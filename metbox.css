@@ -1,0 +1,60 @@
+.metBoxTitle {
+    margin-bottom: 2em;
+  }
+  
+  
+  
+  #metBox {
+        margin-top: 10em;
+    display: none;
+  }
+  
+  
+  .metBoxTitle {
+    margin-bottom: 2em;
+  }
+  
+  .metBoxContentProduct {
+    width: 100%;
+  }
+.metSpoiler {
+ 
+}
+  #spoilerContentMetar {
+    display: none;
+
+      width: 99%;
+     
+      position: relative;
+
+    }
+    
+    #spoilerContentGafor {
+    display: none;
+      margin: auto;
+      width: 99%;
+    }
+    
+    #spoilerContentGafor img {
+      display: block;
+      width: 90%;
+      margin: auto;
+    }
+    
+    
+    .spoilerTitle1, .spoilerTitle2 {
+        display: block;
+        width: 96%;
+        background-color: blue;
+        color: white;
+        padding: 1em;
+        font-family: helvetica;
+        margin-top: 1em;
+        margin-left: auto;
+        margin-right: auto;
+
+      }
+      
+      .spoilerTitle:hover {
+        cursor: pointer;
+      }
