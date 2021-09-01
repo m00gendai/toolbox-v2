@@ -1,0 +1,248 @@
+
+  #spvrBox {
+    margin-top: 3em;
+display: none;
+}
+.spvrBoxContainer{
+  display: flex;
+align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.spvrBoxTitle {
+margin-bottom: 1em;
+}
+
+.setDate {
+
+	background-color: lime;
+	  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.setDateTitle {
+  position: relative;
+  width: 60%;
+	text-align: left;
+  font-size: 
+  3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setDateCalendar {
+  position: relative;
+  width: 40%;
+  font-size: 3em;
+
+  display: flex;
+  align-items: right;
+  justify-content: left;
+}
+
+.setDateCalendar input {
+  position: relative;
+  width: 80%;
+  font-size: 3vw;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mainCLcontainerTogglers{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#toggleLate, #toggleNight {
+  background: blue;
+  color: white;
+  border: 1px solid black;
+  margin: 0 0 0 1vw;
+  padding: 1vw 2vw 1vw 2vw;
+}
+#toggleEarly {
+  background-image: linear-gradient(315deg, #eaf818 0%, #f6fc9c 74%);
+  color: black;
+  border: 1px solid black;
+  margin: 0 0 0 1vw;
+  padding: 1vw 2vw 1vw 2vw;
+}
+
+.mainCLcontainerEarly {
+  display: flex;
+  width: 100%;
+  margin: 0;
+}
+.mainCLcontainerLate {
+  display: none;
+  width: 100%;
+  margin: 0;
+}
+
+.mainCLcontainerEarly form,
+.mainCLcontainerLate form {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 100%;
+  grid-template-rows:auto;
+  grid-row-gap: 1vw;
+
+  padding: 0 1vw 0 1vw;
+}
+
+
+.gridrow {
+	border-radius: 1vw;
+	display: grid;
+	 grid-template-columns: 10% 40% 5% 10% 30% 5%;
+	 box-shadow: 0px 5px 5px -5px black;
+	 z-index: 2;
+	 font-size: 1vw;
+	 font-family: "arial";
+
+}
+
+#displayContainerEarly .gridrow {
+  background-image: linear-gradient(315deg, #eaf818 0%, #f6fc9c 74%);
+  color: black;
+}
+#displayContainerLate .gridrow {
+background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+color: black;
+
+}
+
+.desc {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  flex-wrap: wrap;
+  		padding: 1vw 0 1vw 0;
+		text-align: left;
+
+}
+.desc label {
+	display: flex;
+	justify-content: space-between;
+	width: 60%;
+}
+#descCheckboxes {
+		padding: 0 0 1vw 0;	
+}
+.desc input {
+	width: 1vw;
+	height: 1vw;
+	  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.time,
+.initials,
+.resp,
+.status,
+.freetext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+
+
+}
+
+.formTime,
+.formDesc,
+.formInitials,
+.formResp,
+.formFree,
+.formSts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+}
+
+.time,
+.initials {
+  text-align: center;
+}
+
+.status {
+  font-size: 2vw;
+  border-top-right-radius: 1vw;
+  border-bottom-right-radius: 1vw;
+
+}
+
+.time {
+  border-top-left-radius:1vw;
+  border-bottom-left-radius: 1vw;
+}
+
+.initials {
+  padding: 1vw 0 1vw 0;
+
+}
+
+.initials input {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 1vw;
+  border-bottom: 5px solid blue;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.initials input::placeholder {
+  color: lightgray;
+}
+
+.freetext {
+  padding: 1vw 0 1vw 0;
+}
+
+.freetext textarea {
+  height: 100%;
+  width: 100%;
+  border: 1px solid blue;
+}
+.resp p{
+	transform: rotate(-90deg);
+	 display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1vw;
+}
+.rowTitle {
+	background-color: yellow;
+	grid-column: 1/ 7;
+z-index: 1;
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  border-radius: 1vw;
+}
+#thu1, #wed1, #moFri{
+	display: none;
+}
+.time, .desc, .initials, .resp, .freetext, .status {
+	 background: transparent;
+}
+
+
