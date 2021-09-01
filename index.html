@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Toolbox V2</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="AIM Operations Zurich Toolbox V2">
+		<meta name="author" content="Marcel Weber">
+		<script src="JS/jquery-3.6.0.min.js"></script>            <!-- jQuery library -->
+		<script src="JS/script.js"></script>                      <!-- Main JavaScript Code -->
+		<script src="JS/all.min.js"></script>                     <!-- Font Awesome -->
+		<script src="JS/lodash.js"></script>                      <!-- lodash library -->
+		<script src="JS/french.js"></script>                      <!-- Specific French section JavaScript Code -->
+		<script src="JS/json.js"></script>                        <!-- JSON for French Table 1 -->
+		<script src="JS/json2.js"></script>                       <!-- JSON for French Table 2 -->
+		<script src="JS/json3.js"></script>                       <!-- JSON for French Table 3 -->
+		<script src="JS/json4.js"></script>                       <!-- JSON for French Table 4 -->
+		<script src="JS/sita.js"></script>                        <!-- Specific SITA section JavaScript Code -->
+		<script src="JS/apcodes.js"></script>                     <!-- JSON for SITA section - Airport Codes -->
+		<script src="JS/alcodes.js"></script>                     <!-- JSON for SITA section - Airline Codes -->
+		<script src="JS/convcodes.js"></script>                   <!-- JSON for SITA section - Matching Address Pairs -->
+		<script src="JS/corpcodes.js"></script>                   <!-- JSON for SITA section - Department Codes -->
+		<script src="JS/locisFK.js"></script>                     <!-- JSON for DOC Tool - Flightkeys AD -->
+		<script src="JS/locisFIR.js"></script>                    <!-- JSON for DOC Tool - SWR FIR -->
+		<script src="JS/locisSWR.js"></script>                    <!-- JSON for DOC Tool - SWR AD -->
+		<script src="JS/aipLinks.js"></script>                    <!-- JSON for AIP Library - eAIP Links -->
+		<script src="JS/tileLinks.js"></script>                   <!-- JSON for Home Page - Tile Links -->
+		<link rel="stylesheet" href="CSS/styles.css">             <!-- CSS General Styles -->
+		<link rel="stylesheet" href="CSS/menubar.css">            <!-- CSS Menu Bar & Footer -->
+		<link rel="stylesheet" href="CSS/aipbox.css">             <!-- CSS AIP Library -->
+		<link rel="stylesheet" href="CSS/atsbox.css">             <!-- CSS ATS MSG Search -->
+		<link rel="stylesheet" href="CSS/frenchBox.css">          <!-- CSS French Translation Section -->
+		<link rel="stylesheet" href="CSS/sitaBox.css">            <!-- CSS SITA Address Converter -->
+		<link rel="stylesheet" href="CSS/doctoolbox.css">         <!-- CSS DOC Screening Tool -->
+		<link rel="stylesheet" href="CSS/legal.css">              <!-- CSS Legal Statement Popup -->
+		<link rel="stylesheet" href="CSS/optionsMenu.css">        <!-- CSS DOC Tool Options Menu -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="icon" href="Favicon/favicon.ico?v=2" />        <!-- Browser Tab Icon -->
+	</head>
+	<nav>
+		<ul>
+			<li id="home">Home</li>
+			<li id="ats">ATS MSG Search</li>
+			<li id="aip">AIP Library</li>
+			<li id="doctool">DOC Screening Tool</li>
+		</ul>
+	</nav>
+	<!-- BEGIN Home  -->
+	<section id="contentBox">
+		<div class="title" id="searchBarContainer">
+			<input class="mainInput" type="text" id="searchBar" autofocus placeholder="Welcome to the AIM Info Hub">
+			<div class="sortBoxHome">
+				<div class="sortBoxHomeTitle">
+					Sort tiles by:
+				</div>
+				<div class="sortBoxHomeAZ" id="sortBoxHomeAZ">
+					A-Z
+				</div>
+				<div class="sortBoxHomeTyp" id="sortBoxHomeTyp">
+					CAT
+				</div>
+			</div>
+		</div>
+		<div class="container" id="quickLinks">
+		</div>
+	</section>
+	<!-- END Home -->
+	<!-- BEGIN AIP Library -->
+	<section id="aipBox">
+		<div class="title" id="aipBoxTitle">
+			<input class="aipInput" type="text" id="aipBar" onkeyup="displayAIP()" autofocus placeholder="Search for country name or code">
+		</div>
+		<div class="container">
+			<div class="colorCodesContainer">
+				<div class="colorCodes">
+					<div class="spanBlank" id="aipLogins"><i class="fas fa-unlock-alt"></i> Logins</div>
+					<div class="spanGreen">External link to eAIP</div>
+					<div class="spanYellow">Internal link to eAIP</div>
+					<div class="spanRed">Only physical AIP</div>
+					<div class="spanBlack">No information at all</div>
+				</div>
+			</div>
+			<div class="missingCountrySpoiler" id="misCtry">
+				<div class="missingCountrySpoilerTitle">Missing Countries</div>
+				<div class="missingCountrySpoilerContent" id="misCtryCnt">
+					<ul>
+						<li>Anguilla</li>
+						<li>Antigua & Barbuda</li>
+						<li>Azores</li>
+						<li>Bahamas</li>
+						<li>Belize</li>
+						<li>Bonaire</li>
+						<li>British Virgin Islands</li>
+						<li>Brunei</li>
+						<li>Burundi</li>
+						<li>Cabo Verde</li>
+						<li>Caribbean Netherlands</li>
+						<li>Caroline Islands</li>
+						<li>Central Kiribati</li>
+						<li>Ceuta</li>
+						<li>Costa Rica</li>
+						<li>Curacao</li>
+						<li>Djibouti</li>
+						<li>Dominica</li>
+						<li>Eastern Caribbean</li>
+						<li>El Salvador</li>
+						<li>Eritrea</li>
+						<li>Ethiopia</li>
+						<li>Falkland Islands</li>
+						<li>Fiji</li>
+						<li>French Guyana</li>
+						<li>French Polynesia</li>
+						<li>Futuna Islands</li>
+						<li>Gibraltar</li>
+						<li>Grenada</li>
+						<li>Guadeloupe</li>
+						<li>Guam</li>
+						<li>Guatemala</li>
+						<li>Guinea</li>
+						<li>Guinea Bissau</li>
+						<li>Guyana</li>
+						<li>Jamaica</li>
+						<li>Laos</li>
+						<li>Liberia</li>
+						<li>Line Islands</li>
+						<li>Maledives</li>
+						<li>Mali</li>
+						<li>Marshall Islands</li>
+						<li>Martinique</li>
+						<li>Mauritania</li>
+						<li>Melilla</li>
+						<li>Micronesia</li>
+						<li>Midway Atoll</li>
+						<li>Monaco</li>
+						<li>Montserrat</li>
+						<li>Morocco</li>
+						<li>New Caledonia</li>
+						<li>Nicaragua</li>
+						<li>North Korea</li>
+						<li>Northern Mariana Islands</li>
+						<li>Palau</li>
+						<li>Palestine</li>
+						<li>Peru</li>
+						<li>Philippines</li>
+						<li>Portugal</li>
+						<li>Puerto Rico</li>
+						<li>Saint Barthelemy</li>
+						<li>Saint Eustatius</li>
+						<li>Saint Kitts and Nevis</li>
+						<li>Saint Lucia</li>
+						<li>Saint Martinique</li>
+						<li>Saint Pierre and Miquelon</li>
+						<li>Saint Vincent and Grenadines</li>
+						<li>Senegal</li>
+						<li>Sierra Leone</li>
+						<li>Sint Marteen</li>
+						<li>South Sudan</li>
+						<li>Sudan</li>
+						<li>Suriname</li>
+						<li>Switzerland</li>
+						<li>Syria</li>
+						<li>Tanzania</li>
+						<li>Trinidad & Tobago</li>
+						<li>Turks and Caicos Island</li>
+						<li>US Virgin Islands</li>
+						<li>Wake Island</li>
+						<li>Wallis</li>
+						<li>Western Kiribati</li>
+						<li>Western Sahara</li>
+						<li>Yemen</li>
+					</ul>
+				</div>
+			</div>
+			<div id="aipLinks">
+			</div>
+		</div>
+	</section>
+	<!-- END AIP Library -->
+	<!-- BEGIN Flight Search -->
+	<section class = "sectionClass" id="atsBox">
+		<div class="title" id="atsTitle">
+			Search for Flight Plans, Assosciated Messages and other ATS Messages on ACC and ARO Queues.<br>
+			Flight Rules are ignored for all message types except FPL.</br>
+			Queries can be triggered with the "enter" key in each input field. Use the "%" character as a wildcard (example: DEP LS%, %ZH, LS%H, L%Z%, %S%H, ...) for ACFT ID, DEP, DEST and FULL TEXT.
+		</div>
+		<div class="FScontainer">
+			<div id="atsBoxForm">
+				<div class="annotation">
+					ACFT ID:
+				</div>
+				<input type="text" id="ident" name="ident" placeholder="HBLOL">       
+				<div class="filler">
+				</div>
+				<div class="annotation">
+					EOBD from / to:
+				</div>
+				<input type="date" id="eobdfrom" name="eobdfrom" >	
+				<input type="date" id="eobdto" name="eobdto" >       
+				<div class="annotation">
+					Flight Rules:
+				</div>
+				<select name="fltrule" id="fltrule">
+					<option value="V">V - VFR</option>
+					<option value="i">I - IFR</option>
+					<option value="z">Z - VFR - IFR</option>
+					<option value="y">Y - IFR - VFR</option>
+				</select>
+				<div class="filler">
+				</div>
+				<div class="annotation">
+					DEP from - DEST to:
+				</div>
+				<input type="text" id="dep" name="dep" placeholder ="LSZH">
+				<input type="text" id="dest" name="dest" placeholder="LSGG">
+				<div class="annotation">
+					Full Text Search:
+				</div>
+				<input type="text" id="fulltext" name="fulltext" placeholder ="Full text search">
+				<div class="annotation">
+					Message Type:
+				</div>
+				<input type="text" id="msgtype" name="msgtype" placeholder="FPL">
+				<div class="filler">
+				</div>
+				<div class="annotation">
+					Message Direction:
+				</div>
+				<select name="msgdir" id="msgdir">
+					<option value="All">In- & Outbound</option>
+					<option value="Inbound">Inbound</option>
+					<option value="Outbound">Outbound</option>
+				</select>
+				<div class="filler">
+				</div>
+				<div class="annotation">
+					Message Queues:
+				</div>
+				<select name="queue" id="queue">
+					<option value="all">All</option>
+					<option value="accz:/zurich">ACCZ:/Zurich</option>
+					<option value="accg:/geneva">ACCG:/Geneva</option>
+					<option value="gva:/gda">GVA:/GDA</option>
+					<option value="ZRH%3A%2FARO">ZRH:/ARO</option>
+					<option value="zrh:/supervisor">ZRH:/supervisor</option>
+				</select>
+				<div class="filler">
+				</div>
+			</div>
+			<div id="fsIframeContainer">
+				<p>Flight Events will be displayed here</p>
+			</div>
+		</div>
+		<button id="atsButton" onsubmit="return false">
+		Submit
+		</button>
+	</section>
+	<!-- END Flight Search -->
+	<!-- BEGIN French Translation -->
+	<section id="frenchBox">
+		<div class="inputField" id="inputField">
+			<div class="g1"><input type="text" id="searchAll" name="searchAll" placeholder="Alles durchsuchen"></div>
+			<div class="g2"> <input type="text" id="searchFrench" name="searchFrench" placeholder="Französisch durchsuchen"></div>
+			<div class="g3"><input type="text" id="searchGerman" name="searchGerman" placeholder="Deutsch durchsuchen"></div>
+		</div>
+		<div class="inputField2" id="inputField2">
+			<button class="switchButton" id="buttonGeneral">Le dictionnaire général</button>
+			<button class="switchButton" id="buttonSFO">Le support téléphonique et les éléments informatiques</button>
+			<button class="switchButton" id="buttonWhatever">Dictionnaire de l'AIS</button>
+			<button class="switchButton" id="buttonAnother">Le support téléphonique SFO</button>
+		</div>
+		<table id="frenchTable">
+			<tbody>
+			</tbody>
+		</table>
+	</section>
+	<!-- END French Translation -->
+	<!-- BEGIN SITA Conversion -->
+	<section id="sitaBox">
+		<div id="loadingSpinnerContainer">
+			<div id="loadingSpinner"></div>
+		</div>
+		<div class="queryBar">
+			<input type="text" id="inputSita" maxlength="7" placeholder="Enter SITA address">
+			<button id="inputSitaSearch">Search</button>
+		</div>
+		<div class="intro">
+			<br>
+			This tool decodes a SITA address to approximately determine the origin of an ATS message.<br>
+			<br>
+			SITA addresses are comprised of:<br>
+			<br>
+			IATA Location code | IATA Airline code | IATA Department code / company code<br>
+			<br>
+			Usually in that order. However, sometimes, the airline code comes before the department/company code.<br>
+			There are also circa 50 reserved codes that are included instead of a location code.<br>
+			Sometimes, the first three letters can refer to the airline or corporation.<br>
+			SITA is really inconsistent.<br>
+			<br>
+			Therefore, this lookup simply returns all matching data to a SITA code segment; it has then to be interpreted manually.<br>
+			<br>
+		</div>
+		<div class="dissect">
+			<div id="third1"></div>
+			<div id="third2"></div>
+			<div id="third3"></div>
+		</div>
+		<div class="directConversion" id="directConversion">
+			<div class="directConversionTitle" id="directConversionTitle">Direct AFTN equivalent found:</div>
+			<div id="directConversionAddress"></div>
+		</div>
+		<div class="explain">
+			<div id="sitaLoci"></div>
+			<div id="sitaDept"></div>
+			<div id="sitaCorp"></div>
+		</div>
+		<!-- Kept in case of a full database display possibility request -->
+		<table id="apcodesTable">
+			<tbody>
+			</tbody>
+		</table>
+	</section>
+	<!-- END SITA Conversion -->
+	<!-- BEGIN DOC Screening Tool Section -->
+	<section id="doctoolBox">
+	<div class="optionsButton" id="optionsButton">
+	<i class="fas fa-cog"></i>
+</div>
+	<div id="optionsMenu">
+	<div id="optionsDocToolHelp">
+			<div id="optionsDocToolHelpTitle">
+				Help Dialog
+			</div>
+			<div id="optionsDocToolHelpToggler">
+				Hide <input type="range" id="optionsDocToolHelpRange" name="HelpRange"
+         min="0" max="1" value="0"> Show
+			</div>
+		</div>
+		<div id="optionsLociDatabase">
+			<div id="optionsLociDatabaseTitle">
+				LOCI Lookup Database
+			</div>
+			<div id="optionsLociDatabaseToggler">
+				Hide <input type="range" id="optionsLociDatabaseRange" name="LociRange"
+         min="0" max="1" value="1"> Show
+			</div>
+		</div>
+		<div id="optionsPrintDialog">
+			<div id="optionsPrintDialogTitle">
+				Print Dialog for Screening
+			</div>
+			<div id="optionsPrintDialogToggler">
+				Hide <input type="range" id="optionsPrintRange" name="PrintRange"
+         min="0" max="1" value="1"> Show
+			</div>
+		</div>
+		<div id="optionsRecoverData">
+			<div id="optionsRecoverDataTitle">
+				Recover Screening Data
+			</div>
+			<div id="optionsRecoverDataToggler">
+				Recover
+			</div>
+		</div>
+		<div id="optionsLoadSave">
+			<div id="optionsLoadSaveTitle">
+				Save & Load Screening Data
+			</div>
+			<div id="optionsLoadSaveToggler">
+				<div id="optionsLoadSaveSave"></div>
+				<input type="file" id="loadDocScreening" name="loadDocScreening">
+				<label for="loadDocScreening" id="optionsLoadSaveLoad" title="Load Screening session from file">Load Screening session from file</label>
+			</div>
+		</div>
+	</div>
+
+	
+		<div class="halpText" id="halpText">
+			<strong>LOCI Lookup Database</strong>
+			<br>
+			<br>
+			Enter the LOCI letters into the input field and see which airports Flightkeys need screened.<br>
+			L -> Shows everything starting with L<br>
+			LS -> Shows everything starting with LS<br>
+			And so on.
+			<br>
+			<hr>
+			<br>
+			<strong>Print Dialog for Screening</strong>
+			<br>
+			<br>
+			This tool is used in conjunction with a document to be screened.<br>
+			Enter the page range to be printed into the relevant input fields.<br>
+			At the end, it will show how many pages there are printed and to be entered into the Zeiterfassung.<br>
+			<br>
+			By pressing <kbd>Copy</kbd>, a popup appears.<br>
+			<br>
+			The popup:
+			<ul>
+				<li>displays the page range to be entered into the print dialog of the pdf document</li>
+				<li>shows for which customer the page range is for</li>
+				<li>splits the page range if it detects a single page (1-4,<b>7</b>,9-10)</li>
+				<li>adds a single page at the end of a sequence and adds subsequent single pages in a separate row</li>
+				<li>splits the page range if it detects a range that results in an odd number of pages (1-4,<b>6-8</b>,10-11)</li>
+				<li>adds the odd range at the end of a sequence and adds subsequent odd ranges in a separate row</li>
+			</ul>
+			<br>
+			The tool:
+			<ul>
+				<li>adds the page count when tabbing out of an input field or when clicking the <kbd>Calculate Pages</kbd> button</li>
+				<li>alerts you if it detects any other character besides a number, a dash (-) or a comma (,)</li>
+				<li>alerts you if it detects a wrong sequence of page numbers (1-4-7 instead of 1-4,7)</li>
+				<li>alerts you if it detects two special characters in a row (1-4,,7-10)</li>
+				<li>alerts you if it detects the input being longer than 100 characters (and shows you where the overflow happens)</li>
+				<li>ignores spaces, i.e. prevents them entirely</li>
+				<li>stores entries in local memory so entered inputs are not lost if the page is refreshed or the browser window is closed</li>
+			</ul>
+			<br>
+			The options menu:
+			<ul>
+                <li>Toggles the help dialog on or off</li>
+                <li>Toggles the lookup database on or off</li>
+                <li>Toggles screening dialog on or off</li>
+                <li>Recovers entered data after a refresh or closure of the browser</li>
+                <li>Lets you save your progress to a file, with the file name taken from the Document Name field</li>
+                <li>Lets you load a saved progress file to continue the screening</li>
+			<hr>
+			<br>
+			For any questions or bug reports, feel free to reach out to <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>.
+		</div>
+		<div class="docContent">
+			<div class="queryContainer" id="queryContainer">
+				<div class="containerTitle">
+					LOCI Lookup Database <span style="font-size:0.5rem">WEF 27 JUN 21</span>
+				</div>
+				<input id="queryFK" placeholder="Search for LOCI">
+				<div class="queryFKresults">
+					<table id="FKresultsTable">
+						<tbody>
+						</tbody>
+					</table>
+					<!--      <table id="SFresultsTable">
+						<tbody>
+						</tbody>
+						</table>
+						<table id="SAresultsTable">
+						<tbody>
+						</tbody>
+						</table> -->
+				</div>
+			</div>
+			<div class="screeningContainer" id="screeningContainer">
+				<div class="containerTitle">
+					Print Dialog for Screening
+				</div>
+				<!--   <fieldset id="fieldsetSWR">
+					<legend id="legendSWR">Swiss</legend>
+					<textarea class="screenField" id="screenSWR" placeholder="1-4,10-15,17,20-25,..."></textarea>
+					<div class="screenAlert" id="screenSWRalert"></div>
+					</fieldset> -->
+                <fieldset id="fieldsetDocument">
+					<legend id="legendDocument">Document Name</legend>
+					<textarea class="screenField" id="screenDocument" placeholder="LS AIRAC AMDT 13/21 (This will be the file name if you save your progress)"></textarea>
+				</fieldset>
+				<fieldset id="fieldsetFKDF">
+					<legend id="legendFKDF">Flightkeys Daily Folder</legend>
+					<textarea class="screenField" id="screenFKDF" placeholder="1-4,10-15,17,20-25,..."></textarea>
+					<div class="screenAlert" id="screenFKDFalert"></div>
+				</fieldset>
+				<fieldset id="fieldsetFKAT">
+					<legend id="legendFKAT">Flightkeys AIP Tool</legend>
+					<textarea class="screenField" id="screenFKAT" placeholder="1-4,10-15,17,20-25,..."></textarea>
+					<div class="screenAlert" id="screenFKATalert"></div>
+				</fieldset>
+				<fieldset id="fieldsetNTM">
+					<legend id="legendNTM">Team NOTAM</legend>
+					<textarea class="screenField" id="screenNTM" placeholder="1-4,10-15,17,20-25,..."></textarea>
+					<div class="screenAlert" id="screenNTMalert"></div>
+				</fieldset>
+				<fieldset id="fieldsetDBU">
+					<legend id="legendDBU">DBU</legend>
+					<textarea class="screenField" id="screenDBU" placeholder="1-4,10-15,17,20-25,..."></textarea>
+					<div class="screenAlert" id="screenDBUalert"></div>
+				</fieldset>
+				<fieldset id="fieldsetIATA">
+					<legend id="legendIATA">IATA</legend>
+					<textarea class="screenField" id="screenIATA" placeholder="1-4,10-15,17,20-25,..."></textarea>
+					<div class="screenAlert" id="screenIATAalert"></div>
+				</fieldset>
+				<button id="calculatePages">Calculate Pages</button>
+				<div class="pageDisplay">
+					<table id="screenTable">
+						<tbody>
+							<tr>
+								<th id="thScreen">Screen for</th>
+								<th id="thPages">Pages</th>
+								<th id="thCopy"></th>
+							</tr>
+							<!--        <tr id="trSWR">
+								<td class="tdLabel">Swiss</td>
+								<td class="pageTD" id="SWRtd"></td>
+								<td id="copySWR">
+								    <button id="buttonCopySWR">Copy</button>
+								</td>
+								</tr> -->
+							<tr id="trFKDF">
+								<td class="tdLabel">Flightkeys Daily Folder</td>
+								<td class="pageTD" id="FKDFtd"></td>
+								<td id="copyFKDF">
+									<button id="buttonCopyFKDF">Copy</button>
+								</td>
+							</tr>
+							<tr id="trFKAT">
+								<td class="tdLabel">Flightkeys AIP Tool</td>
+								<td class="pageTD" id="FKATtd"></td>
+								<td id="copyFKAT">
+									<button id="buttonCopyFKAT">Copy</button>
+								</td>
+							</tr>
+							<tr id="trNTM">
+								<td class="tdLabel">Team NOTAM</td>
+								<td class="pageTD" id="NTMtd"></td>
+								<td id="copyNTM">
+									<button id="buttonCopyNTM">Copy</button>
+								</td>
+							</tr>
+							<tr id="trDBU">
+								<td class="tdLabel">DBU</td>
+								<td class="pageTD" id="DBUtd"></td>
+								<td id="copyDBU">
+									<button id="buttonCopyDBU">Copy</button>
+								</td>
+							</tr>
+							<tr id="trIATA">
+								<td class="tdLabel">IATA</td>
+								<td class="pageTD" id="IATAtd"></td>
+								<td id="copyIATA">
+									<button id="buttonCopyIATA">Copy</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="testHTMLContainer">
+				<div id="testHTMLTitle"></div>
+				<div id="testHTML"></div>
+				<button id="testHTMLClose">Close</button>
+			</div>
+		</div>
+	</section>
+	<!-- END DOC Screening Tool Section -->
+	<div id="legalA">
+		<div id="legalB">
+			<div class="legalTitle">
+				Legal Statement
+			</div>
+			Developed for skyguide AIM Services by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>.<br><br>
+			Links to internal (skyguide) and/or external resources are under the sole responsibility of the respective owner(s). AIM Services and <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> will assume no liability for the contents of external links.<br><br>
+			Original Tools: <br>
+			<ul>
+				<li>SITA Address Decoder by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development)</li>
+				<li>SFO French by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development) & <a href="http://phone.skyguide.corp/Default.asp?ID=4437" target="_blank">Christine Bissey</a> (Content)</li>
+				<li>DOC Tool by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development)</li>
+			</ul>
+			<br>
+			Image Usage Rights: <br>
+			<ul>
+				<li>
+					Icons by 
+					<ul>
+						<li><a href="https://www.flaticon.com/" target="_blank">flaticon.com</a></li>
+						<li><a href="https://icons8.com/" target="_blank">icons8.com</a></li>
+					</ul>
+				</li>
+				<li>Flags from <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a></li>
+			</ul>
+			<br>
+			A source code backup is stored in a private git repo by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>. <br>This repo is also used to update the AIS local instance.<br><br>
+			Trello is used as a changelog and ticketing service. Please refer to the <a href="https://trello.com/b/lPvSDcli" target="_blanK">Toolbox V2 Kanban Board</a>. <br><br>For issue reports and feature requests, please advise <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> directly.<br>
+			An online ticketing service is not planned.<br> <br>
+			Tech stack:<br>
+			<ul>
+				<li>HTML5</li>
+				<li>CSS3</li>
+				<li>JavaScript</li>
+				<ul>
+					<li>jQuery</li>
+					<li>lodash</li>
+					<li>JSON</li>
+				</ul>
+				<li>Python 3.9</li>
+				<li>git</li>
+			</ul>
+			<div id="legalCopy">&copy; 2020-2021 Marcel Weber</div>
+		</div>
+		<div id="close"><i class="far fa-thumbs-up"></i></div>
+	</div>
+	<footer>
+		&copy; 2020-2021 AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues. 
+		<div id="legal"><u>Legal Statement</u></div>
+	</footer>
+	</body>
+</html>
