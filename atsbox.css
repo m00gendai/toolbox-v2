@@ -1,0 +1,148 @@
+#atsBox {
+display: none;
+font-family: "arial";
+}
+
+
+#atsBoxForm {
+
+display: grid;
+grid-template-columns: repeat(3,1fr);
+grid-row-gap: 1vw;
+grid-column-gap: 2vw;
+width: 100%;
+
+}
+
+
+#atsTitle {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#ident{
+  width: 100%;
+  font-size: 1rem;
+
+
+}
+#eobdfrom{
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+}
+#eobdto{
+  width: 100%;
+  font-size: 1rem;
+}
+#dep{
+  width: 100%;
+  font-size: 1rem;
+}
+#dest{
+  width: 100%;
+  font-size: 1rem;
+}
+
+#fltrule {
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+}
+#fltrule:focus{
+border-top: 0;
+border-right: 0;
+border-left: 0;
+outline: 0;
+    border-bottom: 3px solid blue;
+}
+#fulltext{
+ 
+  width: 100%;
+  font-size: 1rem;
+  grid-column: 2 / span 2;
+}
+#msgtype
+ {
+  width: 100%;
+  font-size: 1rem;
+
+}
+#queue {
+
+  width: 100%;
+  font-size: 1rem;
+border: none;
+}
+#queue:focus{
+border-top: 0;
+border-right: 0;
+border-left: 0;
+outline: 0;
+    border-bottom: 3px solid blue;
+}
+#msgdir{
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+
+}
+#msgdir:focus{
+border-top: 0;
+border-right: 0;
+border-left: 0;
+outline: 0;
+    border-bottom: 3px solid blue;
+}
+
+#atsButton{
+  width: 100%;
+  font-size: 1rem;
+height: 3rem;
+
+}
+#atsButton:hover{
+  cursor:pointer;
+
+}
+
+.annotation{
+  display: flex;
+  align-items: center;
+
+}
+
+#fsIframeContainer {
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0 0 5rem 0;
+ background-image: url("https://loremflickr.com/800/600/warbird");
+background-position: center;
+background-repeat: norepeat;
+background-size: cover;
+}
+#fsIframeContainer p{
+padding: 1rem;
+background: white;
+}
+
+#fsIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0;
+background: white;
+}
+.FScontainer{
+    display: grid;
+    grid-template-columns: 40% 50%;
+    grid-column-gap: 10%;
+    margin: 0 0 2rem 0;
+    width: 100%;
+
