@@ -1,0 +1,117 @@
+body {
+	width: 99%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+section {
+  margin-top: 3em;
+  display: block;
+  margin-bottom: 5em;
+  width: 90%;
+}
+
+.title {
+	  position: relative;
+	  width: 100%;
+	  display: flex;
+}
+input {
+	position: relative;
+	width: 100%;
+	border-bottom: 3px solid blue;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	outline: 0;
+	font-size: 3em;
+	
+}
+
+.sortBoxHome{
+    width: 10%;
+    font-family: "Arial";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.sortBoxHomeTitle{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.sortBoxHomeAZ,
+.sortBoxHomeTyp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+.sortBoxHomeAZ:hover,
+.sortBoxHomeTyp:hover{
+    cursor:pointer;
+}
+
+.container {
+width: 100%;
+display: flex;
+justify-content: center;
+
+flex-wrap: wrap;
+}
+
+#quickLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+width: 100%;
+	margin-top: 3em;
+  margin-bottom : 2em;
+
+  grid-gap: 1em;
+}
+
+
+.quicklinksContainerBox {
+			text-align: center;
+		  box-shadow: 0px 1px 5px 0px silver, 0px -1px 5px 0px silver;
+	font-family: arial;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+}
+
+
+
+
+.quicklinksContainerBox:hover{
+cursor: pointer;
+opacity: 0.8;
+}
+.quicklinksContainerBox:focus{
+	box-shadow: inset 0px 0px 5px 5px rgba(0,0,0,0.5);
+}
+
+.quicklinksContainerBox p{
+	display: inline-block;
+	bottom: 0;
+	background-color: white;
+	padding: 0.1em;
+	width:95%;
+	
+}
+
+.quicklinksContainerBox img{
+	display: inline-block;
+	padding: 10% 10% 2.5% 10%;
+	margin: auto;
+	width: 5em;
+	height: 5em;
+}
+
+
+
