@@ -1,0 +1,342 @@
+#doctoolBox {
+	display: none;
+    font-family: arial;
+}
+
+.toggleDocTools {
+	width: 100%;
+	display: flex;
+    flex-wrap: wrap;
+}
+
+#toggleLLD {
+	display: inline-block;
+	width: 2rem;
+}
+
+#togglePDS {
+	display: inline-block;
+	width: 2rem;
+}
+
+#toggleHalp {
+	display: inline-block;
+	width: 2rem;
+}
+
+#toggleLocalStorage {
+	display: inline-block;
+	width: 2rem;
+    margin: 0 0.2rem 0 0;
+}
+
+#toggleDocTools label {
+    display: inline-block;
+}
+.docToolsRange {
+    display: flex;
+    align-items: center;
+    margin: 0 3rem 0 0;
+}
+.halpText {
+	background: lightblue;
+	width: 90%;
+	margin-top: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1rem;
+	display: none;
+}
+
+.docContent {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	padding: 0;
+	height: 100vh;
+}
+
+.queryContainer {
+	width: 100%;
+	height: 100%;
+	position: relative;
+    margin: 0 10% 0 0;
+}
+
+.containerTitle{
+	margin: 1rem 0 1rem 0;
+	text-align: center;
+	width: 100%;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+#queryFK {
+	width: 90%;
+	margin: 0 0 1rem 0;
+}
+
+.screeningContainer {
+	width: 100%;
+	height: auto;
+	position: relative;
+	display: flex;
+	flex-wrap: no-wrap;
+	flex-direction: column;
+}
+
+#screenTable td {
+	border: 3px solid white;
+}
+#screenTable th {
+	border: none;
+}
+#screenTable tr {
+	border: none;
+}
+
+
+#screenTable {
+	table-layout: fixed;
+	width: 100%;
+    border: none;
+}
+
+#thScreen {
+	width: 60%;
+}
+
+#thPages {
+	width: 10%;
+}
+
+#thCopy {
+	width: 30%;
+}
+
+#thFK,
+#thSF,
+#thSA {
+
+	white-space: nowrap;
+}
+
+#FKresultsTable,
+#SFresultsTable,
+#SAresultsTable{
+	width: 100%;
+	font-family: monospace;
+	font-size: 1.2rem;
+    border: none;
+}
+
+#FKresultsTable tr,
+#SFresultsTable tr,
+#SAresultsTable tr{
+	height: 2ch;
+}
+#FKresultsTable th,
+#SFresultsTable th,
+#SAresultsTable th{
+	border: none;
+}
+
+#FKresultsTable td,
+#SFresultsTable td,
+#SAresultsTable td{
+	border: none;
+}
+#FKresultsTable tr:nth-child(even),
+#SFresultsTable tr:nth-child(even),
+#SAresultsTable tr:nth-child(even){
+	background: lightblue;
+}
+
+#FKresultsTable tr:nth-child(odd),
+#SFresultsTable tr:nth-child(odd),
+#SAresultsTable tr:nth-child(odd){
+	background: #f6f6f6;
+}
+
+.queryFKresults{
+	display: flex;
+}
+
+.tdLabel{
+	padding: 0.2rem 0 0.1rem 1rem;
+}
+
+.pageTD {
+	padding: 0.2rem 0 0.1rem 0;
+	text-align: center;
+}
+
+fieldset {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem 0 0 0;
+	flex-wrap: wrap;
+	margin: 0 0 0.5rem 0;
+	border: none;
+}
+
+#fieldsetSWR {
+	background: red;
+}
+#fieldsetFKDF {
+background: #40e0d0 ;
+}
+#fieldsetFKAT {
+	background: #40e0d0;
+}
+#fieldsetNTM {
+	background: yellow;
+}
+#fieldsetDBU {
+	background: orange;
+}
+#fieldsetIATA {
+	background: blue;
+}
+legend {
+	background: white;
+}
+#legendSWR {
+	color: white;
+	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+	background: red;
+	border-right: 5px solid white;
+	border-bottom: 5px solid white;
+}
+#legendFKDF {
+	color: black;
+	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+	background: #40e0d0;
+	border-right: 5px solid white;
+	border-bottom: 5px solid white;
+}
+#legendFKAT {
+	color: black;
+	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+	background: #40e0d0;
+	border-right: 5px solid white;
+	border-bottom: 5px solid white;
+}
+#legendNTM {
+	color: black;
+	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+	background: yellow;
+	border-right: 5px solid white;
+	border-bottom: 5px solid white;
+}
+#legendDBU {
+	color: black;
+	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+	background: orange;
+	border-right: 5px solid white;
+	border-bottom: 5px solid white;
+}
+#legendIATA {
+	color: white;
+	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+	background: blue;
+	border-right: 5px solid white;
+	border-bottom: 5px solid white;
+}
+
+#trSWR {
+	background: red;
+	color: white;
+}
+#trFKDF {
+	background: #40e0d0;
+}
+#trFKAT {
+	background: #40e0d0;
+}
+#trNTM {
+	background: yellow;
+}
+#trDBU {
+	background: orange;
+}
+#trIATA {
+	background: blue;
+	color: white;
+}
+
+.screenField{
+	min-width: 90%;
+	width: 90%;
+	max-width: 90%;
+	margin: 0 0 0.5rem 0;
+	padding: 0 5px 0 0;
+	font-size: 1rem;
+	height: 1.4rem;
+	min-height: 1.4rem;
+}
+
+.screenAlert {
+	color: red;
+	background: white;
+	width: 100%;
+	text-align: center;
+	padding: 0.2rem;
+}
+
+#buttonCopySWR,
+#buttonCopyFKDF,
+#buttonCopyFKAT,
+#buttonCopyNTM,
+#buttonCopyDBU,
+#buttonCopyIATA{
+	width: 100%;
+    height: 100%;
+    padding: 1rem 0 1rem 0;
+}
+
+#copySWR,
+#copyFKDF,
+#copyFKAT,
+#copyNTM,
+#copyDBU,
+#copyIATA {
+	background: white;
+        padding: 0;
+}
+
+#calculatePages {
+	margin: 1rem 5% 1rem 5%;
+	width: 90%;
+	height: 2rem;
+}
+
+#testHTMLContainer {
+	width: 40%;
+	height: auto;
+	background: white;
+	left: 0;
+	right: 0;
+	position: fixed;
+	margin: auto;
+	display: none;
+	flex-wrap: wrap;
+	justify-content: center;
+	box-shadow: 0.5rem 0.5rem 0.5rem 0.3rem rgba(0,0,0,0.5);
+	padding: 1rem;
+	z-index: 100;
+}
+
+#testHTMLTitle {
+	text-align: center;
+	margin: 0 0 0.5rem 0;
+}
+
+#testHTML {
+	width: 100%;
+}
+
+#testHTMLClose {
+	margin: 1rem 0 0 0;
+}
