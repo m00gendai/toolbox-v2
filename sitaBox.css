@@ -1,0 +1,139 @@
+#sitaBox {
+	display: none;
+}
+
+tr:nth-child(2n+3) {
+	background: linear-gradient(to right, rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%);
+}
+.explain {
+	display: grid;
+	grid-template-columns: 1;
+	font-family: arial;
+	width: 100%;
+}
+#sitaLoci {
+	background: red;
+	color: white;
+	padding: 1em;
+	width: auto;
+	display: none;
+}
+
+#sitaDept {
+	background: green;
+	color: white;
+	padding: 1em;
+	display: none;
+	width: auto;
+}
+
+#sitaCorp {
+	background: blue;
+	color: white;
+	padding: 1em;
+	display: none;
+	width: auto;
+}
+
+#third1 {
+	background: red;
+	color: white;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5em;
+}
+#third2 {
+	background: green;
+	color: white;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5em;
+}
+#third3 {
+	background: blue;
+	color: white;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5em;
+}
+
+.intro {
+	display: flex;
+	width: 100%
+}
+
+.queryBar {
+	display: grid;
+	grid-template-columns: 80% 20%;
+	width: 100%;
+	grid-column-gap: 1vw;
+}
+
+.dissect {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	margin: 1rem 0 1rem 0;
+	text-transform: uppercase;
+	font-family: monospace;
+	font-weight: 900;
+	letter-spacing: 0.5em;
+	font-size: 4em;
+	width: 100%;
+}
+
+#directConversion {
+	background: yellow;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
+	margin:0 0 1em 0;
+}
+#directConversionTitle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.2em;
+	width: 100%;
+	padding: 0.5em;
+	font-family: arial;
+	
+}
+#directConversionAddress{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 0.5rem;
+	font-family: monospace;
+	font-size: 2em;
+	letter-spacing: 0.1em;
+	font-weight: 900;
+}
+
+#loadingSpinnerContainer {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+#loadingSpinner {
+	background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ryb-colorwheel.svg/240px-Ryb-colorwheel.svg.png");
+	background-size: cover;
+	width: 50px;
+	height: 50px;
+	animation: mymove 1s infinite;
+	animation-timing-function: linear;
+	clip-path: circle(50% at 50% 50%);
+}
+
+@keyframes mymove {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
