@@ -689,12 +689,13 @@ for(let i=0;i<valueDict.length;i++){ // iterates to the customer objects
 // This deals with putting the page ranges into local storage
 function localStorager(customer) {
 //const LoStoSWR 	= {valuex: "SWRvalues", 	screen: "screenSWR", 	name: "SWR"};
+const loStoDoc  = {valuex: "DocumentValues", 	screen: "screenDocument", 	name: "DOC"};
 const LoStoFKDF = {valuex: "FKDFvalues", 	screen: "screenFKDF", 	name: "FKDF"};
 const LoStoFKAT = {valuex: "FKATvalues", 	screen: "screenFKAT",	name: "FKAT"};
 const LoStoNTM 	= {valuex: "NTMvalues", 	screen: "screenNTM",	name: "NTM"};
 const LoStoDBU 	= {valuex: "DBUvalues", 	screen: "screenDBU",	name: "DBU"};
 const LoStoIATA = {valuex: "IATAvalues", 	screen: "screenIATA", 	name: "IATA"};
-const LoStoAll	= [LoStoFKDF, LoStoFKAT, LoStoNTM, LoStoDBU, LoStoIATA] // LoStoSWR removed
+const LoStoAll	= [LoStoFKDF, LoStoFKAT, LoStoNTM, LoStoDBU, LoStoIATA, loStoDoc] // LoStoSWR removed
 for(let i=0;i<LoStoAll.length;i++){
   if(customer == LoStoAll[i].name){
     localStoragerSetter(LoStoAll, i);
@@ -725,6 +726,11 @@ calculatePagesEvent(customer);
 localStorager(customer);
 
 })*/
+document.getElementById("screenDocument").addEventListener("blur", function() {
+let customer = "DOC";
+localStorager(customer);
+
+})
 document.getElementById("screenFKDF").addEventListener("blur", function() {
 let customer = "FKDF";
 calculatePagesEvent(customer);
@@ -974,6 +980,7 @@ saveDocLink.setAttribute("href", "")
 document.getElementById("optionsLoadSaveSave").addEventListener("click", function(){
 	let docData = {
 				//docData0: document.getElementById("screenSWR").value + "%0A",
+        docDataA: document.getElementById("screenDocument").value + "%0A",
 				docData0: document.getElementById("screenFKDF").value + "%0A",
                 docData1: document.getElementById("screenFKAT").value + "%0A",
                 docData2: document.getElementById("screenNTM").value + "%0A",                               
@@ -987,7 +994,7 @@ document.getElementById("optionsLoadSaveSave").addEventListener("click", functio
 	}
 	
 	let docDataString = "";
-	for (let i=0;i<5;i++) {
+	for (let i=0;i<6;i++) {
 		docDataString += linkArrayDocData[i];
 	}
 	
@@ -1001,7 +1008,7 @@ document.getElementById("optionsLoadSaveSave").addEventListener("click", functio
 
 document.getElementById('loadDocScreening').addEventListener('change', function() {
     console.log("load")
-    let cust = ["screenFKDF", "screenFKAT", "screenNTM", "screenDBU", "screenIATA"] // removed screenSWR
+    let cust = ["screenDocument", "screenFKDF", "screenFKAT", "screenNTM", "screenDBU", "screenIATA"] // removed screenSWR
 
     
 	let fr=new FileReader();
@@ -1020,6 +1027,7 @@ document.getElementById('loadDocScreening').addEventListener('change', function(
 
 document.getElementById("optionsRecoverDataToggler").addEventListener("click", function(){
 // document.getElementById("screenSWR").innerHTML 	= localStorage.getItem("SWRvalues");
+document.getElementById("screenDocument").innerHTML = localStorage.getItem("DocumentValues");   
 document.getElementById("screenFKDF").innerHTML = localStorage.getItem("FKDFvalues");
 document.getElementById("screenFKAT").innerHTML = localStorage.getItem("FKATvalues");
 document.getElementById("screenNTM").innerHTML 	= localStorage.getItem("NTMvalues");
