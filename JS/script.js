@@ -674,7 +674,7 @@ for(let i=0;i<valueDict.length;i++){ // iterates to the customer objects
       let twoFiddyLength = valueDict[i].value.length;
       let twoFiddySlice = valueDict[i].value.substring(99, (twoFiddyLength));
       let twoFiddySlice2 = valueDict[i].value.substring(0,99);
-      document.getElementById(valueDict[i].alert).innerHTML = "Page sequence might be too long for print dialog. Pay attention while printing. Overflow starts from: " +  twoFiddySlice;
+      document.getElementById(valueDict[i].alert).innerHTML = "Page sequence might be too long for print dialog. Pay attention while printing. Overflow starts from: " +  twoFiddySlice.substring(0,10) + "...";
       document.getElementById(valueDict[i].td).innerHTML = pageCalculation(valueDict[i].value); // calls the pageCalculation function anways because its only a warning notice
     }else {
       document.getElementById(valueDict[i].td).innerHTML = pageCalculation(valueDict[i].value); //else call pageCalculation with the customer obj value...
@@ -813,7 +813,10 @@ for(let i=0;i<customerValues.length;i++){
           let oddArrayInit = (alertArray[i]).split("-"); // copy page range elements into this list
           
           if((parseInt(oddArrayInit[0]) + parseInt(oddArrayInit[1]))%2 != 0){ // if int + int equals odd number
-            document.getElementById("testHTML").innerHTML += alertArray[i] + ", ";//... push it to the popup in sequence
+              let span = document.createElement("span")
+              span.id = alertArray[i]
+              span.innerHTML += alertArray[i] + ", ";//... push it to the popup in sequence
+              document.getElementById("testHTML").appendChild(span)
             // notice the missing <br>
           } else { // if its even (meaning an odd sequence (weird i know))
             document.getElementById("testHTML").innerHTML += alertArray[i];
@@ -834,6 +837,7 @@ for(let i=0;i<customerValues.length;i++){
     displayPagePopup()
   }
 }
+
 }
 
 // these are the copy button event handlers, they simply call the printEvent function with the customer variable
