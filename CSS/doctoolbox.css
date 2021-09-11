@@ -160,6 +160,8 @@
 
 .queryFKresults{
 	display: flex;
+    position: relative;
+    padding-bottom: 5em;
 }
 
 .tdLabel{
@@ -318,7 +320,7 @@ legend {
 	background: white;
 	left: 0;
 	right: 0;
-	position: fixed;
+	position: absolute;
 	margin: auto;
 	display: none;
 	flex-wrap: wrap;
