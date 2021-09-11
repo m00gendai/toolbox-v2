@@ -688,6 +688,7 @@ for(let i=0;i<valueDict.length;i++){ // iterates to the customer objects
 
 // This deals with putting the page ranges into local storage
 function localStorager(customer) {
+    console.log(customer)
 //const LoStoSWR 	= {valuex: "SWRvalues", 	screen: "screenSWR", 	name: "SWR"};
 const loStoDoc  = {valuex: "DocumentValues", 	screen: "screenDocument", 	name: "DOC"};
 const LoStoFKDF = {valuex: "FKDFvalues", 	screen: "screenFKDF", 	name: "FKDF"};
@@ -697,7 +698,9 @@ const LoStoDBU 	= {valuex: "DBUvalues", 	screen: "screenDBU",	name: "DBU"};
 const LoStoIATA = {valuex: "IATAvalues", 	screen: "screenIATA", 	name: "IATA"};
 const LoStoAll	= [LoStoFKDF, LoStoFKAT, LoStoNTM, LoStoDBU, LoStoIATA, loStoDoc] // LoStoSWR removed
 for(let i=0;i<LoStoAll.length;i++){
-  if(customer == LoStoAll[i].name){
+    console.log(document.getElementById(LoStoAll[i].screen).value)
+  if(customer == LoStoAll[i].name && document.getElementById(LoStoAll[i].screen).value != ""){
+      console.log(customer + ", " + LoStoAll[i].name)
     localStoragerSetter(LoStoAll, i);
   } 
 }
@@ -710,6 +713,8 @@ if (customer == "All"){
 
 // this is only a function so i have to write this expression only once
 function localStoragerSetter(LoStoAll,i) {
+    console.log(LoStoAll[i].valuex)
+    console.log(document.getElementById(LoStoAll[i].screen).value)
 localStorage.setItem(LoStoAll[i].valuex, document.getElementById(LoStoAll[i].screen).value);
 }
 
@@ -727,15 +732,17 @@ localStorager(customer);
 
 })*/
 document.getElementById("screenDocument").addEventListener("blur", function() {
+
 let customer = "DOC";
 localStorager(customer);
 
 })
 document.getElementById("screenFKDF").addEventListener("blur", function() {
+    if(document.getElementById("screenFKDF").value != 0){
 let customer = "FKDF";
 calculatePagesEvent(customer);
 localStorager(customer);
-
+    }
 })
 document.getElementById("screenFKAT").addEventListener("blur", function() {
 let customer = "FKAT";
@@ -1026,6 +1033,7 @@ document.getElementById('loadDocScreening').addEventListener('change', function(
 })
 
 document.getElementById("optionsRecoverDataToggler").addEventListener("click", function(){
+    console.log("recovering")
 // document.getElementById("screenSWR").innerHTML 	= localStorage.getItem("SWRvalues");
 document.getElementById("screenDocument").innerHTML = localStorage.getItem("DocumentValues");   
 document.getElementById("screenFKDF").innerHTML = localStorage.getItem("FKDFvalues");
@@ -1034,6 +1042,24 @@ document.getElementById("screenNTM").innerHTML 	= localStorage.getItem("NTMvalue
 document.getElementById("screenDBU").innerHTML 	= localStorage.getItem("DBUvalues");
 document.getElementById("screenIATA").innerHTML = localStorage.getItem("IATAvalues");
 })
+
+const clearButtons = [
+{target: "FKDF", clear: "clearFKDF", operation: "screenFKDF", collateral: "FKDFtd"},
+{target: "FKAT", clear: "clearFKAT", operation: "screenFKAT", collateral: "FKATtd"},
+{target: "NTM", clear: "clearNTM", operation: "screenNTM", collateral: "NTMtd"},
+{target: "DBU", clear: "clearDBU", operation: "screenDBU", collateral: "DBUtd"},
+{target: "IATA", clear: "clearIATA", operation: "screenIATA", collateral: "IATAtd"}
+]
+for (let i=0;i<Object.keys(clearButtons).length;i++){
+
+    document.getElementById(clearButtons[i].clear).addEventListener("click", function(){
+        console.log(clearButtons[i].target)
+            localStorager(clearButtons[i].target)
+        document.getElementById(clearButtons[i].operation).value = ""
+        document.getElementById(clearButtons[i].collateral).innerHTML = ""
+        
+    })
+}
 
         
 });
