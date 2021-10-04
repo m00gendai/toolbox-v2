@@ -1,29 +1,24 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This is an intranet information hub, basically a collection of links and applets related to the work place.
+It is completely serverless, meaning it lives as a simple collection of HTML, JS and CSS files on a harddrive. This is due to constraints and requirements at the workplace.
+It uses JSON as "databases" mainly, and heavily relies on LocalStorage and file URI operations to persistently save and retrieve data.
+
+Python was used to create the software that converts CSV files into customized JSON files since data delivery is alsmost exclusively Excel.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+The toolbox relies only on a few JavaScript libraries to run:
+
+* jQuery
+* lodash
 
 ### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+No contribution, this is an inhouse company only intranet page maintained by the repo owner alone.
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Repo owner
