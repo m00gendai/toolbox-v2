@@ -180,4 +180,19 @@ let buttonID = "buttonGeneral";
 tabbing(buttonID);
 init();
 filterAll.focus();
+
+// I N P U T S
+let frenchCtcToggle = 0
+document.getElementById("frenchContactArrow").addEventListener("click", function(){
+	if (frenchCtcToggle == 0){
+		document.getElementById("frenchContact").style.left = "-2.5%"
+		frenchCtcToggle = 1
+		document.getElementById("frenchContactArrow").innerHTML = "<"
+	} else if (frenchCtcToggle == 1){
+		document.getElementById("frenchContact").style.left = "-100%"
+		frenchCtcToggle = 0
+		document.getElementById("frenchContactArrow").innerHTML = ">"
+	}
+})
+
 });
