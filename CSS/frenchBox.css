@@ -146,3 +146,56 @@ flex-wrap: wrap;
 
 #buttonAnother {
 display: none;
+}
+
+#frenchContact{
+	width: 102.5%;
+	height: 30rem;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	top: 50vh;
+	left: -100%;
+	transform: translate(0, -50%);
+	background: white;
+	box-shadow: 0px 5px 2px -2px black,0px -5px 2px -2px black;
+}
+#frenchContactTitle{
+	position: relative;
+	width: 80%;
+	height: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#frenchContactText{
+	position: relative;
+	width: 80%;
+	height: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#frenchContactArrow{
+	width: 2.5%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	padding: 0 0.5rem 0 0.5rem;
+	background: green;
+	color: white;
+}
+#frenchContactSend{
+	position: relative;
+	width: 80%;
+	height: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
