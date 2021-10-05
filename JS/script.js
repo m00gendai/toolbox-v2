@@ -116,6 +116,7 @@ const quicklinkGeneratorSpace = document.getElementById("quickLinks");
 function generateAIPtiles(homeTileData){
 
 for(let i=0;i<homeTileData.length;i++){
+    
     const homeTileDiv = document.createElement("div");
     const homeTileDivP = document.createElement("p");
     homeTileDivImg = document.createElement("img");
@@ -204,10 +205,11 @@ for(let i=0;i<homeTileData.length;i++){
             }
         });
     }
-
+setTimeout(function(){
     quicklinkGeneratorSpace.appendChild(homeTileDiv);
  //   document.getElementById("searchBar").focus();
-}
+    
+}, 1000)}
 }
 
 
@@ -286,8 +288,12 @@ catch(err) {
 }
 
 let homeTiles = homeTileData
-generateAIPtiles(homeTiles)
-
+try{
+sortHomeByName(homeTiles)
+}
+catch(err){
+    alert("Error\n" + err + "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html")
+}
 
 document.getElementById("sortBoxHomeTyp").style.background = "none";
 document.getElementById("sortBoxHomeTyp").style.color = "black";
