@@ -44,8 +44,14 @@ function displayAIP() {
 
 $(document).ready(function() {
     
+      const src = homeTileData
+document.getElementById("quickLinks").innerHTML = ""
+
+    
 window.addEventListener("keypress", function(e){
-    if(e.keyCode ==  32 && e.target != document.getElementById("screenDocument")){
+    if(e.keyCode ==  32 
+        && e.target != document.getElementById("screenDocument")
+        && e.target != document.getElementById("frenchContactText")){
         e.preventDefault();
     }
 });
@@ -108,6 +114,7 @@ $("#doctool").click(function() {
           
 const quicklinkGeneratorSpace = document.getElementById("quickLinks");
 function generateAIPtiles(homeTileData){
+
 for(let i=0;i<homeTileData.length;i++){
     const homeTileDiv = document.createElement("div");
     const homeTileDivP = document.createElement("p");
@@ -197,8 +204,9 @@ for(let i=0;i<homeTileData.length;i++){
             }
         });
     }
+
     quicklinkGeneratorSpace.appendChild(homeTileDiv);
-    document.getElementById("searchBar").focus();
+ //   document.getElementById("searchBar").focus();
 }
 }
 
@@ -262,7 +270,7 @@ function displayGrid(src) {
     }
 }
 try {
-  let src = homeTileData
+
 document.getElementById("searchBar").addEventListener("keyup", function(src){
     if (document.getElementById("sortBoxHomeAZ").style.background == "blue"){
         src = sortHomeByName()
@@ -276,24 +284,6 @@ document.getElementById("searchBar").addEventListener("keyup", function(src){
 catch(err) {
   alert("Error\n" + err + "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html")
 }
-
-
-
-/*let resulting = []
-for(let i=0;i<Object.keys(homeTileData).length;i++){
-    resulting.push(JSON.parse(localStorage.getItem("sortedBy" + i)))
-}
-console.log(resulting)
-if(Object.keys(resulting).length == 0){
-    console.log("1")
-    let homeTiles = homeTileData;
-    generateAIPtiles(homeTiles)
-} else if(Object.keys(resulting).length != 0){
-    console.log("2")
-    let homeTiles = resulting
-    generateAIPtiles(homeTiles)
-}
-*/
 
 let homeTiles = homeTileData
 generateAIPtiles(homeTiles)
@@ -886,18 +876,6 @@ document.getElementById("testHTMLClose").addEventListener("click", function() {
 document.getElementById("testHTMLContainer").style.display = "none";
 })
 
-// this will fill the page count cells with the local storage data
-/*
-document.getElementById("toggleLocalStorage").addEventListener("click", function(){
-//document.getElementById("screenSWR").innerHTML 	= localStorage.getItem("SWRvalues");
-document.getElementById("screenFKDF").innerHTML = localStorage.getItem("FKDFvalues");
-document.getElementById("screenFKAT").innerHTML = localStorage.getItem("FKATvalues");
-document.getElementById("screenNTM").innerHTML 	= localStorage.getItem("NTMvalues");
-document.getElementById("screenDBU").innerHTML 	= localStorage.getItem("DBUvalues");
-document.getElementById("screenIATA").innerHTML = localStorage.getItem("IATAvalues");
-})
-
-*/
 
 // D O C  T O O L  I N I T I A L   L O A D   
 
