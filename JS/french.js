@@ -20,15 +20,15 @@ filterAll.addEventListener("keyup", function() {
 	while (translateTable.childNodes.length > 2) { // > 2 so it stops before removing the <th>
     	translateTable.removeChild(translateTable.lastChild);
 	}
- 	for (i=0; i<Object.keys(obj.translate).length; i++){
+ 	for (i=0; i<obj.length; i++){
 		var filterValueA = filterAll.value.toLowerCase();
 		if (filterValueA.match(/[\u00C0-\u00FF\u0027]/g)){ // checks if accent characters are present
-			if (obj.translate[i].french.toLowerCase().includes(filterValueA) || obj.translate[i].german.toLowerCase().includes(filterValueA)) {
+			if (obj[i].Français.toLowerCase().includes(filterValueA) || obj[i].Allemand.toLowerCase().includes(filterValueA)) {
 				wordList(); // if accent characters present, search with them
 			} 
 		} else { // if no accent characters present, normalize the object value and remove accent characters
-			var deaccentedAF = _.deburr(obj.translate[i].french.toLowerCase()); // ALL GLORY TO LODASH FOR THE DEBURR FUNCTION OH MY GOD
-			var deaccentedAG = _.deburr(obj.translate[i].german.toLowerCase()); // ...deburr removes accents and replaces accented letters with latin letters (è -> e)
+			var deaccentedAF = _.deburr(obj[i].Français.toLowerCase()); // ALL GLORY TO LODASH FOR THE DEBURR FUNCTION OH MY GOD
+			var deaccentedAG = _.deburr(obj[i].Allemand.toLowerCase()); // ...deburr removes accents and replaces accented letters with latin letters (è -> e)
 			if (deaccentedAF.includes(filterValueA) || deaccentedAG.includes(filterValueA)) {
 				wordList();
 			}
@@ -79,11 +79,20 @@ filterGerman.addEventListener("keyup", function() {
 function tabbing(buttonID) {
 	for (let i = 0; i < btns.length; i++) {
   		if(btns[i].getAttribute('id') == buttonID){
-  			btns[i].style.backgroundColor ="blue";
+  			btns[i].style.backgroundImage = "linear-gradient(315deg, #0499f2 0%, #26f596 74%)";
+            
+
+            btns[i].style.filter = "grayscale(0%)"
 			  btns[i].style.color ="white";
+              btns[i].style.fontSize = "1.1rem"
+              btns[i].style.padding = "0.9rem 0.4rem 0.9rem 0.4rem"
   		} else {
-  			btns[i].style.backgroundColor ="lightblue";
+  			btns[i].style.backgroundImage = "linear-gradient(315deg, #0499f2 0%, #26f596 74%)";
+            btns[i].style.filter = "grayscale(50%)"
+
 			  btns[i].style.color ="black";
+              btns[i].style.fontSize = "1rem"
+              btns[i].style.padding = "1rem 0.5rem 1rem 0.5rem"
   		}
   	}
 	filterAll.focus()
@@ -126,8 +135,8 @@ function createTableContent() {
 	var TR 					= document.createElement("tr");
 	var TDFrench 			= document.createElement("td");
 	var TDGerman 			= document.createElement("td");
-	var textContentFrench 	= document.createTextNode(obj.translate[i].french);
-	var textContentGerman 	= document.createTextNode(obj.translate[i].german);
+	var textContentFrench 	= document.createTextNode(obj[i].Français);
+	var textContentGerman 	= document.createTextNode(obj[i].Allemand);
 	TDFrench.appendChild(textContentFrench);
 	TDGerman.appendChild(textContentGerman);
 	TR.appendChild(TDFrench);
@@ -150,7 +159,7 @@ function wordList() {
 		THFrench.setAttribute("id", "baguette");
 		THGerman.setAttribute("id", "bratwurst");
 		
-		for (i=0; i<Object.keys(obj.translate).length; i++){
+		for (i=0; i<obj.length; i++){
 			createTableContent(); // calls each JSON object and creates a row for it
 		}
 	} else {
@@ -161,7 +170,7 @@ function wordList() {
 // Initial display of the table and also used for switching JSON sources
 function init() {
 	if (a == 0){
-		obj = JSON.parse(json);
+		obj = vociTechGen ;
 		wordList();
 	} else if (a == 1) {
 		obj = JSON.parse(json2);
