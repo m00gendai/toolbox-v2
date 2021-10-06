@@ -50,6 +50,7 @@ $(document).ready(function() {
   
     $("#home").click(function() {
         location.reload();
+        
     });
     $("#ats").click(function() {
         $("#contentBox").hide();
@@ -92,44 +93,44 @@ $(document).ready(function() {
     
     const quicklinkGeneratorSpace = document.getElementById("quickLinks");
     
-    function generateAIPtiles(homeTileData){
-        for(let i=0;i<homeTileData.length;i++){
+    function generateAIPtiles(src){
+        for(let i=0;i<src.length;i++){
             const homeTileDiv = document.createElement("div");
             const homeTileDivP = document.createElement("p");
             homeTileDivImg = document.createElement("img");
-            homeTileDiv.setAttribute("id", homeTileData[i].id);
+            homeTileDiv.setAttribute("id", src[i].id);
             homeTileDiv.setAttribute("class", "quicklinksContainerBox");
             homeTileDiv.setAttribute("tabindex", 0);
-            homeTileDivImg.src = homeTileData[i].img;
+            homeTileDivImg.src = src[i].img;
             homeTileDiv.appendChild(homeTileDivImg);
             homeTileDiv.appendChild(homeTileDivP);
-            homeTileDivP.innerHTML = homeTileData[i].title;
-            if(homeTileData[i].style == "spvr"){
+            homeTileDivP.innerHTML = src[i].title;
+            if(src[i].style == "spvr"){
                 homeTileDiv.style.background = "linear-gradient(45deg,  #e570e7 0%,#c85ec7 47%,#a849a3 100%)";
             }
-            if(homeTileData[i].style == "aro"){
+            if(src[i].style == "aro"){
                 homeTileDiv.style.background = "linear-gradient(45deg,  #a7cfdf 0%,#23538a 100%)";
             }
-            if(homeTileData[i].style == "general"){
+            if(src[i].style == "general"){
                 homeTileDiv.style.background = "linear-gradient(45deg,  #ffa84c 0%,#ff7b0d 100%)";
             }
-            if(homeTileData[i].style == "pub"){
+            if(src[i].style == "pub"){
                 homeTileDiv.style.background = "linear-gradient(45deg, #299a0b 0%,#299a0b 100%)";
             }
-            if(homeTileData[i].style == "sfo"){
+            if(src[i].style == "sfo"){
                 homeTileDiv.style.background = "linear-gradient(45deg,  #ffd65e 0%,#febf04 100%)";
             }
-            if(homeTileData[i].style == "doc"){
+            if(src[i].style == "doc"){
                 homeTileDiv.style.background = "linear-gradient(45deg,  #ff3019 0%,#cf0404 100%)";
             }
             if(homeTileDiv.id != "frenchStuff" && homeTileDiv.id != "sitaConversion"){
                 homeTileDiv.addEventListener("click", function(){
-                window.open(homeTileData[i].link)
+                window.open(src[i].link)
                 });
             
                 homeTileDiv.addEventListener("keypress", function(e){
                     if(e.keyCode == 13 || e.keyCode == 32) {
-                        window.open(homeTileData[i].link)
+                        window.open(src[i].link)
                     }
                 });
             } else if(homeTileDiv.id == "frenchStuff"){
@@ -183,13 +184,13 @@ $(document).ready(function() {
                     }
                 });
             }
-        
-            setTimeout(function(){
+        // The timeout function disrupts the search function, as all tiles are re-generated. Commented out for the time being.
+           // setTimeout(function(){ 
                 quicklinkGeneratorSpace.appendChild(homeTileDiv);
-            }, 1000)
+          //  }, 1000)
         }
     }
-
+    
     
 // H O M E   T I L E   D I S P L A Y   F U N C T I O N 
 
@@ -255,7 +256,7 @@ $(document).ready(function() {
 
     try {
         document.getElementById("searchBar").addEventListener("keyup", function(src){
-            if (document.getElementById("sortBoxHomeAZ").style.background == "blue"){
+           if (document.getElementById("sortBoxHomeAZ").style.background == "blue"){
                 src = sortHomeByName()
             }
             if (document.getElementById("sortBoxHomeTyp").style.background == "blue"){
@@ -269,10 +270,10 @@ $(document).ready(function() {
         alert("Error\n" + err + "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html")
     }   
 
-    let homeTiles = homeTileData
+
     
     try{
-        sortHomeByName(homeTiles)
+        sortHomeByName(src)
     }
     catch(err){
         alert("Error\n" + err + "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html")
