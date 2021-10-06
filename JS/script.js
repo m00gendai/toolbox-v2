@@ -1,9 +1,11 @@
+const errorMessage = "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html"
+
 // A I P   Q U E R Y   I N P U T   F U N C T I O N
 
 
 function linkAIP(icao) { // icao = passed parameter from onclick
     if (icao in linkCollectionAIP) {
-        var linkAIP = linkCollectionAIP[icao];
+        let linkAIP = linkCollectionAIP[icao];
     }
     window.open(linkAIP);
 }
@@ -56,8 +58,6 @@ $(document).ready(function() {
         $("#contentBox").hide();
         $("#aipBox").hide();
         $("#atsBox").show();
-        $("#docBox").hide();
-        $("#spvrBox").hide();
         $("#frenchBox").hide();
         $("#sitaBox").hide();
         $("#doctoolBox").hide();
@@ -67,8 +67,6 @@ $(document).ready(function() {
         $("#contentBox").hide();
         $("#aipBox").show();
         $("#atsBox").hide();
-        $("#docBox").hide();
-        $("#spvrBox").hide();
         $("#frenchBox").hide();
         $("#sitaBox").hide();
         $("#doctoolBox").hide();
@@ -79,8 +77,6 @@ $(document).ready(function() {
         $("#contentBox").hide();
         $("#aipBox").hide();
         $("#atsBox").hide();
-        $("#docBox").hide();
-        $("#spvrBox").hide();
         $("#frenchBox").hide();
         $("#sitaBox").hide();
         $("#doctoolBox").show();
@@ -97,35 +93,36 @@ $(document).ready(function() {
         for(let i=0;i<src.length;i++){
             const homeTileDiv = document.createElement("div");
             const homeTileDivP = document.createElement("p");
-            homeTileDivImg = document.createElement("img");
-            homeTileDiv.setAttribute("id", src[i].id);
-            homeTileDiv.setAttribute("class", "quicklinksContainerBox");
-            homeTileDiv.setAttribute("tabindex", 0);
+            const homeTileDivImg = document.createElement("img");
+            
+            homeTileDiv.id = src[i].id;
+            homeTileDiv.className = "quicklinksContainerBox";
+            homeTileDiv.tabIndex = 0;
             homeTileDivImg.src = src[i].img;
+            
             homeTileDiv.appendChild(homeTileDivImg);
             homeTileDiv.appendChild(homeTileDivP);
+            
             homeTileDivP.innerHTML = src[i].title;
-            if(src[i].style == "spvr"){
-                homeTileDiv.style.background = "linear-gradient(45deg,  #e570e7 0%,#c85ec7 47%,#a849a3 100%)";
+            
+            switch(src[i].style){
+                case "spvr": homeTileDiv.style.background = "linear-gradient(45deg,  #e570e7 0%,#c85ec7 47%,#a849a3 100%)";
+                    break;
+                case "aro": homeTileDiv.style.background = "linear-gradient(45deg,  #a7cfdf 0%,#23538a 100%)";
+                    break;
+                case "general": homeTileDiv.style.background = "linear-gradient(45deg,  #ffa84c 0%,#ff7b0d 100%)";
+                    break;
+                case "pub": homeTileDiv.style.background = "linear-gradient(45deg, #299a0b 0%,#299a0b 100%)";
+                    break;
+                case "sfo": homeTileDiv.style.background = "linear-gradient(45deg,  #ffd65e 0%,#febf04 100%)";
+                    break;
+                case "doc": homeTileDiv.style.background = "linear-gradient(45deg,  #ff3019 0%,#cf0404 100%)";
+                    break;
             }
-            if(src[i].style == "aro"){
-                homeTileDiv.style.background = "linear-gradient(45deg,  #a7cfdf 0%,#23538a 100%)";
-            }
-            if(src[i].style == "general"){
-                homeTileDiv.style.background = "linear-gradient(45deg,  #ffa84c 0%,#ff7b0d 100%)";
-            }
-            if(src[i].style == "pub"){
-                homeTileDiv.style.background = "linear-gradient(45deg, #299a0b 0%,#299a0b 100%)";
-            }
-            if(src[i].style == "sfo"){
-                homeTileDiv.style.background = "linear-gradient(45deg,  #ffd65e 0%,#febf04 100%)";
-            }
-            if(src[i].style == "doc"){
-                homeTileDiv.style.background = "linear-gradient(45deg,  #ff3019 0%,#cf0404 100%)";
-            }
+           
             if(homeTileDiv.id != "frenchStuff" && homeTileDiv.id != "sitaConversion"){
                 homeTileDiv.addEventListener("click", function(){
-                window.open(src[i].link)
+                    window.open(src[i].link)
                 });
             
                 homeTileDiv.addEventListener("keypress", function(e){
@@ -138,8 +135,6 @@ $(document).ready(function() {
                     $("#contentBox").hide();
                     $("#aipBox").hide();
                     $("#atsBox").hide();
-                    $("#docBox").hide();
-                    $("#spvrBox").hide();
                     $("#frenchBox").show();
                     $("#sitaBox").hide();
                     $("#doctoolBox").hide();
@@ -150,8 +145,6 @@ $(document).ready(function() {
                         $("#contentBox").hide();
                         $("#aipBox").hide();
                         $("#atsBox").hide();
-                        $("#docBox").hide();
-                        $("#spvrBox").hide();
                         $("#frenchBox").show();
                         $("#sitaBox").hide();
                         $("#doctoolBox").hide();
@@ -163,8 +156,6 @@ $(document).ready(function() {
                     $("#contentBox").hide();
                     $("#aipBox").hide();
                     $("#atsBox").hide();
-                    $("#docBox").hide();
-                    $("#spvrBox").hide();
                     $("#frenchBox").hide();
                     $("#sitaBox").show();
                     $("#doctoolBox").hide();
@@ -175,8 +166,6 @@ $(document).ready(function() {
                         $("#contentBox").hide();
                         $("#aipBox").hide();
                         $("#atsBox").hide();
-                        $("#docBox").hide();
-                        $("#spvrBox").hide();
                         $("#frenchBox").hide();
                         $("#sitaBox").show();
                         $("#doctoolBox").hide();
@@ -267,7 +256,7 @@ $(document).ready(function() {
         })
     }
     catch(err) {
-        alert("Error\n" + err + "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html")
+        alert("Error\n" + err + errorMessage)
     }   
 
 
@@ -276,7 +265,7 @@ $(document).ready(function() {
         sortHomeByName(src)
     }
     catch(err){
-        alert("Error\n" + err + "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html")
+        alert("Error\n" + err + errorMessage)
     }
 
     document.getElementById("sortBoxHomeTyp").style.background = "none";
@@ -328,8 +317,8 @@ $(document).ready(function() {
         const aipTileDivImg = document.createElement("img");
         const aipTileBr = document.createElement("br");
         const aipTileLink = aipTileData[i].link;
-        aipTileDiv.setAttribute("id", aipTileData[i].id);
-        aipTileDiv.setAttribute("class", "aipLinkBox");
+        aipTileDiv.id = aipTileData[i].id;
+        aipTileDiv.className = "aipLinkBox";
         
         aipTileDiv.addEventListener("click", function(){
             if(aipTileLink != ""){
@@ -346,7 +335,7 @@ $(document).ready(function() {
         });
         
         aipTileDivImg.src = aipTileData[i].img;
-        aipTileDivImg.setAttribute("width", "100%");
+        aipTileDivImg.width = "100%";
         aipTileDiv.appendChild(aipTileDivImg);
         aipTileDiv.appendChild(aipTileDivP);
         aipTileDivP.innerHTML = aipTileData[i].icao + "<br>" + aipTileData[i].country
@@ -428,49 +417,49 @@ $(document).ready(function() {
 
     function atsForm() {
         const atsRegex = /([%])/;
-        let http1         = "http://zhisaop/FlightSearch/FlightSearch?QueryTimeOut=30&MaxFlightCount=50";
-        let httpident     = "&Ident="
-        let ident         = $("#ident").val();
+        const http1         = "http://zhisaop/FlightSearch/FlightSearch?QueryTimeOut=30&MaxFlightCount=50";
+        const httpident     = "&Ident="
+        const ident         = $("#ident").val();
         
         if(ident.includes("%")){
             ident = $("#ident").val().replace(atsRegex, "%25")
         }
         
-        let httpeobdfrom  = "&EOBDFrom="
-        let eobdfrom      = dateToDOFFrom();
-        let httpeobtfrom  = "&EOBTFrom="
-        let httpeobdto    = "&EOBDUntil="
-        let eobdto        = dateToDOFTo();
-        let httpeobtto    = "&EOBTUntil="
-        let httpfltrule   = "&FlightRule="
-        let fltrule       = $("#fltrule").val();
-        let httpdep       = "&DEPAD="
-        let dep           = $("#dep").val();
+        const httpeobdfrom  = "&EOBDFrom="
+        const eobdfrom      = dateToDOFFrom();
+        const httpeobtfrom  = "&EOBTFrom="
+        const httpeobdto    = "&EOBDUntil="
+        const eobdto        = dateToDOFTo();
+        const httpeobtto    = "&EOBTUntil="
+        const httpfltrule   = "&FlightRule="
+        const fltrule       = $("#fltrule").val();
+        const httpdep       = "&DEPAD="
+        const dep           = $("#dep").val();
         
         if(dep.includes("%")){
             dep = $("#dep").val().replace(atsRegex, "%25")
         }
         
-        let httpdest      = "&DESTAD="
-        let dest          = $("#dest").val();
+        const httpdest      = "&DESTAD="
+        const dest          = $("#dest").val();
         
         if(dest.includes("%")){
             dest = $("#dest").val().replace(atsRegex, "%25")
         }
         
-        let httpfulltext  = "&FreeText="
-        let fulltext      = $("#fulltext").val();
+        const httpfulltext  = "&FreeText="
+        const fulltext      = $("#fulltext").val();
         
         if(fulltext.includes("%")){
             fulltext = $("#fulltext").val().replace(atsRegex, "%25")
         }
         
-        let httpmsgtype   = "&MessageType="
-        let msgtype       = $("#msgtype").val();
-        let httpmsgdir    = "&MessageDirection="
-        let msgdir        = $("#msgdir").val();
-        let httpqueue     = "&InQueues="
-        let queue         = $("#queue").val();
+        const httpmsgtype   = "&MessageType="
+        const msgtype       = $("#msgtype").val();
+        const httpmsgdir    = "&MessageDirection="
+        const msgdir        = $("#msgdir").val();
+        const httpqueue     = "&InQueues="
+        const queue         = $("#queue").val();
         let linkFS
         
         if(msgtype != "FPL"){
@@ -480,8 +469,8 @@ $(document).ready(function() {
         }
   
         const fsIframe = document.createElement("iframe");
-        fsIframe.setAttribute("src", linkFS);
-        fsIframe.setAttribute("id", "fsIframe");
+        fsIframe.src = linkFS;
+        fsIframe.id = "fsIframe";
         document.getElementById("fsIframeContainer").innerHTML = "";
         document.getElementById("fsIframeContainer").appendChild(fsIframe);
     }
@@ -504,7 +493,7 @@ $(document).ready(function() {
     
     $('.aipLinkBox').each(function() {
         if (this.type != "hidden") {
-            var $input = $(this);
+            let $input = $(this);
             $input.attr("tabindex", 0);
         }
     });
@@ -580,7 +569,6 @@ $(document).ready(function() {
 
     //this is called on blur of screening input or on calculate pages button press
     function calculatePagesEvent() {
-        //const SWRvalue 		= document.getElementById("screenSWR").value;
         const FKDFvalue 	= document.getElementById("screenFKDF").value;
         const FKATvalue	 	= document.getElementById("screenFKAT").value;
         const NTMvalue 		= document.getElementById("screenNTM").value;
@@ -588,12 +576,12 @@ $(document).ready(function() {
         const IATAvalue 	= document.getElementById("screenIATA").value;
         const rangeRegex 	= /([$&+:;=?@#|'<>.^*()%!_öäüèéà])|([a-zA-Z])|(,{2,})|(-{2,})|([0-9]{1,}-+([0-9]+-))/; // Magic, sorcery, BURN THE WITCH AT THE STAKE it catches double characters, invalid characters, invalid chains (7-8-9), put it into regexr and see
         const regexWrng 	= "Invalid sequence (multiple \",\" or \"-\" or other characters found) \n or invalid charcters (anything besides \",\" \"-\" and numbers)";
-         const FKDFdict 		= {value: FKDFvalue, td:"FKDFtd", alert:"screenFKDFalert"};
+        const FKDFdict 		= {value: FKDFvalue, td:"FKDFtd", alert:"screenFKDFalert"};
         const FKATdict 		= {value: FKATvalue, td:"FKATtd", alert:"screenFKATalert"};
         const NTMdict 		= {value: NTMvalue, td:"NTMtd", alert:"screenNTMalert"};
         const DBUdict 		= {value: DBUvalue, td:"DBUtd", alert:"screenDBUalert"};
         const IATAdict 		= {value: IATAvalue, td:"IATAtd", alert:"screenIATAalert"};
-        const valueDict 	= [FKDFdict, FKATdict, NTMdict, DBUdict, IATAdict]; //removed SWRdict
+        const valueDict 	= [FKDFdict, FKATdict, NTMdict, DBUdict, IATAdict]; 
 
         //This throws an error message underneath the input if invalid character (sequences) are found
         // OTherwise calls pageCalculation function
@@ -628,7 +616,7 @@ $(document).ready(function() {
         const LoStoNTM 	= {valuex: "NTMvalues", 	screen: "screenNTM",	name: "NTM"};
         const LoStoDBU 	= {valuex: "DBUvalues", 	screen: "screenDBU",	name: "DBU"};
         const LoStoIATA = {valuex: "IATAvalues", 	screen: "screenIATA", 	name: "IATA"};
-        const LoStoAll	= [LoStoFKDF, LoStoFKAT, LoStoNTM, LoStoDBU, LoStoIATA, loStoDoc] // LoStoSWR removed
+        const LoStoAll	= [LoStoFKDF, LoStoFKAT, LoStoNTM, LoStoDBU, LoStoIATA, loStoDoc]
         for(let i=0;i<LoStoAll.length;i++){
             if(customer == LoStoAll[i].name && document.getElementById(LoStoAll[i].screen).value != ""){
                 localStoragerSetter(LoStoAll, i);
@@ -648,40 +636,43 @@ $(document).ready(function() {
 
     // pageCalculation function call events, either on buton or on blur
     // also deals with the local storage
+    
+    let customer
+    
     document.getElementById("calculatePages").addEventListener("click", function() {
-        let customer = "All";
+        customer = "All";
         
         calculatePagesEvent(customer); // passing the customer variable shouldnt do anything but it works, so... i'll leave it
         localStorager(customer);
     })
     document.getElementById("screenDocument").addEventListener("blur", function() {
-        let customer = "DOC";
+        customer = "DOC";
         localStorager(customer);
     })
     document.getElementById("screenFKDF").addEventListener("blur", function() {
         if(document.getElementById("screenFKDF").value != 0){
-            let customer = "FKDF";
+            customer = "FKDF";
             calculatePagesEvent(customer);
             localStorager(customer);
         }
     })
     document.getElementById("screenFKAT").addEventListener("blur", function() {
-        let customer = "FKAT";
+        customer = "FKAT";
         calculatePagesEvent(customer);
         localStorager(customer);
     })
     document.getElementById("screenNTM").addEventListener("blur", function() {
-        let customer = "NTM";
+        customer = "NTM";
         calculatePagesEvent(customer);
         localStorager(customer);
     })
     document.getElementById("screenDBU").addEventListener("blur", function() {
-        let customer = "DBU";
+        customer = "DBU";
         calculatePagesEvent(customer);
         localStorager(customer);
     })
     document.getElementById("screenIATA").addEventListener("blur", function() {
-        let customer = "IATA";
+        customer = "IATA";
         calculatePagesEvent(customer);
         localStorager(customer);
     })
@@ -724,13 +715,12 @@ $(document).ready(function() {
     // the printing order though, in fact it saves time with the trailing int. Odd int-int sequences are also treated like a single int
 
     function printEvent(customer){ // receives the customer variable
-        //const customerSWR 		= {name: "SWR", 	value: document.getElementById("screenSWR").value,   print: "Swiss"}
         const customerFKDF 		= {name: "FKDF", 	value: document.getElementById("screenFKDF").value,  print: "Flightkeys Daily Folder"}
         const customerFKAT 		= {name: "FKAT", 	value: document.getElementById("screenFKAT").value,  print: "Flightkeys AIP Tool"}
         const customerNTM 		= {name: "NTM", 	value: document.getElementById("screenNTM").value,   print: "Team NOTAM"}
         const customerDBU 		= {name: "DBU", 	value: document.getElementById("screenDBU").value,   print: "DBU"}
         const customerIATA 		= {name: "IATA", 	value: document.getElementById("screenIATA").value,  print: "IATA"}
-        const customerValues 	= [customerFKDF, customerFKAT, customerNTM, customerDBU, customerIATA]; // emoved customerSWR
+        const customerValues 	= [customerFKDF, customerFKAT, customerNTM, customerDBU, customerIATA]; 
 
         //This itreates through the customer obj array
         for(let i=0;i<customerValues.length;i++){
@@ -773,23 +763,23 @@ $(document).ready(function() {
 
     // these are the copy button event handlers, they simply call the printEvent function with the customer variable
     document.getElementById("buttonCopyFKDF").addEventListener("click", function(){
-        let customer = "FKDF";
+        customer = "FKDF";
         printEvent(customer);
     })
     document.getElementById("buttonCopyFKAT").addEventListener("click", function(){
-        let customer = "FKAT";
+        customer = "FKAT";
         printEvent(customer);
     })
     document.getElementById("buttonCopyNTM").addEventListener("click", function(){
-        let customer = "NTM";
+        customer = "NTM";
         printEvent(customer);
     })
     document.getElementById("buttonCopyDBU").addEventListener("click", function(){
-        let customer = "DBU";
+        customer = "DBU";
         printEvent(customer);
     })
     document.getElementById("buttonCopyIATA").addEventListener("click", function(){
-        let customer = "IATA";
+        customer = "IATA";
         printEvent(customer);
     })
 
@@ -886,12 +876,12 @@ $(document).ready(function() {
     });
     // this is due to the fact that when the menu is not open, a click on the cog to open it in the first place counts already as a click outside of the options menu. so, a system had to be put in place to not count the first click in this event.
 
-    let saveDocLink = document.createElement("a");
-    let saveDocLinkText = "Save Screening Session to file";
+    const saveDocLink = document.createElement("a");
+    const saveDocLinkText = "Save Screening Session to file";
     let txtsaveDocLinkText = document.createTextNode(saveDocLinkText);
     saveDocLink.appendChild(txtsaveDocLinkText);
     document.getElementById("optionsLoadSaveSave").appendChild(saveDocLink)
-    saveDocLink.setAttribute("href", "")
+    saveDocLink.href = ""
     
     document.getElementById("optionsLoadSaveSave").addEventListener("click", function(){
         let docData = {
@@ -914,14 +904,14 @@ $(document).ready(function() {
         }
         
         let fileDownloadName = document.getElementById("screenDocument").value;
-        saveDocLink.setAttribute("href", "data:application/octet-stream;charset=utf-8," + docDataString);
-        saveDocLink.setAttribute("target", "_blank")
-        saveDocLink.setAttribute("download", fileDownloadName)
+        saveDocLink.href = "data:application/octet-stream;charset=utf-8," + docDataString;
+        saveDocLink.target = "_blank"
+        saveDocLink.download = fileDownloadName
 
     })
 
     document.getElementById('loadDocScreening').addEventListener('change', function() {
-        let cust = ["screenDocument", "screenFKDF", "screenFKAT", "screenNTM", "screenDBU", "screenIATA"] // removed screenSWR
+        const cust = ["screenDocument", "screenFKDF", "screenFKAT", "screenNTM", "screenDBU", "screenIATA"] 
         let fr=new FileReader();
         fr.onload=function() {
             let text1 = fr.result.split("\n");
