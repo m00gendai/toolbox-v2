@@ -74,6 +74,11 @@
 	align-items: center;
 	justify-content: center;
 }
+
+#optionsLoadSaveSave a{
+    text-decoration: none;
+    color: white;
+}
 #optionsLoadSaveLoad{
 	background: Red;
 	padding: 1rem;
@@ -82,7 +87,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+    color: white;
 }
+
+
 #optionsRecoverDataToggler{
 	background: yellow;
 	padding: 1rem;
