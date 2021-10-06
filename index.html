@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<title>Toolbox V2</title>
-		<meta charset="UTF-8">
+        <meta charset="UTF-8">		
 		<meta name="description" content="AIM Operations Zurich Toolbox V2">
 		<meta name="author" content="Marcel Weber">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<title>Toolbox V2</title>
+		
 		<script src="JS/jquery-3.6.0.min.js"></script>            <!-- jQuery library -->
 		<script src="JS/script.js" defer></script>                      <!-- Main JavaScript Code -->
 		<script src="JS/all.min.js" defer></script>                     <!-- Font Awesome -->
@@ -192,6 +195,12 @@
 				<div class="filler">
 				</div>
 				<div class="annotation">
+					Message Type:
+				</div>
+				<input type="text" id="msgtype" name="msgtype" placeholder="FPL">
+				<div class="filler">
+				</div>
+				<div class="annotation">
 					EOBD from / to:
 				</div>
 				<input type="date" id="eobdfrom" name="eobdfrom" >	
@@ -201,9 +210,9 @@
 				</div>
 				<select name="fltrule" id="fltrule">
 					<option value="V">V - VFR</option>
-					<option value="i">I - IFR</option>
-					<option value="z">Z - VFR - IFR</option>
-					<option value="y">Y - IFR - VFR</option>
+					<option value="I">I - IFR</option>
+					<option value="Z">Z - VFR - IFR</option>
+					<option value="Y">Y - IFR - VFR</option>
 				</select>
 				<div class="filler">
 				</div>
@@ -216,12 +225,6 @@
 					Full Text Search:
 				</div>
 				<input type="text" id="fulltext" name="fulltext" placeholder ="Full text search">
-				<div class="annotation">
-					Message Type:
-				</div>
-				<input type="text" id="msgtype" name="msgtype" placeholder="FPL">
-				<div class="filler">
-				</div>
 				<div class="annotation">
 					Message Direction:
 				</div>
@@ -334,8 +337,8 @@
 	<!-- BEGIN DOC Screening Tool Section -->
 	<section id="doctoolBox">
 	<div class="optionsButton" id="optionsButton">
-	<i class="fas fa-cog"></i>
-</div>
+        <i class="fas fa-cog"></i>
+    </div>
 	<div id="optionsMenu">
 	<div id="optionsDocToolHelp">
 			<div id="optionsDocToolHelpTitle">
@@ -449,52 +452,39 @@
 						<tbody>
 						</tbody>
 					</table>
-					<!--      <table id="SFresultsTable">
-						<tbody>
-						</tbody>
-						</table>
-						<table id="SAresultsTable">
-						<tbody>
-						</tbody>
-						</table> -->
 				</div>
 			</div>
 			<div class="screeningContainer" id="screeningContainer">
 				<div class="containerTitle">
 					Print Dialog for Screening
 				</div>
-				<!--   <fieldset id="fieldsetSWR">
-					<legend id="legendSWR">Swiss</legend>
-					<textarea class="screenField" id="screenSWR" placeholder="1-4,10-15,17,20-25,..."></textarea>
-					<div class="screenAlert" id="screenSWRalert"></div>
-					</fieldset> -->
                 <fieldset id="fieldsetDocument">
 					<legend id="legendDocument">Document Name</legend>
 					<textarea class="screenField" id="screenDocument" placeholder="LS AIRAC AMDT 13/21 (This will be the file name if you save your progress)"></textarea>
 				</fieldset>
 				<fieldset id="fieldsetFKDF">
 					<legend id="legendFKDF">Flightkeys Daily Folder</legend>
-					<div class="textFieldContainer"><textarea class="screenField" id="screenFKDF" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearFKDF" tabindex="-1"><i class="fas fa-trash-alt"></i></button></div></div>
+					<div class="textFieldContainer"><textarea class="screenField" id="screenFKDF" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearFKDF" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenFKDFalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetFKAT">
 					<legend id="legendFKAT">Flightkeys AIP Tool</legend>
-					<div class="textFieldContainer"><textarea class="screenField" id="screenFKAT" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearFKAT" tabindex="-1"><i class="fas fa-trash-alt"></i></button></div></div>
+					<div class="textFieldContainer"><textarea class="screenField" id="screenFKAT" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearFKAT" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenFKATalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetNTM">
 					<legend id="legendNTM">Team NOTAM</legend>
-					<div class="textFieldContainer"><textarea class="screenField" id="screenNTM" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearNTM" tabindex="-1"><i class="fas fa-trash-alt"></i></button></div></div>
+					<div class="textFieldContainer"><textarea class="screenField" id="screenNTM" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearNTM" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenNTMalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetDBU">
 					<legend id="legendDBU">DBU</legend>
-					<div class="textFieldContainer"><textarea class="screenField" id="screenDBU" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearDBU" tabindex="-1"><i class="fas fa-trash-alt"></i></button></div></div>
+					<div class="textFieldContainer"><textarea class="screenField" id="screenDBU" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearDBU" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenDBUalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetIATA">
 					<legend id="legendIATA">IATA</legend>
-					<div class="textFieldContainer"><textarea class="screenField" id="screenIATA" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearIATA" tabindex="-1"><i class="fas fa-trash-alt"></i></button></div></div>
+					<div class="textFieldContainer"><textarea class="screenField" id="screenIATA" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearIATA" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenIATAalert"></div>
 				</fieldset>
 				<button id="calculatePages">Calculate Pages</button>
@@ -506,13 +496,6 @@
 								<th id="thPages">Pages</th>
 								<th id="thCopy"></th>
 							</tr>
-							<!--        <tr id="trSWR">
-								<td class="tdLabel">Swiss</td>
-								<td class="pageTD" id="SWRtd"></td>
-								<td id="copySWR">
-								    <button id="buttonCopySWR">Copy</button>
-								</td>
-								</tr> -->
 							<tr id="trFKDF">
 								<td class="tdLabel">Flightkeys Daily Folder</td>
 								<td class="pageTD" id="FKDFtd"></td>
@@ -602,13 +585,13 @@
 				<li>Python 3.9</li>
 				<li>git</li>
 			</ul>
-			<div id="legalCopy">&copy; 2020-2021 Marcel Weber</div>
+			<div id="legalCopy"></div>
 		</div>
 		<div id="close"><i class="far fa-thumbs-up"></i></div>
 	</div>
 
 	<footer>
-		&copy; 2020-2021 AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues. 
+		<div id="footerText"></div>
 		<div id="legal"><u>Legal Statement</u></div>
 	</footer>
 		</body>
