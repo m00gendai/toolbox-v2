@@ -432,7 +432,7 @@ $(document).ready(function() {
         const eobdto        = dateToDOFTo();
         const httpeobtto    = "&EOBTUntil="
         const httpfltrule   = "&FlightRule="
-        const fltrule       = $("#fltrule").val();
+        let fltrule       = $("#fltrule").val();
         const httpdep       = "&DEPAD="
         const dep           = $("#dep").val();
         
@@ -455,13 +455,12 @@ $(document).ready(function() {
         }
         
         const httpmsgtype   = "&MessageType="
-        const msgtype       = $("#msgtype").val();
+        const msgtype       = $("#msgtype").val().toUpperCase();
         const httpmsgdir    = "&MessageDirection="
         const msgdir        = $("#msgdir").val();
         const httpqueue     = "&InQueues="
         const queue         = $("#queue").val();
         let linkFS
-        
         if(msgtype != "FPL"){
             linkFS = http1 + httpident + ident + httpeobdfrom + eobdfrom + httpeobtfrom + httpeobdto + eobdto + httpeobtto + httpqueue + queue + httpfltrule + httpdep + dep + httpdest + dest + httpmsgtype + msgtype + httpfulltext + fulltext + httpmsgdir + msgdir  
         } else if(msgtype == "FPL"){
@@ -486,6 +485,12 @@ $(document).ready(function() {
     document.getElementById("close").addEventListener("click", function(){
         document.getElementById("legalA").style.display ="none";
     })
+    
+    const thisDate = new Date()
+    const thisYear = thisDate.getFullYear()
+    
+    document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
+    document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
 
     
 // R A N D O M   T A B   I N D E X   F U N C T  I O N   C O M I N G   T H R O U G H
