@@ -3,41 +3,6 @@
     font-family: arial;
 }
 
-.toggleDocTools {
-	width: 100%;
-	display: flex;
-    flex-wrap: wrap;
-}
-
-#toggleLLD {
-	display: inline-block;
-	width: 2rem;
-}
-
-#togglePDS {
-	display: inline-block;
-	width: 2rem;
-}
-
-#toggleHalp {
-	display: inline-block;
-	width: 2rem;
-}
-
-#toggleLocalStorage {
-	display: inline-block;
-	width: 2rem;
-    margin: 0 0.2rem 0 0;
-}
-
-#toggleDocTools label {
-    display: inline-block;
-}
-.docToolsRange {
-    display: flex;
-    align-items: center;
-    margin: 0 3rem 0 0;
-}
 .halpText {
 	background: lightblue;
 	width: 90%;
@@ -85,77 +50,74 @@
 	flex-direction: column;
 }
 
-#screenTable td {
-	border: 3px solid white;
-}
-#screenTable th {
-	border: none;
-}
-#screenTable tr {
-	border: none;
+.pageDisplay{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
-
-#screenTable {
-	table-layout: fixed;
-	width: 100%;
-    border: none;
+.pageDisplayRow, .pageDisplayTitleRow{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    margin: 0.5rem 0 0.5rem 0;
 }
 
 #thScreen {
-	width: 60%;
+	width: 55%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 #thPages {
 	width: 10%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 #thCopy {
 	width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#thFK,
-#thSF,
-#thSA {
-
-	white-space: nowrap;
-}
-
-#FKresultsTable,
-#SFresultsTable,
-#SAresultsTable{
+#FKresultsTable{
 	width: 100%;
 	font-family: monospace;
 	font-size: 1.2rem;
     border: none;
 }
 
-#FKresultsTable tr,
-#SFresultsTable tr,
-#SAresultsTable tr{
+#FKresultsTable tr{
 	height: 2ch;
 }
-#FKresultsTable th,
-#SFresultsTable th,
-#SAresultsTable th{
+
+#FKresultsTable th{
+	border: none;
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+}
+
+#FKresultsTable td{
 	border: none;
 }
 
-#FKresultsTable td,
-#SFresultsTable td,
-#SAresultsTable td{
-	border: none;
-}
-#FKresultsTable tr:nth-child(even),
-#SFresultsTable tr:nth-child(even),
-#SAresultsTable tr:nth-child(even){
-	background: lightblue;
+#FKresultsTable tr:nth-child(even){
+	background: rgb(238,238,238);
 }
 
-#FKresultsTable tr:nth-child(odd),
-#SFresultsTable tr:nth-child(odd),
-#SAresultsTable tr:nth-child(odd){
-	background: #f6f6f6;
+#FKresultsTable tr:nth-child(odd){
+	background: rgb(255,255,255);
 }
 
 .queryFKresults{
@@ -166,11 +128,13 @@
 
 .tdLabel{
 	padding: 0.2rem 0 0.1rem 1rem;
+    width: 55%;
 }
 
 .pageTD {
 	padding: 0.2rem 0 0.1rem 0;
 	text-align: center;
+    width: 10%;
 }
 
 fieldset {
@@ -183,89 +147,67 @@ fieldset {
 	border: none;
 }
 
-#fieldsetSWR {
-	background: red;
-}
 #fieldsetFKDF {
-background: #40e0d0 ;
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
 }
+
 #fieldsetFKAT {
-	background: #40e0d0;
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
 }
+
 #fieldsetNTM {
-	background: yellow;
+    background-color: #dbf26e;
+    background-image: linear-gradient(319deg, #dbf26e 0%, #61fa74 37%, #1cfdd6 100%);
+
 }
+
 #fieldsetDBU {
-	background: orange;
+    background-color: #ef5734;
+    background-image: linear-gradient(315deg, #ef5734 0%, #ffcc2f 74%);
 }
+
 #fieldsetIATA {
-	background: blue;
+    background-color: #1fd1f9;
+    background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+
 }
+
 legend {
 	background: white;
 }
-#legendSWR {
-	color: white;
+
+.inputLegend{
+    color: black;
 	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-	background: red;
-	border-right: 5px solid white;
-	border-bottom: 5px solid white;
-}
-#legendFKDF {
-	color: black;
-	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-	background: #40e0d0;
-	border-right: 5px solid white;
-	border-bottom: 5px solid white;
-}
-#legendFKAT {
-	color: black;
-	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-	background: #40e0d0;
-	border-right: 5px solid white;
-	border-bottom: 5px solid white;
-}
-#legendNTM {
-	color: black;
-	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-	background: yellow;
-	border-right: 5px solid white;
-	border-bottom: 5px solid white;
-}
-#legendDBU {
-	color: black;
-	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-	background: orange;
-	border-right: 5px solid white;
-	border-bottom: 5px solid white;
-}
-#legendIATA {
-	color: white;
-	padding: 0.1rem 0.5rem 0.1rem 0.5rem;
-	background: blue;
 	border-right: 5px solid white;
 	border-bottom: 5px solid white;
 }
 
-#trSWR {
-	background: red;
-	color: white;
+#legendFKDF {
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
 }
-#trFKDF {
-	background: #40e0d0;
+
+#legendFKAT {
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
 }
-#trFKAT {
-	background: #40e0d0;
+
+#legendNTM {
+    background-color: #dbf26e;
+    background-image: linear-gradient(319deg, #dbf26e 0%, #61fa74 37%, #1cfdd6 100%);
 }
-#trNTM {
-	background: yellow;
+
+#legendDBU {
+    background-color: #ef5734;
+    background-image: linear-gradient(315deg, #ef5734 0%, #ffcc2f 74%);
 }
-#trDBU {
-	background: orange;
-}
-#trIATA {
-	background: blue;
-	color: white;
+
+#legendIATA {
+    background-color: #1fd1f9;
+    background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
 }
 
 .textFieldContainer{
@@ -289,14 +231,13 @@ legend {
 }
 
 .clearButtonContainer{
-
     width:10%;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
-    	margin: 0 0 0.5rem 0;
-    
+    margin: 0 0 0.5rem 0;
 }
+
 .clearScreeningPages{
     width: 1.5rem;;
     height: 1.5rem;
@@ -306,8 +247,6 @@ legend {
     color: white;
     background: red;
     border: none;
-
-
 }
 
 .screenAlert {
@@ -318,25 +257,73 @@ legend {
 	padding: 0.2rem;
 }
 
-#buttonCopySWR,
-#buttonCopyFKDF,
-#buttonCopyFKAT,
-#buttonCopyNTM,
-#buttonCopyDBU,
-#buttonCopyIATA{
+.buttonCopy{
 	width: 100%;
     height: 100%;
     padding: 1rem 0 1rem 0;
 }
 
-#copySWR,
-#copyFKDF,
-#copyFKAT,
-#copyNTM,
-#copyDBU,
-#copyIATA {
+.copyButtonContainer {
 	background: white;
-        padding: 0;
+    padding: 0;
+    width: 30%;
+}
+
+.tdLabel, .pageTD{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+#tdLabelFKDF{
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+}
+
+#tdLabelFKAT{
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+}
+
+#tdLabelNTM{
+    background-color: #dbf26e;
+    background-image: linear-gradient(319deg, #dbf26e 0%, #61fa74 37%, #1cfdd6 100%);
+}
+
+#tdLabelDBU{
+    background-color: #ef5734;
+    background-image: linear-gradient(315deg, #ef5734 0%, #ffcc2f 74%);
+}
+
+#tdLabelIATA{
+    background-color: #1fd1f9;
+    background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+}
+
+#FKDFtd{
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+}
+
+#FKATtd{
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+}
+
+#NTMtd{
+    background-color: #dbf26e;
+    background-image: linear-gradient(319deg, #dbf26e 0%, #61fa74 37%, #1cfdd6 100%);
+}
+
+#DBUtd{
+    background-color: #ef5734;
+    background-image: linear-gradient(315deg, #ef5734 0%, #ffcc2f 74%);
+}
+
+#IATAtd{
+    background-color: #1fd1f9;
+    background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
 }
 
 #calculatePages {
