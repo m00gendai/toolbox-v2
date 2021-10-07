@@ -81,16 +81,14 @@ $(document).ready(function() {
         for (let i = 0; i < btns.length; i++) {
             if(btns[i].id == buttonID){
                 btns[i].style.backgroundImage = "linear-gradient(315deg, #0499f2 0%, #26f596 74%)";
-                btns[i].style.filter = "grayscale(0%)"
+                btns[i].style.opacity = "1"
                 btns[i].style.color ="white";
-                btns[i].style.fontSize = "1.1rem"
-                btns[i].style.padding = "0.9rem 0.4rem 0.9rem 0.4rem"
+                btns[i].style.textShadow ="0px 0px 3px black";
             } else {
                 btns[i].style.backgroundImage = "linear-gradient(315deg, #0499f2 0%, #26f596 74%)";
-                btns[i].style.filter = "grayscale(50%)"
+                btns[i].style.opacity = "0.5"
+                btns[i].style.textShadow ="none";
                 btns[i].style.color ="black";
-                btns[i].style.fontSize = "1rem"
-                btns[i].style.padding = "1rem 0.5rem 1rem 0.5rem"
             }
         }
         filterAll.focus()
