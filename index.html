@@ -463,76 +463,72 @@
 					<textarea class="screenField" id="screenDocument" placeholder="LS AIRAC AMDT 13/21 (This will be the file name if you save your progress)"></textarea>
 				</fieldset>
 				<fieldset id="fieldsetFKDF">
-					<legend id="legendFKDF">Flightkeys Daily Folder</legend>
+					<legend id="legendFKDF" class="inputLegend">Flightkeys Daily Folder</legend>
 					<div class="textFieldContainer"><textarea class="screenField" id="screenFKDF" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearFKDF" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenFKDFalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetFKAT">
-					<legend id="legendFKAT">Flightkeys AIP Tool</legend>
+					<legend id="legendFKAT" class="inputLegend">Flightkeys AIP Tool</legend>
 					<div class="textFieldContainer"><textarea class="screenField" id="screenFKAT" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearFKAT" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenFKATalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetNTM">
-					<legend id="legendNTM">Team NOTAM</legend>
+					<legend id="legendNTM" class="inputLegend">Team NOTAM</legend>
 					<div class="textFieldContainer"><textarea class="screenField" id="screenNTM" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearNTM" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenNTMalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetDBU">
-					<legend id="legendDBU">DBU</legend>
+					<legend id="legendDBU" class="inputLegend">DBU</legend>
 					<div class="textFieldContainer"><textarea class="screenField" id="screenDBU" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearDBU" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenDBUalert"></div>
 				</fieldset>
 				<fieldset id="fieldsetIATA">
-					<legend id="legendIATA">IATA</legend>
+					<legend id="legendIATA" class="inputLegend">IATA</legend>
 					<div class="textFieldContainer"><textarea class="screenField" id="screenIATA" placeholder="1-4,10-15,17,20-25,..."></textarea><div class="clearButtonContainer"><button class="clearScreeningPages" id="clearIATA" tabindex="-1" title="Delete entries"><i class="fas fa-trash-alt"></i></button></div></div>
 					<div class="screenAlert" id="screenIATAalert"></div>
 				</fieldset>
 				<button id="calculatePages">Calculate Pages</button>
 				<div class="pageDisplay">
-					<table id="screenTable">
-						<tbody>
-							<tr>
-								<th id="thScreen">Screen for</th>
-								<th id="thPages">Pages</th>
-								<th id="thCopy"></th>
-							</tr>
-							<tr id="trFKDF">
-								<td class="tdLabel">Flightkeys Daily Folder</td>
-								<td class="pageTD" id="FKDFtd"></td>
-								<td id="copyFKDF">
-									<button id="buttonCopyFKDF">Copy</button>
-								</td>
-							</tr>
-							<tr id="trFKAT">
-								<td class="tdLabel">Flightkeys AIP Tool</td>
-								<td class="pageTD" id="FKATtd"></td>
-								<td id="copyFKAT">
-									<button id="buttonCopyFKAT">Copy</button>
-								</td>
-							</tr>
-							<tr id="trNTM">
-								<td class="tdLabel">Team NOTAM</td>
-								<td class="pageTD" id="NTMtd"></td>
-								<td id="copyNTM">
-									<button id="buttonCopyNTM">Copy</button>
-								</td>
-							</tr>
-							<tr id="trDBU">
-								<td class="tdLabel">DBU</td>
-								<td class="pageTD" id="DBUtd"></td>
-								<td id="copyDBU">
-									<button id="buttonCopyDBU">Copy</button>
-								</td>
-							</tr>
-							<tr id="trIATA">
-								<td class="tdLabel">IATA</td>
-								<td class="pageTD" id="IATAtd"></td>
-								<td id="copyIATA">
-									<button id="buttonCopyIATA">Copy</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<div class="pageDisplayTitleRow">
+								<div id="thScreen">Screen for</div>
+								<div id="thPages">Pages</div>
+								<div id="thCopy"></div>
+					</div>
+					<div class="pageDisplayRow">
+								<div class="tdLabel" id="tdLabelFKDF">Flightkeys Daily Folder</div>
+								<div class="pageTD" id="FKDFtd"></div>
+								<div id="copyFKDF" class="copyButtonContainer">
+									<button id="buttonCopyFKDF" class="buttonCopy">Copy</button>
+								</div>
+					</div>
+							<div class="pageDisplayRow" >
+								<div class="tdLabel" id="tdLabelFKAT">Flightkeys AIP Tool</div>
+								<div class="pageTD" id="FKATtd"></div>
+								<div id="copyFKAT" class="copyButtonContainer">
+									<button id="buttonCopyFKAT" class="buttonCopy">Copy</button>
+								</div>
+							</div>
+							<div class="pageDisplayRow">
+								<div class="tdLabel" id="tdLabelNTM">Team NOTAM</div>
+								<div class="pageTD" id="NTMtd"></div>
+								<div id="copyNTM" class="copyButtonContainer">
+									<button id="buttonCopyNTM" class="buttonCopy">Copy</button>
+								</div>
+							</div>
+							<div class="pageDisplayRow">
+								<div class="tdLabel" id="tdLabelDBU">DBU</div>
+								<div class="pageTD" id="DBUtd"></div>
+								<div id="copyDBU" class="copyButtonContainer">
+									<button id="buttonCopyDBU" class="buttonCopy">Copy</button>
+								</div>
+							</div>
+							<div class="pageDisplayRow">
+								<div class="tdLabel" id="tdLabelIATA">IATA</div>
+								<div class="pageTD" id="IATAtd"></div>
+								<div id="copyIATA" class="copyButtonContainer">
+									<button id="buttonCopyIATA" class="buttonCopy">Copy</button>
+								</div>
+							</div>
 				</div>
 			</div>
 			<div id="testHTMLContainer">
@@ -567,23 +563,28 @@
 					</ul>
 				</li>
 				<li>Flags from <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a></li>
+				<li>Photographs from <a href="https://pixabay.com" target="_blank">Pixabay</a></li>
 			</ul>
 			<br>
 			A source code backup is stored in a private git repo by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>. <br>This repo is also used to update the AIS local instance.<br><br>
 			Trello is used as a changelog and ticketing service. Please refer to the <a href="https://trello.com/b/lPvSDcli" target="_blanK">Toolbox V2 Kanban Board</a>. <br><br>For issue reports and feature requests, please advise <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> directly.<br>
-			An online ticketing service is not planned.<br> <br>
+			An online ticketing service for AIM personnel is not planned.<br> <br>
 			Tech stack:<br>
 			<ul>
 				<li>HTML5</li>
 				<li>CSS3</li>
 				<li>JavaScript</li>
-				<ul>
-					<li>jQuery</li>
-					<li>lodash</li>
-					<li>JSON</li>
-				</ul>
+                    <ul>
+                        <li>jQuery</li>
+                        <li>lodash</li>
+                        <li>JSON</li>
+                    </ul>
 				<li>Python 3.9</li>
 				<li>git</li>
+				<li>API</li>
+                    <ul>
+                        <li>getform.io</li>
+                    </ul>
 			</ul>
 			<div id="legalCopy"></div>
 		</div>
