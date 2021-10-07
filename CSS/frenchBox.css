@@ -4,10 +4,11 @@ display: none;
 
 
 table {
-	width: 100%;
+	width: 80%;
     border-collapse: collapse;
 	font-family: arial;
 	font-weight: 500;
+    box-shadow: 2px -2px 5px 1px darkgray;
 }
 
 .switchButton {
@@ -15,9 +16,20 @@ table {
 	background-color: transparent;
 	color: black;
 	border: none;
-    margin: 0 0.25rem 0 0.25rem;
-	clip-path: polygon(40% 0, 50% 15%, 60% 0, 100% 0, 100% 99%, 0 100%, 0 0);
+    margin: 0;
+     box-shadow: 2px -2px 5px 0px darkgray;
+     letter-spacing: 1px;
 }
+
+.switchButton:nth-child(1){
+    margin: 0 0 0 1rem;
+    border-top-left-radius: 25px;
+}
+.switchButton:last-child{
+    margin: 0 1rem 0 0;
+    border-top-right-radius: 25px;
+}
+
 .switchButton:active,
 .switchButton:focus {
 	color: black;
@@ -37,19 +49,19 @@ tr:nth-child(2n+3) {
 background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/320px-Flag_of_France.svg.png");
 background-repeat: no-repeat;
 background-size: cover;
-	font-size: 2vw;
+	font-size: 1.5rem;
 
 }
 #bratwurst {
 background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/320px-Flag_of_Germany.svg.png");
 background-repeat: no-repeat;
 background-size: 100% 100%;
-	font-size: 2vw;
+	font-size: 1.5rem;
 	color: white;
      padding: 0;
 
 }
-
+/*
 tr:last-child{
 	border-bottom: 1px solid black;
 }
@@ -58,17 +70,17 @@ tr:nth-child(1) {
 	border: 1px solid black;
 	
 }
-
+*/
 td {
 	padding: 1vw;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
+	/*border-left: 1px solid black;
+	border-right: 1px solid black;*/
 	width: 50%;
 }
 
 th {
-	padding: 1vw 0 1vw 0;
-	border: 1px solid black;
+	padding: 0.5rem 0 0.5rem 0;
+	/*border: 1px solid black;*/
 
 }
 .inputField {
@@ -80,11 +92,11 @@ th {
 }
 .inputField2 {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
     align-items: center;
-	width: 100%;
+	width: 80%;
 	margin: 0 0 0 0;
-	
+	z-index: 400;
 }
 
 
@@ -94,7 +106,7 @@ th {
 	padding-left: 15%;
 	background-position: left center;
 	background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Flag_of_France_and_Germany.svg/320px-Flag_of_France_and_Germany.svg.png");
-	background-size: 15% 100%;
+	background-size: 10% 60%;
 	background-repeat: no-repeat;
 	margin-right: 1vw;
 }
@@ -103,7 +115,7 @@ th {
 	padding-left: 15%;
 	background-position: left center;
 	background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/320px-Flag_of_France.svg.png");
-	background-size: 15% 100%;
+	background-size: 10% 60%;
 	background-repeat: no-repeat;
 	margin-left: 1vw;
 	margin-right: 1vw;
@@ -113,7 +125,7 @@ th {
 	padding-left: 15%;
 	background-position: left center;
 	background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/320px-Flag_of_Germany.svg.png");
-	background-size: 15% 100%;
+	background-size: 10% 60%;
 	background-repeat: no-repeat;
 	margin-left: 1vw;
 }
@@ -148,9 +160,7 @@ section {
 flex-wrap: wrap;
 }
 
-#buttonAnother {
-display: none;
-}
+
 
 #frenchContact{
 	width: 103%;
