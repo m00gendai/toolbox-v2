@@ -136,6 +136,7 @@ $(document).ready(function() {
                     $("#aipBox").hide();
                     $("#atsBox").hide();
                     $("#frenchBox").show();
+                    loadFrenchCode()
                     $("#sitaBox").hide();
                     $("#doctoolBox").hide();
                     $("#searchAll").focus();
