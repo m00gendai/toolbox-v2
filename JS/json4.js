@@ -1,1 +1,0 @@
-var json4 = '{"translate":[{"id": "0", "french": "à votre service", "german": "gern geschehen!"},{"id": "1", "french": "adresse email - courriel (l\', une) - (le, un)", "german": "die Email Adresse"}]}'
