@@ -92,7 +92,7 @@ th {
 }
 .inputField2 {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
     align-items: center;
 	width: 80%;
 	margin: 0 0 0 0;
@@ -170,14 +170,15 @@ flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	top: 50vh;
+	top: 10vh;
 	left: -100%;
-	transform: translate(0, -50%);
+	/*transform: translate(0, -50%);*/
 	background-image: url("U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO NOT DELETE PLS -WM/Assets/eiffel-tower-951509.jpg");
     background-size: cover;
     background-position: center;
 	box-shadow: 0px 0px 15px -5px #000000;
     transition: left 1s ease-out;
+    z-index: 20000;
 }
 #frenchContactTitle{
 	position: relative;
@@ -286,4 +287,22 @@ cursor:pointer;
     width: 2.5rem;
     height: 2.5rem;
     margin: 2rem 0 0 0;
+}
+
+#toTop{
+margin: 2rem 0 0 0;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+font-size: 3rem;
+
+width: 100%;
+position: relative;
+}
+
+.fa-arrow-alt-circle-up.fa-w-16{
+    color: blue;
+}
+.fa-arrow-alt-circle-up.fa-w-16:hover{
+    cursor:pointer;
 }
