@@ -13,7 +13,11 @@
 		<script src="JS/all.min.js" defer></script>                     <!-- Font Awesome -->
 		<script src="JS/lodash.js" defer></script>                      <!-- lodash library -->
 		<script src="JS/french.js" defer></script>                      <!-- Specific French section JavaScript Code -->
+		<script src="Documents/FRENCH BIBLIOTHEK/sfo_helpdesk.js" defer></script>                        <!-- JSON for French Table 1 -->
+		<script src="Documents/FRENCH BIBLIOTHEK/skybriefing_helpdesk.js" defer></script>                        <!-- JSON for French Table 1 -->
+		<script src="Documents/FRENCH BIBLIOTHEK/aip_helpdesk.js" defer></script>                        <!-- JSON for French Table 1 -->
 		<script src="Documents/FRENCH BIBLIOTHEK/voci_tech_gen.js" defer></script>                        <!-- JSON for French Table 1 -->
+		<script src="Documents/FRENCH BIBLIOTHEK/voci_div.js" defer></script>                        <!-- JSON for French Table 1 -->
 		<script src="JS/json2.js" defer></script>                       <!-- JSON for French Table 2 -->
 		<script src="JS/json3.js" defer></script>                       <!-- JSON for French Table 3 -->
 		<script src="JS/json4.js" defer></script>                       <!-- JSON for French Table 4 -->
@@ -266,10 +270,12 @@
 			<div class="g3"><input type="text" id="searchGerman" name="searchGerman" placeholder="Deutsch durchsuchen"></div>
 		</div>
 		<div class="inputField2" id="inputField2">
-			<button class="switchButton" id="buttonGeneral">Le dictionnaire général</button>
-			<button class="switchButton" id="buttonSFO">Le support téléphonique et les éléments informatiques</button>
-			<button class="switchButton" id="buttonWhatever">Dictionnaire de l'AIS</button>
-			<button class="switchButton" id="buttonAnother">Le support téléphonique SFO</button>
+		<button class="switchButton" id="buttonSFO">SFO Helpdesk</button>
+			<button class="switchButton" id="buttonGeneral">Skybriefing Helpdesk</button>
+			
+			<button class="switchButton" id="buttonWhatever">AIP Helpdesk</button>
+			<button class="switchButton" id="buttonAnother">Vocabulaire technique général</button>
+			<button class="switchButton" id="buttonLastOne">Vocabulaire divers de l'AIS</button>
 		</div>
 		<table id="frenchTable">
 			<tbody>
@@ -286,6 +292,7 @@
 			</form>
 			<div id="frenchContactArrow">FEEDBACK&NewLine;<i class="fas fa-angle-right"></i></div>
 		</div>
+		<div id="toTop"><i class="far fa-arrow-alt-circle-up" title="Zurück nach oben"></i></div>
 	</section>
 	<!-- END French Translation -->
 	<!-- BEGIN SITA Conversion -->
