@@ -10,6 +10,9 @@
  *          - pub:      green
  *          - sfo:      yellow
  *          - doc:      red
+ * 
+ * Tile object do not need to be sorted alphabetically. They will be automatically sorted upon initial page load. 
+ * 
  */
 
 const homeTileData = [{
@@ -19,6 +22,14 @@ const homeTileData = [{
 		link: "Documents/aiseqptmap.pdf",
 		tags: "ais phone equipment map telephone eqpt iawp",
 		style: "spvr"
+	},
+    {
+		id: "arrmsg",
+		img: "Assets/europe.png",
+		title: "ARR MSG/Phone Numbers",
+		link: "U:\\ZOL\\PR-Team\\AIS-ALLG\\aim-info-hub_DO NOT DELETE PLS -WM\\Documents\\Phone_numbers_foreign_coutries.jpg",
+		tags: "arrival phone arr number nr foreign italia france austria germany",
+		style: "aro"
 	},
 	{
 		id: "atfmx",
@@ -167,9 +178,9 @@ const homeTileData = [{
 	{
 		id: "frenchStuff",
 		img: "Assets/eiffel-tower.png",
-		title: "Français / French / französisch für SFO",
-		tags: "französisch francais françcais french special flight office drohne drone sfo",
-		style: "sfo"
+		title: "Français / French / Französisch",
+		tags: "französisch francais françcais french special flight office drohne drone sfo vocabulaire wörter übersetzung",
+		style: "general"
 	}, // internal link
 	{
 		id: "helpdeskQA",
@@ -346,6 +357,14 @@ const homeTileData = [{
 		tags: "aip schweiz swiss switzerland",
 		style: "doc"
 	},
+    {
+        id: "timeZone",
+        img: "Assets/time-zone.png",
+        title: "Time Zone Converter",
+        link: "https://www.timeanddate.com/worldclock/converter.html",
+        tags: "utc local time zone converter calculator",
+        style: "general"
+    },
 	{
 		id: "toolboxStatus",
 		img: "Assets/trello.png",
@@ -393,5 +412,7 @@ const homeTileData = [{
 		link: "https://performancemanager5.successfactors.eu/sf/start/#Shell-home",
 		tags: "yea year end appraisal pib gespräch performance successfactors",
 		style: "general"
-	}
+	},
+
+
 ];
