@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function loadFrenchCode() {
 
 
 // I N I T I A L   V A R I A B L E S   D E C L A R A T I O N S
@@ -12,12 +12,13 @@ $(document).ready(function() {
     const btnContainer 		= document.getElementById("inputField2");
     const btns 				= btnContainer.getElementsByClassName("switchButton");
     const accentRegex       = /[\u00C0-\u00FF\u0027]/g
-
+    let allInOne
     
 // E V E N T   L I S T E N E R S
 
     
     filterAll.addEventListener("keyup", function() {
+        obj = allInOne
         while (translateTable.childNodes.length > 2) { // > 2 so it stops before removing the <th>
             translateTable.removeChild(translateTable.lastChild);
         }
@@ -38,6 +39,7 @@ $(document).ready(function() {
     })
 
     filterFrench.addEventListener("keyup", function() {
+        obj = allInOne
         while (translateTable.childNodes.length > 2) { // > 2 so it stops before removing the <th>
             translateTable.removeChild(translateTable.lastChild);
         }
@@ -57,6 +59,7 @@ $(document).ready(function() {
     })
 
     filterGerman.addEventListener("keyup", function() {
+        obj = allInOne
         while (translateTable.childNodes.length > 2) { // > 2 so it stops before removing the <th>
             translateTable.removeChild(translateTable.lastChild);
         }
@@ -95,15 +98,15 @@ $(document).ready(function() {
     }
 
 
-    document.getElementById("buttonGeneral").addEventListener("click", function() {
-        let buttonID = "buttonGeneral";
+    document.getElementById("buttonSFO").addEventListener("click", function() {
+        let buttonID = "buttonSFO";
         tabbing(buttonID);
         showTableOnLoad = 0;
         init();
     })
-
-    document.getElementById("buttonSFO").addEventListener("click", function() {
-        let buttonID = "buttonSFO";
+    
+    document.getElementById("buttonGeneral").addEventListener("click", function() {
+        let buttonID = "buttonGeneral";
         tabbing(buttonID);
         showTableOnLoad = 1;
         init();
@@ -120,6 +123,13 @@ $(document).ready(function() {
         let buttonID = "buttonAnother";
         tabbing(buttonID);
         showTableOnLoad = 3;
+        init();
+    })
+    
+    document.getElementById("buttonLastOne").addEventListener("click", function() {
+        let buttonID = "buttonLastOne";
+        tabbing(buttonID);
+        showTableOnLoad = 4;
         init();
     })
     
@@ -167,25 +177,40 @@ $(document).ready(function() {
 // Initial display of the table and also used for switching JSON sources
     function init() {
         if (showTableOnLoad == 0){
-            obj = vociTechGen ;
+            obj = sfoHelpdesk.slice(1)  ;
             wordList();
         } else if (showTableOnLoad == 1) {
-            obj = JSON.parse(json2);
+            obj = skybriefingHelpdesk.slice(1)    
             wordList();
         } else if (showTableOnLoad == 2) {
-            obj = JSON.parse(json3);
+            obj = aipHelpdesk.slice(1)  ;
             wordList();
         } else if (showTableOnLoad == 3) {
-            obj = JSON.parse(json4);
+            obj = vociTechGen.slice(1)   
             wordList();
         }
+         else if (showTableOnLoad == 4) {
+            obj = vociDiv.slice(1)   
+            wordList();
+        }
+        
+        console.log("sfoHelpdesk: " + sfoHelpdesk.length)
+        console.log("skybriefingHelpdesk: " + skybriefingHelpdesk.length)
+        console.log("aipHelpdesk: " + aipHelpdesk.length)
+        console.log("vociTechGen: " + vociTechGen.length)
+        console.log("vociDiv: " + vociDiv.length)
+        console.log("Total: " + (sfoHelpdesk.length + aipHelpdesk.length + vociDiv.length + vociTechGen.length + skybriefingHelpdesk.length))
+
+        allInOne = sfoHelpdesk.concat(aipHelpdesk, vociDiv, vociTechGen, skybriefingHelpdesk)
+        console.log(allInOne)
     }
 
 // M A I N   E N T R Y   P O I N T
-    let buttonID = "buttonGeneral";
+    let buttonID = "buttonSFO";
     tabbing(buttonID);
     init();
     filterAll.focus();
+
 
 // I N P U T S
     let frenchCtcToggle = 0
@@ -200,6 +225,10 @@ $(document).ready(function() {
             document.getElementById("frenchContactArrow").innerHTML = 'FEEDBACK\r<i class="fas fa-angle-right"></i>'
         }
     })
+    
+    document.getElementById("toTop").addEventListener("click", function(){
+        window.scrollTo(0,0)
+    })
 
 
-});
+};
