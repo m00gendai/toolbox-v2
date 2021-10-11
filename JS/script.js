@@ -1,13 +1,65 @@
 const errorMessage = "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html"
 
 
-
-
 // I N I T I A L   L O A D
 
 
 $(document).ready(function() {
     
+    window.addEventListener('popstate', (event) => {
+        console.log(history.state)
+        switch(history.state.page_id){
+            case 1:{
+                $("#contentBox").show();
+                $("#aipBox").hide();
+                $("#atsBox").hide();
+                $("#frenchBox").hide();
+                $("#sitaBox").hide();
+                $("#doctoolBox").hide();
+            }
+            break;
+            case 2: {
+                $("#contentBox").hide();
+                $("#aipBox").hide();
+                $("#atsBox").show();
+                loadAtsMsgCode()
+                $("#frenchBox").hide();
+                $("#sitaBox").hide();
+                $("#doctoolBox").hide();
+                $("#ident").focus();
+            }
+            break;
+            case 3: {
+                $("#contentBox").hide();
+                $("#aipBox").show();
+                loadAipLibraryCode()
+                $("#atsBox").hide();
+                $("#frenchBox").hide();
+                $("#sitaBox").hide();
+                $("#doctoolBox").hide();
+                $("#aipBar").focus();
+            }
+            break;
+            case 4: {
+                $("#contentBox").hide();
+                $("#aipBox").hide();
+                $("#atsBox").hide();
+                $("#frenchBox").hide();
+                $("#sitaBox").hide();
+                $("#doctoolBox").show();
+                loadDocScreeningToolCode()
+                document.getElementById("queryFK").focus();
+            }
+            break;
+        }
+    });
+
+    
+    
+    let state = { 'page_id': 1}
+    let title = 'Toolbox Home'
+    let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html'
+    history.pushState(state, title, url)
     
     const src = homeTileData
     document.getElementById("quickLinks").innerHTML = ""
@@ -15,7 +67,11 @@ $(document).ready(function() {
     window.addEventListener("keypress", function(e){
         if(e.keyCode ==  32 
         && e.target != document.getElementById("screenDocument")
-        && e.target != document.getElementById("frenchContactText")){
+        && e.target != document.getElementById("frenchContactText")
+        && e.target != document.getElementById("searchAll")
+        && e.target != document.getElementById("searchFrench")
+        && e.target != document.getElementById("searchGerman")
+        ){
             e.preventDefault();
         }
     });
@@ -33,6 +89,11 @@ $(document).ready(function() {
         $("#sitaBox").hide();
         $("#doctoolBox").hide();
         $("#ident").focus();
+        let state = { 'page_id': 2}
+        let title = 'ATS MSG Search'
+        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#ATS_MSG_Search'
+        history.pushState(state, title, url)
+        console.log(history)
     });
     $("#aip").click(function() {
         $("#contentBox").hide();
@@ -43,6 +104,11 @@ $(document).ready(function() {
         $("#sitaBox").hide();
         $("#doctoolBox").hide();
         $("#aipBar").focus();
+        let state = { 'page_id': 3}
+        let title = 'AIP Tool'
+        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#AIP_Library'
+        history.pushState(state, title, url)
+        console.log(history)
     });
     
     $("#doctool").click(function() {
@@ -54,6 +120,11 @@ $(document).ready(function() {
         $("#doctoolBox").show();
         loadDocScreeningToolCode()
         document.getElementById("queryFK").focus();
+        let state = { 'page_id': 4}
+        let title = 'DOC Screening Tool'
+        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#DOC_Screening_Tool'
+        history.pushState(state, title, url)
+        console.log(history)
     });
 
                    
@@ -67,11 +138,11 @@ $(document).ready(function() {
             const homeTileDiv = document.createElement("div");
             const homeTileDivP = document.createElement("p");
             const homeTileDivImg = document.createElement("img");
-            
             homeTileDiv.id = src[i].id;
             homeTileDiv.className = "quicklinksContainerBox";
             homeTileDiv.tabIndex = 0;
             homeTileDivImg.src = src[i].img;
+            homeTileDivImg.loading = "lazy"
             
             homeTileDiv.appendChild(homeTileDivImg);
             homeTileDiv.appendChild(homeTileDivP);
@@ -113,6 +184,11 @@ $(document).ready(function() {
                     $("#sitaBox").hide();
                     $("#doctoolBox").hide();
                     $("#searchAll").focus();
+                     let state = { 'page_id': 5}
+        let title = 'French Tool'
+        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#French_Tool'
+        history.pushState(state, title, url)
+        console.log(history)
                 });
                 homeTileDiv.addEventListener("keypress", function(e){
                     if(e.keyCode == 13 || e.keyCode == 32) {
@@ -123,6 +199,11 @@ $(document).ready(function() {
                         $("#sitaBox").hide();
                         $("#doctoolBox").hide();
                         $("#searchAll").focus();
+                         let state = { 'page_id': 5}
+        let title = 'French Tool'
+        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#French_Tool'
+        history.pushState(state, title, url)
+        console.log(history)
                     }
                 });
             } else if (homeTileDiv.id == "sitaConversion"){
@@ -134,6 +215,11 @@ $(document).ready(function() {
                     $("#sitaBox").show();
                     $("#doctoolBox").hide();
                     $("inputSita").focus();
+                     let state = { 'page_id': 6}
+        let title = 'SITA Address Converter'
+        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#SITA_Address_Converter'
+        history.pushState(state, title, url)
+        console.log(history)
                 });
                 homeTileDiv.addEventListener("keypress", function(e){
                     if(e.keyCode == 13 || e.keyCode == 32) {
@@ -144,6 +230,11 @@ $(document).ready(function() {
                         $("#sitaBox").show();
                         $("#doctoolBox").hide();
                         $("inputSita").focus();
+                         let state = { 'page_id': 6}
+        let title = 'SITA Address Converter'
+        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#SITA_Address_Converter'
+        history.pushState(state, title, url)
+        console.log(history)
                     }
                 });
             }
