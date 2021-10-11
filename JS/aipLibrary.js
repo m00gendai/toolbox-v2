@@ -65,6 +65,7 @@ function displayAIP() {
         });
         
         aipTileDivImg.src = aipTileData[i].img;
+        aipTileDivImg.loading="lazy"
         aipTileDivImg.width = "100%";
         aipTileDiv.appendChild(aipTileDivImg);
         aipTileDiv.appendChild(aipTileDivP);
