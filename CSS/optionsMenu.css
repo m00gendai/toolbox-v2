@@ -10,7 +10,13 @@
 }
 .fa-cog.fa-w-16 {
 	font-size: 4em;
-	color: blue;
+	background-color: #d3d3d3;
+	background-image: linear-gradient(315deg, #d3d3d3 0%, #57606f 74%);
+	color: white;
+	text-shadow: 2px 2px black;
+	border-radius: 50px;
+	padding: 0.25rem;
+	box-shadow: 5px 5px 10px -2px black;
 }
 
 #optionsMenu{
