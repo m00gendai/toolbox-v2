@@ -11,25 +11,7 @@
 		<script src="JS/jquery-3.6.0.min.js"></script>            <!-- jQuery library -->
 		<script src="JS/script.js" defer></script>                <!-- Main JavaScript Code -->
 		<script src="JS/all.min.js" defer></script>               <!-- Font Awesome -->
-		<script src="JS/lodash.js" defer></script>                <!-- lodash library -->
-		<script src="JS/french.js" defer></script>                <!-- Specific French section JavaScript Code -->
-		<script src="JS/atsMsg.js" defer></script>                <!-- Specific ATS MSG section JavaScript Code -->
-		<script src="JS/aipLibrary.js" defer></script>                <!-- Specific AIP Library section JavaScript Code -->
-		<script src="JS/docScreeningTool.js" defer></script>                <!-- Specific DOC Screening Tool section JavaScript Code -->
-		<script src="Documents/FRENCH BIBLIOTHEK/sfo_helpdesk.js" defer></script>                <!-- JSON for French Table 1 -->
-		<script src="Documents/FRENCH BIBLIOTHEK/skybriefing_helpdesk.js" defer></script>        <!-- JSON for French Table 2 -->
-		<script src="Documents/FRENCH BIBLIOTHEK/aip_helpdesk.js" defer></script>                <!-- JSON for French Table 3 -->
-		<script src="Documents/FRENCH BIBLIOTHEK/voci_tech_gen.js" defer></script>               <!-- JSON for French Table 4 -->
-		<script src="Documents/FRENCH BIBLIOTHEK/voci_div.js" defer></script>                    <!-- JSON for French Table 5 -->
-		<script src="JS/sita.js" defer></script>                        <!-- Specific SITA section JavaScript Code -->
-		<script src="JS/apcodes.js" defer></script>                     <!-- JSON for SITA section - Airport Codes -->
-		<script src="JS/alcodes.js" defer></script>                     <!-- JSON for SITA section - Airline Codes -->
-		<script src="JS/convcodes.js" defer></script>                   <!-- JSON for SITA section - Matching Address Pairs -->
-		<script src="JS/corpcodes.js" defer></script>                   <!-- JSON for SITA section - Department Codes -->
-		<script src="JS/locisFK.js" defer></script>                     <!-- JSON for DOC Tool - Flightkeys AD -->
-		<script src="JS/locisFIR.js" defer></script>                    <!-- JSON for DOC Tool - SWR FIR -->
-		<script src="JS/locisSWR.js" defer></script>                    <!-- JSON for DOC Tool - SWR AD -->
-		<script src="JS/aipLinks.js" defer></script>                    <!-- JSON for AIP Library - eAIP Links -->
+		
 		<script src="JS/tileLinks.js" defer></script>                   <!-- JSON for Home Page - Tile Links -->
 		<link rel="stylesheet" href="CSS/styles.css">             <!-- CSS General Styles -->
 		<link rel="stylesheet" href="CSS/menubar.css">            <!-- CSS Menu Bar & Footer -->
@@ -68,6 +50,10 @@
 				</div>
 			</div>
 		</div>
+		<fieldset id="favoritesBarFieldset">
+            <legend id="favoritesBarFieldsetLegend">Favorites</legend>
+		<div id="favoritesBar" name="favoritesBar"></div>
+		</fieldset>
 		<div class="container" id="quickLinks">
 		</div>
 	</section>
@@ -600,7 +586,26 @@
 
 	<footer>
 		<div id="footerText"></div>
-		<div id="legal"><u>Legal Statement</u></div>
+		<div id="legal"><u>Legal Statement</u> | Version 2.90 (78caa4e)</div>
 	</footer>
+	<script src="JS/lodash.js" defer></script>                <!-- lodash library -->
+		<script src="JS/french.js" defer></script>                <!-- Specific French section JavaScript Code -->
+		<script src="JS/atsMsg.js" defer></script>                <!-- Specific ATS MSG section JavaScript Code -->
+		<script src="JS/aipLibrary.js" defer></script>                <!-- Specific AIP Library section JavaScript Code -->
+		<script src="JS/docScreeningTool.js" defer></script>                <!-- Specific DOC Screening Tool section JavaScript Code -->
+		<script src="Documents/FRENCH BIBLIOTHEK/sfo_helpdesk.js" defer></script>                <!-- JSON for French Table 1 -->
+		<script src="Documents/FRENCH BIBLIOTHEK/skybriefing_helpdesk.js" defer></script>        <!-- JSON for French Table 2 -->
+		<script src="Documents/FRENCH BIBLIOTHEK/aip_helpdesk.js" defer></script>                <!-- JSON for French Table 3 -->
+		<script src="Documents/FRENCH BIBLIOTHEK/voci_tech_gen.js" defer></script>               <!-- JSON for French Table 4 -->
+		<script src="Documents/FRENCH BIBLIOTHEK/voci_div.js" defer></script>                    <!-- JSON for French Table 5 -->
+		<script src="JS/sita.js" defer></script>                        <!-- Specific SITA section JavaScript Code -->
+		<script src="JS/apcodes.js" defer></script>                     <!-- JSON for SITA section - Airport Codes -->
+		<script src="JS/alcodes.js" defer></script>                     <!-- JSON for SITA section - Airline Codes -->
+		<script src="JS/convcodes.js" defer></script>                   <!-- JSON for SITA section - Matching Address Pairs -->
+		<script src="JS/corpcodes.js" defer></script>                   <!-- JSON for SITA section - Department Codes -->
+		<script src="JS/locisFK.js" defer></script>                     <!-- JSON for DOC Tool - Flightkeys AD -->
+		<script src="JS/locisFIR.js" defer></script>                    <!-- JSON for DOC Tool - SWR FIR -->
+		<script src="JS/locisSWR.js" defer></script>                    <!-- JSON for DOC Tool - SWR AD -->
+		<script src="JS/aipLinks.js" defer></script>                    <!-- JSON for AIP Library - eAIP Links -->
 		</body>
 </html>
