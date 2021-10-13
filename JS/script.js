@@ -398,104 +398,41 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
     document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
 
+
+// D R A G   &   D R O P
     
-let objects = homeTileData
-console.log(objects)
-for(let i=0;i<objects.length;i++){
-	let psn = JSON.parse(localStorage.getItem(objects[i].id))
-	if(psn != null){
-		if(psn[0] == "favoritesBar"){
-		let clonedObj = document.createElement("div")
-		clonedObj.id= psn[1]
-		clonedObj.style.background = psn[2]
-		clonedObj.className = psn[3]
-		clonedObj.draggable = psn[4]
-		clonedObj.innerHTML = psn[5]
-		document.getElementById("favoritesBar").appendChild(clonedObj)
-		objects.push(clonedObj)
-		}
-		
-	} 
-}
-const target = document.getElementById("favoritesBar")
-const initial = document.getElementById("quickLinks")
+    
+let keys = Object.keys(localStorage)
+    for(let i=0;i<keys.length;i++){
+        let favorites = JSON.parse(localStorage.getItem(keys[i]))  
+        if(favorites[0] == "favoritesBar"){
+            document.getElementById(favorites[0]).appendChild(document.getElementById(favorites[1]))
+        }
+    }
 
-target.addEventListener("drop", function(ev){
-	drop(ev, this)
-})
-target.addEventListener("dragover", function(ev){
-	allowDrop(ev)
-})
-initial.addEventListener("drop", function(ev){
-	drop(ev, this)
-})
-initial.addEventListener("dragover", function(ev){
-	allowDrop(ev)
-})
+    
+const drake = dragula([document.querySelector('#quickLinks'), document.querySelector('#favoritesBar')], {copy: false, copySortSource: false, revertOnSpill: true});
 
-for(let i=0;i<objects.length; i++){
-let objId = objects[i].id
-document.getElementById(objId).addEventListener("dragstart", function(ev){
-	drag(objId, ev)
+drake.on('drop', function(el, target, source, sibling){
+    if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount <= 8){
+        localStorage.setItem("toolbox_favorite_" + el.id, JSON.stringify([target.id, el.id]))
+    } else if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount > 8){
+        alert("Maximum eight Favorites suppoerted")
+        drake.cancel(true);
+    }
+    if(target.id == "quickLinks"){
+        for(let i=0;i<keys.length;i++){
+            let favorites = JSON.parse(localStorage.getItem("toolbox_favorite_" + el.id))
+            console.log(favorites)
+            console.log(el.id)
+
+                localStorage.removeItem("toolbox_favorite_" + el.id)
+            
+        }
+    }
+
 })
-}
-
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function drag(objId, ev) {
-    console.log(ev.path)
-    ev.dataTransfer.setData("object", ev.path[1]);
-    ev.dataTransfer.setData("id", objId);
-    ev.dataTransfer.setData("innerHTML", ev.path[1].innerHTML)
-    ev.dataTransfer.setData("innerText", ev.path[1].innerText)
-    ev.dataTransfer.setData("style", ev.path[1].style.backgroundImage)
-}
-
-function drop(ev, el) {
-let cloneID
-  ev.preventDefault();
- let obj        = ev.dataTransfer.getData("object")
- let id         = ev.dataTransfer.getData("id")
- let innerHTML  = ev.dataTransfer.getData("innerHTML")
- let innerText  = ev.dataTransfer.getData("innerText")
- let style      = ev.dataTransfer.getData("style")
   
-  
-  let cloneObj = document.createElement("div")
-
-  if(ev.target.id == "favoritesBar" && document.getElementById("favoritesBar").childElementCount < 8){
-  
-  cloneID = cloneElement(obj, id, innerHTML, style, cloneObj, el, ev)
-  
-  } else if (ev.target.id == "favoritesBar" && document.getElementById("favoritesBar").childElementCount >= 8){
-    alert("Only eight favorites suppoerted")
-  }
-  if(ev.target.id == "quickLinks"){
-
-  	localStorage.removeItem(dataKey)
-	for(let i=0;i<target.childNodes.length;i++){
-
-		target.removeChild(target.childNodes[i])
-		
-	}
-  }
-}
-
-function cloneElement(obj, id, innerHTML, style, cloneObj, el, ev){
-    cloneObj.id = "favorite_" + id
-    cloneObj.innerHTML = innerHTML
-    cloneObj.style.backgroundImage = style
-    console.log(style)
-    cloneObj.minWidth = "12em";
-    cloneObj.maxWidth = "12em";
-    cloneObj.className = "quicklinksContainerBox"
-
-  el.appendChild(cloneObj);
-  //	localStorage.setItem(data, JSON.stringify([ev.target.id, cloneObj.id, color, cloneObj.className, cloneObj.draggable, cloneObj.innerHTML]))
-	return cloneObj.id
-}
-
+ 
         
 });
