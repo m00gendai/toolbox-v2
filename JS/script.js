@@ -59,8 +59,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     let state = { 'page_id': 1}
     let title = 'Toolbox Home'
-    let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html'
-  //  history.pushState(state, title, url)
+    const url = window.location.href
+    try{
+        history.pushState(state, title, url)
+    }
+    catch(err){
+        alert("Error" + err + "\n\nPlease make sure website address of Toolbox is \"U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html\"")
+    }
     
     const src = homeTileData
     document.getElementById("quickLinks").innerHTML = ""
@@ -78,7 +83,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
     });
   
     $("#home").click(function() {
-        location.reload();
+        $("#contentBox").show();
+        $("#aipBox").hide();
+        $("#atsBox").hide();
+        $("#frenchBox").hide();
+        $("#sitaBox").hide();
+        $("#doctoolBox").hide();
+        $("#searchBar").focus();
+        document.getElementById("searchBar").value = ""
+        document.getElementById("quickLinks").innerHTML = ""
+        try{
+        sortHomeByName(src)
+    }
+    catch(err){
+        alert("Error\n" + err + errorMessage)
+    }
+        
+        let state = { 'page_id': 1}
+        let title = 'Toolbox Home'
+        let href = url.substring(0, url.indexOf("#"))
+        console.log(href)
+        history.pushState(state, title, href)
+
         
     });
     $("#ats").click(function() {
@@ -92,9 +118,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         $("#ident").focus();
         let state = { 'page_id': 2}
         let title = 'ATS MSG Search'
-        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#ATS_MSG_Search'
-    //    history.pushState(state, title, url)
-        console.log(history)
+        let href = url.substring(0, url.indexOf("#")) + "#ATS_MSG_Search"
+        history.pushState(state, title, href)
     });
     $("#aip").click(function() {
         $("#contentBox").hide();
@@ -107,9 +132,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         $("#aipBar").focus();
         let state = { 'page_id': 3}
         let title = 'AIP Tool'
-        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#AIP_Library'
-    // history.pushState(state, title, url)
-        console.log(history)
+        let href = url.substring(0, url.indexOf("#")) + "#AIP_Tool"
+        history.pushState(state, title, href)
     });
     
     $("#doctool").click(function() {
@@ -123,9 +147,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById("queryFK").focus();
         let state = { 'page_id': 4}
         let title = 'DOC Screening Tool'
-        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#DOC_Screening_Tool'
-     //  history.pushState(state, title, url)
-        console.log(history)
+        let href = url.substring(0, url.indexOf("#")) + "#DOC_Screening_Tool"
+        history.pushState(state, title, href)
     });
 
                    
@@ -187,9 +210,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     $("#searchAll").focus();
                      let state = { 'page_id': 5}
         let title = 'French Tool'
-        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#French_Tool'
-     //   history.pushState(state, title, url)
-        console.log(history)
+        let href = url.substring(0, url.indexOf("#")) + "#French_Tool"
+        history.pushState(state, title, href)
                 });
                 homeTileDiv.addEventListener("keypress", function(e){
                     if(e.keyCode == 13 || e.keyCode == 32) {
@@ -202,9 +224,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         $("#searchAll").focus();
                          let state = { 'page_id': 5}
         let title = 'French Tool'
-        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#French_Tool'
-      //  history.pushState(state, title, url)
-        console.log(history)
+        let href = url.substring(0, url.indexOf("#")) + "#French_Tool"
+        history.pushState(state, title, href)
                     }
                 });
             } else if (homeTileDiv.id == "sitaConversion"){
@@ -218,9 +239,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     $("inputSita").focus();
                      let state = { 'page_id': 6}
         let title = 'SITA Address Converter'
-        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#SITA_Address_Converter'
-     //   history.pushState(state, title, url)
-        console.log(history)
+        let href = url.substring(0, url.indexOf("#")) + "#SITA_Address_Converter"
+        history.pushState(state, title, href)
                 });
                 homeTileDiv.addEventListener("keypress", function(e){
                     if(e.keyCode == 13 || e.keyCode == 32) {
@@ -233,9 +253,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         $("inputSita").focus();
                          let state = { 'page_id': 6}
         let title = 'SITA Address Converter'
-        let url = 'file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html#SITA_Address_Converter'
-   //     history.pushState(state, title, url)
-        console.log(history)
+        let href = url.substring(0, url.indexOf("#")) + "#SITA_Address_Converter"
+        history.pushState(state, title, href)
                     }
                 });
             }
@@ -398,6 +417,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
     document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
 
+    
+
+
+        
+});
+
+
 
 // D R A G   &   D R O P
     
@@ -407,6 +433,7 @@ let keys = Object.keys(localStorage)
         let favorites = JSON.parse(localStorage.getItem(keys[i]))  
         if(favorites[0] == "favoritesBar"){
             document.getElementById(favorites[0]).appendChild(document.getElementById(favorites[1]))
+            document.getElementById(favorites[1]).classList.add("favoriteLinkFixedWidth")
         }
     }
 
@@ -416,6 +443,7 @@ const drake = dragula([document.querySelector('#quickLinks'), document.querySele
 drake.on('drop', function(el, target, source, sibling){
     if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount <= 8){
         localStorage.setItem("toolbox_favorite_" + el.id, JSON.stringify([target.id, el.id]))
+        el.classList.add("favoriteLinkFixedWidth")
     } else if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount > 8){
         alert("Maximum eight Favorites suppoerted")
         drake.cancel(true);
@@ -423,8 +451,7 @@ drake.on('drop', function(el, target, source, sibling){
     if(target.id == "quickLinks"){
         for(let i=0;i<keys.length;i++){
             let favorites = JSON.parse(localStorage.getItem("toolbox_favorite_" + el.id))
-            console.log(favorites)
-            console.log(el.id)
+            el.classList.remove("favoriteLinkFixedWidth")
 
                 localStorage.removeItem("toolbox_favorite_" + el.id)
             
@@ -433,6 +460,15 @@ drake.on('drop', function(el, target, source, sibling){
 
 })
   
- 
+let favoriteChildren = document.getElementById("favoritesBar").childElementCount
+let favoriteWidth = 12
+    if (favoriteChildren == 0){
+         document.getElementById("favoritesBar").width = favoriteWidth + "em"
+    } else {
+        for(let i=0;i<favoriteChildren;i++){
+            favoriteWidth += 12
+        }
+        
+    }
         
 });
