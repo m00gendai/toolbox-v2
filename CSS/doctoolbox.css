@@ -347,7 +347,7 @@ legend {
 	background: white;
 	left: 0;
 	right: 0;
-	position: absolute;
+	position: fixed;
 	margin: auto;
 	display: none;
 	flex-wrap: wrap;
