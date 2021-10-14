@@ -1,5 +1,6 @@
 function loadDocScreeningToolCode(){
 
+
 // L O C I   D A T A B A S E
 
 
@@ -218,9 +219,15 @@ function loadDocScreeningToolCode(){
                             if((parseInt(oddArrayInit[0]) + parseInt(oddArrayInit[1]))%2 != 0){ // if int + int equals odd number
                                 let span = document.createElement("span")
                                 span.id = alertArray[i]
-                                span.innerHTML += alertArray[i] + ", ";//... push it to the popup in sequence
-                                document.getElementById("testHTML").appendChild(span)
-                                // notice the missing <br>
+                                if(i < alertArray.length-1){ // if its not the last pair of pages...
+                                    span.innerHTML += alertArray[i] + ", ";//... push it to the popup in sequence with a comma
+                                    document.getElementById("testHTML").appendChild(span)
+                                    // notice the missing <br>
+                                }else if(i == alertArray.length-1){ // if its the last pair of pages...
+                                    span.innerHTML += alertArray[i];//... push it to the popup in sequence without a comma
+                                    document.getElementById("testHTML").appendChild(span)
+                                    // notice the missing <br>
+                                }
                             } else { // if its even (meaning an odd sequence (weird i know))
                                 document.getElementById("testHTML").innerHTML += alertArray[i];
                                 document.getElementById("testHTML").innerHTML += "<br>"
@@ -429,4 +436,5 @@ function loadDocScreeningToolCode(){
             
         })
     }
+
 }
