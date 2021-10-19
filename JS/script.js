@@ -389,17 +389,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }))
         }
     });
-
     
 
-
-    
-// F L I G H T S E A R C H   F U N C T I O N
-
-
-    
-
-    
 // L E G A L   S T A T E M E N T
 
 
@@ -417,8 +408,5 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
     document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
 
-    
 
-
-        
 });
