@@ -389,17 +389,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }))
         }
     });
-
     
 
-
-    
-// F L I G H T S E A R C H   F U N C T I O N
-
-
-    
-
-    
 // L E G A L   S T A T E M E N T
 
 
@@ -417,58 +408,5 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
     document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
 
-    
 
-
-        
-});
-
-
-
-// D R A G   &   D R O P
-    
-    
-let keys = Object.keys(localStorage)
-    for(let i=0;i<keys.length;i++){
-        let favorites = JSON.parse(localStorage.getItem(keys[i]))  
-        if(favorites[0] == "favoritesBar"){
-            document.getElementById(favorites[0]).appendChild(document.getElementById(favorites[1]))
-            document.getElementById(favorites[1]).classList.add("favoriteLinkFixedWidth")
-        }
-    }
-
-    
-const drake = dragula([document.querySelector('#quickLinks'), document.querySelector('#favoritesBar')], {copy: false, copySortSource: false, revertOnSpill: true});
-
-drake.on('drop', function(el, target, source, sibling){
-    if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount <= 8){
-        localStorage.setItem("toolbox_favorite_" + el.id, JSON.stringify([target.id, el.id]))
-        el.classList.add("favoriteLinkFixedWidth")
-    } else if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount > 8){
-        alert("Maximum eight Favorites suppoerted")
-        drake.cancel(true);
-    }
-    if(target.id == "quickLinks"){
-        for(let i=0;i<keys.length;i++){
-            let favorites = JSON.parse(localStorage.getItem("toolbox_favorite_" + el.id))
-            el.classList.remove("favoriteLinkFixedWidth")
-
-                localStorage.removeItem("toolbox_favorite_" + el.id)
-            
-        }
-    }
-
-})
-  
-let favoriteChildren = document.getElementById("favoritesBar").childElementCount
-let favoriteWidth = 12
-    if (favoriteChildren == 0){
-         document.getElementById("favoritesBar").width = favoriteWidth + "em"
-    } else {
-        for(let i=0;i<favoriteChildren;i++){
-            favoriteWidth += 12
-        }
-        
-    }
-        
 });
