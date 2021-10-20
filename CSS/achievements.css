@@ -1,0 +1,92 @@
+.achievementContainer{
+	position: fixed;
+	bottom: 10%;
+	width: 100%;
+	left: 0;
+	right: 0;
+	height: 5vw;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#achievement{
+	position: relative;
+	height: 100%;
+	width: 0vw;
+	background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+	opacity: 0.8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 1000ms cubic-bezier(.05,.8,.61,.64);
+	overflow: hidden;
+	white-space: nowrap;
+	flex-wrap: nowrap;
+}
+
+#achievement::after{
+	position: absolute;
+	content: "";
+	height: 4vw;
+	width: 29vw;
+	background: transparent;
+	border: 2px solid gold;
+	z-index: 100;
+}
+
+.achievementIcon{
+	height: 100%;
+	width: 25%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 3vw;
+	
+
+}
+
+.fa-trophy.fa-w-18{
+	background-color: #fbb034;
+background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
+	-webkit-background-clip: text;
+	color: transparent;
+    color: yellow;
+}
+
+#achievementText{
+	width: 75%;
+	height: 100%;
+	display: flex;
+	justify-content: right;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	color: white;
+}
+
+#achievementTitle{
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	font-size: 1.5vw;
+	font-weight: bolder;
+	font-variant: small-caps;
+	font-style: italic;
+	letter-spacing: 2px;
+	margin: 0 2vw 0 0;
+}
+
+#achievementDetail{
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: right;
+	align-items: flex-start;
+	font-variant: small-caps;
+	font-size: 1vw;
+	margin: 0 2vw 0 0;
+}
