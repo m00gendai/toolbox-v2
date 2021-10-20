@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', (event) => {
+    
 
     let keys = Object.keys(localStorage)
     
@@ -7,7 +8,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if(favorites[0] == "favoritesBar"){
             document.getElementById(favorites[0]).appendChild(document.getElementById(favorites[1]))
             document.getElementById(favorites[1]).classList.add("favoriteLinkFixedWidth")
+        } else if(favorites[0] == "favoritesBarToggle"){
+            let favoriteStyle = favorites[1]
+            document.getElementById("favoritesBar").style.display = favoriteStyle
+            document.getElementById("favoritesTogglor").innerHTML = `<i class="${favorites[2]} fa-star"></i>`
+            document.getElementById("quickLinks").style.margin = `${favorites[3]}rem 0 2rem 0`
         }
+        
     }
         
     const drake = dragula(
@@ -24,7 +31,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     drake.on('drop', function(el, target, source, sibling){
         if(localStorage.getItem("toolbox_favorite_" + el.id) && target.id=="favoritesBar"){
-            alert("You can't add the same Favorite twice, or else you will BREAK REALITY ITSELF!!!")
+                    document.getElementById("achievementDetail").innerText = "Tried adding the same Favorite twice"
+                    document.getElementById("achievement").style.width = "30vw"
+                    setTimeout(function(){
+                        document.getElementById("achievement").style.width = "0vw"
+                    }, 5000)
             drake.cancel(true);
             el.classList.remove("favoriteLinkFixedWidth")
         }
@@ -34,7 +45,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             el.classList.add("favoriteLinkFixedWidth")
             displayFavoriteMessage()
         } else if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount > 9){ // eight elements, but the hint message counts as a child element, too
-            alert("Maximum eight Favorites supported")
+            alert("Only a maximum of eight Favorites are supported.")
             drake.cancel(true);
         }
         
@@ -58,5 +69,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
     
     displayFavoriteMessage()
+    
+    function favoriteBarToggler(favoriteStyle){
+         if(favoriteStyle == "grid"){
+            document.getElementById("favoritesBar").style.display = "none"
+            localStorage.setItem("toolbox_favoritesbar", JSON.stringify(["favoritesBarToggle","none", "far", 3]))
+            document.getElementById("favoritesTogglor").innerHTML = '<i class="far fa-star"></i>'
+            document.getElementById("quickLinks").style.margin = "3rem 0 2rem 0"
+         } else if (favoriteStyle == "none"){
+            document.getElementById("favoritesBar").style.display = "grid"
+            localStorage.setItem("toolbox_favoritesbar", JSON.stringify(["favoritesBarToggle","grid", "fas", 1]))
+            document.getElementById("favoritesTogglor").innerHTML = '<i class="fas fa-star"></i>'
+            document.getElementById("quickLinks").style.margin = "1rem 0 2rem 0"
+        }
+    }
+    
+    
+    document.getElementById("favoritesTogglor").addEventListener("click", function(){
+        let favoriteStyle = window.getComputedStyle(document.getElementById("favoritesBar")).display
+       favoriteBarToggler(favoriteStyle)
+    })
+        
+        
     
 })
