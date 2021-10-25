@@ -1,4 +1,4 @@
-.achievementContainer{
+#achievementContainer{
 	position: fixed;
 	bottom: 10%;
 	width: 100%;
@@ -6,7 +6,7 @@
 	right: 0;
 	height: 5vw;
 
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 }
