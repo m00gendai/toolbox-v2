@@ -6,7 +6,6 @@ pipelines:
         name: Build artifact
         script:
           - mkdir artifact
-          - echo "test" > artifact/indextest.html
         artifacts:
           - artifact/*
    - step:
