@@ -9,7 +9,7 @@ pipelines:
           - echo "test" > artifact/indextest.html
         artifacts:
           - artifact/*
-    - step:
+   - step:
         name: Deploy to S3
         deployment: production
         script:
