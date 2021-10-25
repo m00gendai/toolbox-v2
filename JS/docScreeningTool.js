@@ -113,7 +113,7 @@ function loadDocScreeningToolCode(){
 
     // this is only a function so i have to write this expression only once
     function localStoragerSetter(LoStoAll,i) {
-        localStorage.setItem(LoStoAll[i].valuex, document.getElementById(LoStoAll[i].screen).value);
+        localStorage.setItem(LoStoAll[i].valuex, JSON.stringify(document.getElementById(LoStoAll[i].screen).value));
     }
 
     // pageCalculation function call events, either on buton or on blur
@@ -180,15 +180,9 @@ function loadDocScreeningToolCode(){
         return resultArraySum;
     }
 
-    // This gets called by the copy event handlers and displays the page sequence popup.
+   // This gets called by the copy event handlers and displays the page sequence popup.
     function displayPagePopup() {
-        document.getElementById("testHTMLContainer").style.display = "flex";
-        // the following cleans up the inner html IF the last displayed element is an int-int, which inherently gets a comma added.
-        // its convoluted, but it seems to work the best.
-        let thatDamnComma = document.getElementById("testHTML").innerHTML.toString();
-        if(thatDamnComma.charAt(thatDamnComma.length - 2) == ","){
-            document.getElementById("testHTML").innerHTML = thatDamnComma.slice(0,thatDamnComma.length-2)
-        }
+        document.getElementById("testHTMLContainer").style.display = "flex"
     }
 
     // This  handles the splitting and the popup that shows the page sequences.
@@ -203,51 +197,199 @@ function loadDocScreeningToolCode(){
         const customerDBU 		= {name: "DBU", 	value: document.getElementById("screenDBU").value,   print: "DBU"}
         const customerIATA 		= {name: "IATA", 	value: document.getElementById("screenIATA").value,  print: "IATA"}
         const customerValues 	= [customerFKDF, customerFKAT, customerNTM, customerDBU, customerIATA]; 
-
+        
+        const html = document.getElementById("testHTML")
+        
+        let alertArray
+        
+        let eventBubbler = 0 // This is a hacky fix for the button event handlers that seem to call the page display function multiple times.
+        
         //This itreates through the customer obj array
         for(let i=0;i<customerValues.length;i++){
             if (customerValues[i].name == customer){ // compares the passed customer variable to each customer obj in the array
                 let customerValue = customerValues[i].value; // gets the value from the matching obj
-                let alertArray 	= customerValue.split(","); // splits by comma
+                alertArray = customerValue.split(","); // splits by comma
                 document.getElementById("testHTML").innerHTML = ""; // clears any content in the popup
                 document.getElementById("testHTMLTitle").innerHTML = ""; // clears the title of the popup
                 document.getElementById("testHTMLTitle").innerHTML += "Pages for " + customerValues[i].print + ":" // sets the title for the popup
-                for(let i=0; i<alertArray.length;i++){ // iterates through the comma split sequence array
-                    for(let j=0;j<alertArray[i].length;j++){ // iterates to the elements of the comma split sequence array
-                        if(alertArray[i][j].includes("-")){ // if an element contains a - ...
-                            let oddArrayInit = (alertArray[i]).split("-"); // copy page range elements into this list
-                            if((parseInt(oddArrayInit[0]) + parseInt(oddArrayInit[1]))%2 != 0){ // if int + int equals odd number
-                                let span = document.createElement("span")
-                                span.id = alertArray[i]
-                                if(i < alertArray.length-1){ // if its not the last pair of pages...
-                                    span.innerHTML += alertArray[i] + ", ";//... push it to the popup in sequence with a comma
-                                    document.getElementById("testHTML").appendChild(span)
-                                    // notice the missing <br>
-                                }else if(i == alertArray.length-1){ // if its the last pair of pages...
-                                    span.innerHTML += alertArray[i];//... push it to the popup in sequence without a comma
-                                    document.getElementById("testHTML").appendChild(span)
-                                    // notice the missing <br>
-                                }
-                            } else { // if its even (meaning an odd sequence (weird i know))
-                                document.getElementById("testHTML").innerHTML += alertArray[i];
-                                document.getElementById("testHTML").innerHTML += "<br>"
-                                // adds a line break to treat it like the single int elements like below:
+            }
+        }               
+                
+        const inpt = document.getElementById("input")
+
+        /*
+        This constant denotes the valuie limit in the print dialog window.
+        If the line length gets over this limit IF another element is added, the element to be added 
+        will be shifted to a new row, so every row stays under or exactly at this limit.
+        If the limit is set to be less than the length of one element, it seems to default to adding that
+        element anyways. This is fine, as the printWrap limit is mostly above 50 characters.
+        Sadly, these limits are very different depending on the reader print dialog and seem to change with software releases, 
+        so a minimum baseline wrap should be chosen every so often.
+        */
+
+        const printWrap = 50 
+
+        // The spanArray is a collection of page ranges that will get added to the different rows 
+
+        let spanArray = []
+
+        for(let i=0;i<alertArray.length;i++){
+            if(alertArray[i].includes("-")){ // This now checks if the elements contain a "-" and are thus ranges, or are single ints
+                let range = alertArray[i].split("-")
+                if(((range[1]-range[0]) + 1)%2 == 0){ // Checks if the page range is even (thus +1, because ex 4-1 = 3, but its 4 pages)
+                    let span = document.createElement("span") // Creates a span element
+                    span.className = "even" // Classifies this span element as even
+                    span.innerHTML = alertArray[i] // Assigns the text of the page range item to it
+                    spanArray.push(span) // Pushes it to the spanArray for further processing
+                } else if(((range[1]-range[0])+1)%2 != 0){ // Same with odd page ranges
+                    let span = document.createElement("span")
+                    span.className = "odd"
+                    span.innerHTML = alertArray[i]
+                    spanArray.push(span)
+                }
+            } else { // And same with singe integers
+                let span = document.createElement("span")
+                span.className = "single"
+                span.innerHTML = alertArray[i]
+                spanArray.push(span)
+            }
+        }
+
+        // Now the spanArray is filled with the page range elements, and they are also assigned a class.
+
+        /*
+        This is importand for handling the trailing single pages. If true, a single page will be added to the current row of even page ranges, 
+        sets singleCHeck to false, which causes the NEXT single page, if one immediately follows another, to be shifted to a new row
+        */
+
+        let singleCheck = true 
+
+        for(let i=0;i<spanArray.length;i++){
+            if(i==0){ // This is simply to create a new row from the get go
+                let pageRow = document.createElement("div")
+                pageRow.id = "pageRow0" // A div row with id pageRow0 is created...
+                pageRow.appendChild(spanArray[i]) // ...filled with the current page range element...
+                pageRow.innerHTML += ", " //...a comma added after that element...
+                html.appendChild(pageRow) //...and the row is the added to the page display container
+            } else if(i > 0){ // Now for every other row except the first
+                if(spanArray[i].className == spanArray[i-1].className && spanArray[i-1].className != "odd" && singleCheck){
+                /*
+                So, if the current span element classname equals that of the one before (so this can only be done from iteration i=1)
+                AND its not am odd page range (these will ALWAYS occupy their own row)
+                AND singleCheck is set to true (so a single element following another ssingle element will occupy the same row)
+                */
+                    let pageRow = html.lastChild.id // initiate a pageRow variable with the id of the LAST ADDED page row
+                    if((document.getElementById(pageRow).innerText.length + spanArray[i].innerText.length) < printWrap){ // This is the length check explained above
+                        document.getElementById(pageRow).appendChild(spanArray[i]) // Add that span element to the last row
+                        document.getElementById(pageRow).innerHTML += ", " // Add a comma after it
+                    } else { // Simply creates a new row and continue to fill that
+                        let pageRow = document.createElement("div")
+                        pageRow.id = "pageRow" + i
+                        pageRow.appendChild(spanArray[i])
+                        pageRow.innerHTML += ", "
+                        html.appendChild(pageRow)
+                    }
+                } else if((spanArray[i].className == "single" || spanArray[i].className == "odd") && spanArray[i-1].className == "even" && singleCheck){
+                /*
+                Okay so if the current element is a single OR an odd, and the last one is an even, and singleCheck is true,
+                it adds the single/odd element to the current row.
+                It also sets singleCheck to false, so if the immediately following element is also a single/odd, it will occupy its own row
+                */
+                    let pageRow = html.lastChild.id
+                    if((document.getElementById(pageRow).innerText.length + spanArray[i].innerText.length) < printWrap){
+                        document.getElementById(pageRow).appendChild(spanArray[i])
+                        document.getElementById(pageRow).innerHTML += ", "
+                        singleCheck = false
+                    } else {
+                        let pageRow = document.createElement("div")
+                        pageRow.id = "pageRow" + i
+                        pageRow.appendChild(spanArray[i])
+                        pageRow.innerHTML += ", "
+                        html.appendChild(pageRow)
+                        singleCheck = false
+                    }
+                } else { 
+                /*
+                Else, it just creates a new row, appends the element to it and sets singleCheck to true, so
+                immediately following singles are sent to the same row.
+                This also takes care of odd elements.
+                */
+                    let pageRow = document.createElement("div")
+                    pageRow.id = "pageRow" + i
+                    pageRow.appendChild(spanArray[i])
+                    pageRow.innerHTML += ", "
+                    html.appendChild(pageRow)
+                    singleCheck = true
+                }
+            }
+        }
+
+        /*
+        This is sort of a cleaner function; it goes through the text of each row and removes each trailing comma.
+        It needs to be innerHTML, as using innerText removes all class assignments and, worse, span tags, which are
+        INCONCEIVABLY important for the copy marking event handlers
+        */
+
+        for(let i=0;i<html.childElementCount;i++){
+                html.children[i].innerHTML = html.children[i].innerHTML.slice(0,html.children[i].innerHTML.length-2)
+        }
+
+        // this fires the popup with the page sequences
+        displayPagePopup()
+
+        /*
+        This marks which page ranges were selected to copy. The flow is as follows:
+        1. Get the selection as a string
+        2. Make an array out of it, split by comma
+        3. For each element in the array... (loop i)
+        4. ...look at each row in the page display container... (loop j)
+        5. ...and for each row, look at each element in that row (loop k)
+        6. If that element is wrapped ina SPAN (therefore excluding commas and spaces)...
+        7. ...and if that elements text content matches that of the selectionArray element...
+        8. ...toggle the selectah class on that element in that row
+        9. Rinse and repeat for each element in the selectedArray
+        */
+
+        function markCopiedPages(){
+            let selected = window.getSelection().toString()
+            console.log(selected)
+            let selectedArray = selected.split(", ")
+            console.log(selectedArray)
+            for(let i=0;i<selectedArray.length;i++){
+                for(let j=0;j<html.childElementCount;j++){
+                    for(let k=0;k<html.children[j].childElementCount;k++){
+                        if(html.children[j].children[k].tagName == "SPAN"){
+                            if(selectedArray[i] == html.children[j].children[k].textContent){
+                                html.children[j].children[k].classList.toggle("selectah") // Why "selectah"? Watch Ali G in da house...
                             }
                         }
                     }
-                    if(!alertArray[i].includes("-")){ // if an element doesnt include a - (single int)...
-                        document.getElementById("testHTML").innerHTML += alertArray[i]; // push it to the popup with a line break
-                        // notice the mising comma, this is intentional since the print dialog gets confused if a sequence ends with a ,
-                        document.getElementById("testHTML").innerHTML += "<br>"
-                        // here the <br> gets added below, this creates the trailing int but also splits
-                        // single ints into their own rows. I think thats a good solution.
-                    }
                 }
-                // this fires the popup with the page sequences
-                displayPagePopup()
             }
         }
+
+        /*
+        And heres the event handlers to invoke above function, either via right click or ctrl+c
+        I stole the ctrl+c handler from https://javascriptf1.com/snippet/detect-ctrl+c-and-ctrl+v-using-javascript because NOTHING ELSE WANTED TO WORK!
+        Well, my solution DID work, but somehow needed two ctrl+c events to toggle the class, whyever. Patience fleeting, stealing commencing.
+        */
+
+        document.addEventListener('keydown', evt => {
+            if (evt.key === 'c' && evt.ctrlKey && eventBubbler == 0) {
+                markCopiedPages()
+                eventBubbler = 1
+            } 
+        });
+
+        html.addEventListener("contextmenu", function(e){
+            if(eventBubbler == 0){
+                markCopiedPages()
+            }
+            eventBubbler = 1
+        })
+                
     }
+
 
     // these are the copy button event handlers, they simply call the printEvent function with the customer variable
     document.getElementById("buttonCopyFKDF").addEventListener("click", function(){
@@ -412,12 +554,12 @@ function loadDocScreeningToolCode(){
     })
 
     document.getElementById("optionsRecoverDataToggler").addEventListener("click", function(){
-        document.getElementById("screenDocument").innerHTML = localStorage.getItem("DocumentValues");   
-        document.getElementById("screenFKDF").innerHTML = localStorage.getItem("FKDFvalues");
-        document.getElementById("screenFKAT").innerHTML = localStorage.getItem("FKATvalues");
-        document.getElementById("screenNTM").innerHTML 	= localStorage.getItem("NTMvalues");
-        document.getElementById("screenDBU").innerHTML 	= localStorage.getItem("DBUvalues");
-        document.getElementById("screenIATA").innerHTML = localStorage.getItem("IATAvalues");
+        document.getElementById("screenDocument").innerHTML = JSON.parse(localStorage.getItem("DocumentValues"));   
+        document.getElementById("screenFKDF").innerHTML = JSON.parse(localStorage.getItem("FKDFvalues"));
+        document.getElementById("screenFKAT").innerHTML = JSON.parse(localStorage.getItem("FKATvalues"));
+        document.getElementById("screenNTM").innerHTML 	= JSON.parse(localStorage.getItem("NTMvalues"));
+        document.getElementById("screenDBU").innerHTML 	= JSON.parse(localStorage.getItem("DBUvalues"));
+        document.getElementById("screenIATA").innerHTML = JSON.parse(localStorage.getItem("IATAvalues"));
     })
 
     const clearButtons = [
