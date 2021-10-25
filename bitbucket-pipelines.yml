@@ -2,6 +2,12 @@ image: atlassian/default-image:2
 
 pipelines:
   default:
+      - step:
+        name: Build artifact
+        script:
+          - mkdir artifact
+        artifacts:
+          - artifact/*
     - step:
         name: Deploy to S3
         deployment: production
