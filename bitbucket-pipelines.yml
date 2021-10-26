@@ -15,29 +15,9 @@ image: atlassian/default-image:2
 # Workflow Configuration
 
 pipelines:
-  default:
-    - parallel:
-      - step:
-          name: Validate with AWS
-          image: amazon/aws-cli:2.0.48
-          script:
-            # More details https://docs.aws.amazon.com/cli/latest/reference/cloudformation/validate-template.html
-            - aws cloudformation validate-template --template-body file://template.yaml
-      - step:
-          name: Lint the template
-          image: python:3.8
-          script:
-            - pip install cfn-lint
-            # Validate CloudFormation yaml/json templates https://github.com/aws-cloudformation/cfn-python-lint
-            - cfn-lint -I template.yaml
   branches:
     master:
       - parallel:
-        - step:
-            name: Validate with AWS
-            image: amazon/aws-cli:2.0.48
-            script:
-              - aws cloudformation validate-template --template-body file://template.yaml
         - step:
             name: Security Scan
             script:
