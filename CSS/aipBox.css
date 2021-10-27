@@ -16,36 +16,51 @@ input.aipInput {
   text-align: center;
   box-shadow: 0px 1px 5px 0px silver, 0px -1px 5px 0px silver;
 font-family: arial;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-overflow: hidden;
-background-color: #f9fcff;}
 
-.aipLinkBox img {
-  padding: 0% 0% 2.5% 0%;
-  height: 5em;
-  width: auto;
+overflow: hidden;
+background-color: #f9fcff;
+aspect-ratio: 1 / 1.25;    
+}
+
+.aipLinkBoxImage {
+  padding: 0;
+  height: 50%;
+  width: 100%;
+  position: relative;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.aipLinkBox p {
+  margin: 0;
+  height: 50%;
+  width: 100%;
   position: relative;
     display: flex;
   justify-content: center;
-  align-items: center;
-
-  
+  align-content: center;
+  flex-wrap: wrap;
 }
+
+.aipLinkBox p strong{
+    width: 100%;
+}
+
 .aipLinkBox:hover {
   cursor: pointer;
 }
 
 #aipLinks {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 	width: 100%;
 	margin-top: 2em;
   margin-bottom : 2em;
 
-  grid-gap: 1em;
+
 }
 .colorCodesContainer {
   display: flex;
@@ -56,8 +71,8 @@ background-color: #f9fcff;}
 }
   .colorCodes{
 display: grid;
-grid-template-columns:1fr 1fr 1fr 1fr 1fr;
-width: 90%;
+grid-template-columns: repeat(8, 1fr);
+width: 100%;
 grid-gap: 1vw;
 }
 
@@ -95,6 +110,7 @@ grid-gap: 1vw;
     font-family: "Arial";
     position: relative;
     box-shadow: 0px 2px 10px -3px #000000;
+    border: none;
 }
 
 .aipSpan:hover{
@@ -103,14 +119,12 @@ grid-gap: 1vw;
 }
 
 
-.fa-eye.fa-w-18, .fa-eye-slash.fa-w-20{
+.fa-eye.fa-w-18, .fa-eye-slash.fa-w-20, .fa-sort-alpha-down.fa-w-14, .fa-grip-horizontal.fa-w-14, .fa-th.fa-w-16, .fa-unlock-alt.fa-w-14{
     position: absolute;
     right: 0.5rem;
+    font-size: 1rem;
 }
 
-.fa-unlock-alt.fa-w-14{
-    margin: 0 0.5rem 0 0;
-}
 
 
 .eaip {
@@ -177,7 +191,7 @@ clip-path: polygon(0 80%, 0% 100%, 20% 100%);
 .missingCountrySpoiler {
     width: 100%;
     display: flex;
-    margin: 1rem 0 0 0;
+    margin: 1rem 0 1rem 0;
     background: magenta;
     color: white;
     justify-content: center;
@@ -201,3 +215,78 @@ clip-path: polygon(0 80%, 0% 100%, 20% 100%);
     color: black;
     margin: 0 0 0.5% 0;
 }
+
+.letterContainer{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.letterContainer:nth-child(n+2){
+    margin: 1rem 0 0 0;
+}
+
+.letterContainerStuff{
+    display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+  grid-gap: 1em;
+  width: 100%;
+  position: relative;
+  padding: 1rem;
+  box-shadow: 0px 1px 5px 0px silver, 0px -1px 5px 0px silver;
+}
+
+.letterContainerLetter{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 4rem;
+    font-family: "Arial";
+    scroll-margin: 4rem;
+}
+
+#alphabetSoup{
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+    grid-gap: 1rem;
+    width: 100%;
+    position: relative;
+    font-family: "Arial";
+}
+
+.alphabletter{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 1px 5px 0px silver, 0px -1px 5px 0px silver;
+}
+
+.alphabletter:hover{
+    cursor:pointer;
+    background: blue;
+    color: white;
+}
+
+#toTopAIPlibrary{
+display: flex;
+justify-content: flex-end;
+align-items: center;
+font-size: 3rem;
+position: fixed;
+bottom: 3rem;
+right: 1rem;
+}
+
+.fa-arrow-alt-circle-up.fa-w-16{
+    color: blue;
+}
+.fa-arrow-alt-circle-up.fa-w-16:hover{
+    cursor:pointer;
+}
+
