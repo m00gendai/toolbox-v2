@@ -88,21 +88,30 @@
             <div class="container">
                 <div class="colorCodesContainer">
                     <div class="colorCodes">
-                        <div title="View Logins" class="aipSpan" id="aipLogins">
-                            <i class="fas fa-unlock-alt"></i> Logins
-                        </div>
-                        <div title="Filter Tiles" class="aipSpan" id="spanGreen">
+                        <button title="View Logins" class="aipSpan" id="aipLogins">
                             <!-- Text content set in aipLibrary.js -->
-                        </div>    
-                        <div title="Filter Tiles" class="aipSpan" id="spanYellow">
+                        </button>
+                        <button title="Filter Tiles" class="aipSpan" id="spanGreen">
                             <!-- Text content set in aipLibrary.js -->
-                        </div>
-                        <div title="Filter Tiles" class="aipSpan" id="spanRed">
+                        </button>    
+                        <button title="Filter Tiles" class="aipSpan" id="spanYellow">
                             <!-- Text content set in aipLibrary.js -->
-                        </div>
-                        <div title="Filter Tiles" class="aipSpan" id="spanBlack">
+                        </button>
+                        <button title="Filter Tiles" class="aipSpan" id="spanRed">
                             <!-- Text content set in aipLibrary.js -->
-                        </div>
+                        </button>
+                        <button title="Filter Tiles" class="aipSpan" id="spanBlack">
+                            <!-- Text content set in aipLibrary.js -->
+                        </button>
+                        <button class="aipSpan" id="sortAipTilesByNone">
+                            <!-- Text content set in aipLibrary.js -->
+                        </button>
+                        <button class="aipSpan" id="sortAipTilesByICAO">
+                            <!-- Text content set in aipLibrary.js -->
+                        </button>
+                        <button class="aipSpan" id="sortAipTilesByName">
+                            <!-- Text content set in aipLibrary.js -->
+                        </button>
                     </div>
                 </div>
                 <div class="missingCountrySpoiler" id="misCtry">
@@ -198,8 +207,13 @@
                         </ul>
                     </div>
                 </div>
+                <div id="alphabetSoup">
+                </div>
                 <div id="aipLinks">
                 </div>
+            </div>
+            <div id="toTopAIPlibrary">
+                <i class="far fa-arrow-alt-circle-up" title="Back to Top"></i>
             </div>
         </section>
 <!-- END Section AIP Library -->
@@ -771,7 +785,7 @@
             <div id="footerText">
             </div>
             <div id="legal">
-                <u>Legal Statement</u> | Version 2.129 (8149243)
+                <u>Legal Statement</u> | Version 2.132 (8b9b88a)
             </div>
         </footer>
 <!-- END Footer -->
