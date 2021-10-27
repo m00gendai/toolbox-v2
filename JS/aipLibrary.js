@@ -9,8 +9,12 @@ function loadAipLibraryCode(){
         {target: "spanYellow", class: "toolbox", text: "Internal link to eAIP", clicked: false},
         {target: "spanRed", class: "bookaip", text: "Only physical AIP", clicked: false},
         {target: "spanBlack", class: "noaip", text: "No information at all", clicked: false},
+        {target: "sortAipTilesByNone", class: "", text: "Display all", clicked: false},
+        {target: "sortAipTilesByICAO", class: "", text: "Sort by ICAO", clicked: false},
+        {target: "sortAipTilesByName", class: "", text: "Sort by Name", clicked: false},
+        {target: "aipLogins", class: "", text: "View Logins", clicked: false},
+        
     ]
-    
     const aipButtonSymbols = {symbolShow: '<i class="far fa-eye"></i>', symbolHide: '<i class="far fa-eye-slash"></i>'}
     
     const aipLinkGeneratorSpace = document.getElementById("aipLinks");
@@ -20,6 +24,7 @@ function loadAipLibraryCode(){
     
     
     document.getElementById("aipBar").addEventListener("keyup", function(){
+        displayAIPtiles() // Forces the view to Display All 
         displayAIP()
     })
     
@@ -28,15 +33,25 @@ function loadAipLibraryCode(){
        
     
     for(let i=0;i<aipBlockTypes.length;i++){
-        document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + aipButtonSymbols.symbolShow
-        document.getElementById(aipBlockTypes[i].target).addEventListener("click", function(e){
+        if(!aipBlockTypes[i].class == ""){
+            document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + aipButtonSymbols.symbolShow
+        } else {
+            if(aipBlockTypes[i].text == "Display all"){
+               document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + '<i class="fas fa-th"></i>' // '<i class="fas fa-grip-horizontal"></i>'
+            } else if(aipBlockTypes[i].text == "View Logins"){
+                document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + '<i class="fas fa-unlock-alt"></i>'
+            } else {
+                document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + '<i class="fas fa-sort-alpha-down"></i>'
+            }
+        }
+            document.getElementById(aipBlockTypes[i].target).addEventListener("click", function(e){
             // clicked true = HIDE elements 
             // clicked false = SHOW elements 
-            if(aipBlockTypes[i].clicked == false){
+            if(aipBlockTypes[i].clicked == false && !aipBlockTypes[i].class == ""){
                 aipBlockTypes[i].clicked = true
                 document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + aipButtonSymbols.symbolHide
                 toggleAipTiles("none",i)
-            } else {
+            } else if(aipBlockTypes[i].clicked == true && !aipBlockTypes[i].class == ""){
                 aipBlockTypes[i].clicked = false
                 document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + aipButtonSymbols.symbolShow
                 toggleAipTiles("flex",i)
@@ -79,6 +94,7 @@ function loadAipLibraryCode(){
                 let foundz  = sourcez.indexOf(inputB) !== -1;
                 if (foundz) {
                     rows[i].style.display = "flex";
+                    rows[i].style.flexWrap = "wrap";
                 } else {
                     rows[i].style.display = "none";
                 }
@@ -88,52 +104,199 @@ function loadAipLibraryCode(){
 
     
     // A I P   T I L E   G E N E R A T O R
-
     
-    for(let i=0;i<aipTileData.length;i++){
-        const aipTileDiv = document.createElement("div");
-        const aipTileDivP = document.createElement("p");
-        const aipTileDivImg = document.createElement("img");
-        const aipTileBr = document.createElement("br");
-        const aipTileLink = aipTileData[i].link;
-        aipTileDiv.id = aipTileData[i].id;
-        aipTileDiv.className = "aipLinkBox";
+    displayAIPtiles()
+    
+
+    document.getElementById("sortAipTilesByICAO").addEventListener("click", function(){
+        let sortby = "icao"
+        sortAIPtiles(sortby)
+    })
+    document.getElementById("sortAipTilesByName").addEventListener("click", function(){
+        let sortby = "country"
+        sortAIPtiles(sortby)
+    })
+    
+    document.getElementById("sortAipTilesByNone").addEventListener("click", function(){
+        displayAIPtiles()
+    })
+    
+    function displayAIPtiles(){
         
-        aipTileDiv.addEventListener("click", function(){
-            if(aipTileLink != ""){
-                window.open(aipTileLink);
-            }
-        });
+        document.getElementById("alphabetSoup").style.display = "none"
+        document.getElementById("aipLinks").style.display = "grid"
+        document.getElementById("aipLinks").style.gridTemplateColumns = "repeat(auto-fill, minmax(8em, 1fr))"
+        document.getElementById("aipLinks").style.gridGap = "1rem"
         
-        aipTileDiv.addEventListener("keypress", function(e){
-            if(e.keyCode==13 || e.keyCode==32){
+        document.getElementById("aipLinks").innerHTML = ""
+        
+        for(let i=0;i<aipTileData.length;i++){
+            const aipTileDiv = document.createElement("div");
+            const aipTileDivP = document.createElement("p");
+            const aipTileDivImg = document.createElement("div");
+            const aipTileBr = document.createElement("br");
+            const aipTileLink = aipTileData[i].link;
+            aipTileDiv.id = aipTileData[i].id;
+            aipTileDiv.className = "aipLinkBox";
+            
+            aipTileDiv.addEventListener("click", function(){
                 if(aipTileLink != ""){
                     window.open(aipTileLink);
                 }
+            });
+            
+            aipTileDiv.addEventListener("keypress", function(e){
+                if(e.keyCode==13 || e.keyCode==32){
+                    if(aipTileLink != ""){
+                        window.open(aipTileLink);
+                    }
+                }
+            });
+            
+            aipTileDivImg.style.backgroundImage = "url(" + aipTileData[i].img + ")";
+            aipTileDivImg.className = "aipLinkBoxImage"
+
+            aipTileDiv.appendChild(aipTileDivImg);
+            aipTileDiv.appendChild(aipTileDivP);
+            aipTileDivP.innerHTML = "<strong>" + aipTileData[i].icao + "</strong>" + aipTileData[i].country
+
+            
+            if(aipTileData[i].aip == "green"){
+                aipTileDiv.classList.add("eaip");
             }
-        });
+            if(aipTileData[i].aip == "yellow"){
+                aipTileDiv.classList.add("toolbox");
+            }
+            if(aipTileData[i].aip == "red"){
+                aipTileDiv.classList.add("bookaip");
+            }
+            if(aipTileData[i].aip == "black"){
+                aipTileDiv.classList.add("noaip");
+            }
         
-        aipTileDivImg.src = aipTileData[i].img;
-        aipTileDivImg.loading="lazy"
-        aipTileDivImg.width = "100%";
-        aipTileDiv.appendChild(aipTileDivImg);
-        aipTileDiv.appendChild(aipTileDivP);
-        aipTileDivP.innerHTML = aipTileData[i].icao + "<br>" + aipTileData[i].country
-        aipLinkGeneratorSpace.appendChild(aipTileDiv);
-        if(aipTileData[i].aip == "green"){
-            document.getElementById(aipTileData[i].id).classList.add("eaip");
-        }
-        if(aipTileData[i].aip == "yellow"){
-            document.getElementById(aipTileData[i].id).classList.add("toolbox");
-        }
-        if(aipTileData[i].aip == "red"){
-            document.getElementById(aipTileData[i].id).classList.add("bookaip");
-        }
-        if(aipTileData[i].aip == "black"){
-            document.getElementById(aipTileData[i].id).classList.add("noaip");
-        }
+        
+        
+        document.getElementById("aipLinks").appendChild(aipTileDiv)
+        
+    }
     }
     
+    function sortAIPtiles(sortby){
+        
+        document.getElementById("aipLinks").style.display = "flex"
+        document.getElementById("aipLinks").style.justifyContent = "center"
+        document.getElementById("aipLinks").style.alignItems = "center"
+        document.getElementById("alphabetSoup").style.display = "flex"
+        document.getElementById("aipLinks").innerHTML = ""
+        document.getElementById("alphabetSoup").innerHTML = ""
+        sortAIPby = sortby
+        let alphabet = []
+        let aipTileArray = []
+        
+        for(let i=0;i<aipTileData.length;i++){
+            const aipTileDiv = document.createElement("div");
+            const aipTileDivP = document.createElement("p");
+            const aipTileDivImg = document.createElement("div");
+            const aipTileBr = document.createElement("br");
+            const aipTileLink = aipTileData[i].link;
+            aipTileDiv.id = aipTileData[i].id;
+            aipTileDiv.className = "aipLinkBox";
+            
+            aipTileDiv.addEventListener("click", function(){
+                if(aipTileLink != ""){
+                    window.open(aipTileLink);
+                }
+            });
+            
+            aipTileDiv.addEventListener("keypress", function(e){
+                if(e.keyCode==13 || e.keyCode==32){
+                    if(aipTileLink != ""){
+                        window.open(aipTileLink);
+                    }
+                }
+            });
+            
+            aipTileDivImg.style.backgroundImage = "url(" + aipTileData[i].img + ")";
+            aipTileDivImg.className = "aipLinkBoxImage"
+
+            aipTileDiv.appendChild(aipTileDivImg);
+            aipTileDiv.appendChild(aipTileDivP);
+            aipTileDivP.innerHTML = "<strong>" + aipTileData[i].icao + "</strong>" + aipTileData[i].country
+
+            if(sortAIPby == "icao"){
+                alphabet.push(aipTileData[i].icao[0].toUpperCase())
+            } else if(sortAIPby == "country"){
+                alphabet.push(aipTileData[i].country[0].toUpperCase())
+            }
+            
+            if(aipTileData[i].aip == "green"){
+                aipTileDiv.classList.add("eaip");
+            }
+            if(aipTileData[i].aip == "yellow"){
+                aipTileDiv.classList.add("toolbox");
+            }
+            if(aipTileData[i].aip == "red"){
+                aipTileDiv.classList.add("bookaip");
+            }
+            if(aipTileData[i].aip == "black"){
+                aipTileDiv.classList.add("noaip");
+            }
+            
+            aipTileArray.push(aipTileDiv)
+        }
+        
+        console.log(aipTileArray[0])
+        
+        alphabet.sort()
+        let set = new Set(alphabet)
+        alphabet = Array.from(set)
+        
+        for(let i=0;i<alphabet.length;i++){
+            
+            let alphabletter = document.createElement("div")
+            alphabletter.className = "alphabletter"
+            
+            alphabletter.innerText = alphabet[i].toUpperCase()
+            document.getElementById("alphabetSoup").appendChild(alphabletter)
+            
+            
+            
+            
+            let letterContainer = document.createElement("div")
+            let letterContainerLetter = document.createElement("div")
+            let letterContainerStuff = document.createElement("div")
+            
+            letterContainer.className = "letterContainer"
+            letterContainerLetter.className = "letterContainerLetter"
+            letterContainerStuff.className = "letterContainerStuff"
+            letterContainer.id = "letterContainer" + alphabet[i]
+            letterContainerLetter.id = "letterContainerLetter" + alphabet[i]
+            letterContainerStuff.id = "letterContainerStuff" + alphabet[i]
+            
+            letterContainer.appendChild(letterContainerLetter)
+            letterContainerLetter.innerHTML = alphabet[i].toUpperCase()
+            letterContainer.appendChild(letterContainerStuff)
+            document.getElementById("aipLinks").appendChild(letterContainer)
+            
+            alphabletter.addEventListener("click", function(){
+                letterContainerLetter.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            })
+            
+        for(let j=0;j<aipTileArray.length;j++){
+            if(sortAIPby == "icao"){
+                if(aipTileArray[j].id.substring(0,1).toLowerCase() == letterContainer.id.substring(letterContainer.id.length-1, letterContainer.id.length).toLowerCase()){
+                    letterContainerStuff.appendChild(aipTileArray[j])
+                }
+            } else if(sortAIPby == "country"){
+                if(aipTileArray[j].innerText[2].toLowerCase() == letterContainer.id.substring(letterContainer.id.length-1, letterContainer.id.length).toLowerCase()){
+                    letterContainerStuff.appendChild(aipTileArray[j])
+                }
+            }
+        }
+    
+    
+        }
+    }
     // R A N D O M   T A B   I N D E X   F U N C T  I O N   C O M I N G   T H R O U G H
    
     
@@ -163,6 +326,10 @@ function loadAipLibraryCode(){
             document.getElementById("misCtryCnt").style.display = "block";
         }
     });
+    
+    document.getElementById("toTopAIPlibrary").addEventListener("click", function(){
+        window.scrollTo(0,0)
+    })
 
     
 }
