@@ -10,10 +10,11 @@ Python was used to create the software that converts CSV files into customized J
 
 ### How do I get set up? ###
 
-The toolbox relies only on a few JavaScript libraries to run:
+The toolbox relies on a few JavaScript libraries to run:
 
 * jQuery
 * lodash
+* dragula
 
 ### Contribution guidelines ###
 
