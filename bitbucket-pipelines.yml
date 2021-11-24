@@ -37,4 +37,4 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 S3_BUCKET: 'toolboxv2'
-                LOCAL_PATH: ''
+                LOCAL_PATH: '/'
