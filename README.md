@@ -16,6 +16,8 @@ The toolbox relies on a few JavaScript libraries to run:
 * lodash
 * dragula
 
+Basic maintenance in the sense of adding/removing/changing Home Page Tiles (links to applets/websites) and/or AIP Tiles (links to electronic AIPs) requires only amendments in the respective JSON files, the rest happens automatically.
+
 ### Contribution guidelines ###
 
 No contribution, this is an inhouse company only intranet page maintained by the repo owner alone.
