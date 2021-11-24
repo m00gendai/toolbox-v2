@@ -1,16 +1,15 @@
-#  Template AWS Cloudformation deploy
+#  Template React Deploy
 
-#  This template allows you to deploy your configuration as code using AWS CloudFormation.
-#  The workflow allows validate, linting and security scans on feature branches (as well as master).
-#  The AWS cloudformation template will be validated and deployed after the code is merged to master.
+#  This template allows you to deploy your React app to an AWS S3 bucket and invalidate the old AWS Cloudfront distribution.
+#  The workflow allows running tests, code linting and security scans on feature branches (as well as master).
+#  The react app will be validated, deployed to S3 and trigger an AWS Cloudfront distribution invalidation to refresh the CDN caches after the code is merged to master.
 
-# Prerequisites: $AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY, $AWS_DEFAULT_REGION setup in the Repository variables and Deployment variables.
-# For advanced cases, please, follow examples from the pipe's README https://bitbucket.org/atlassian/aws-cloudformation-deploy/src/master/README.md
-# You can find AWS Cloudformation template example for creating AWS S3 Bucket in the template.yaml file. 
-# You can modify and use it to deploy any of your configuration as code. https://aws.amazon.com/cloudformation/resources/templates/
+# Prerequisites: $AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY setup in the Deployment variables.
+# For advanced cases, please, follow examples from the pipe's:
+# README https://bitbucket.org/atlassian/aws-s3-deploy/src/master/README.md
+# README https://bitbucket.org/atlassian/aws-cloudfront-invalidate/src/master/README.md
 
-
-image: atlassian/default-image:2
+image: node:16
 
 # Workflow Configuration
 
@@ -23,19 +22,19 @@ pipelines:
             script:
               # Run a security scan for sensitive data.
               # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-              - pipe: atlassian/git-secrets-scan:0.4.3
+              - pipe: atlassian/git-secrets-scan:0.5.1
       - step:
           name: Deploy to Production
           deployment: Production
           trigger: manual
+          clone:
+            enabled: false
           script:
-            # Deploy your configuration as code using AWS CloudFormation.
-            # See more details https://bitbucket.org/atlassian/aws-cloudformation-deploy
-            - pipe: atlassian/aws-cloudformation-deploy:0.8.0
+            # sync your files to S3
+            - pipe: atlassian/aws-s3-deploy:1.1.0
               variables:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION: 'eu-central-1'
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 S3_BUCKET: 'toolboxv2'
                 LOCAL_PATH: 'build'
-
