@@ -123,6 +123,8 @@ function loadAipLibraryCode(){
     
     function displayAIPtiles(){
         
+        let sortedAIPs = []
+        
         document.getElementById("alphabetSoup").style.display = "none"
         document.getElementById("aipLinks").style.display = "grid"
         document.getElementById("aipLinks").style.gridTemplateColumns = "repeat(auto-fill, minmax(8em, 1fr))"
@@ -131,12 +133,18 @@ function loadAipLibraryCode(){
         document.getElementById("aipLinks").innerHTML = ""
         
         for(let i=0;i<aipTileData.length;i++){
+            sortedAIPs.push(aipTileData[i])
+        }
+        sortedAIPs = sortedAIPs.sort((a, b) => (a.country > b.country) ? 1 : -1)
+        
+        
+        for(let i=0;i<sortedAIPs.length;i++){
             const aipTileDiv = document.createElement("div");
             const aipTileDivP = document.createElement("p");
             const aipTileDivImg = document.createElement("div");
             const aipTileBr = document.createElement("br");
-            const aipTileLink = aipTileData[i].link;
-            aipTileDiv.id = aipTileData[i].id;
+            const aipTileLink = sortedAIPs[i].link;
+            aipTileDiv.id = sortedAIPs[i].id;
             aipTileDiv.className = "aipLinkBox";
             
             aipTileDiv.addEventListener("click", function(){
@@ -153,34 +161,35 @@ function loadAipLibraryCode(){
                 }
             });
             
-            aipTileDivImg.style.backgroundImage = "url(" + aipTileData[i].img + ")";
+            aipTileDivImg.style.backgroundImage = "url(" + sortedAIPs[i].img + ")";
             aipTileDivImg.className = "aipLinkBoxImage"
 
             aipTileDiv.appendChild(aipTileDivImg);
             aipTileDiv.appendChild(aipTileDivP);
-            aipTileDivP.innerHTML = "<strong>" + aipTileData[i].icao + "</strong>" + aipTileData[i].country
+            aipTileDivP.innerHTML = "<strong>" + sortedAIPs[i].icao + "</strong>" + sortedAIPs[i].country
 
             
-            if(aipTileData[i].aip == "green"){
+            if(sortedAIPs[i].aip == "green"){
                 aipTileDiv.classList.add("eaip");
             }
-            if(aipTileData[i].aip == "yellow"){
+            if(sortedAIPs[i].aip == "yellow"){
                 aipTileDiv.classList.add("toolbox");
             }
-            if(aipTileData[i].aip == "red"){
+            if(sortedAIPs[i].aip == "red"){
                 aipTileDiv.classList.add("bookaip");
             }
-            if(aipTileData[i].aip == "black"){
+            if(sortedAIPs[i].aip == "black"){
                 aipTileDiv.classList.add("noaip");
             }
         
         
         
         document.getElementById("aipLinks").appendChild(aipTileDiv)
+
         
     }
     }
-    
+	
     function sortAIPtiles(sortby){
         
         document.getElementById("aipLinks").style.display = "flex"
@@ -282,17 +291,18 @@ function loadAipLibraryCode(){
                 letterContainerLetter.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
             })
             
-        for(let j=0;j<aipTileArray.length;j++){
-            if(sortAIPby == "icao"){
-                if(aipTileArray[j].id.substring(0,1).toLowerCase() == letterContainer.id.substring(letterContainer.id.length-1, letterContainer.id.length).toLowerCase()){
-                    letterContainerStuff.appendChild(aipTileArray[j])
-                }
-            } else if(sortAIPby == "country"){
-                if(aipTileArray[j].innerText[2].toLowerCase() == letterContainer.id.substring(letterContainer.id.length-1, letterContainer.id.length).toLowerCase()){
-                    letterContainerStuff.appendChild(aipTileArray[j])
+            
+            for(let j=0;j<aipTileArray.length;j++){
+                if(sortAIPby == "icao"){
+                    if(aipTileArray[j].id.substring(0,1).toLowerCase() == letterContainer.id.substring(letterContainer.id.length-1, letterContainer.id.length).toLowerCase()){
+                        letterContainerStuff.appendChild(aipTileArray[j])
+                    }
+                } else if(sortAIPby == "country"){
+                    if(aipTileArray[j].innerText[2].toLowerCase() == letterContainer.id.substring(letterContainer.id.length-1, letterContainer.id.length).toLowerCase()){
+                        letterContainerStuff.appendChild(aipTileArray[j])
+                    }
                 }
             }
-        }
     
     
         }
