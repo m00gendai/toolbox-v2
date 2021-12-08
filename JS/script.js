@@ -236,7 +236,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     $("#frenchBox").hide();
                     $("#sitaBox").show();
                     $("#doctoolBox").hide();
-                    $("inputSita").focus();
+                    $("#inputSita").focus();
                      let state = { 'page_id': 6}
         let title = 'SITA Address Converter'
         let href = url.substring(0, url.indexOf("#")) + "#SITA_Address_Converter"
@@ -250,7 +250,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         $("#frenchBox").hide();
                         $("#sitaBox").show();
                         $("#doctoolBox").hide();
-                        $("inputSita").focus();
+                        $("#inputSita").focus();
                          let state = { 'page_id': 6}
         let title = 'SITA Address Converter'
         let href = url.substring(0, url.indexOf("#")) + "#SITA_Address_Converter"
@@ -407,6 +407,5 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
     document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
-
 
 });
