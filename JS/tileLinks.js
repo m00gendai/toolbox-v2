@@ -259,7 +259,7 @@ const homeTileData = [{
 		img: "Assets/030-medical.png",
 		title: "Mobilisation & e-Alarming Tool",
 		link: "https://emergency.swisscom-alarm.ch/",
-		tags: "ealarming alarmierung notfall",
+		tags: "ealarming alarmierung notfall mobilisation tool mosi cos",
 		style: "spvr"
 	},
 {
@@ -429,5 +429,29 @@ const homeTileData = [{
 		tags: "rad route availabiltiy document restriction ifps cfmu",
 		style: "aro"
 	},
+    {
+        id: "lfnOps",
+        img: "Assets/chopper.png",
+        title: "LFN Documents",
+        link: "U:\\ZOL\\PR-Team\\AIS-ALLG\\aim-info-hub_DO NOT DELETE PLS -WM\\Documents\\LFN",
+        tags: "lfn gnss low flying flight network rega mil occupancy sheet map",
+        style: "aro"
+    },
+    {
+        id: "eventReport",
+        img: "Assets/alert.png",
+        title: "Event Report",
+        link: "http://event-report.skyguide.corp/event_report",
+        tags: "duty office fuel dump checklist event report oir",
+        style: "spvr"
+    },
+    {
+        id: "dutyOffice",
+        img: "Assets/alert.png",
+        title: "Duty Office Documents",
+        link: "U:\\ZOL\\PR-Team\\AIS-ALLG\\aim-info-hub_DO NOT DELETE PLS -WM\\Documents\\Duty Office",
+        tags: "duty office fuel dump checklist event report oir",
+        style: "spvr"
+    },
 
 ];
