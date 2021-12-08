@@ -6,7 +6,7 @@ window.onload = (event) => {
     document.getElementById("inputSita").addEventListener("keyup", function(e){
         if(e.key == "Enter"){
             sitaInput = document.getElementById("inputSita").value.toLowerCase()
-            if(chartExists){
+            if(chart){
                 chart.dispose()
             }
             displayChart(sitaInput)
@@ -15,7 +15,7 @@ window.onload = (event) => {
     
     document.getElementById("inputSitaSearch").addEventListener("click", function(){
         sitaInput = document.getElementById("inputSita").value.toLowerCase()
-            if(chartExists){
+            if(chart){
                 chart.dispose()
             }
         displayChart(sitaInput)
@@ -93,12 +93,6 @@ window.onload = (event) => {
             chart.dataFields.toName = "to"
             chart.dataFields.value = "value"
             chart.paddingRight = 500
-
-            let nodeTemplate = chart.nodes.template
-            nodeTemplate.inert = true
-            nodeTemplate.readerTitle = "Drag me!"
-            nodeTemplate.showSystemTooltip = true
-            nodeTemplate.width = 20
 
             let nodeTemplate = chart.nodes.template
             nodeTemplate.readerTitle = "Click to show/hide or drag to rearrange"
