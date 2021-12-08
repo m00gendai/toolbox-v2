@@ -332,7 +332,7 @@
                 </div>
             </div>
             <div class="queryBar">
-                <input type="text" id="inputSita" maxlength="7" placeholder="Enter SITA address">
+                <input type="text" id="inputSita" maxlength="7" placeholder="Enter SITA address" tabindex="0">
                 <button id="inputSitaSearch">
                     Search
                 </button>
@@ -353,34 +353,8 @@
                 Therefore, this lookup simply returns all matching data to a SITA code segment; it has then to be interpreted manually.<br>
                 <br>
             </div>
-            <div class="dissect">
-                <div id="third1">
-                </div>
-                <div id="third2">
-                </div>
-                <div id="third3">
-                </div>
+            <div class="dissect" id="dissect">
             </div>
-            <div class="directConversion" id="directConversion">
-                <div class="directConversionTitle" id="directConversionTitle">
-                    Direct AFTN equivalent found:
-                </div>
-                <div id="directConversionAddress">
-                </div>
-            </div>
-            <div class="explain">
-                <div id="sitaLoci">
-                </div>
-                <div id="sitaDept">
-                </div>
-                <div id="sitaCorp">
-                </div>
-            </div>
-            <!-- Kept in case of a full database display possibility request -->
-            <table id="apcodesTable">
-                <tbody>
-                </tbody>
-            </table>
         </section>
 <!-- END Section SITA Conversion -->
 <!-- BEGIN Section DOC Screening Tool Section -->
@@ -720,6 +694,7 @@
                             <li>jQuery</li>
                             <li>lodash</li>
                             <li>dragula</li>
+                            <li>amCharts</li>
                             <li>JSON</li>
                         </ul>
                     <li>Python 3.9</li>
@@ -759,7 +734,7 @@
             <div id="footerText">
             </div>
             <div id="legal">
-                <u>Legal Statement</u> | Version 2.143 (7414570)
+                <u>Legal Statement</u> | Version 2.148 (92cbfeb)
             </div>
         </footer>
 <!-- END Footer -->
@@ -785,6 +760,9 @@
         <script src="Documents/FRENCH BIBLIOTHEK/voci_tech_gen.js" defer></script>          <!-- JSON for French Table 4 -->
         <script src="Documents/FRENCH BIBLIOTHEK/voci_div.js" defer></script>               <!-- JSON for French Table 5 -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js" integrity="sha512-MrA7WH8h42LMq8GWxQGmWjrtalBjrfIzCQ+i2EZA26cZ7OBiBd/Uct5S3NP9IBqKx5b+MMNH1PhzTsk6J9nPQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        <!-- dragula.js library CDN -->
+        <script src="https://cdn.amcharts.com/lib/4/core.js"></script>                      <!-- amCharts library -->
+        <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>                    <!-- amCharts library -->
+        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>           <!-- amCharts library -->
 <!-- END Deferred Scripts -->
     </body>
 <!-- END Body -->
