@@ -26,12 +26,14 @@
 		<link rel="stylesheet" href="CSS/legal.css">              <!-- CSS Legal Statement Popup -->
 		<link rel="stylesheet" href="CSS/optionsMenu.css">        <!-- CSS DOC Tool Options Menu -->
 		<link rel="stylesheet" href="CSS/achievements.css">       <!-- CSS Achievement Unlocked -->
+		<link rel="stylesheet" href="CSS/profileMenu.css">       <!-- CSS Achievement Unlocked -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />      <!-- CSS Font Awesome CDN -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <!-- CSS Dragula.js -->
 <!-- END Stylesheets -->
 		<link rel="icon" href="Favicon/favicon.ico?v=2" />        <!-- Browser Tab Icon -->
-		
-
+		<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 	</head>
 <!-- END Head -->
 <!-- BEGIN Navigation Bar -->
@@ -51,9 +53,6 @@
             </li>
 			<li id="favoritesTogglor" title="Toggle Favorites">
                 <i class="fas fa-star"></i>
-            </li>
-            <li id="loginField">
-                <input type="email" id="loginMail"><input id="loginPassword" type="password"><button id="login">O</button><button id="logout">X</button>
             </li>
 		</ul>
 	</nav>
@@ -734,6 +733,14 @@
             </div>
         </div>
 <!-- END Achievement -->
+<!-- BEGIN Profile Menu -->
+    <aside id="profileMenu">
+        <div id="profileMenuContainer">
+            
+        </div>
+    </aside>
+
+<!-- END Profile Menu -->
 <!-- BEGIN Footer -->
         <footer>
             <div id="footerText">
@@ -769,98 +776,118 @@
         <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>                    <!-- amCharts library -->
         <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>           <!-- amCharts library -->
         <script src="JS/firebase.js" defer></script> 
-        <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-  import { getFirestore, collection, addDoc, getDocs }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: apiKey,
-    authDomain: authDomain,
-    projectId: projectId,
-    storageBucket: storageBucket,
-    messagingSenderId: messagingSenderId,
-    appId: appId
-  };
+        <script data-type="module" type="text/babel">
+ 
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+            import { getFirestore, collection, addDoc, getDocs }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+            
+            const firebaseConfig = {
+                apiKey: apiKey,
+                authDomain: authDomain,
+                projectId: projectId,
+                storageBucket: storageBucket,
+                messagingSenderId: messagingSenderId,
+                appId: appId
+            };
   
+            function Login(){
+                return(
+                    <div>
+                        <div id="profilePictureContainer">
+                            <i class="far fa-user-circle"></i>
+                        </div>
+                        <div id="loginContainer">
+                            <div id="loginWelcome">
+                                <h2>Login</h2>
+                            </div>
+                            <input type="email" id="loginMail" placeholder="email" />
+                            <input id="loginPassword" type="password" placeholder="password" />
+                            <button id="login">O</button>
+                            
+                        </div>
+                    </div>
+                )
+            }
   
-
-
+            function LoggedIn(props){
+            const userID = props.data
+                console.log(`props: ${userID}`)
+                return(
+                    <div>
+                        Welcome, {userID}
+                        <button id="logout">X</button>
+                    </div>
+                )
+            }
   
-  
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore();
+            const auth = getAuth();
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore();
-  
-
-const auth = getAuth();
-
-document.getElementById("login").addEventListener("click", function(){
-    const email = document.getElementById("loginMail").value
-    const password = document.getElementById("loginPassword").value
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const uid = user.displayName;
+                    console.log(`User: ${user}`)
+                    ReactDOM.render(<LoggedIn data={uid} />, document.getElementById("profileMenuContainer"))
+                    document.getElementById("logout").addEventListener("click", function(){
+                        auth.signOut()
+                            .then(() => {
+                                console.log("signed out")
+                            })
+                            .catch((error) => {
+                                const errorCode = error.code;
+                                const errorMessage = error.message;
+                                console.log(`Sign out error: ${errorMessage}`)
+                            });
+                    })
+                } else {
+                    console.log("no user logged in")
+                    ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
+                    document.getElementById("login").addEventListener("click", function(){
+                        const email = document.getElementById("loginMail").value
+                        const password = document.getElementById("loginPassword").value
     
-    signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user)
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage)
-  });
-  })
-  
-  document.getElementById("logout").addEventListener("click", function(){
-    auth.signOut().then(function() {
-    console.log("signed out")
-}, function(error) {
-  console.log(`Signout error: ${error}`)
-});
-  })
-  onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    console.log(user)
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-  /*
-  try {
-  const docRef =  addDoc(collection(db, "users"), {
-    first: "Lol",
-    last: "Lovelace",
-    born: 1815
-  })
-  
-  console.log("Document written with ID: ", docRef.id);
-  
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
-  */
-});
-  
-setTimeout(function(){updateProfile(auth.currentUser, {
-  displayName: "Jane User", photoURL: "https://example.com/jane-q-user/profile.jpg", displayMode: "dark"
-}).then(() => {
-  console.log(auth.currentUser)
-  // ...
-}).catch((error) => {
-  console.log(error)
-  // ...
-});}, 2000)
-
+                        signInWithEmailAndPassword(auth, email, password)
+                            .then((userCredential) => {
+                                const user = userCredential.user;
+                                console.log(`Signed in user: ${user}`)
+                            })
+                            .catch((error) => {
+                                const errorCode = error.code;
+                                const errorMessage = error.message;
+                                console.log(`Sign in error: ${errorMessage}`)
+                            });
+                    })
+                }
+                /*
+                try {
+                    const docRef =  addDoc(collection(db, "users"), {
+                        first: "Lol",
+                        last: "Lovelace",
+                        born: 1815
+                    })
+                    console.log("Document written with ID: ", docRef.id);
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                }
+                */
+            });
+            /*
+            setTimeout(function(){
+                updateProfile(auth.currentUser, {
+                    displayName: "Mäse", 
+                    photoURL: "https://example.com/jane-q-user/profile.jpg", 
+                    displayMode: "dark"
+                })
+                .then(() => {
+                    console.log(`Update current user: ${auth.currentUser}`)
+                })
+                .catch((error) => {
+                    console.log(`Update current user error: ${error}`)
+                })
+            }, 2000)
+            */
 /*createUserWithEmailAndPassword(auth, "marcel.weber@skyguide.ch", "123456")
   .then((userCredential) => {
     // Signed in 
@@ -875,10 +902,10 @@ setTimeout(function(){updateProfile(auth.currentUser, {
 
   
   
-  const querySnapshot = await getDocs(collection(db, "users"));
+ /* const querySnapshot = getDocs(collection(db, "users"));
 querySnapshot.forEach((doc) => {
   console.log(`${doc.id} => ${doc.data().first}`);
-});
+});*/
   
   
 </script>
