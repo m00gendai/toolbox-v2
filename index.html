@@ -30,6 +30,8 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <!-- CSS Dragula.js -->
 <!-- END Stylesheets -->
 		<link rel="icon" href="Favicon/favicon.ico?v=2" />        <!-- Browser Tab Icon -->
+		
+
 	</head>
 <!-- END Head -->
 <!-- BEGIN Navigation Bar -->
@@ -49,6 +51,9 @@
             </li>
 			<li id="favoritesTogglor" title="Toggle Favorites">
                 <i class="fas fa-star"></i>
+            </li>
+            <li id="loginField">
+                <input type="email" id="loginMail"><input id="loginPassword" type="password"><button id="login">O</button><button id="logout">X</button>
             </li>
 		</ul>
 	</nav>
@@ -763,6 +768,120 @@
         <script src="https://cdn.amcharts.com/lib/4/core.js"></script>                      <!-- amCharts library -->
         <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>                    <!-- amCharts library -->
         <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>           <!-- amCharts library -->
+        <script src="JS/firebase.js" defer></script> 
+        <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: apiKey,
+    authDomain: authDomain,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId
+  };
+  
+  
+
+
+  
+  
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore();
+  
+
+const auth = getAuth();
+
+document.getElementById("login").addEventListener("click", function(){
+    const email = document.getElementById("loginMail").value
+    const password = document.getElementById("loginPassword").value
+    
+    signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage)
+  });
+  })
+  
+  document.getElementById("logout").addEventListener("click", function(){
+    auth.signOut().then(function() {
+    console.log("signed out")
+}, function(error) {
+  console.log(`Signout error: ${error}`)
+});
+  })
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    console.log(user)
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+  /*
+  try {
+  const docRef =  addDoc(collection(db, "users"), {
+    first: "Lol",
+    last: "Lovelace",
+    born: 1815
+  })
+  
+  console.log("Document written with ID: ", docRef.id);
+  
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
+  */
+});
+  
+setTimeout(function(){updateProfile(auth.currentUser, {
+  displayName: "Jane User", photoURL: "https://example.com/jane-q-user/profile.jpg", displayMode: "dark"
+}).then(() => {
+  console.log(auth.currentUser)
+  // ...
+}).catch((error) => {
+  console.log(error)
+  // ...
+});}, 2000)
+
+/*createUserWithEmailAndPassword(auth, "marcel.weber@skyguide.ch", "123456")
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage)
+  });*/
+
+  
+  
+  const querySnapshot = await getDocs(collection(db, "users"));
+querySnapshot.forEach((doc) => {
+  console.log(`${doc.id} => ${doc.data().first}`);
+});
+  
+  
+</script>
 <!-- END Deferred Scripts -->
     </body>
 <!-- END Body -->
