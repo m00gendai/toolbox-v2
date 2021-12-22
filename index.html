@@ -54,6 +54,7 @@
 			<li id="favoritesTogglor" title="Toggle Favorites">
                 <i class="fas fa-star"></i>
             </li>
+            <li id="profileMenuToggle"><i class="far fa-user-circle"></i></li>
 		</ul>
 	</nav>
 <!-- END Navigation Bar -->
@@ -733,13 +734,12 @@
             </div>
         </div>
 <!-- END Achievement -->
-<!-- BEGIN Profile Menu -->
+	<!-- BEGIN Profile Menu -->
     <aside id="profileMenu">
         <div id="profileMenuContainer">
             
         </div>
     </aside>
-
 <!-- END Profile Menu -->
 <!-- BEGIN Footer -->
         <footer>
@@ -776,10 +776,11 @@
         <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>                    <!-- amCharts library -->
         <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>           <!-- amCharts library -->
         <script src="JS/firebase.js" defer></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script data-type="module" type="text/babel">
  
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
             import { getFirestore, collection, addDoc, getDocs }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
             
             const firebaseConfig = {
@@ -790,6 +791,10 @@
                 messagingSenderId: messagingSenderId,
                 appId: appId
             };
+            
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore();
+            const auth = getAuth();
   
             function Login(){
                 return(
@@ -798,40 +803,122 @@
                             <i class="far fa-user-circle"></i>
                         </div>
                         <div id="loginContainer">
-                            <div id="loginWelcome">
-                                <h2>Login</h2>
-                            </div>
                             <input type="email" id="loginMail" placeholder="email" />
-                            <input id="loginPassword" type="password" placeholder="password" />
-                            <button id="login">O</button>
-                            
+                            <input id="loginPassword" type="password" placeholder="password" onKeyPress={login} />
+                            <h4 id="passwordForgotten" onClick={forgotPassword}>Forgot Password?</h4>
+                            <button id="login" onClick={login}>Log in</button>
+                        </div>
+                        <div id="loginErrors"></div>
+                        <div id="signup">
+                            <h3>
+                                No account? Sign up!
+                            </h3>
                         </div>
                     </div>
                 )
             }
-  
+            
+            function ForgotPassword(){
+                return(
+                    <div>
+                        <div id="profilePictureContainer">
+                            <i class="far fa-user-circle"></i>
+                        </div>
+                        <div id="loggedinContainer">
+                            <input type="email" id="forgotPassword" placeholder="email" />
+                            <button id="forgotPasswordButton" onClick={sendNewPassword}>Send new Password</button>
+                            <div id="passwordSentDialog"></div>
+                        </div>
+                    </div>
+                )
+            }
+            
+
             function LoggedIn(props){
             const userID = props.data
                 console.log(`props: ${userID}`)
                 return(
                     <div>
-                        Welcome, {userID}
-                        <button id="logout">X</button>
+                        <div id="profilePictureContainer">
+                            <i class="far fa-user-circle"></i>
+                            
+                        </div>
+                        <h2>{userID}</h2>
+                        <div id="loggedinContainer">
+                            <button id="logoutButton" onClick={logout}>Log out</button>
+                        </div>
+
                     </div>
                 )
             }
-  
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore();
-            const auth = getAuth();
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    const uid = user.displayName;
-                    console.log(`User: ${user}`)
-                    ReactDOM.render(<LoggedIn data={uid} />, document.getElementById("profileMenuContainer"))
-                    document.getElementById("logout").addEventListener("click", function(){
-                        auth.signOut()
+            
+            function forgotPassword(){
+                ReactDOM.render(<ForgotPassword />, document.getElementById("profileMenuContainer"))
+            }
+            
+            function PasswordResetSuccess(props){
+                const recipient = props.recipient
+                return(
+                    <div>
+                        Password reset link sent to {recipient}.
+                        If you do not receive a password reset link in the next couple of minutes,
+                        please advise weberml directly.
+                    </div>
+                )
+                }
+            
+            function sendNewPassword(){
+                const email = document.getElementById("forgotPassword").value
+                sendPasswordResetEmail(auth, email)
+                    .then(() => {
+                        ReactDOM.render(<PasswordResetSuccess recipient={email} />, document.getElementById("passwordSentDialog"))
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        ReactDOM.render(<LoginError message={errorCode} />, document.getElementById("loginErrors"))
+                            anime({
+                                targets: '#loginErrors',
+                                minHeight: "2rem", 
+                                delay: 0,
+                                duration: 100,
+                                direction: 'normal',
+                                loop: false,
+                                easing: 'linear'
+                            });
+                    });
+                    }
+            
+            function login(e){
+                if(e.key == "Enter" || e.button == 0){
+                    const email = document.getElementById("loginMail").value
+                    const password = document.getElementById("loginPassword").value
+    
+                    signInWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            const user = userCredential.user;
+                            console.log(`Signed in user: ${user}`)
+                        })
+                        .catch((error) => {
+                            let errorCode = error.code;
+                            if (errorCode == "auth/user-not-found" || errorCode == "auth/wrong-password"){
+                                errorCode = "Username and/or password do not match"
+                                }
+                            ReactDOM.render(<LoginError message={errorCode} />, document.getElementById("loginErrors"))
+                            anime({
+                                targets: '#loginErrors',
+                                minHeight: "2rem", 
+                                delay: 0,
+                                duration: 100,
+                                direction: 'normal',
+                                loop: false,
+                                easing: 'linear'
+                            });
+                        })
+                }
+            }
+            
+            function logout(){
+            auth.signOut()
                             .then(() => {
                                 console.log("signed out")
                             })
@@ -840,24 +927,74 @@
                                 const errorMessage = error.message;
                                 console.log(`Sign out error: ${errorMessage}`)
                             });
+                            }
+            
+            function signAwayYourSoul(){
+                const email = document.getElementById("signupMail").value
+                const password = document.getElementById("signupPassword").value
+                const name = document.getElementById("signupName").value 
+                
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        updateProfile(auth.currentUser, {
+                            displayName: name, 
+                        })
+                            .then(() => {
+                                console.log(`Update current user: ${auth.currentUser}`)
+                                ReactDOM.render(<LoggedIn data={auth.currentUser.displayName} />, document.getElementById("profileMenuContainer"))
+                            })
+                            .catch((error) => {
+                                console.log(`Update current user error: ${error}`)
+                            })
                     })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log(errorMessage)
+                    })
+                
+            }
+            
+            function LoginError(props){
+                const errorMessage = props.message
+                
+                return(
+                    <div>
+                        Error: {errorMessage}
+                    </div>
+                    )
+                }
+            
+            function Signup(){
+                return(
+                    <div>
+                        <div id="profilePictureContainer">
+                            <i class="far fa-user-circle"></i>
+                        </div>
+                        <div id="signupContainer">
+                            <input type="email" id="signupMail" placeholder="email" />
+                            <input type="text" id="signupName" placeholder="name" />
+                            <input type="password" id="signupPassword" placeholder="password" />
+                            <button id="signupButton" onClick={signAwayYourSoul}>Sign up!</button>
+                        </div>
+                    </div>
+                )
+            }
+  
+            
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const uid = user.displayName;
+                    console.log(`User: ${user}`)
+                    ReactDOM.render(<LoggedIn data={uid} />, document.getElementById("profileMenuContainer"))
                 } else {
                     console.log("no user logged in")
                     ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
-                    document.getElementById("login").addEventListener("click", function(){
-                        const email = document.getElementById("loginMail").value
-                        const password = document.getElementById("loginPassword").value
-    
-                        signInWithEmailAndPassword(auth, email, password)
-                            .then((userCredential) => {
-                                const user = userCredential.user;
-                                console.log(`Signed in user: ${user}`)
-                            })
-                            .catch((error) => {
-                                const errorCode = error.code;
-                                const errorMessage = error.message;
-                                console.log(`Sign in error: ${errorMessage}`)
-                            });
+                    document.getElementById("signup").addEventListener("click", function(){                        
+                        ReactDOM.render(<Signup/>, document.getElementById("profileMenuContainer"))
+                        
                     })
                 }
                 /*
@@ -888,17 +1025,6 @@
                 })
             }, 2000)
             */
-/*createUserWithEmailAndPassword(auth, "marcel.weber@skyguide.ch", "123456")
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage)
-  });*/
 
   
   
