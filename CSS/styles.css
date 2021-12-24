@@ -1,9 +1,10 @@
 body {
-	width: 99%;
+	width: 100%;
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+    margin: 0;
 }
 section {
   margin-top: 3em;
@@ -121,6 +122,7 @@ height: 100%;
     min-width: 12em;
 
 }
+
 
 
 .favoriteLinkFixedWidth{
