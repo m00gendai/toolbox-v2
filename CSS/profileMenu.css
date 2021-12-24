@@ -1,6 +1,6 @@
 #profileMenu{
-    position: absolute;
-    height: 100%;
+    position: fixed;
+    height: 100vh;
     width: 0;
     display: flex;
     justify-content: center;
@@ -8,13 +8,12 @@
     flex-wrap: nowrap;
     font-family: "Arial";
     right: 0;
+    top: 0;
     overflow: hidden;
     box-shadow: 0px 0px 14px -1px #000000;
-background-color: #7ee8fa;
-background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
-
-
-    }
+    background-color: #2a2a72;
+    background-image: linear-gradient(180deg, #045de9 0%, #09c6f9 74%)
+}
     
 #profileMenuContainer{
     width: 90%;
@@ -32,30 +31,62 @@ background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
     align-items: center;
     flex-wrap: nowrap;
     font-size: 10rem;
-    color: blue;
+    color: white;
     width: 100%;
-    border: 1px solid red;
 }
 
-    #loginContainer, #loggedinContainer {
+#passwordForgotten{
+    width: 100%;
+    text-align: right;
+    margin: -0.75rem 0 1rem 0;
+    font-size: 0.75rem;
+}
+
+#passwordForgotten:hover{
+    cursor:pointer;
+}
+
+#signup{
+    width: 100%;
+    margin: 1rem 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#signup:hover{
+    cursor: pointer;
+}
+
+#reasonsWhy{
+    margin: 2rem 0 0 0;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+#loginContainer, #loggedinContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid pink;
-    }
-    #loginContainer input{
-        margin: 1rem 0 1rem 0;
-        font-size: 1.5rem;
-        box-shadow: 0px 0px 5px -2px black;
-    }
-    #login, #logoutButton{
+}
+
+#loginContainer input{
+    margin: 1rem 0 1rem 0;
+    font-size: 1.5rem;
+    box-shadow: 0px 0px 5px -2px black;
+}
+    
+#login, #logoutButton, #signupCall, #signupButton{
     width: 70%;
     height: 3rem;
-    }
+}
 
-    #loginErrors{
+#loginErrors{
     width: 100%;
     height: 0%;
     background: red;
@@ -64,18 +95,31 @@ background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
     justify-content: center;
     align-items: center;
     text-align: center;
-    }
+}
     
-    #optionsContainerDarkmode{
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: nowrap;
-        border: 1px solid red;
-    }
+#welcomeUser{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    
+#optionsContainerDarkmode{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 2rem 0 0 0;
+}
+    
+#optionsContainerDarkmode label{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 
-    .toggler{
+.toggler{
 	width: 4rem;
 	height: 2rem;
 	position: relative;
@@ -116,4 +160,9 @@ background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
 	font-family: "Arial";
 	color: red;
 	transition: 0.5s;
+}
+
+#logoutButton{
+    position: absolute;
+    bottom: 1%;
 }
