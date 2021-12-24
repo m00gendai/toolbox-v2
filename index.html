@@ -14,6 +14,9 @@
 		<script src="JS/script.js" defer></script>                <!-- Main JavaScript Code -->
 		<script src="JS/all.min.js" defer></script>               <!-- Font Awesome -->
 		<script src="JS/tileLinks.js" defer></script>             <!-- JSON for Home Page - Tile Links -->
+		<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>          <!-- React prod -->
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>  <!-- React DOM -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>                            <!-- Babel -->
 <!-- END Necessary Scripts -->
 <!-- BEGIN Stylesheets -->
 		<link rel="stylesheet" href="CSS/styles.css" id="styleSheetStyles">             <!-- CSS General Styles -->
@@ -31,9 +34,6 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <!-- CSS Dragula.js -->
 <!-- END Stylesheets -->
 		<link rel="icon" href="Favicon/favicon.ico?v=2" />        <!-- Browser Tab Icon -->
-		<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 	</head>
 <!-- END Head -->
 <!-- BEGIN Navigation Bar -->
@@ -742,10 +742,10 @@
             </div>
         </div>
 <!-- END Achievement -->
-	<!-- BEGIN Profile Menu -->
+<!-- BEGIN Profile Menu -->
     <aside id="profileMenu">
         <div id="profileMenuContainer">
-            
+            <!-- See below at <script data-type="module" type="text/babel"> -->
         </div>
     </aside>
 <!-- END Profile Menu -->
@@ -783,19 +783,20 @@
         <script src="https://cdn.amcharts.com/lib/4/core.js"></script>                      <!-- amCharts library -->
         <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>                    <!-- amCharts library -->
         <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>           <!-- amCharts library -->
-        <script src="JS/firebase.js" defer></script> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="JS/firebase.js" defer></script>                                        <!-- Firebase configs -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>          <!-- anime.js -->
+        <!-- React code below due to script type module not working if served via file path -->
         <script data-type="module" type="text/babel">
  
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-            import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, setDoc }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"; // Firebase Core
+            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"; // Firebase Auth
+            import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, setDoc }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; // Firebase Firestore
             
             const styleSheetStyles = document.getElementById("styleSheetStyles");
             const styleSheetMenubar = document.getElementById("styleSheetMenuBar");
             const styleSheetProfileMenu = document.getElementById("styleSheetProfileMenu");
             
-            const firebaseConfig = {
+            const firebaseConfig = { // see firebase.js for configs. If you cloned this repo, you need to provide your own keys and tokens.
                 apiKey: apiKey,
                 authDomain: authDomain,
                 projectId: projectId,
@@ -823,15 +824,61 @@
                         <div id="loginErrors"></div>
                         <div id="signup">
                             <h3>
-                                No account? Sign up!
+                                No account?
                             </h3>
-                            <h4>Why sign up?</h4>
-                            <ul>
-                                <li>Darkmode!</li>
-                            </ul>
+                            <button id="signupCall">Sign up!</button>
+                            <div id="reasonsWhy">
+                                <h4>Why sign up?</h4>
+                                <ul>
+                                    <li>Darkmode!</li>
+                                    <li>Other stuff in the future!</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 )
+            }
+            
+            function forgotPassword(){
+                ReactDOM.render(<ForgotPassword />, document.getElementById("profileMenuContainer"))
+            }
+            
+            function login(e){
+                if(e.key == "Enter" || e.button == 0){
+                    const email = document.getElementById("loginMail").value
+                    const password = document.getElementById("loginPassword").value
+    
+                    signInWithEmailAndPassword(auth, email, password)
+                    .then(async (userCredential) => {
+                        const user = userCredential.user;
+                        const docRef = doc(db, "users", auth.currentUser.uid);
+                        const docSnap = await getDoc(docRef);
+                        let darkmode
+                        if (docSnap.exists()) {
+                            if(docSnap.data().darkmode){
+                                hideTheSun()
+                            } else {
+                                praiseTheSun()
+                            }
+                        }
+                    })
+                    .catch((error) => {
+                        let errorCode = error.code;
+                        if (errorCode == "auth/user-not-found" || errorCode == "auth/wrong-password"){
+                            errorCode = "Username and/or password do not match"
+                        }
+                        ReactDOM.render(<LoginError message={errorCode} />, document.getElementById("loginErrors"))
+                        anime({
+                            targets: '#loginErrors',
+                            minHeight: "2rem", 
+                            delay: 0,
+                            duration: 100,
+                            direction: 'normal',
+                            loop: false,
+                            easing: 'linear'
+                        });
+                    })
+                }
             }
             
             function ForgotPassword(){
@@ -844,6 +891,89 @@
                             <input type="email" id="forgotPassword" placeholder="email" />
                             <button id="forgotPasswordButton" onClick={sendNewPassword}>Send new Password</button>
                             <div id="passwordSentDialog"></div>
+                        </div>
+                    </div>
+                )
+            }
+            
+            function Signup(){
+                return(
+                    <div>
+                        <div id="profilePictureContainer">
+                            <i class="far fa-user-circle"></i>
+                        </div>
+                        <div id="signupContainer">
+                            <input type="email" id="signupMail" placeholder="email" />
+                            <input type="text" id="signupName" placeholder="name" />
+                            <input type="password" id="signupPassword" placeholder="password" />
+                            <button id="signupButton" onClick={signAwayYourSoul}>Sign up!</button>
+                        </div>
+                    </div>
+                )
+            }
+            
+            function sendNewPassword(){
+                const email = document.getElementById("forgotPassword").value
+                
+                sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    ReactDOM.render(<PasswordResetSuccess recipient={email} />, document.getElementById("passwordSentDialog"))
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    ReactDOM.render(<LoginError message={errorCode} />, document.getElementById("loginErrors"))
+                    anime({
+                        targets: '#loginErrors',
+                        minHeight: "2rem", 
+                        delay: 0,
+                        duration: 100,
+                        direction: 'normal',
+                        loop: false,
+                        easing: 'linear'
+                    });
+                });
+            }
+            
+            function PasswordResetSuccess(props){
+                const recipient = props.recipient
+                return(
+                    <div>
+                        Password reset link sent to {recipient}.
+                        If you do not receive a password reset link in the next couple of minutes,
+                        please advise weberml directly.
+                    </div>
+                )
+            }
+            
+            function LoginError(props){
+                const errorMessage = props.message
+                return(
+                    <div>
+                        Error: {errorMessage}
+                    </div>
+                )
+            }
+            
+            function LoggedIn(props){
+                const userID = props.data
+                console.log(`props: ${userID}`)
+                return(
+                    <div style={{width: "100%"}}> {/* this is a weird and stupid fix for a weird and stupid problem */}                
+                        <div id="profilePictureContainer">
+                            <i class="far fa-user-circle"></i>
+                        </div>
+                        <h2 id="welcomeUser">{userID}</h2>
+                        <div id="loggedinContainer">
+                            <div id="optionsContainerDarkmode">
+                                <label for="darkmode">Darkmode</label>
+                                <div class="toggler">
+                                    <input type="checkbox" id="check" onChange={toggleDarkmode}/>
+                                    <div id="togglerBody">
+                                        <div id="togglerSwitch"><i class="fas fa-power-off"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="logoutButton" onClick={logout}>Log out</button>
                         </div>
                     </div>
                 )
@@ -919,110 +1049,6 @@
                 }
             }
             
-
-            function LoggedIn(props){
-            const userID = props.data
-                console.log(`props: ${userID}`)
-                return(
-                    <div>
-                        <div id="profilePictureContainer">
-                            <i class="far fa-user-circle"></i>
-                            
-                        </div>
-                        <h2>{userID}</h2>
-                        <div id="loggedinContainer">
-                            <div id="optionsContainerDarkmode">
-                                <label for="darkmode">Darkmode</label>
-                                <div class="toggler">
-                                    <input type="checkbox" id="check" onChange={toggleDarkmode}/>
-                                    <div id="togglerBody">
-                                        <div id="togglerSwitch"><i class="fas fa-power-off"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button id="logoutButton" onClick={logout}>Log out</button>
-                        </div>
-
-                    </div>
-                )
-            }
-            
-            function forgotPassword(){
-                ReactDOM.render(<ForgotPassword />, document.getElementById("profileMenuContainer"))
-            }
-            
-            function PasswordResetSuccess(props){
-                const recipient = props.recipient
-                return(
-                    <div>
-                        Password reset link sent to {recipient}.
-                        If you do not receive a password reset link in the next couple of minutes,
-                        please advise weberml directly.
-                    </div>
-                )
-                }
-            
-            function sendNewPassword(){
-                const email = document.getElementById("forgotPassword").value
-                sendPasswordResetEmail(auth, email)
-                    .then(() => {
-                        ReactDOM.render(<PasswordResetSuccess recipient={email} />, document.getElementById("passwordSentDialog"))
-                    })
-                    .catch((error) => {
-                        const errorCode = error.code;
-                        ReactDOM.render(<LoginError message={errorCode} />, document.getElementById("loginErrors"))
-                            anime({
-                                targets: '#loginErrors',
-                                minHeight: "2rem", 
-                                delay: 0,
-                                duration: 100,
-                                direction: 'normal',
-                                loop: false,
-                                easing: 'linear'
-                            });
-                    });
-                    }
-            
-            function login(e){
-                if(e.key == "Enter" || e.button == 0){
-                    const email = document.getElementById("loginMail").value
-                    const password = document.getElementById("loginPassword").value
-    
-                    signInWithEmailAndPassword(auth, email, password)
-                        .then(async (userCredential) => {
-                            const user = userCredential.user;
-                            console.log(`Signed in user: ${user}`)
-
-                            const docRef = doc(db, "users", auth.currentUser.uid);
-                            const docSnap = await getDoc(docRef);
-                            let darkmode
-                            if (docSnap.exists()) {
-                                if(docSnap.data().darkmode){
-                                    hideTheSun()
-                            } else {
-                                praiseTheSun()
-                            }
-                            }
-
-                        })
-                        .catch((error) => {
-                            let errorCode = error.code;
-                            if (errorCode == "auth/user-not-found" || errorCode == "auth/wrong-password"){
-                                errorCode = "Username and/or password do not match"
-                                }
-                            ReactDOM.render(<LoginError message={errorCode} />, document.getElementById("loginErrors"))
-                            anime({
-                                targets: '#loginErrors',
-                                minHeight: "2rem", 
-                                delay: 0,
-                                duration: 100,
-                                direction: 'normal',
-                                loop: false,
-                                easing: 'linear'
-                            });
-                        })
-                }
-            }
             
             function logout(){
             auth.signOut()
@@ -1072,31 +1098,9 @@
                 
             }
             
-            function LoginError(props){
-                const errorMessage = props.message
-                
-                return(
-                    <div>
-                        Error: {errorMessage}
-                    </div>
-                    )
-                }
             
-            function Signup(){
-                return(
-                    <div>
-                        <div id="profilePictureContainer">
-                            <i class="far fa-user-circle"></i>
-                        </div>
-                        <div id="signupContainer">
-                            <input type="email" id="signupMail" placeholder="email" />
-                            <input type="text" id="signupName" placeholder="name" />
-                            <input type="password" id="signupPassword" placeholder="password" />
-                            <button id="signupButton" onClick={signAwayYourSoul}>Sign up!</button>
-                        </div>
-                    </div>
-                )
-            }
+            
+            
   
             
             
@@ -1119,7 +1123,7 @@
                 } else {
                     console.log("no user logged in")
                     ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
-                    document.getElementById("signup").addEventListener("click", function(){                        
+                    document.getElementById("signupCall").addEventListener("click", function(){                        
                         ReactDOM.render(<Signup/>, document.getElementById("profileMenuContainer"))
                         
                     })
