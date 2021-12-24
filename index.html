@@ -16,8 +16,8 @@
 		<script src="JS/tileLinks.js" defer></script>             <!-- JSON for Home Page - Tile Links -->
 <!-- END Necessary Scripts -->
 <!-- BEGIN Stylesheets -->
-		<link rel="stylesheet" href="CSS/styles.css">             <!-- CSS General Styles -->
-		<link rel="stylesheet" href="CSS/menubar.css">            <!-- CSS Menu Bar & Footer -->
+		<link rel="stylesheet" href="CSS/styles.css" id="styleSheetStyles">             <!-- CSS General Styles -->
+		<link rel="stylesheet" href="CSS/menubar.css" id="styleSheetMenuBar">            <!-- CSS Menu Bar & Footer -->
 		<link rel="stylesheet" href="CSS/aipbox.css">             <!-- CSS AIP Library -->
 		<link rel="stylesheet" href="CSS/atsbox.css">             <!-- CSS ATS MSG Search -->
 		<link rel="stylesheet" href="CSS/frenchBox.css">          <!-- CSS French Translation Section -->
@@ -26,7 +26,7 @@
 		<link rel="stylesheet" href="CSS/legal.css">              <!-- CSS Legal Statement Popup -->
 		<link rel="stylesheet" href="CSS/optionsMenu.css">        <!-- CSS DOC Tool Options Menu -->
 		<link rel="stylesheet" href="CSS/achievements.css">       <!-- CSS Achievement Unlocked -->
-		<link rel="stylesheet" href="CSS/profileMenu.css">       <!-- CSS Achievement Unlocked -->
+		<link rel="stylesheet" href="CSS/profileMenu.css" id="styleSheetProfileMenu">       <!-- CSS Achievement Unlocked -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />      <!-- CSS Font Awesome CDN -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <!-- CSS Dragula.js -->
 <!-- END Stylesheets -->
@@ -699,6 +699,8 @@
                             <li>jQuery</li>
                             <li>lodash</li>
                             <li>dragula</li>
+                            <li>React</li>
+                            <li>JSX/li>
                             <li>amCharts</li>
                             <li>JSON</li>
                         </ul>
@@ -707,6 +709,12 @@
                     <li>API</li>
                         <ul>
                             <li>getform.io</li>
+                            <li>Firebase<li>
+                        </ul>
+                    <li>Firebase</li>
+                        <ul>
+                            <li>Auth</li>
+                            <li>Firestore</li>
                         </ul>
                 </ul>
                 <div id="legalCopy">
@@ -781,7 +789,11 @@
  
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
             import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-            import { getFirestore, collection, addDoc, getDocs }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+            import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, setDoc }  from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+            
+            const styleSheetStyles = document.getElementById("styleSheetStyles");
+            const styleSheetMenubar = document.getElementById("styleSheetMenuBar");
+            const styleSheetProfileMenu = document.getElementById("styleSheetProfileMenu");
             
             const firebaseConfig = {
                 apiKey: apiKey,
@@ -795,7 +807,7 @@
             const app = initializeApp(firebaseConfig);
             const db = getFirestore();
             const auth = getAuth();
-  
+            
             function Login(){
                 return(
                     <div>
@@ -813,6 +825,10 @@
                             <h3>
                                 No account? Sign up!
                             </h3>
+                            <h4>Why sign up?</h4>
+                            <ul>
+                                <li>Darkmode!</li>
+                            </ul>
                         </div>
                     </div>
                 )
@@ -833,6 +849,76 @@
                 )
             }
             
+            function hideTheSun(){
+                document.getElementById("togglerBody").style.background = "blue"
+                document.getElementById("togglerSwitch").style.left = "auto"
+                document.getElementById("togglerSwitch").style.right = "5%"
+                document.getElementById("togglerSwitch").style.color = "lime"
+                
+                styleSheetStyles.href = "CSS/styles_dark.css"
+                styleSheetMenubar.href = "CSS/menubar_dark.css"
+                styleSheetProfileMenu.href = "CSS/profileMenu_dark.css"
+                document.getElementById("check").checked = true
+            }
+            
+            function praiseTheSun(){
+                document.getElementById("togglerBody").style.background = "grey"
+                document.getElementById("togglerSwitch").style.right = "auto"
+                document.getElementById("togglerSwitch").style.left = "5%"
+                document.getElementById("togglerSwitch").style.color = "red"
+                
+                styleSheetStyles.href = "CSS/styles.css"
+                styleSheetMenubar.href = "CSS/menubar.css"
+                styleSheetProfileMenu.href = "CSS/profileMenu.css"
+                document.getElementById("check").checked = false
+            }
+            
+            async function theSunWillDarkenAnddDarknessShallBefallThisRottenEarthlyPlanesForAllEternety(){
+                const userDocumentReference = doc(db, "users", auth.currentUser.uid);
+                await updateDoc(userDocumentReference, {
+                    darkmode: true
+                });
+                    
+                const docRef = doc(db, "users", auth.currentUser.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    console.log("Document data:", docSnap.data());
+                } else {
+                    console.log("No such document!");
+                }
+                
+                hideTheSun()
+                
+            }
+            
+            async function theSunlightHasOnceAgainGracedTheseForsakenLandsAndWarmsTheCorpsesOfHopeAndHumanity(){
+                const userDocumentReference = doc(db, "users", auth.currentUser.uid);
+                await updateDoc(userDocumentReference, {
+                    darkmode: false
+                });
+                    
+                const docRef = doc(db, "users", auth.currentUser.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    console.log("Document data:", docSnap.data());
+                } else {
+                    console.log("No such document!");
+                }
+                
+                praiseTheSun()
+            }
+                
+            
+            function toggleDarkmode(){
+                if(document.getElementById("check").checked){ // darkmode ON
+                    theSunWillDarkenAnddDarknessShallBefallThisRottenEarthlyPlanesForAllEternety()
+                } else { // darkmode OFF
+                    theSunlightHasOnceAgainGracedTheseForsakenLandsAndWarmsTheCorpsesOfHopeAndHumanity()
+                }
+            }
+            
 
             function LoggedIn(props){
             const userID = props.data
@@ -845,6 +931,15 @@
                         </div>
                         <h2>{userID}</h2>
                         <div id="loggedinContainer">
+                            <div id="optionsContainerDarkmode">
+                                <label for="darkmode">Darkmode</label>
+                                <div class="toggler">
+                                    <input type="checkbox" id="check" onChange={toggleDarkmode}/>
+                                    <div id="togglerBody">
+                                        <div id="togglerSwitch"><i class="fas fa-power-off"></i></div>
+                                    </div>
+                                </div>
+                            </div>
                             <button id="logoutButton" onClick={logout}>Log out</button>
                         </div>
 
@@ -894,9 +989,21 @@
                     const password = document.getElementById("loginPassword").value
     
                     signInWithEmailAndPassword(auth, email, password)
-                        .then((userCredential) => {
+                        .then(async (userCredential) => {
                             const user = userCredential.user;
                             console.log(`Signed in user: ${user}`)
+
+                            const docRef = doc(db, "users", auth.currentUser.uid);
+                            const docSnap = await getDoc(docRef);
+                            let darkmode
+                            if (docSnap.exists()) {
+                                if(docSnap.data().darkmode){
+                                    hideTheSun()
+                            } else {
+                                praiseTheSun()
+                            }
+                            }
+
                         })
                         .catch((error) => {
                             let errorCode = error.code;
@@ -941,12 +1048,21 @@
                             displayName: name, 
                         })
                             .then(() => {
-                                console.log(`Update current user: ${auth.currentUser}`)
+                                
                                 ReactDOM.render(<LoggedIn data={auth.currentUser.displayName} />, document.getElementById("profileMenuContainer"))
                             })
                             .catch((error) => {
                                 console.log(`Update current user error: ${error}`)
                             })
+                        try {
+                        console.log(auth.currentUser.uid)
+                            const docRef =  setDoc(doc(db, "users", auth.currentUser.uid), {
+                                darkmode: false
+                            })
+                    console.log("Document written with ID: ", docRef.id);
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                }
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -983,12 +1099,23 @@
             }
   
             
+            
 
-            onAuthStateChanged(auth, (user) => {
+            onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     const uid = user.displayName;
-                    console.log(`User: ${user}`)
                     ReactDOM.render(<LoggedIn data={uid} />, document.getElementById("profileMenuContainer"))
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    const docSnap = await getDoc(docRef);
+                    let darkmode
+                    if (docSnap.exists()) {
+                        console.log(docSnap.data())
+                        if(docSnap.data().darkmode){
+                            hideTheSun()
+                        } else {
+                            praiseTheSun()
+                        }
+                    }
                 } else {
                     console.log("no user logged in")
                     ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
@@ -997,41 +1124,8 @@
                         
                     })
                 }
-                /*
-                try {
-                    const docRef =  addDoc(collection(db, "users"), {
-                        first: "Lol",
-                        last: "Lovelace",
-                        born: 1815
-                    })
-                    console.log("Document written with ID: ", docRef.id);
-                } catch (e) {
-                    console.error("Error adding document: ", e);
-                }
-                */
-            });
-            /*
-            setTimeout(function(){
-                updateProfile(auth.currentUser, {
-                    displayName: "Mäse", 
-                    photoURL: "https://example.com/jane-q-user/profile.jpg", 
-                    displayMode: "dark"
                 })
-                .then(() => {
-                    console.log(`Update current user: ${auth.currentUser}`)
-                })
-                .catch((error) => {
-                    console.log(`Update current user error: ${error}`)
-                })
-            }, 2000)
-            */
-
-  
-  
- /* const querySnapshot = getDocs(collection(db, "users"));
-querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data().first}`);
-});*/
+                
   
   
 </script>
