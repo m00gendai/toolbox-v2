@@ -407,5 +407,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
     document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
+    
+// A N I M A T I O N S
+    let profileMenuVisible = false
+        
+    document.getElementById("profileMenuToggle").addEventListener("click", function(){
+        let transition
+        if(profileMenuVisible){
+            transition = ["20vw", 0]
+            profileMenuVisible = false
+            
+        } else {
+            transition = [0, "20vw"]
+            profileMenuVisible = true
+        }
+    
+    anime({
+        targets: '#profileMenu',
+        width: transition, 
+        delay: 0,
+        duration: 500,
+        direction: 'normal',
+        loop: false,
+        easing: 'linear'
+    });
+    })
 
 });
