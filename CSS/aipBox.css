@@ -1,5 +1,4 @@
-
-  #aipBox {
+#aipBox {
 display: none;
 }
 
@@ -210,10 +209,13 @@ clip-path: polygon(0 80%, 0% 100%, 20% 100%);
 
 #misCtryCnt {
     display: none;
-    width: 99%;
+    width: 98%;
+    height: auto;
+    padding: 0.5%;
     background: white;
     color: black;
     margin: 0 0 0.5% 0;
+    font-family: "Arial";
 }
 
 .letterContainer{
@@ -255,6 +257,7 @@ clip-path: polygon(0 80%, 0% 100%, 20% 100%);
     width: 100%;
     position: relative;
     font-family: "Arial";
+    margin: 1rem 0 0 0;
 }
 
 .alphabletter{
