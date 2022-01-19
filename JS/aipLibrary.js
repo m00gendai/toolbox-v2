@@ -4,17 +4,7 @@ function loadAipLibraryCode(){
     // C O N S T A N T S
     
     
-    const aipBlockTypes = [
-        {target: "spanGreen", class: "eaip", text: "External link to eAIP", clicked: false},
-        {target: "spanYellow", class: "toolbox", text: "Internal link to eAIP", clicked: false},
-        {target: "spanRed", class: "bookaip", text: "Only physical AIP", clicked: false},
-        {target: "spanBlack", class: "noaip", text: "No information at all", clicked: false},
-        {target: "sortAipTilesByNone", class: "", text: "Display all", clicked: false},
-        {target: "sortAipTilesByICAO", class: "", text: "Sort by ICAO", clicked: false},
-        {target: "sortAipTilesByName", class: "", text: "Sort by Name", clicked: false},
-        {target: "aipLogins", class: "", text: "View Logins", clicked: false},
-        
-    ]
+   
     const aipButtonSymbols = {symbolShow: '<i class="far fa-eye"></i>', symbolHide: '<i class="far fa-eye-slash"></i>'}
     
     const aipLinkGeneratorSpace = document.getElementById("aipLinks");
@@ -29,19 +19,55 @@ function loadAipLibraryCode(){
     })
     
     
+    // C O U N T   A I P   T Y P E S
+    
+    let greenAIPs = 0
+    let yellowAIPs = 0
+    let redAIPs = 0
+    let blackAIPs = 0
+    let allAIPs = 0
+    
+    for(let i=0;i<aipTileData.length;i++){
+        if(aipTileData[i].aip == "green"){
+            greenAIPs++
+        }
+        if(aipTileData[i].aip == "yellow"){
+            yellowAIPs++
+        }
+        if(aipTileData[i].aip == "red"){
+            redAIPs++
+        }
+        if(aipTileData[i].aip == "black"){
+            blackAIPs++
+        }
+        allAIPs++
+    }
+    
+     const aipBlockTypes = [
+        {target: "spanGreen", class: "eaip", text: `External eAIP (${greenAIPs})`, clicked: false},
+        {target: "spanYellow", class: "toolbox", text: `Internal eAIP (${yellowAIPs})`, clicked: false},
+        {target: "spanRed", class: "bookaip", text: `Only physical AIP (${redAIPs})`, clicked: false},
+        {target: "spanBlack", class: "noaip", text: `No information at all (${blackAIPs})`, clicked: false},
+        {target: "sortAipTilesByNone", class: "", text: `Display all (${allAIPs})`, clicked: false},
+        {target: "sortAipTilesByICAO", class: "", text: "Sort by ICAO", clicked: false},
+        {target: "sortAipTilesByName", class: "", text: "Sort by Name", clicked: false},
+        {target: "aipLogins", class: "", text: "View Logins", clicked: false},
+        
+    ]
+    
     // T O G G L E   A I P   T I L E S
        
     
     for(let i=0;i<aipBlockTypes.length;i++){
         if(!aipBlockTypes[i].class == ""){
-            document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + aipButtonSymbols.symbolShow
+            document.getElementById(aipBlockTypes[i].target).innerHTML = `${aipBlockTypes[i].text} ${aipButtonSymbols.symbolShow}`
         } else {
             if(aipBlockTypes[i].text == "Display all"){
-               document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + '<i class="fas fa-th"></i>' // '<i class="fas fa-grip-horizontal"></i>'
+               document.getElementById(aipBlockTypes[i].target).innerHTML = `${aipBlockTypes[i].text} <i class="fas fa-th"></i>`
             } else if(aipBlockTypes[i].text == "View Logins"){
-                document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + '<i class="fas fa-unlock-alt"></i>'
+                document.getElementById(aipBlockTypes[i].target).innerHTML = `${aipBlockTypes[i].text} <i class="fas fa-unlock-alt"></i>`
             } else {
-                document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + '<i class="fas fa-sort-alpha-down"></i>'
+                document.getElementById(aipBlockTypes[i].target).innerHTML = `${aipBlockTypes[i].text} <i class="fas fa-sort-alpha-down"></i>`
             }
         }
             document.getElementById(aipBlockTypes[i].target).addEventListener("click", function(e){
@@ -49,12 +75,12 @@ function loadAipLibraryCode(){
             // clicked false = SHOW elements 
             if(aipBlockTypes[i].clicked == false && !aipBlockTypes[i].class == ""){
                 aipBlockTypes[i].clicked = true
-                document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + aipButtonSymbols.symbolHide
+                document.getElementById(aipBlockTypes[i].target).innerHTML = `${aipBlockTypes[i].text} ${aipButtonSymbols.symbolHide}`
                 toggleAipTiles("none",i)
             } else if(aipBlockTypes[i].clicked == true && !aipBlockTypes[i].class == ""){
                 aipBlockTypes[i].clicked = false
-                document.getElementById(aipBlockTypes[i].target).innerHTML = aipBlockTypes[i].text + aipButtonSymbols.symbolShow
-                toggleAipTiles("flex",i)
+                document.getElementById(aipBlockTypes[i].target).innerHTML = `${aipBlockTypes[i].text} ${aipButtonSymbols.symbolShow}`
+                toggleAipTiles("block",i)
             }
         })
     }
@@ -135,6 +161,7 @@ function loadAipLibraryCode(){
         for(let i=0;i<aipTileData.length;i++){
             sortedAIPs.push(aipTileData[i])
         }
+        
         sortedAIPs = sortedAIPs.sort((a, b) => (a.country > b.country) ? 1 : -1)
         
         
@@ -144,6 +171,7 @@ function loadAipLibraryCode(){
             const aipTileDivImg = document.createElement("div");
             const aipTileBr = document.createElement("br");
             const aipTileLink = sortedAIPs[i].link;
+
             aipTileDiv.id = sortedAIPs[i].id;
             aipTileDiv.className = "aipLinkBox";
             
@@ -254,7 +282,7 @@ function loadAipLibraryCode(){
             aipTileArray.push(aipTileDiv)
         }
         
-        console.log(aipTileArray[0])
+
         
         alphabet.sort()
         let set = new Set(alphabet)
@@ -328,6 +356,7 @@ function loadAipLibraryCode(){
     
     // M I S S I N G   C O U N T R I E S   S P O I L E R
 
+    if(document.getElementById("misCtry")){
     
     document.getElementById("misCtry").addEventListener("click", function() {
         if (document.getElementById("misCtryCnt").style.display == "block"){
@@ -340,6 +369,6 @@ function loadAipLibraryCode(){
     document.getElementById("toTopAIPlibrary").addEventListener("click", function(){
         window.scrollTo(0,0)
     })
-
+    }
     
 }
