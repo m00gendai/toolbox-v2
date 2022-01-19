@@ -8,7 +8,7 @@
 		<meta name="author" content="Marcel Weber">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- END Meta Information -->
-		<title>Toolbox V2</title>
+		<title>AIM Toolbox</title>
 <!-- BEGIN Necessary Scripts -->
 		<script src="JS/jquery-3.6.0.min.js"></script>            <!-- jQuery library -->
 		<script src="JS/script.js" defer></script>                <!-- Main JavaScript Code -->
@@ -58,7 +58,7 @@
 <!-- BEGIN Section Home  -->
         <section id="contentBox">
             <div class="title" id="searchBarContainer">
-                <input class="mainInput" type="text" id="searchBar" autofocus placeholder="Welcome to the AIM Info Hub">
+                <input class="mainInput" type="text" id="searchBar" autofocus placeholder="Welcome to the AIM Toolbox">
                 <div class="sortBoxHome">
                     <div class="sortBoxHomeTitle">
                         Sort tiles by:
@@ -114,70 +114,72 @@
                         </button>
                     </div>
                 </div>
-                <div class="missingCountrySpoiler" id="misCtry">
+               <div class="missingCountrySpoiler" id="misCtry">
                     <div class="missingCountrySpoilerTitle">
-                        Missing Countries
+                        Information and missing countries
                     </div>
                     <div class="missingCountrySpoilerContent" id="misCtryCnt">
+                        Listed are links to AIPs of countries, state unions, federations etc. <br>
+                        This means that some countries have their own link, despite being in a state union (for example, England and the United Kingdom, or Serbia and Montenegro).<br>
+                        Also, overseas territories (like French Polynesia) and some sovereign territories (like Akrotiri) are listed.<br>
+                        Even more, aviation unions are listed aswell, like ASECNA, COCESNA etc.<br>
+                        Color coded for easy identification of type of AIP.<br>
+                        <br>
+                        Green if:
                         <ul>
-                            <li>Cabo Verde</li>
-                            <li>Caroline Islands</li>
-                            <li>Central Kiribati</li>
-                            <li>Ceuta</li>
-                            <li>Djibouti</li>
-                            <li>Eritrea</li>
-                            <li>Ethiopia</li>
-                            <li>Falkland Islands</li>
-                            <li>Fiji</li>
-                            <li>French Guyana</li>
-                            <li>French Polynesia</li>
-                            <li>Futuna Islands</li>
-                            <li>Gibraltar</li>
-                            <li>Guadeloupe</li>
-                            <li>Guam</li>
-                            <li>Guinea</li>
-                            <li>Guinea Bissau</li>
-                            <li>Guyana</li>
-                            <li>Jamaica</li>
-                            <li>Laos</li>
-                            <li>Liberia</li>
-                            <li>Line Islands</li>
-                            <li>Maledives</li>
-                            <li>Mali</li>
-                            <li>Marshall Islands</li>
-                            <li>Martinique</li>
-                            <li>Mauritania</li>
-                            <li>Melilla</li>
-                            <li>Micronesia</li>
-                            <li>Midway Atoll</li>
-                            <li>Monaco</li>
-                            <li>Morocco</li>
-                            <li>New Caledonia</li>
-                            <li>North Korea</li>
-                            <li>Northern Mariana Islands</li>
-                            <li>Palau</li>
-                            <li>Palestine</li>
-                            <li>Peru</li>
-                            <li>Philippines</li>
-                            <li>Puerto Rico</li>
-                            <li>Saint Barthelemy</li>
-                            <li>Saint Martinique</li>
-                            <li>Saint Pierre and Miquelon</li>
-                            <li>Senegal</li>
-                            <li>Sierra Leone</li>
-                            <li>South Sudan</li>
-                            <li>Sudan</li>
-                            <li>Suriname</li>
-                            <li>Switzerland</li>
-                            <li>Syria</li>
-                            <li>Tanzania</li>
-                            <li>Turks and Caicos Island</li>
-                            <li>US Virgin Islands</li>
-                            <li>Wake Island</li>
-                            <li>Wallis</li>
-                            <li>Western Kiribati</li>
-                            <li>Western Sahara</li>
-                            <li>Yemen</li>
+                            <li>A dedicated, publicly available internet link exists for the AIP publication <strong>and</strong></li>
+                            <li>if a login is required, we have credentials</li>
+                        </ul>
+                        Yellow if:
+                        <ul>
+                            <li>A dedicated, publicly available internet link exists for the AIP publication <strong>but</strong></li>
+                            <li>we do not have credentials, <strong>or</strong></li>
+                            <li>No publicly available internet link exists for the AIP publication <strong>and</strong></li>
+                            <li>we receive a CD and host the electronic AIP internally</li>
+                        </ul>
+                        <strong>If both a dedicated, publicly available internet link exists for the AIP publication AND we receive a CD and host the electronic AIP internally, the link always points to the publicly available internet link with a green label.</strong><br><br>
+                        Red if:
+                        <ul>
+                            <li>Either a publicly available internet link exists for the AIP publication <strong>but</strong></li>
+                            <li>we do not have credentials, <strong>or</strong></li>
+                            <li>no publicly available internet link exists for the AIP publication <strong>and</strong></li>
+                            <li>we do not receive a CD and host the electronic AIP internally, <strong>or</strong></li>
+                            <li>the AIP does not exist at all in electronic form</li>
+                        </ul>
+                        Black if:
+                        <ul>
+                            <li>No information at all, neither electronically nor physically, exists <strong>or</strong></li>
+                            <li>Either a publicly available internet link exists for the AIP publication <strong>but</strong></li>
+                            <li>we do not have credentials, <strong>or</strong></li>
+                            <li>no publicly available internet link exists for the AIP publication <strong>and</strong></li>
+                            <li>we do not receive a CD and host the electronic AIP internally, <strong>or</strong></li>
+                            <li>the AIP does not exist at all in electronic form</li>
+                        </ul>
+                        Some countries do not have an airport at all and are not relevant for aviation, despite being under FIR jurisdiction. For example the Pitcairn Islands, which do not have an airport and can only be reached by amphibious planes and helicopters, are under the New Zealand FIR jurisdiction but have no relevant information. Thus they are listed with the relevant ICAO two letter code but under "no information at all". Others, like the Gaza Strip, have unserviceable airports and then others like Ascension Island have an Airport but such specific operations that no information is available anywhere. Finally, places like the Heard and McDonald Islands, which aren't inhabited at all and do not feature any infrastructure whatsoever, are simply listed for completeness.<br>
+                        <br>
+                        Missing countries:
+                        <ul>
+                            <li>Antarctica</li>
+                            <li>Ashmore and Cartier Islands</li>
+                            <li>Baker Island</li>
+                            <li>Bouvet Island</li>
+                            <li>CENOR FLIP</li>
+                            <li>Clipperton Island</li>
+                            <li>Cocos (Keeling) Islands</li>
+                            <li>Coral Sea Islands</li>
+                            <li>French Southern and Antarctic Lands</li>
+                            <li>GEMIL</li>
+                            <li>Heard Island and McDonald Islands</li>
+                            <li>Howland Island</li>
+                            <li>Jan Mayen</li>
+                            <li>Jarvis Island</li>
+                            <li>Johnston Atoll</li>
+                            <li>Navassa Island</li>
+                            <li>Paracel Islands</li>
+                            <li>Spratly Islands</li>
+                            <li>United Kingdom Military</li>
+                            <li>United States Pacific Island Wildlife Refuges</li>
+                            <li>West Bank</li>
                         </ul>
                     </div>
                 </div>
@@ -354,6 +356,7 @@
                 <br>
             </div>
             <div class="dissect" id="dissect">
+                <p>Results will be displayed here</p>
             </div>
         </section>
 <!-- END Section SITA Conversion -->
@@ -680,6 +683,8 @@
                     </li>
                     <li>Flags from <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a></li>
                     <li>Photographs from <a href="https://pixabay.com" target="_blank">Pixabay</a></li>
+                    <li>ATS Message Search random images by <a hef="https://loremflickr.com/" target="_blank">LoremFlickr</a>
+                    <li>SITA Address converter image by skyguide Branding Portal</li>
                 </ul>
                 <br>
                 A source code backup is stored in a private git repo by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>. <br>This repo is also used to update the AIS local instance.<br><br>
