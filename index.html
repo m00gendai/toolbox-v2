@@ -29,7 +29,8 @@
 		<link rel="stylesheet" href="CSS/legal.css">              <!-- CSS Legal Statement Popup -->
 		<link rel="stylesheet" href="CSS/optionsMenu.css">        <!-- CSS DOC Tool Options Menu -->
 		<link rel="stylesheet" href="CSS/achievements.css">       <!-- CSS Achievement Unlocked -->
-		<link rel="stylesheet" href="CSS/profileMenu.css" id="styleSheetProfileMenu">       <!-- CSS Achievement Unlocked -->
+		<link rel="stylesheet" href="CSS/profileMenu.css" id="styleSheetProfileMenu">      
+		<link rel="stylesheet" href="CSS/profileMenuTogglers.css" >      
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />      <!-- CSS Font Awesome CDN -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <!-- CSS Dragula.js -->
 <!-- END Stylesheets -->
@@ -819,14 +820,14 @@
                             <input type="email" id="loginMail" placeholder="email" />
                             <input id="loginPassword" type="password" placeholder="password" onKeyPress={login} />
                             <h4 id="passwordForgotten" onClick={forgotPassword}>Forgot Password?</h4>
-                            <button id="login" onClick={login}>Log in</button>
+                            <button id="login" class="profileMenuButton" onClick={login}>Log in</button>
                         </div>
                         <div id="loginErrors"></div>
                         <div id="signup">
                             <h3>
                                 No account?
                             </h3>
-                            <button id="signupCall">Sign up!</button>
+                            <button id="signupCall" class="profileMenuButton" >Sign up!</button>
                             <div id="reasonsWhy">
                                 <h4>Why sign up?</h4>
                                 <ul>
@@ -871,6 +872,7 @@
                         anime({
                             targets: '#loginErrors',
                             minHeight: "2rem", 
+                            padding: "0.5em 0 0.5em 0",
                             delay: 0,
                             duration: 100,
                             direction: 'normal',
@@ -889,7 +891,8 @@
                         </div>
                         <div id="loggedinContainer">
                             <input type="email" id="forgotPassword" placeholder="email" />
-                            <button id="forgotPasswordButton" onClick={sendNewPassword}>Send new Password</button>
+                            <button id="forgotPasswordButton" class="profileMenuButton" onClick={sendNewPassword}>Send new Password</button>
+                            <h4 id="passwordForgottenBack" onClick={initialProfileMenu}><u>Back</u></h4>
                             <div id="passwordSentDialog"></div>
                         </div>
                     </div>
@@ -906,7 +909,8 @@
                             <input type="email" id="signupMail" placeholder="email" />
                             <input type="text" id="signupName" placeholder="name" />
                             <input type="password" id="signupPassword" placeholder="password" />
-                            <button id="signupButton" onClick={signAwayYourSoul}>Sign up!</button>
+                            <button id="signupButton" class="profileMenuButton" onClick={signAwayYourSoul}>Sign up!</button>
+                            <h4 id="signupButtonBack" onClick={initialProfileMenu}><u>Back</u></h4>
                         </div>
                     </div>
                 )
@@ -964,44 +968,96 @@
                         </div>
                         <h2 id="welcomeUser">{userID}</h2>
                         <div id="loggedinContainer">
-                            <div id="optionsContainerDarkmode">
+                            <div id="optionsContainerDarkmode" class="optionsContainer">
                                 <label for="darkmode">Darkmode</label>
                                 <div class="toggler">
-                                    <input type="checkbox" id="check" onChange={toggleDarkmode}/>
-                                    <div id="togglerBody">
-                                        <div id="togglerSwitch"><i class="fas fa-power-off"></i></div>
+                                    <input type="checkbox" id="check_darkmode" class="togglerCheckBox" onChange={toggleDarkmode}/>
+                                    <div id="togglerBody_darkmode" class="togglerBody">
+                                        <div id="togglerSwitch_darkmode" class="togglerSwitchOff"><i class="fas fa-power-off"></i></div>
                                     </div>
                                 </div>
                             </div>
-                            <button id="logoutButton" onClick={logout}>Log out</button>
+                            <div id="optionsContainerFavorites" class="optionsContainer">
+                                <label for="favorites">Favorites</label>
+                                <div class="toggler">
+                                    <input type="checkbox" id="check_favorites" class="togglerCheckBox" onChange={toggleFavorites}/>
+                                    <div id="togglerBody_favorites" class="togglerBody">
+                                        <div id="togglerSwitch_favorites" class="togglerSwitchOff"><i class="fas fa-power-off"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="profilePictureChangeButton" class="profileMenuButton" onClick={changeProfilePicture}>Change Profile Picture URL</button>
+                            <button id="logoutButton" class="profileMenuButton" onClick={logout}>Log out</button>
                         </div>
                     </div>
                 )
             }
             
+           async function changeProfilePicture(){
+                let profilePictureUrl  = prompt("Enter image URL:" , "")
+                
+                const userDocumentReference = doc(db, "users", auth.currentUser.uid);
+                    await updateDoc(userDocumentReference, {
+                        profile_picture: profilePictureUrl
+                    });
+                        
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        console.log("Document data:", docSnap.data());
+                    } else {
+                        console.log("No such document!");
+                    }
+                    favoriteBarToggler(docSnap.data().profile_picture)
+                    
+                    setProfilePicture(docSnap.data().profile_picture)
+                    }
+                    
+                    function setProfilePicture(url){
+                
+                document.getElementById("profilePictureContainer").innerHTML = ""
+                document.getElementById("profilePictureContainer").style.backgroundImage = `url("${url}")`
+                document.getElementById("profilePictureContainer").style.backgroundSize = "cover"
+                document.getElementById("profilePictureContainer").style.backgroundRepeat ="no-repeat"
+                document.getElementById("profilePictureContainer").style.backgroundPosition ="center"
+                document.getElementById("profileMenuToggle").innerHTML = ""
+                document.getElementById("profileMenuToggle").style.backgroundImage = `url("${url}")`
+                document.getElementById("profileMenuToggle").style.backgroundSize = "cover"
+                document.getElementById("profileMenuToggle").style.backgroundRepeat ="no-repeat"
+                document.getElementById("profileMenuToggle").style.backgroundPosition ="center"
+                document.getElementById("profileMenuToggle").style.aspectRatio ="1/1"
+                document.getElementById("profileMenuToggle").style.borderRadius ="50%"
+                }
+            
             function hideTheSun(){
-                document.getElementById("togglerBody").style.background = "blue"
-                document.getElementById("togglerSwitch").style.left = "auto"
-                document.getElementById("togglerSwitch").style.right = "5%"
-                document.getElementById("togglerSwitch").style.color = "lime"
+                toggleStyleOn("darkmode")
                 
                 styleSheetStyles.href = "CSS/styles_dark.css"
                 styleSheetMenubar.href = "CSS/menubar_dark.css"
                 styleSheetProfileMenu.href = "CSS/profileMenu_dark.css"
-                document.getElementById("check").checked = true
             }
             
             function praiseTheSun(){
-                document.getElementById("togglerBody").style.background = "grey"
-                document.getElementById("togglerSwitch").style.right = "auto"
-                document.getElementById("togglerSwitch").style.left = "5%"
-                document.getElementById("togglerSwitch").style.color = "red"
+                toggleStyleOff("darkmode")
+                
                 
                 styleSheetStyles.href = "CSS/styles.css"
                 styleSheetMenubar.href = "CSS/menubar.css"
                 styleSheetProfileMenu.href = "CSS/profileMenu.css"
-                document.getElementById("check").checked = false
+
             }
+            
+            function toggleStyleOn(mode){
+                document.getElementById(`togglerBody_${mode}`).style.background = "blue"
+                document.getElementById(`togglerSwitch_${mode}`).classList.add("togglerSwitchOn")
+                document.getElementById(`check_${mode}`).checked = true
+                }
+            function toggleStyleOff(mode){
+                document.getElementById(`togglerBody_${mode}`).style.background = "grey"
+                document.getElementById(`togglerSwitch_${mode}`).classList.remove("togglerSwitchOn")
+                document.getElementById(`check_${mode}`).checked = false
+                }
             
             async function theSunWillDarkenAnddDarknessShallBefallThisRottenEarthlyPlanesForAllEternety(){
                 const userDocumentReference = doc(db, "users", auth.currentUser.uid);
@@ -1042,18 +1098,71 @@
                 
             
             function toggleDarkmode(){
-                if(document.getElementById("check").checked){ // darkmode ON
+                if(document.getElementById("check_darkmode").checked){ // darkmode ON
                     theSunWillDarkenAnddDarknessShallBefallThisRottenEarthlyPlanesForAllEternety()
                 } else { // darkmode OFF
                     theSunlightHasOnceAgainGracedTheseForsakenLandsAndWarmsTheCorpsesOfHopeAndHumanity()
                 }
             }
             
+            async function toggleFavorites(){
+                if(document.getElementById("check_favorites").checked){ // darkmode ON
+                    toggleStyleOn("favorites")
+                    const userDocumentReference = doc(db, "users", auth.currentUser.uid);
+                    await updateDoc(userDocumentReference, {
+                        favorites: "grid"
+                    });
+                        
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        console.log("Document data:", docSnap.data());
+                    } else {
+                        console.log("No such document!");
+                    }
+                    favoriteBarToggler(docSnap.data().favorites)
+                } else { // darkmode OFF
+                    toggleStyleOff("favorites")
+                    const userDocumentReference = doc(db, "users", auth.currentUser.uid);
+                    await updateDoc(userDocumentReference, {
+                        favorites: "none"
+                    });
+                        
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        console.log("Document data:", docSnap.data());
+                    } else {
+                        console.log("No such document!");
+                    }
+                    favoriteBarToggler(docSnap.data().favorites)
+                }
+                
+            }
+            
+            function favoriteBarToggler(favoriteStyle){
+         if(favoriteStyle == "none"){
+            document.getElementById("favoritesBar").style.display = "none"
+            localStorage.setItem("toolbox_favoritesbar", JSON.stringify(["favoritesBarToggle","none", "far", 3]))
+            document.getElementById("favoritesTogglor").innerHTML = '<i class="far fa-star"></i>'
+            document.getElementById("quickLinks").style.margin = "3rem 0 2rem 0"
+         } else if (favoriteStyle == "grid"){
+            document.getElementById("favoritesBar").style.display = "grid"
+            localStorage.setItem("toolbox_favoritesbar", JSON.stringify(["favoritesBarToggle","grid", "fas", 1]))
+            document.getElementById("favoritesTogglor").innerHTML = '<i class="fas fa-star"></i>'
+            document.getElementById("quickLinks").style.margin = "1rem 0 2rem 0"
+        }
+    }
+            
             
             function logout(){
             auth.signOut()
                             .then(() => {
                                 console.log("signed out")
+                                document.getElementById("profileMenuToggle").innerHTML = `<i class="far fa-user-circle"></i>`
+                                document.getElementById("profileMenuToggle").style.backgroundImage = null
                             })
                             .catch((error) => {
                                 const errorCode = error.code;
@@ -1119,16 +1228,33 @@
                         } else {
                             praiseTheSun()
                         }
+                        if(docSnap.data().favorites == "grid"){
+                            favoriteBarToggler(docSnap.data().favorites)
+                            toggleStyleOn("favorites")
+                        } else {
+                            favoriteBarToggler(docSnap.data().favorites)
+                            toggleStyleOff("favorites")
+                        }
+                        if(docSnap.data().profile_picture){
+                            setProfilePicture(docSnap.data().profile_picture)
+                        } 
                     }
                 } else {
                     console.log("no user logged in")
-                    ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
+                    
+                        initialProfileMenu()
+
+                }
+                })
+                
+                function initialProfileMenu(){
+                ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
+                setTimeout(function(){
                     document.getElementById("signupCall").addEventListener("click", function(){                        
                         ReactDOM.render(<Signup/>, document.getElementById("profileMenuContainer"))
                         
-                    })
-                }
-                })
+                    })},100)
+                    }
                 
   
   
