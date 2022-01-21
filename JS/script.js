@@ -77,6 +77,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         && e.target != document.getElementById("searchAll")
         && e.target != document.getElementById("searchFrench")
         && e.target != document.getElementById("searchGerman")
+        && e.target != document.getElementById("signupName")
         ){
             e.preventDefault();
         }
@@ -190,12 +191,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
            
             if(homeTileDiv.id != "frenchStuff" && homeTileDiv.id != "sitaConversion"){
                 homeTileDiv.addEventListener("click", function(){
-                    window.open(src[i].link)
+                    window.open(src[i].link, "_blank", "noopener,noreferrer")
                 });
             
                 homeTileDiv.addEventListener("keypress", function(e){
                     if(e.keyCode == 13 || e.keyCode == 32) {
-                        window.open(src[i].link)
+                        window.open(src[i].link, "_blank", "noopener,noreferrer")
                     }
                 });
             } else if(homeTileDiv.id == "frenchStuff"){
