@@ -1,16 +1,15 @@
 #profileMenu{
     position: fixed;
     height: 100vh;
-    width: 0;
+    width: 20vw;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
     font-family: "Arial";
-    right: 0;
+    right: -20vw;
     top: 0;
     overflow: hidden;
-    box-shadow: 0px 0px 14px -1px #000000;
     background-color: #2b4162;
     background-image: linear-gradient(0deg, #2b4162 0%, #12100e 74%);
 }
@@ -32,7 +31,10 @@
     flex-wrap: nowrap;
     font-size: 10rem;
     color: lightgrey;
-    width: 100%;
+    width: 50%;
+    aspect-ratio: 1/1;
+    margin: 1rem auto 0 auto;
+    border-radius: 50%;
 }
 
 #passwordForgotten{
@@ -43,7 +45,17 @@
     color: lightgrey;
 }
 
-#passwordForgotten:hover{
+#passwordForgottenBack, #signupButtonBack{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1em 0 1em 0;
+    font-size: 0.75em;
+}
+
+#passwordForgotten, #passwordForgottenBack, #signupButtonBack:hover{
     cursor:pointer;
 }
 
@@ -70,7 +82,7 @@
     color: lightgrey;
 }
 
-#loginContainer, #loggedinContainer {
+#loginContainer, #loggedinContainer, #signupContainer {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -78,15 +90,22 @@
     flex-wrap: wrap;
 }
     
-#loginContainer input{
+#loginContainer input, #signupContainer input{
     margin: 1rem 0 1rem 0;
     font-size: 1.5rem;
     box-shadow: 0px 0px 5px -2px black;
 }
 
-#login, #logoutButton, #signupCall, #signupButton{
+#forgotPassword {
+margin: 1rem 0 1rem 0;
+    font-size: 1.5rem;
+    box-shadow: 0px 0px 5px -2px black;
+}
+    
+.profileMenuButton {
     width: 70%;
     height: 3rem;
+    margin: 1rem 0 1rem 0;
 }
 
 #loginErrors{
@@ -108,63 +127,20 @@
     align-items: center;
 }
         
-#optionsContainerDarkmode{
+.optionsContainer{
     width: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
-    margin: 2rem 0 0 0;
+    margin: 0.5rem 0 0 0;
 }
     
-#optionsContainerDarkmode label{
+.optionsContainer label{
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     color: lightgrey;
-}
-
-.toggler{
-	width: 4rem;
-	height: 2rem;
-	position: relative;
-}
-
-#check {
-	position: absolute;
-	z-index: 5;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	opacity: 0;
-}
-
-#togglerBody{
-	position: relative;
-	height: 100%;
-	width: 100%;
-	background: grey;
-	border-radius: 25px;
-	transition: 0.5s;
-}
-
-#togglerSwitch{
-	height: 80%;
-	aspect-ratio: 1/1;
-	background: white;
-	position: absolute;
-	left: 5%;
-	top: 50%;
-	transform: translate(0, -50%);
-	border-radius: 25px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	font-family: "Arial";
-	color: red;
-	transition: 0.5s;
 }
 
 #logoutButton{
