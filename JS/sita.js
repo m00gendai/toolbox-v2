@@ -6,7 +6,7 @@ window.onload = (event) => {
     document.getElementById("inputSita").addEventListener("keyup", function(e){
         if(e.key == "Enter"){
             sitaInput = document.getElementById("inputSita").value.toLowerCase()
-            if(chart){
+            if(chartExists){
                 chart.dispose()
             }
             displayChart(sitaInput)
@@ -15,7 +15,7 @@ window.onload = (event) => {
     
     document.getElementById("inputSitaSearch").addEventListener("click", function(){
         sitaInput = document.getElementById("inputSita").value.toLowerCase()
-            if(chart){
+            if(chartExists){
                 chart.dispose()
             }
         displayChart(sitaInput)
@@ -50,79 +50,40 @@ window.onload = (event) => {
             * C = IATA Department Code
             */
             
-            let count = 0
-      
             airportCodes.forEach(airportCode => {
                 if(sitaInput.substring(0,3) == airportCode.iata.toLowerCase()){
-                    chart.data.push({from: `Airport Code: ${airportCode.iata}`, to: `${airportCode.icao} - ${airportCode.airport}, ${airportCode.place}`, value: 10})
-                } else {
-                    count++
+                    chart.data.push({from: airportCode.iata, to: `${airportCode.icao} - ${airportCode.airport}, ${airportCode.place}`, value: 10})
                 }
             })
-            if(count == airportCodes.length){
-                 chart.data.push({from: `Airport Code: ${sitaInput.substring(0,3)}`, to: `NONE FOUND`, value: 10})
-            } else {
-                    count++
-                }
-            
-            count = 0
-            
-            airlineCodes.forEach(airlineCode => {
-                if(sitaInput.substring(3,5) == airlineCode.designator.toLowerCase()){
-                    chart.data.push({from: `Airline Code: ${airlineCode.designator}`, to: `${airlineCode.airline}, ${airlineCode.remark}`, value: 10})
-                } else {
-                    count++
-                }
-            })
-            if(count == airlineCodes.length){
-                 chart.data.push({from: `Airline Code: ${sitaInput.substring(3,5)}`, to: `NONE FOUND`, value: 10})
-            }
-                    
-            count = 0
 
             airlineCodes.forEach(airlineCode => {
+                if(sitaInput.substring(3,5) == airlineCode.designator.toLowerCase()){
+                    chart.data.push({from: airlineCode.designator, to: `${airlineCode.airline}, ${airlineCode.remark}`, value: 10})
+                } 
+            })
+                    
+            airlineCodes.forEach(airlineCode => {
                 if(sitaInput.substring(5,7) == airlineCode.designator.toLowerCase()){
-                    chart.data.push({from: `Airline Code: ${airlineCode.designator}`, to: `${airlineCode.airline}, ${airlineCode.remark}`, value: 10})
-                } else {
-                    count++
+                    chart.data.push({from: airlineCode.designator, to: `${airlineCode.airline}, ${airlineCode.remark}`, value: 10})
                 }
             })
-            if(count == airlineCodes.length){
-                 chart.data.push({from: `Airline Code: ${sitaInput.substring(5,7)}`, to: `NONE FOUND`, value: 10})
-            }
-                    
-            count = 0
             
             departmentCodes.forEach(departmentCode => {
                 if(sitaInput.substring(5,7) == departmentCode.abbr.toLowerCase()){
-                    chart.data.push({from: `Department code: ${departmentCode.abbr}`, to: departmentCode.meaning, value: 10})
-                } else {
-                    count++
+                    chart.data.push({from: departmentCode.abbr, to: departmentCode.meaning, value: 10})
                 }
             })
-            if(count == departmentCodes.length){
-                 chart.data.push({from: `Department Code: ${sitaInput.substring(5,7)}`, to: `NONE FOUND`, value: 10})
-            }
-            
-            count = 0
             
             departmentCodes.forEach(departmentCode => {
                 if(sitaInput.substring(3,5) == departmentCode.abbr.toLowerCase()){
-                    chart.data.push({from: `Department Code: ${departmentCode.abbr}`, to: departmentCode.meaning, value: 10})
-                } else {
-                    count++
+                    chart.data.push({from: departmentCode.abbr, to: departmentCode.meaning, value: 10})
                 }
             })
-            if(count == departmentCodes.length){
-                 chart.data.push({from: `Department Code: ${sitaInput.substring(3,5)}`, to: `NONE FOUND`, value: 10})
-            }
-            
-            count = 0
             
             conversionCodes.forEach(conversionCode => {
                 if(sitaInput == conversionCode.sita.toLowerCase()){
                     chart.data.push({from: conversionCode.sita, to: `Matching AFTN Address found: ${conversionCode.aftn}`, value: 10})
-                } 
+                }
             })
             
             let hoverState = chart.links.template.states.create("hover")
@@ -132,6 +93,8 @@ window.onload = (event) => {
             chart.dataFields.toName = "to"
             chart.dataFields.value = "value"
             chart.paddingRight = 500
+
+
 
             let nodeTemplate = chart.nodes.template
             nodeTemplate.readerTitle = "Click to show/hide or drag to rearrange"
