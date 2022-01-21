@@ -1,0 +1,62 @@
+.toggler{
+	width: 4rem;
+	height: 2rem;
+	position: relative;
+}
+
+.togglerCheckBox {
+	position: absolute;
+	z-index: 5;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+}
+
+.togglerBody{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: grey;
+	border-radius: 25px;
+	transition: 0.5s;
+}
+
+.togglerSwitchOff{
+	height: 80%;
+	aspect-ratio: 1/1;
+	background: white;
+	position: absolute;
+	left: 5%;
+    right: auto;
+	top: 50%;
+	transform: translate(0, -50%);
+	border-radius: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-family: "Arial";
+	color: red;
+	transition: 0.5s;
+}
+
+.togglerSwitchOn{
+    height: 80%;
+	aspect-ratio: 1/1;
+	background: white;
+	position: absolute;
+    left: auto;
+    right: 5%;
+    top: 50%;
+	transform: translate(0, -50%);
+	border-radius: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-family: "Arial";
+    color: lime;
+    transition: 0.5s;
+}
