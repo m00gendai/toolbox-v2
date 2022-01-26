@@ -10,29 +10,29 @@
 <!-- END Meta Information -->
 		<title>Toolbox V2</title>
 <!-- BEGIN Necessary Scripts -->
-		<script src="JS/jquery-3.6.0.min.js"></script>            <!-- jQuery library -->
-		<script src="JS/script.js" defer></script>                <!-- Main JavaScript Code -->
-		<script src="JS/all.min.js" defer></script>               <!-- Font Awesome -->
-		<script src="JS/tileLinks.js" defer></script>             <!-- JSON for Home Page - Tile Links -->
-		<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>          <!-- React prod -->
-        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>  <!-- React DOM -->
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>                            <!-- Babel -->
+		<script src="JS/jquery-3.6.0.min.js"></script> 
+		<script src="JS/script.js" defer></script> <!-- Main JavaScript Code -->
+		<script src="JS/all.min.js" defer></script> <!-- Font Awesome -->
+		<script src="JS/tileLinks.js" defer></script> <!-- JSON for Home Page - Tile Links -->
+		<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script> 
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script> 
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
 <!-- END Necessary Scripts -->
 <!-- BEGIN Stylesheets -->
-		<link rel="stylesheet" href="CSS/styles.css" id="styleSheetStyles">             <!-- CSS General Styles -->
-		<link rel="stylesheet" href="CSS/menubar.css" id="styleSheetMenuBar">            <!-- CSS Menu Bar & Footer -->
-		<link rel="stylesheet" href="CSS/aipbox.css">             <!-- CSS AIP Library -->
-		<link rel="stylesheet" href="CSS/atsbox.css">             <!-- CSS ATS MSG Search -->
-		<link rel="stylesheet" href="CSS/frenchBox.css">          <!-- CSS French Translation Section -->
-		<link rel="stylesheet" href="CSS/sitaBox.css">            <!-- CSS SITA Address Converter -->
-		<link rel="stylesheet" href="CSS/doctoolbox.css">         <!-- CSS DOC Screening Tool -->
-		<link rel="stylesheet" href="CSS/legal.css">              <!-- CSS Legal Statement Popup -->
-		<link rel="stylesheet" href="CSS/optionsMenu.css">        <!-- CSS DOC Tool Options Menu -->
-		<link rel="stylesheet" href="CSS/achievements.css">       <!-- CSS Achievement Unlocked -->
+		<link rel="stylesheet" href="CSS/styles.css" id="styleSheetStyles"> <!-- General Styles -->
+		<link rel="stylesheet" href="CSS/menubar.css" id="styleSheetMenuBar"> <!-- Menu Bar & Footer -->
+		<link rel="stylesheet" href="CSS/aipbox.css"> <!-- AIP Library -->
+		<link rel="stylesheet" href="CSS/atsbox.css"> <!-- ATS MSG Search -->
+		<link rel="stylesheet" href="CSS/frenchBox.css"> <!-- French Translation Section -->
+		<link rel="stylesheet" href="CSS/sitaBox.css"> <!-- SITA Address Converter -->
+		<link rel="stylesheet" href="CSS/doctoolbox.css"> <!-- DOC Screening Tool -->
+		<link rel="stylesheet" href="CSS/legal.css"> <!-- Legal Statement Popup -->
+		<link rel="stylesheet" href="CSS/optionsMenu.css"> <!-- DOC Tool Options Menu -->
+		<link rel="stylesheet" href="CSS/achievements.css"> <!-- Achievement Unlocked -->
 		<link rel="stylesheet" href="CSS/profileMenu.css" id="styleSheetProfileMenu">      
 		<link rel="stylesheet" href="CSS/profileMenuTogglers.css" >      
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />      <!-- CSS Font Awesome CDN -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <!-- CSS Dragula.js -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- END Stylesheets -->
 		<link rel="icon" href="Favicon/favicon.ico?v=2" />        <!-- Browser Tab Icon -->
 	</head>
@@ -788,6 +788,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>          <!-- anime.js -->
         <!-- React code below due to script type module not working if served via file path -->
         <script data-type="module" type="text/babel">
+        
+        
+    
+
  
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"; // Firebase Core
             import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"; // Firebase Auth
@@ -796,6 +800,24 @@
             const styleSheetStyles = document.getElementById("styleSheetStyles");
             const styleSheetMenubar = document.getElementById("styleSheetMenuBar");
             const styleSheetProfileMenu = document.getElementById("styleSheetProfileMenu");
+            
+            function checkMode(){
+                    if(localStorage.getItem("toolbox_mode")){
+                        if(localStorage.getItem("toolbox_mode") == "dark"){
+                            styleSheetStyles.href = "CSS/styles_dark.css"
+                styleSheetMenubar.href = "CSS/menubar_dark.css"
+                styleSheetProfileMenu.href = "CSS/profileMenu_dark.css"
+                localStorage.setItem("toolbox_mode", "dark");
+                        } else {
+                            styleSheetStyles.href = "CSS/styles.css"
+                styleSheetMenubar.href = "CSS/menubar.css"
+                styleSheetProfileMenu.href = "CSS/profileMenu.css"
+                localStorage.setItem("toolbox_mode", "light");
+                        }
+                    }
+                }
+                
+                    checkMode()
             
             const firebaseConfig = { // see firebase.js for configs. If you cloned this repo, you need to provide your own keys and tokens.
                 apiKey: apiKey,
@@ -809,6 +831,34 @@
             const app = initializeApp(firebaseConfig);
             const db = getFirestore();
             const auth = getAuth();
+            
+            function CreateColorPickers(props){
+                let components = props.data.map((value) => {
+                    const {tile, color1, color2} = value
+                    return(
+                        <div class="homeTileColorChangers">
+                            <label for="color1">{`${tile.toUpperCase()}:`}</label>
+                            <div class="colorInputWrapper">
+                                <input type="color" id={`colorPick_${tile}1`} class="homeTileColorPicker" />
+                            </div>
+                            <div class="colorInputWrapper">
+                                <input type="color" id={`colorPick_${tile}2`} class="homeTileColorPicker" />
+                            </div>
+                            <div class="colorBox" id={`colorGradient_${tile}`}></div>
+                            <button class="colorPickResetButton" id={`colorPickResetButton_${tile}`}>Reset</button>
+                        </div>
+                    )
+                    
+                     })
+                return (
+                    <>
+                        {components}
+                    </>
+                    )
+            }
+            
+            
+            
             
             function Login(){
                 return(
@@ -960,7 +1010,7 @@
             
             function LoggedIn(props){
                 const userID = props.data
-                console.log(`props: ${userID}`)
+                console.log(`User: ${userID}`)
                 return(
                     <div style={{width: "100%"}}> {/* this is a weird and stupid fix for a weird and stupid problem */}                
                         <div id="profilePictureContainer">
@@ -986,16 +1036,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <button id="profilePictureChangeButton" class="profileMenuButton" onClick={changeProfilePicture}>Change Profile Picture URL</button>
+                             <button id="profilePictureChangeButton" class="profileMenuButton" onClick={changeProfilePicture}>Change Profile Picture URL</button>
                             <button id="logoutButton" class="profileMenuButton" onClick={logout}>Log out</button>
+                            <div id="optionsContainerColorPickers" class="optionsContainerPanel">
+                                
+                            </div>
                         </div>
                     </div>
                 )
             }
+
             
            async function changeProfilePicture(){
                 let profilePictureUrl  = prompt("Enter image URL:" , "")
-                
+                if(profilePictureUrl != null && profilePictureUrl != ""){
+                        
                 const userDocumentReference = doc(db, "users", auth.currentUser.uid);
                     await updateDoc(userDocumentReference, {
                         profile_picture: profilePictureUrl
@@ -1004,16 +1059,15 @@
                     const docRef = doc(db, "users", auth.currentUser.uid);
                     const docSnap = await getDoc(docRef);
 
-                    if (docSnap.exists()) {
-                        console.log("Document data:", docSnap.data());
-                    } else {
-                        console.log("No such document!");
+                    if (!docSnap.exists()) {
+                        console.log("No such document: changeProfilePicture()!");
                     }
                     favoriteBarToggler(docSnap.data().profile_picture)
                     
                     setProfilePicture(docSnap.data().profile_picture)
                     }
                     
+                    }
                     function setProfilePicture(url){
                 
                 document.getElementById("profilePictureContainer").innerHTML = ""
@@ -1029,6 +1083,10 @@
                 document.getElementById("profileMenuToggle").style.aspectRatio ="1/1"
                 document.getElementById("profileMenuToggle").style.borderRadius ="50%"
                 }
+                
+                
+                
+                
             
             function hideTheSun(){
                 toggleStyleOn("darkmode")
@@ -1036,6 +1094,8 @@
                 styleSheetStyles.href = "CSS/styles_dark.css"
                 styleSheetMenubar.href = "CSS/menubar_dark.css"
                 styleSheetProfileMenu.href = "CSS/profileMenu_dark.css"
+                localStorage.setItem("toolbox_mode", "dark");
+                
             }
             
             function praiseTheSun(){
@@ -1045,7 +1105,7 @@
                 styleSheetStyles.href = "CSS/styles.css"
                 styleSheetMenubar.href = "CSS/menubar.css"
                 styleSheetProfileMenu.href = "CSS/profileMenu.css"
-
+                localStorage.setItem("toolbox_mode", "light");
             }
             
             function toggleStyleOn(mode){
@@ -1068,10 +1128,9 @@
                 const docRef = doc(db, "users", auth.currentUser.uid);
                 const docSnap = await getDoc(docRef);
 
-                if (docSnap.exists()) {
-                    console.log("Document data:", docSnap.data());
-                } else {
-                    console.log("No such document!");
+                if (!docSnap.exists()) {
+                    
+                    console.log("No such document: theSunWillDarkenAnddDarknessShallBefallThisRottenEarthlyPlanesForAllEternety()!");
                 }
                 
                 hideTheSun()
@@ -1087,10 +1146,9 @@
                 const docRef = doc(db, "users", auth.currentUser.uid);
                 const docSnap = await getDoc(docRef);
 
-                if (docSnap.exists()) {
-                    console.log("Document data:", docSnap.data());
-                } else {
-                    console.log("No such document!");
+                if (!docSnap.exists()) {
+
+                    console.log("No such document: theSunlightHasOnceAgainGracedTheseForsakenLandsAndWarmsTheCorpsesOfHopeAndHumanity()!");
                 }
                 
                 praiseTheSun()
@@ -1116,10 +1174,9 @@
                     const docRef = doc(db, "users", auth.currentUser.uid);
                     const docSnap = await getDoc(docRef);
 
-                    if (docSnap.exists()) {
-                        console.log("Document data:", docSnap.data());
-                    } else {
-                        console.log("No such document!");
+                    if (!docSnap.exists()) {
+
+                        console.log("No such document: toggleFavorites() 1!");
                     }
                     favoriteBarToggler(docSnap.data().favorites)
                 } else { // darkmode OFF
@@ -1132,10 +1189,9 @@
                     const docRef = doc(db, "users", auth.currentUser.uid);
                     const docSnap = await getDoc(docRef);
 
-                    if (docSnap.exists()) {
-                        console.log("Document data:", docSnap.data());
-                    } else {
-                        console.log("No such document!");
+                    if (!docSnap.exists()) {
+
+                        console.log("No such document toggleFavorites() 2!");
                     }
                     favoriteBarToggler(docSnap.data().favorites)
                 }
@@ -1209,54 +1265,193 @@
             
             
             
-            
+            const homeTileColors = 
+                [
+                {
+                tile: "general",
+                color1: "#ffa84c",
+                color2: "#ff7a0d"
+                }, {              
+                tile: "spvr",
+                color1: "#c85ec7",
+                color2: "#a849a3"
+                }, {
+                tile: "aro",
+                color1: "#a7cfdf",
+                color2: "#23538a"
+                }, {
+                tile: "doc",
+                color1: "#ff3019",
+                color2: "#cf0404"
+                }, {
+                tile: "pub",
+                color1: "#299a0b",
+                color2: "#2a9a0b"
+                },  {
+                tile: "sfo",
+                color1: "#ffd65e",
+                color2: "#fec004"
+                },
+                ]
   
-            
-            
+    function initialHomeTilecolors(){
+        homeTileColors.forEach(homeTileColor => {
+            changeColorGradient(homeTileColor.tile, homeTileColor.color1, homeTileColor.color2)
+        })
+    }
 
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    const uid = user.displayName;
-                    ReactDOM.render(<LoggedIn data={uid} />, document.getElementById("profileMenuContainer"))
-                    const docRef = doc(db, "users", auth.currentUser.uid);
-                    const docSnap = await getDoc(docRef);
-                    let darkmode
-                    if (docSnap.exists()) {
-                        console.log(docSnap.data())
-                        if(docSnap.data().darkmode){
-                            hideTheSun()
-                        } else {
-                            praiseTheSun()
-                        }
-                        if(docSnap.data().favorites == "grid"){
-                            favoriteBarToggler(docSnap.data().favorites)
-                            toggleStyleOn("favorites")
-                        } else {
-                            favoriteBarToggler(docSnap.data().favorites)
-                            toggleStyleOff("favorites")
-                        }
-                        if(docSnap.data().profile_picture){
-                            setProfilePicture(docSnap.data().profile_picture)
-                        } 
+    async function changeColorGradient(tile, color1, color2){
+        const containerBoxes = document.querySelectorAll(".quicklinksContainerBox")
+        if(document.getElementById(`colorPick_${tile}1`)){
+            document.getElementById(`colorPick_${tile}1`).value = color1
+            document.getElementById(`colorPick_${tile}2`).value = color2
+            document.getElementById(`colorGradient_${tile}`).style.background = `linear-gradient(45deg, ${color1} 0%, ${color2} 100%)`
+        
+        
+	
+		const userDocumentReference = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userDocumentReference, {
+            customColors: true,
+            [tile]: {
+                tile: tile,
+                color1: color1,
+                color2: color2
+            }
+        });
+                        
+        const docRef = doc(db, "users", auth.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        if (!docSnap.exists()) {
+
+            console.log("No such document: changeColorGradient()!");
+        }
+}
+        containerBoxes.forEach(containerBox => {
+            let category = containerBox.getAttribute("category")
+            if(category === tile){
+                containerBox.style.background = `linear-gradient(45deg, ${color1} 0%, ${color2} 100%)`
+            }
+        })
+    }
+    
+    
+    
+    
+    function pickTheColor(){
+    const homeTileColorPickers = document.querySelectorAll(".homeTileColorPicker")
+
+    homeTileColorPickers.forEach(homeTileColorPicker => {
+
+        homeTileColorPicker.addEventListener("change", function (){
+
+            const getColorPickerBinding = homeTileColorPicker.id.split("_")
+            const colorPickerBindingLength = getColorPickerBinding[1].length
+            const colorPickerBinding = getColorPickerBinding[1].substring(0, colorPickerBindingLength-1)
+            
+            changeColorGradient(colorPickerBinding, document.getElementById(`colorPick_${colorPickerBinding}1`).value, document.getElementById(`colorPick_${colorPickerBinding}2`).value)
+        })
+    })
+    }
+    
+    
+    function resetTheColor(){
+    const colorResetButtons = document.querySelectorAll(".colorPickResetButton")
+
+    colorResetButtons.forEach(colorResetButton => {
+        colorResetButton.addEventListener("click", function(){
+            const getColorResetButtonBinding = colorResetButton.id.split("_")
+            homeTileColors.forEach(homeTileColor => {
+                if(homeTileColor.tile === getColorResetButtonBinding[1]){
+                    changeColorGradient(homeTileColor.tile, homeTileColor.color1, homeTileColor.color2)
+                }
+            })
+        })
+    })
+    }
+            
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const uid = user.displayName;
+            
+            ReactDOM.render(<LoggedIn data={uid} />, document.getElementById("profileMenuContainer"))
+            ReactDOM.render(<CreateColorPickers data={homeTileColors} />, document.getElementById("optionsContainerColorPickers"))
+            
+            const docRef = doc(db, "users", auth.currentUser.uid);
+            const docSnap = await getDoc(docRef);
+            let darkmode
+                
+            if (docSnap.exists()) {
+                if(docSnap.data().darkmode){
+                    hideTheSun()
+                } else {
+                    praiseTheSun()
+                }
+                if(docSnap.data().favorites == "grid"){
+                    favoriteBarToggler(docSnap.data().favorites)
+                    toggleStyleOn("favorites")
+                } else {
+                    favoriteBarToggler(docSnap.data().favorites)
+                    toggleStyleOff("favorites")
+                }
+                if(docSnap.data().profile_picture){
+                    setProfilePicture(docSnap.data().profile_picture)
+                } 
+                setTimeout(function(){
+        resetTheColor()
+    },500)
+    setTimeout(function(){
+        pickTheColor()
+    },500)
+                if(docSnap.data().customColors){
+                    if(docSnap.data().aro){
+                        changeColorGradient(docSnap.data().aro.tile, docSnap.data().aro.color1, docSnap.data().aro.color2)
+                  }
+                    if(docSnap.data().spvr){
+
+                            changeColorGradient(docSnap.data().spvr.tile, docSnap.data().spvr.color1, docSnap.data().spvr.color2)
+
+                    }
+                    if(docSnap.data().pub){
+
+                            changeColorGradient(docSnap.data().pub.tile, docSnap.data().pub.color1, docSnap.data().pub.color2)
+
+                    }
+                    if(docSnap.data().sfo){
+
+                            changeColorGradient(docSnap.data().sfo.tile, docSnap.data().sfo.color1, docSnap.data().sfo.color2)
+
+                    }
+                    if(docSnap.data().general){
+
+                            changeColorGradient(docSnap.data().general.tile, docSnap.data().general.color1, docSnap.data().general.color2)
+
+                    }
+                    if(docSnap.data().doc){
+
+                            changeColorGradient(docSnap.data().doc.tile, docSnap.data().doc.color1, docSnap.data().doc.color2)
+
                     }
                 } else {
-                    console.log("no user logged in")
-                    
-                        initialProfileMenu()
-
+                    initialHomeTilecolors()
                 }
-                })
+            }
+        } else {
+            console.log("no user logged in")
+            initialProfileMenu()
+            initialHomeTilecolors()
+        }
+    })
                 
-                function initialProfileMenu(){
-                ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
-                setTimeout(function(){
-                    document.getElementById("signupCall").addEventListener("click", function(){                        
-                        ReactDOM.render(<Signup/>, document.getElementById("profileMenuContainer"))
-                        
-                    })},100)
-                    }
-                
-  
+    function initialProfileMenu(){
+        ReactDOM.render(<Login/>, document.getElementById("profileMenuContainer"))
+        setTimeout(function(){
+            document.getElementById("signupCall").addEventListener("click", function(){                        
+                ReactDOM.render(<Signup/>, document.getElementById("profileMenuContainer"))
+            })
+        },100)
+    }
+                    
+                    
   
 </script>
 <!-- END Deferred Scripts -->
