@@ -7,6 +7,7 @@ const errorMessage = "\nPlease advise weberml\nFor access to backup links, refer
 window.addEventListener('DOMContentLoaded', (event) => {
 
     
+    
     window.addEventListener('popstate', (event) => {
         console.log(history.state)
         switch(history.state.page_id){
@@ -175,17 +176,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
             homeTileDivP.innerHTML = src[i].title;
             
             switch(src[i].style){
-                case "spvr": homeTileDiv.style.background = "linear-gradient(45deg,  #e570e7 0%,#c85ec7 47%,#a849a3 100%)";
+                case "spvr": 
+                 //   homeTileDiv.style.background = "linear-gradient(45deg,  #e570e7 0%,#c85ec7 47%,#a849a3 100%)";
+                    homeTileDiv.setAttribute("category", src[i].style)
                     break;
-                case "aro": homeTileDiv.style.background = "linear-gradient(45deg,  #a7cfdf 0%,#23538a 100%)";
+                case "aro":
+                  //  homeTileDiv.style.background = "linear-gradient(45deg,  #a7cfdf 0%,#23538a 100%)";
+                    homeTileDiv.setAttribute("category", src[i].style)
                     break;
-                case "general": homeTileDiv.style.background = "linear-gradient(45deg,  #ffa84c 0%,#ff7b0d 100%)";
+                case "general": 
+                  //  homeTileDiv.style.background = "linear-gradient(45deg,  #ffa84c 0%,#ff7b0d 100%)";
+                    homeTileDiv.setAttribute("category", src[i].style)
                     break;
-                case "pub": homeTileDiv.style.background = "linear-gradient(45deg, #299a0b 0%,#299a0b 100%)";
+                case "pub": 
+                 //   homeTileDiv.style.background = "linear-gradient(45deg, #299a0b 0%,#299a0b 100%)";
+                    homeTileDiv.setAttribute("category", src[i].style)
                     break;
-                case "sfo": homeTileDiv.style.background = "linear-gradient(45deg,  #ffd65e 0%,#febf04 100%)";
+                case "sfo": 
+                 //   homeTileDiv.style.background = "linear-gradient(45deg,  #ffd65e 0%,#febf04 100%)";
+                    homeTileDiv.setAttribute("category", src[i].style)
                     break;
-                case "doc": homeTileDiv.style.background = "linear-gradient(45deg,  #ff3019 0%,#cf0404 100%)";
+                case "doc": 
+                 //   homeTileDiv.style.background = "linear-gradient(45deg,  #ff3019 0%,#cf0404 100%)";
+                    homeTileDiv.setAttribute("category", src[i].style)
                     break;
             }
            
@@ -415,22 +428,25 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("profileMenuToggle").addEventListener("click", function(){
         let transition
         if(profileMenuVisible){
-            transition = ["20vw", 0]
+            transition = [0, "-20vw"]
+                   shadow = ['0px 0px 14px -1px rgba(0,0,0)', "0px 0px 0px 0px rgba(0,0,0)"]      
             profileMenuVisible = false
             
         } else {
-            transition = [0, "20vw"]
+             transition = ["-20vw", 0]
+             shadow = ["0px 0px 0px 0px rgba(0,0,0)", '0px 0px 14px -1px rgba(0,0,0)']
             profileMenuVisible = true
         }
     
     anime({
         targets: '#profileMenu',
-        width: transition, 
+        right: transition, 
         delay: 0,
         duration: 500,
         direction: 'normal',
         loop: false,
-        easing: 'linear'
+        easing: 'linear',
+        boxShadow: shadow
     });
     })
 
