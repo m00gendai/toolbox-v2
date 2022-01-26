@@ -147,3 +147,55 @@ margin: 1rem 0 1rem 0;
     position: absolute;
     bottom: 1%;
 }
+
+.optionsContainerPanel{
+    width: 100%;
+    margin: 0.5rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border: 2px solid white;
+    padding: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.colorBox{
+    display: none;
+}
+
+.colorPickResetButton{
+	height: 2em;
+	aspect-ratio: 2/1;
+	position: relative;
+}
+
+.homeTileColorChangers{
+    width: 100%;
+    display: grid;
+	grid-template-columns: 25% 25% 25% 25%;
+    grid-gap: 0.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.homeTileColorChangers label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.colorInputWrapper{
+	height: 2em;
+    aspect-ratio: 2/1;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    margin: 0 0.5rem 0 0;
+}
+
+.homeTileColorPicker{
+	width: 10em;
+	height: 10em;
+	position: absolute;
+}
