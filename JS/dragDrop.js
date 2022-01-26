@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let hasAchievement
     
     for(let i=0;i<keys.length;i++){
-		if(typeof(localStorage.getItem(keys[i])) == "string"){
+		if(typeof(localStorage.getItem(keys[i])) == "string" && localStorage.getItem(keys[i]).startsWith("toolbox_favorite")){
 			let favorites = JSON.parse(localStorage.getItem(keys[i]))  
 			if(favorites[0] == "favoritesBar"){
 				document.getElementById(favorites[0]).appendChild(document.getElementById(favorites[1]))
