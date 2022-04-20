@@ -3,7 +3,7 @@ function loadAtsMsgCode(){
     
     for(let i=0; i<flightsearchFields.length; i++){
         document.getElementById(flightsearchFields[i]).addEventListener("keyup", function(e){
-            if(e.keyCode==13){
+            if(e.key == "Enter"){
                 atsForm();
             }
         })
@@ -13,24 +13,24 @@ function loadAtsMsgCode(){
         atsForm();
     })
 
-    let dateObj = new Date();
-    let dateTodayYear = dateObj.getUTCFullYear();
+    const dateObj = new Date();
+    const dateTodayYear = dateObj.getUTCFullYear();
     let dateTodayMonth = dateObj.getUTCMonth()+1;
     let dateTodayDay = dateObj.getUTCDate();
 
     function dateToDOFFrom() {
-        let DOFyearFrom = eobdfrom.value.substring(2,4)
-        let DOFmonthFrom = eobdfrom.value.substring(5,7)
-        let DOFdayFrom = eobdfrom.value.substring(8,10)
-        let currentDOFFrom = DOFyearFrom + DOFmonthFrom + DOFdayFrom;
+        const DOFyearFrom = eobdfrom.value.substring(2,4)
+        const DOFmonthFrom = eobdfrom.value.substring(5,7)
+        const DOFdayFrom = eobdfrom.value.substring(8,10)
+        const currentDOFFrom = DOFyearFrom + DOFmonthFrom + DOFdayFrom;
         return currentDOFFrom;
     }
 
     function dateToDOFTo(){
-        let DOFyearTo = eobdto.value.substring(2,4)
-        let DOFmonthTo = eobdto.value.substring(5,7)
-        let DOFdayTo = eobdto.value.substring(8,10)
-        let currentDOFTo = DOFyearTo + DOFmonthTo + DOFdayTo;
+        const DOFyearTo = eobdto.value.substring(2,4)
+        const DOFmonthTo = eobdto.value.substring(5,7)
+        const DOFdayTo = eobdto.value.substring(8,10)
+        const currentDOFTo = DOFyearTo + DOFmonthTo + DOFdayTo;
         return currentDOFTo;
     }
 
@@ -60,47 +60,47 @@ function loadAtsMsgCode(){
         const atsRegex = /([%])/;
         const http1         = "http://zhisaop/FlightSearch/FlightSearch?QueryTimeOut=30&MaxFlightCount=50";
         const httpident     = "&Ident="
-        const ident         = $("#ident").val();
+        let ident           = document.getElementById("ident").value
         
         if(ident.includes("%")){
-            ident = $("#ident").val().replace(atsRegex, "%25")
+            ident = document.getElementById("ident").value.replace(atsRegex, "%25")
         }
         
         const httpeobdfrom  = "&EOBDFrom="
-        const eobdfrom      = dateToDOFFrom();
+        let eobdfrom      = dateToDOFFrom();
         const httpeobtfrom  = "&EOBTFrom="
         const httpeobdto    = "&EOBDUntil="
-        const eobdto        = dateToDOFTo();
+        let eobdto        = dateToDOFTo();
         const httpeobtto    = "&EOBTUntil="
         const httpfltrule   = "&FlightRule="
-        let fltrule       = $("#fltrule").val();
+        let fltrule       = document.getElementById("fltrule").value
         const httpdep       = "&DEPAD="
-        const dep           = $("#dep").val();
+        let dep           = document.getElementById("dep").value
         
         if(dep.includes("%")){
-            dep = $("#dep").val().replace(atsRegex, "%25")
+            dep = document.getElementById("dep").value.replace(atsRegex, "%25")
         }
         
         const httpdest      = "&DESTAD="
-        const dest          = $("#dest").val();
+        let dest          = document.getElementById("dest").value
         
         if(dest.includes("%")){
-            dest = $("#dest").val().replace(atsRegex, "%25")
+            dest = document.getElementById("dest").value.replace(atsRegex, "%25")
         }
         
         const httpfulltext  = "&FreeText="
-        const fulltext      = $("#fulltext").val();
+        let fulltext      = document.getElementById("fulltext").value
         
         if(fulltext.includes("%")){
-            fulltext = $("#fulltext").val().replace(atsRegex, "%25")
+            document.getElementById("fulltext").value.replace(atsRegex, "%25")
         }
         
         const httpmsgtype   = "&MessageType="
-        const msgtype       = $("#msgtype").val().toUpperCase();
+        let msgtype       = document.getElementById("msgtype").value.toUpperCase();
         const httpmsgdir    = "&MessageDirection="
-        const msgdir        = $("#msgdir").val();
+        let msgdir        = document.getElementById("msgdir").value
         const httpqueue     = "&InQueues="
-        const queue         = $("#queue").val();
+        let queue         = document.getElementById("queue").value
         let linkFS
         if(msgtype != "FPL"){
             linkFS = http1 + httpident + ident + httpeobdfrom + eobdfrom + httpeobtfrom + httpeobdto + eobdto + httpeobtto + httpqueue + queue + httpfltrule + httpdep + dep + httpdest + dest + httpmsgtype + msgtype + httpfulltext + fulltext + httpmsgdir + msgdir  
