@@ -4,154 +4,117 @@ const errorMessage = "\nPlease advise weberml\nFor access to backup links, refer
 // I N I T I A L   L O A D
 
 
-window.addEventListener('DOMContentLoaded', (event) => {
-
+window.addEventListener('DOMContentLoaded', () => {
+    console.time("Initial Load")
     
-    window.addEventListener('popstate', (event) => {
-        console.log(history.state)
-        switch(history.state.page_id){
-            case 1:{
-                $("#contentBox").show();
-                $("#aipBox").hide();
-                $("#atsBox").hide();
-                $("#frenchBox").hide();
-                $("#sitaBox").hide();
-                $("#doctoolBox").hide();
+    const toolboxSections = ["contentBox", "aipBox", "atsBox", "frenchBox", "sitaBox", "doctoolBox"]
+    const toolboxTileLinkExclusions = ["frenchStuff", "sitaConversion", "atfmx", "reports"]
+    const spacesNotAllowedIn = ["screenDocument", "frenchContactMail", "searchAll", "searchFrench", "searchGerman"]
+    
+    window.addEventListener("keypress", function(e){
+        if(e.key == " " && !spacesNotAllowedIn.includes(e.target)){
+            e.preventDefault()
+        }
+    })
+    
+    function toolboxSectionToggler(section){
+        toolboxSections.forEach(section => {
+            document.getElementById(section).style.display = "none"
+        })
+        
+        switch(section){
+            case "contentBox":{
+                document.getElementById("contentBox").style.display = "flex"
+                document.getElementById("searchBar").focus();
             }
             break;
-            case 2: {
-                $("#contentBox").hide();
-                $("#aipBox").hide();
-                $("#atsBox").show();
-                loadAtsMsgCode()
-                $("#frenchBox").hide();
-                $("#sitaBox").hide();
-                $("#doctoolBox").hide();
-                $("#ident").focus();
+            case "aipBox":{
+                document.getElementById("aipBox").style.display = "flex"
+                document.getElementById("aipBar").focus();
             }
             break;
-            case 3: {
-                $("#contentBox").hide();
-                $("#aipBox").show();
-                loadAipLibraryCode()
-                $("#atsBox").hide();
-                $("#frenchBox").hide();
-                $("#sitaBox").hide();
-                $("#doctoolBox").hide();
-                $("#aipBar").focus();
+            case "atsBox":{
+                document.getElementById("atsBox").style.display = "flex"
+                document.getElementById("ident").focus();
             }
             break;
-            case 4: {
-                $("#contentBox").hide();
-                $("#aipBox").hide();
-                $("#atsBox").hide();
-                $("#frenchBox").hide();
-                $("#sitaBox").hide();
-                $("#doctoolBox").show();
-                loadDocScreeningToolCode()
+            case "doctoolBox":{
+                document.getElementById("doctoolBox").style.display = "flex"
                 document.getElementById("queryFK").focus();
             }
             break;
+            case "frenchBox":{
+                document.getElementById("frenchBox").style.display = "flex"
+            }
+            break;
+            case "sitaBox":{
+                document.getElementById("sitaBox").style.display = "flex"
+            }
+            break;
         }
+    }
+    
+    function toolboxSectionStateSetter(pageId, title){
+        let state = { 'page_id': pageId}
+        let href = url.substring(0, url.indexOf("#"))
+        history.pushState(state, title, href)
+    }
+    
+    window.addEventListener('popstate', () => {
+        console.log(`History state: ${history.state}`)
+        toolboxSectionToggler(history.state.page_id)
     });
 
-    
-    
-    let state = { 'page_id': 1}
+    let state = { 'page_id': "contentBox"}
     let title = 'Toolbox Home'
     const url = window.location.href
+    
     try{
         history.pushState(state, title, url)
-    }
+    } 
     catch(err){
-        alert("Error" + err + "\n\nPlease make sure website address of Toolbox is \"U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html\"")
+        alert(`Error ${err} \n\nPlease make sure website address of Toolbox is "U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/index.html"`)
     }
     
     const src = homeTileData
     document.getElementById("quickLinks").innerHTML = ""
-
-    window.addEventListener("keypress", function(e){
-        if(e.keyCode ==  32 
-        && e.target != document.getElementById("screenDocument")
-        && e.target != document.getElementById("frenchContactText")
-        && e.target != document.getElementById("searchAll")
-        && e.target != document.getElementById("searchFrench")
-        && e.target != document.getElementById("searchGerman")
-        ){
-            e.preventDefault();
-        }
-    });
   
-    $("#home").click(function() {
-        $("#contentBox").show();
-        $("#aipBox").hide();
-        $("#atsBox").hide();
-        $("#frenchBox").hide();
-        $("#sitaBox").hide();
-        $("#doctoolBox").hide();
-        $("#searchBar").focus();
+    document.getElementById("home").addEventListener("click", function(){
+        toolboxSectionToggler("contentBox")
         document.getElementById("searchBar").value = ""
         document.getElementById("quickLinks").innerHTML = ""
-        try{
-        sortHomeByName(src)
-    }
-    catch(err){
-        alert("Error\n" + err + errorMessage)
-    }
-        
-        let state = { 'page_id': 1}
-        let title = 'Toolbox Home'
-        let href = url.substring(0, url.indexOf("#"))
-        console.log(href)
-        history.pushState(state, title, href)
-
-        
-    });
-    $("#ats").click(function() {
-        $("#contentBox").hide();
-        $("#aipBox").hide();
-        $("#atsBox").show();
-        loadAtsMsgCode()
-        $("#frenchBox").hide();
-        $("#sitaBox").hide();
-        $("#doctoolBox").hide();
-        $("#ident").focus();
-        let state = { 'page_id': 2}
-        let title = 'ATS MSG Search'
-        let href = url.substring(0, url.indexOf("#")) + "#ATS_MSG_Search"
-        history.pushState(state, title, href)
-    });
-    $("#aip").click(function() {
-        $("#contentBox").hide();
-        $("#aipBox").show();
-        loadAipLibraryCode()
-        $("#atsBox").hide();
-        $("#frenchBox").hide();
-        $("#sitaBox").hide();
-        $("#doctoolBox").hide();
-        $("#aipBar").focus();
-        let state = { 'page_id': 3}
-        let title = 'AIP Tool'
-        let href = url.substring(0, url.indexOf("#")) + "#AIP_Tool"
-        history.pushState(state, title, href)
-    });
+        try {
+            sortHomeByName(src)
+        }
+        catch(err) {
+            alert(`Error\n" ${err}: ${errorMessage}`)
+        }
+        toolboxSectionStateSetter("contentBox", "Toolbox Home")
+    })
     
-    $("#doctool").click(function() {
-        $("#contentBox").hide();
-        $("#aipBox").hide();
-        $("#atsBox").hide();
-        $("#frenchBox").hide();
-        $("#sitaBox").hide();
-        $("#doctoolBox").show();
+    document.getElementById("aip").addEventListener("click", function(){
+        toolboxSectionToggler("aipBox", "aipBar")
+        loadAipLibraryCode()
+        toolboxSectionStateSetter("aipBox", "AIP Library")
+    })
+    
+    document.getElementById("ats").addEventListener("click", function(){
+        toolboxSectionToggler("atsBox")
+        loadAtsMsgCode()
+        toolboxSectionStateSetter("atsBox", "ATS MSG Search")
+    })
+    
+    document.getElementById("doctool").addEventListener("click", function(){
+        toolboxSectionToggler("doctoolBox")
         loadDocScreeningToolCode()
-        document.getElementById("queryFK").focus();
-        let state = { 'page_id': 4}
-        let title = 'DOC Screening Tool'
-        let href = url.substring(0, url.indexOf("#")) + "#DOC_Screening_Tool"
-        history.pushState(state, title, href)
-    });
-
-                   
+        toolboxSectionStateSetter("doctoolBox", "DOC Screening Tool")
+    })
+    
+    document.getElementById("mappingtool").addEventListener("click", function(){
+        window.open("https://aim-mapping-tool.onrender.com/")
+    })
+    
+    
 // H O M E   T I L E   G E N E R A T O R
      
     
@@ -187,81 +150,40 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 case "doc": homeTileDiv.style.background = "linear-gradient(45deg,  #ff3019 0%,#cf0404 100%)";
                     break;
             }
-           
-            if(homeTileDiv.id != "frenchStuff" && homeTileDiv.id != "sitaConversion"){
-                homeTileDiv.addEventListener("click", function(){
-                    window.open(src[i].link)
-                });
             
-                homeTileDiv.addEventListener("keypress", function(e){
-                    if(e.keyCode == 13 || e.keyCode == 32) {
-                        window.open(src[i].link)
+            const homeTileDivEvents = ["click", "keypress"]
+            homeTileDivEvents.forEach(homeTileDivEvent => {
+                homeTileDiv.addEventListener(homeTileDivEvent, function(e){
+                    if(e.key == " " || e.key == "Enter" || e.type == "click") {
+                        if(!toolboxTileLinkExclusions.includes(homeTileDiv.id)){
+                            window.open(src[i].link)
+                        }
+                        
+                        if(homeTileDiv.id == "frenchStuff"){
+                            toolboxSectionToggler("frenchBox")
+                            loadFrenchCode()
+                            toolboxSectionStateSetter("frenchBox", "French Tool")
+                        }
+                        
+                        if(homeTileDiv.id == "sitaConversion"){
+                            toolboxSectionToggler("sitaBox")
+                            loadFrenchCode()
+                            toolboxSectionStateSetter("sitaBox", "SITA Address Converter")
+                        }
+                        
+                        if(homeTileDiv.id == "atfmx"){
+                            prompt(`Please navigate to`,  `U:\\ZOL\\PR-Team\\AIS-ALLG`)
+                        }
+                        
+                        if(homeTileDiv.id == "reports"){
+                            alert(`Report Server is only accessible from OPS environment (AFPS/SCONE)\nUse address https://172.25.184.136:8443/BOE/BI if no bookmark is present.`)
+                        }
+                        
                     }
-                });
-            } else if(homeTileDiv.id == "frenchStuff"){
-                homeTileDiv.addEventListener("click", function(){
-                    $("#contentBox").hide();
-                    $("#aipBox").hide();
-                    $("#atsBox").hide();
-                    $("#frenchBox").show();
-                    loadFrenchCode()
-                    $("#sitaBox").hide();
-                    $("#doctoolBox").hide();
-                    $("#searchAll").focus();
-                     let state = { 'page_id': 5}
-        let title = 'French Tool'
-        let href = url.substring(0, url.indexOf("#")) + "#French_Tool"
-        history.pushState(state, title, href)
-                });
-                homeTileDiv.addEventListener("keypress", function(e){
-                    if(e.keyCode == 13 || e.keyCode == 32) {
-                        $("#contentBox").hide();
-                        $("#aipBox").hide();
-                        $("#atsBox").hide();
-                        $("#frenchBox").show();
-                        $("#sitaBox").hide();
-                        $("#doctoolBox").hide();
-                        $("#searchAll").focus();
-                         let state = { 'page_id': 5}
-        let title = 'French Tool'
-        let href = url.substring(0, url.indexOf("#")) + "#French_Tool"
-        history.pushState(state, title, href)
-                    }
-                });
-            } else if (homeTileDiv.id == "sitaConversion"){
-                homeTileDiv.addEventListener("click", function(){
-                    $("#contentBox").hide();
-                    $("#aipBox").hide();
-                    $("#atsBox").hide();
-                    $("#frenchBox").hide();
-                    $("#sitaBox").show();
-                    $("#doctoolBox").hide();
-                    $("#inputSita").focus();
-                     let state = { 'page_id': 6}
-        let title = 'SITA Address Converter'
-        let href = url.substring(0, url.indexOf("#")) + "#SITA_Address_Converter"
-        history.pushState(state, title, href)
-                });
-                homeTileDiv.addEventListener("keypress", function(e){
-                    if(e.keyCode == 13 || e.keyCode == 32) {
-                        $("#contentBox").hide();
-                        $("#aipBox").hide();
-                        $("#atsBox").hide();
-                        $("#frenchBox").hide();
-                        $("#sitaBox").show();
-                        $("#doctoolBox").hide();
-                        $("#inputSita").focus();
-                         let state = { 'page_id': 6}
-        let title = 'SITA Address Converter'
-        let href = url.substring(0, url.indexOf("#")) + "#SITA_Address_Converter"
-        history.pushState(state, title, href)
-                    }
-                });
-            }
-        // The timeout function disrupts the search function, as all tiles are re-generated. Commented out for the time being.
-           // setTimeout(function(){ 
-                quicklinkGeneratorSpace.appendChild(homeTileDiv);
-          //  }, 1000)
+                })
+            })
+            
+           quicklinkGeneratorSpace.appendChild(homeTileDiv);
         }
     }
     
@@ -341,16 +263,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
         })
     }
     catch(err) {
-        alert("Error\n" + err + errorMessage)
+        alert(`Error ${err}: ${errorMessage}`)
     }   
 
-
-    
     try{
         sortHomeByName(src)
     }
     catch(err){
-        alert("Error\n" + err + errorMessage)
+        alert(`Error ${err}: ${errorMessage}`)
     }
 
     document.getElementById("sortBoxHomeTyp").style.background = "none";
@@ -363,7 +283,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         
         let sortedBy = sortHomeByName();
         for(let i=0;i<Object.keys(sortedBy).length;i++){
-            localStorage.setItem("sortedBy" + i, JSON.stringify({
+            localStorage.setItem(`sortedBy${i}`, JSON.stringify({
                 id: sortedBy[i].id,
                 img: sortedBy[i].img,
                 title: sortedBy[i].title,
@@ -379,7 +299,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         
         let sortedBy = sortHomeByType();
         for(let i=0;i<Object.keys(sortedBy).length;i++){
-            localStorage.setItem("sortedBy" + i, JSON.stringify({
+            localStorage.setItem(`sortedBy${i}`, JSON.stringify({
                 id: sortedBy[i].id,
                 img: sortedBy[i].img,
                 title: sortedBy[i].title,
@@ -405,7 +325,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const thisDate = new Date()
     const thisYear = thisDate.getFullYear()
     
-    document.getElementById("legalCopy").innerHTML = "&copy; 2020-" + thisYear + " Marcel Weber"
-    document.getElementById("footerText").innerHTML = "&copy; 2020-" + thisYear + " AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues." 
+    document.getElementById("legalCopy").innerHTML = `&copy; 2020-${thisYear} Marcel Weber`
+    document.getElementById("footerText").innerHTML = `&copy; 2020-${thisYear} AIM Operations Zurich | Contact helpdesk@skybriefing.com for general enquiries or marcel.weber@skyguide.ch for technical issues.` 
+    
+    console.timeEnd("Initial Load")
 
 });
