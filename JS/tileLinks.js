@@ -67,7 +67,7 @@ const homeTileData = [{
 		id: "confluenceAIM",
 		img: "Assets/icons8-confluence-512.png",
 		title: "Confluence AIM Operations",
-		link: "https://gesconfluence1.skyguide.corp/display/AOP",
+		link: "https://confluence.skyguide.corp/display/AOP/AIM+Operations",
 		tags: "confluence aim operations",
 		style: "spvr"
 	},
@@ -75,7 +75,7 @@ const homeTileData = [{
 		id: "reports",
 		img: "Assets/dashboard.png",
 		title: "Crystal Reports",
-		link: "https://aimzrep01.skyguide.corp:8080/BOE/BI",
+		link: "",
 		tags: "crystal reports",
 		style: "spvr"
 	},
@@ -155,7 +155,7 @@ const homeTileData = [{
 		id: "ewac",
 		img: "Assets/031-preferences.png",
 		title: "eWAC AIM OPS",
-		link: "https://itsm.skyguide.corp/apps_trustedprovider_2018_06_12/apps_trustedprovider_evsm.php?account=50004",
+		link: "https://evapps.skyguide.corp/s/ewac-spvr-prod",
 		tags: "ewac aim ops cos",
 		style: "spvr"
 	},
@@ -453,5 +453,28 @@ const homeTileData = [{
         tags: "duty office fuel dump checklist event report oir",
         style: "spvr"
     },
-
+    {
+        id: "CountryList",
+        img: "Assets/country list.png",
+        title: "Country List",
+        link: "https://skydoc.skyguide.corp/otcs/llisapi.dll?func=Edit.Edit&nodeid=51019095&ReadOnly=True&uiType=1&nexturl=%2Fcs%2Eexe%3Ffunc%3Dll%26objaction%3Doverview%26objid%3D51019095",
+        tags: "country list doc länder liste",
+        style: "doc"
+    },
+    {
+        id: "Bordercross",
+        img: "Assets/barrier.png",
+        title: "Crossborder Flights",
+        link: "https://www.bazg.admin.ch/bazg/de/home/information-private/waren-anmelden/einfuhr-in-die-schweiz/grenzueberschreitende-fluege.html",
+        tags: "cross border customs",
+        style: "aro"
+    },
+	{
+        id: "aimmappingtool",
+        img: "Assets/002-maps.png",
+        title: "AIM Mapping Tool",
+        link: "https://aim-mapping-tool.onrender.com/",
+        tags: "map karte mäse aim mapping tool",
+        style: "aro"
+    },
 ];
