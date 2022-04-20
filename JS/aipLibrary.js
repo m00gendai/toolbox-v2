@@ -337,15 +337,12 @@ function loadAipLibraryCode(){
     }
     // R A N D O M   T A B   I N D E X   F U N C T  I O N   C O M I N G   T H R O U G H
    
+    const aipLinkBoxes = document.querySelectorAll(".aipLinkBox")
     
-    $('.aipLinkBox').each(function() {
-        if (this.type != "hidden") {
-            let $input = $(this);
-            $input.attr("tabindex", 0);
-        }
-    });
+    aipLinkBoxes.forEach(aipLinkBox => {
+        aipLinkBox.setAttribute("tabindex", 0)
+    })
 
-    
     // A I P   L O G I N S   B U T T O N   H A N D L E R
 
     
