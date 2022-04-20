@@ -9,13 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- END Meta Information -->
 		<title>AIM Toolbox</title>
-<!-- BEGIN Necessary Scripts -->
-		<script src="JS/jquery-3.6.0.min.js"></script>            <!-- jQuery library -->
-		<script src="JS/script.js" defer></script>                <!-- Main JavaScript Code -->
-		<script src="JS/all.min.js" defer></script>               <!-- Font Awesome -->
-		<script src="JS/tileLinks.js" defer></script>             <!-- JSON for Home Page - Tile Links -->
-<!-- END Necessary Scripts -->
-<!-- BEGIN Stylesheets -->
+		<!-- BEGIN Stylesheets -->
 		<link rel="stylesheet" href="CSS/styles.css">             <!-- CSS General Styles -->
 		<link rel="stylesheet" href="CSS/menubar.css">            <!-- CSS Menu Bar & Footer -->
 		<link rel="stylesheet" href="CSS/aipbox.css">             <!-- CSS AIP Library -->
@@ -29,6 +23,36 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />      <!-- CSS Font Awesome CDN -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css" integrity="sha512-49xW99xceMN8dDoWaoCaXvuVMjnUctHv/jOlZxzFSMJYhqDZmSF/UnM6pLJjQu0YEBLSdO1DP0er6rUdm8/VqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <!-- CSS Dragula.js -->
 <!-- END Stylesheets -->
+<!-- BEGIN Necessary Scripts -->
+		<script src="JS/script.js" defer></script>                <!-- Main JavaScript Code -->
+		<script src="JS/all.min.js" defer></script>               <!-- Font Awesome -->
+		<script src="JS/tileLinks.js" defer></script>             <!-- JSON for Home Page - Tile Links -->
+		<script src="JS/french.js" defer></script>              <!-- Specific French section JavaScript Code -->
+        <script src="JS/atsMsg.js" defer></script>              <!-- Specific ATS MSG section JavaScript Code -->
+        <script src="JS/aipLibrary.js" defer></script>          <!-- Specific AIP Library section JavaScript Code -->
+        <script src="JS/docScreeningTool.js" defer></script>    <!-- Specific DOC Screening Tool section JavaScript Code -->
+        <script src="JS/sita.js" defer></script>                <!-- Specific SITA section JavaScript Code -->
+        <script src="JS/apcodes.js" defer></script>             <!-- JSON for SITA section - Airport Codes -->
+        <script src="JS/alcodes.js" defer></script>             <!-- JSON for SITA section - Airline Codes -->
+        <script src="JS/convcodes.js" defer></script>           <!-- JSON for SITA section - Matching Address Pairs -->
+        <script src="JS/corpcodes.js" defer></script>           <!-- JSON for SITA section - Department Codes -->
+        <script src="JS/locisFK.js" defer></script>             <!-- JSON for DOC Tool - Flightkeys AD -->
+        <script src="JS/locisFIR.js" defer></script>            <!-- JSON for DOC Tool - SWR FIR -->
+        <script src="JS/locisSWR.js" defer></script>            <!-- JSON for DOC Tool - SWR AD -->
+        <script src="JS/aipLinks.js" defer></script>            <!-- JSON for AIP Library - eAIP Links -->
+        <script src="JS/dragDrop.js" defer></script>            <!-- Drag & Drop logic -->
+        <script src="JS/lodash.js" defer></script>              <!-- lodash library -->
+        <script src="Documents/FRENCH BIBLIOTHEK/sfo_helpdesk.js" defer></script>           <!-- JSON for French Table 1 -->
+        <script src="Documents/FRENCH BIBLIOTHEK/skybriefing_helpdesk.js" defer></script>   <!-- JSON for French Table 2 -->
+        <script src="Documents/FRENCH BIBLIOTHEK/aip_helpdesk.js" defer></script>           <!-- JSON for French Table 3 -->
+        <script src="Documents/FRENCH BIBLIOTHEK/voci_tech_gen.js" defer></script>          <!-- JSON for French Table 4 -->
+        <script src="Documents/FRENCH BIBLIOTHEK/voci_div.js" defer></script>               <!-- JSON for French Table 5 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js" integrity="sha512-MrA7WH8h42LMq8GWxQGmWjrtalBjrfIzCQ+i2EZA26cZ7OBiBd/Uct5S3NP9IBqKx5b+MMNH1PhzTsk6J9nPQQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>        <!-- dragula.js library CDN -->
+        <script src="https://cdn.amcharts.com/lib/4/core.js" defer></script>                      <!-- amCharts library -->
+        <script src="https://cdn.amcharts.com/lib/4/charts.js" defer></script>                    <!-- amCharts library -->
+        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js" defer></script>           <!-- amCharts library -->
+<!-- END Necessary Scripts -->
+
 		<link rel="icon" href="Favicon/favicon.ico?v=2" />        <!-- Browser Tab Icon -->
 	</head>
 <!-- END Head -->
@@ -46,6 +70,9 @@
             </li>
 			<li id="doctool">
                 DOC Screening Tool
+            </li>
+            <li id="mappingtool">
+                Mapping Tool
             </li>
 			<li id="favoritesTogglor" title="Toggle Favorites">
                 <i class="fas fa-star"></i>
@@ -744,30 +771,7 @@
         </footer>
 <!-- END Footer -->
 <!-- BEGIN Deferred Scripts -->
-        <script src="JS/french.js" defer></script>              <!-- Specific French section JavaScript Code -->
-        <script src="JS/atsMsg.js" defer></script>              <!-- Specific ATS MSG section JavaScript Code -->
-        <script src="JS/aipLibrary.js" defer></script>          <!-- Specific AIP Library section JavaScript Code -->
-        <script src="JS/docScreeningTool.js" defer></script>    <!-- Specific DOC Screening Tool section JavaScript Code -->
-        <script src="JS/sita.js" defer></script>                <!-- Specific SITA section JavaScript Code -->
-        <script src="JS/apcodes.js" defer></script>             <!-- JSON for SITA section - Airport Codes -->
-        <script src="JS/alcodes.js" defer></script>             <!-- JSON for SITA section - Airline Codes -->
-        <script src="JS/convcodes.js" defer></script>           <!-- JSON for SITA section - Matching Address Pairs -->
-        <script src="JS/corpcodes.js" defer></script>           <!-- JSON for SITA section - Department Codes -->
-        <script src="JS/locisFK.js" defer></script>             <!-- JSON for DOC Tool - Flightkeys AD -->
-        <script src="JS/locisFIR.js" defer></script>            <!-- JSON for DOC Tool - SWR FIR -->
-        <script src="JS/locisSWR.js" defer></script>            <!-- JSON for DOC Tool - SWR AD -->
-        <script src="JS/aipLinks.js" defer></script>            <!-- JSON for AIP Library - eAIP Links -->
-        <script src="JS/dragDrop.js" defer></script>            <!-- Drag & Drop logic -->
-        <script src="JS/lodash.js" defer></script>              <!-- lodash library -->
-        <script src="Documents/FRENCH BIBLIOTHEK/sfo_helpdesk.js" defer></script>           <!-- JSON for French Table 1 -->
-        <script src="Documents/FRENCH BIBLIOTHEK/skybriefing_helpdesk.js" defer></script>   <!-- JSON for French Table 2 -->
-        <script src="Documents/FRENCH BIBLIOTHEK/aip_helpdesk.js" defer></script>           <!-- JSON for French Table 3 -->
-        <script src="Documents/FRENCH BIBLIOTHEK/voci_tech_gen.js" defer></script>          <!-- JSON for French Table 4 -->
-        <script src="Documents/FRENCH BIBLIOTHEK/voci_div.js" defer></script>               <!-- JSON for French Table 5 -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js" integrity="sha512-MrA7WH8h42LMq8GWxQGmWjrtalBjrfIzCQ+i2EZA26cZ7OBiBd/Uct5S3NP9IBqKx5b+MMNH1PhzTsk6J9nPQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        <!-- dragula.js library CDN -->
-        <script src="https://cdn.amcharts.com/lib/4/core.js"></script>                      <!-- amCharts library -->
-        <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>                    <!-- amCharts library -->
-        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>           <!-- amCharts library -->
+        
 <!-- END Deferred Scripts -->
     </body>
 <!-- END Body -->
