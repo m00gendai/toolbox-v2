@@ -23,7 +23,9 @@ window.onload = (event) => {
     
     function displayChart(sitaInput){
         am4core.ready(function() {
-
+            
+            document.getElementById("dissect").style.background = "none"
+            
             let airlineCodes = JSON.parse(alcodes)
             airlineCodes = airlineCodes.alcode
             
@@ -37,7 +39,7 @@ window.onload = (event) => {
             departmentCodes = departmentCodes.corpcode
             
             am4core.useTheme(am4themes_animated)
-
+            
             chart = am4core.create("dissect", am4charts.SankeyDiagram)
             chart.hiddenState.properties.opacity = 0
 
