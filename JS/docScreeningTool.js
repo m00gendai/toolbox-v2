@@ -6,12 +6,13 @@ function loadDocScreeningToolCode(){
 
     const FKResultsTable 	= document.getElementById("FKresultsTable");
     const queryFKfield		= document.getElementById("queryFK");
+    const locisFKsorted = locisFK.sort()
 
     // This creates the rows of the table dynamically
     function createTableContentFK(i) {
         const TRFK 				= document.createElement("tr");
         const TDFK	 			= document.createElement("td");
-        const FKResultsContent 	= document.createTextNode(locisFK[i]);
+        const FKResultsContent 	= document.createTextNode(locisFKsorted[i]);
         TRFK.appendChild(TDFK);
         TDFK.appendChild(FKResultsContent);
         FKResultsTable.appendChild(TRFK);	
@@ -26,7 +27,7 @@ function loadDocScreeningToolCode(){
         THFK.setAttribute("id", "thFK");
 
         if (queryFKfield.value == 0){
-            for (let i=0; i<locisFK.length; i++){
+            for (let i=0; i<locisFKsorted.length; i++){
                 createTableContentFK(i); // calls each JSON object and creates a row for it
             }
         } 
@@ -427,7 +428,9 @@ function loadDocScreeningToolCode(){
 
 
     document.getElementById("queryFK").focus();
-    queryFKLocis()
+    if(!document.getElementById("thFK")){
+        queryFKLocis()
+    }
 
     
 // D O C   T O O L   O P T I O N S   M E N U
