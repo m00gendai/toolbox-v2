@@ -1,25 +1,28 @@
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', () => {
     
+    let storedAchievements 
+    JSON.parse(localStorage.getItem("toolbox_achievements")) == null ? storedAchievements = [] : storedAchievements = JSON.parse(localStorage.getItem("toolbox_achievements"))
+    let storedFavorites 
+    JSON.parse(localStorage.getItem("toolbox_favorites")) == null ? storedFavorites = [] : storedFavorites = JSON.parse(localStorage.getItem("toolbox_favorites"))
+    let storedVisibility
+    JSON.parse(localStorage.getItem("toolbox_displayFavorites")) == null ? storedVisibility = true : storedVisibility = JSON.parse(localStorage.getItem("toolbox_displayFavorites"))
 
-    let keys = Object.keys(localStorage)
+    if(!storedVisibility){
+        document.getElementById("favoritesBar").style.display = "none"
+        document.getElementById("favoritesTogglor").innerHTML = '&#9734;'
+        document.getElementById("quickLinks").style.margin = "3rem 0 2rem 0"
+    } 
+    if (storedVisibility){
+        document.getElementById("favoritesBar").style.display = "grid"
+        document.getElementById("favoritesTogglor").innerHTML = '&#9733;'
+        document.getElementById("quickLinks").style.margin = "1rem 0 2rem 0"
+    }
 
-    let hasAchievement
-    
-    for(let i=0;i<keys.length;i++){
-		if(typeof(localStorage.getItem(keys[i])) == "string"){
-			let favorites = JSON.parse(localStorage.getItem(keys[i]))  
-			if(favorites[0] == "favoritesBar"){
-				document.getElementById(favorites[0]).appendChild(document.getElementById(favorites[1]))
-				document.getElementById(favorites[1]).classList.add("favoriteLinkFixedWidth")
-			} else if(favorites[0] == "favoritesBarToggle"){
-				let favoriteStyle = favorites[1]
-				document.getElementById("favoritesBar").style.display = favoriteStyle
-				document.getElementById("favoritesTogglor").innerHTML = `<i class="${favorites[2]} fa-star"></i>`
-				document.getElementById("quickLinks").style.margin = `${favorites[3]}rem 0 2rem 0`
-			} else if(favorites[0] == "achievement"){
-				hasAchievement = true
-			}
-        }
+    if(storedFavorites.length > 0){
+        storedFavorites.forEach(favorite =>{
+            document.getElementById("favoritesBar").appendChild(document.getElementById(favorite))
+            document.getElementById(favorite).classList.add("favoriteLinkFixedWidth")
+        })
     }
         
     const drake = dragula(
@@ -33,49 +36,68 @@ window.addEventListener('DOMContentLoaded', (event) => {
             revertOnSpill: true
         }
     );
-
+    
+    function setAchievement_twiceFav(storedAchievements){
+        setTimeout(function(){
+            document.getElementById("achievementContainer").style.display = "flex"
+        }, 0)   
+        setTimeout(function(){
+            document.getElementById("achievementDetail").innerText = "Tried adding the same Favorite twice"
+            document.getElementById("achievement").style.width = "30vw"
+        },500)
+        setTimeout(function(){
+            document.getElementById("achievement").style.width = "0vw"
+        }, 6000)
+        setTimeout(function(){
+            document.getElementById("achievementContainer").style.display = "none"
+        }, 6500)
+        storedAchievements.push("twice_fav")
+        localStorage.setItem("toolbox_achievements", JSON.stringify(storedAchievements))
+    }
+    
     drake.on('drop', function(el, target, source, sibling){
-        console.log(hasAchievement)
-        if(localStorage.getItem("toolbox_favorite_" + el.id) && target.id=="favoritesBar" && source.id != "favoritesBar"){
-            if(!hasAchievement){
-                setTimeout(function(){
-                    document.getElementById("achievementContainer").style.display = "flex"
-                }, 0)   
-                setTimeout(function(){
-                    document.getElementById("achievementDetail").innerText = "Tried adding the same Favorite twice"
-                    document.getElementById("achievement").style.width = "30vw"
-                },500)
-                setTimeout(function(){
-                    document.getElementById("achievement").style.width = "0vw"
-                }, 6000)
-                setTimeout(function(){
-                    document.getElementById("achievementContainer").style.display = "none"
-                }, 6500)
-                localStorage.setItem("toolbox_achievement", JSON.stringify(["achievement", "yes"]))
+         // TRYING TO ADD TILE TWICE       
+        let favs
+        JSON.parse(localStorage.getItem("toolbox_favorites")) == null ? favs = [] : favs = JSON.parse(localStorage.getItem("toolbox_favorites"))
+        if(favs.includes(el.id) && target.id=="favoritesBar" && source.id != "favoritesBar"){
+            if(!storedAchievements.includes("twice_fav")){
+                setAchievement_twiceFav(storedAchievements)
             }
             drake.cancel(true);
             el.classList.remove("favoriteLinkFixedWidth")
-        } else if(localStorage.getItem("toolbox_favorite_" + el.id) && target.id=="favoritesBar" && source.id == "favoritesBar"){
-             localStorage.removeItem("toolbox_favorite_" + el.id)
-             localStorage.setItem("toolbox_favorite_" + el.id, JSON.stringify([target.id, el.id]))
-        }
-        
+        }      
+        // ADDING ITEMS TO FAVORITES BAR
         if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount <= 9){ // eight elements, but the hint message counts as a child element, too
-            localStorage.setItem("toolbox_favorite_" + el.id, JSON.stringify([target.id, el.id]))
+            let favorites
+            localStorage.getItem("toolbox_favorites") == null ? favorites = [] : favorites = JSON.parse(localStorage.getItem("toolbox_favorites"))
+            favorites.push(el.id)
+            localStorage.setItem("toolbox_favorites", JSON.stringify(favorites))
+            document.getElementById("favoritesBar").appendChild(document.getElementById(el.id))
             el.classList.add("favoriteLinkFixedWidth")
             displayFavoriteMessage()
         } else if(target.id == "favoritesBar" && document.getElementById(target.id).childElementCount > 9){ // eight elements, but the hint message counts as a child element, too
             alert("Only a maximum of eight Favorites are supported.")
             drake.cancel(true);
         }
-        
-        if(target.id == "quickLinks"){
-            for(let i=0;i<keys.length;i++){
-                let favorites = JSON.parse(localStorage.getItem("toolbox_favorite_" + el.id))
-                el.classList.remove("favoriteLinkFixedWidth")
-                localStorage.removeItem("toolbox_favorite_" + el.id)
-                displayFavoriteMessage()
+        // REMOVING ITEMS FROM FAVORITES BAR
+        if(target.id == "quickLinks"){ 
+            const favorites = JSON.parse(localStorage.getItem("toolbox_favorites"))
+            el.classList.remove("favoriteLinkFixedWidth")
+            const newFavorites = favorites.filter(item =>{
+                return item != el.id
+            })
+            localStorage.setItem("toolbox_favorites", JSON.stringify(newFavorites))
+            displayFavoriteMessage()
+        }
+        // SORTING ITEMS IN FAVORITES BAR
+        if(target.id == "favoritesBar" && source.id == "favoritesBar"){
+            let sortedFavorites = []
+            for (item of target.children){
+                if(item.id != "favoritesMessage"){
+                    sortedFavorites.push(item.id)
+                }
             }
+            localStorage.setItem("toolbox_favorites", JSON.stringify(sortedFavorites))
         }
     })
 
@@ -90,26 +112,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     displayFavoriteMessage()
     
-    function favoriteBarToggler(favoriteStyle){
-         if(favoriteStyle == "grid"){
+    function favoriteBarToggler(){
+        const isVisible = JSON.parse(localStorage.getItem("toolbox_displayFavorites"))
+         if(isVisible){
+            localStorage.setItem("toolbox_displayFavorites", JSON.stringify(false))
             document.getElementById("favoritesBar").style.display = "none"
-            localStorage.setItem("toolbox_favoritesbar", JSON.stringify(["favoritesBarToggle","none", "far", 3]))
-            document.getElementById("favoritesTogglor").innerHTML = '<i class="far fa-star"></i>'
+            document.getElementById("favoritesTogglor").innerHTML = '&#9734;'
             document.getElementById("quickLinks").style.margin = "3rem 0 2rem 0"
-         } else if (favoriteStyle == "none"){
+         } 
+         if (!isVisible){
+             localStorage.setItem("toolbox_displayFavorites", JSON.stringify(true))
             document.getElementById("favoritesBar").style.display = "grid"
-            localStorage.setItem("toolbox_favoritesbar", JSON.stringify(["favoritesBarToggle","grid", "fas", 1]))
-            document.getElementById("favoritesTogglor").innerHTML = '<i class="fas fa-star"></i>'
+            document.getElementById("favoritesTogglor").innerHTML = '&#9733;'
             document.getElementById("quickLinks").style.margin = "1rem 0 2rem 0"
         }
     }
     
     
     document.getElementById("favoritesTogglor").addEventListener("click", function(){
-        let favoriteStyle = window.getComputedStyle(document.getElementById("favoritesBar")).display
-       favoriteBarToggler(favoriteStyle)
+        favoriteBarToggler()
     })
-        
-        
-    
 })
