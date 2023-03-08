@@ -381,13 +381,13 @@ legend {
 	position: relative;
 	height: 100%;
 	overflow-y: scroll;
-	background: lightblue;
+	background: white;
 }
 
 #doctoolHelpText{
 	position: relative;
-	height: 100%;
-	margin: 4rem 2rem 6rem 2rem;
+	margin: 4rem 2rem 4rem 2rem;
+    line-height: 1.5rem;
 }
 
 #helpMenuTriggerContainer{
@@ -406,4 +406,8 @@ legend {
     font-size: 2rem;
     background: white;
     color: red;
+}
+
+#helpMenuTrigger:hover{
+    cursor: pointer;
 }
