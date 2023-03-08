@@ -389,19 +389,71 @@
 <!-- END Section SITA Conversion -->
 <!-- BEGIN Section DOC Screening Tool Section -->
         <section id="doctoolBox">
+            <div id="doctoolHelpWrapper">
+                <div id="doctoolHelpTextContainer">
+                    <div id="doctoolHelpText">
+                        <strong>LOCI Lookup Database</strong>
+                        <br>
+                        <br>
+                        Enter the LOCI letters into the input field and see which airports Flightkeys need screened.<br>
+                        L -> Shows everything starting with L<br>
+                        LS -> Shows everything starting with LS<br>
+                        And so on.
+                        <br>
+                        <hr>
+                        <br>
+                        <strong>Print Dialog for Screening</strong>
+                        <br>
+                        <br>
+                        This tool is used in conjunction with a document to be screened.<br>
+                        Enter the page range to be printed into the relevant input fields.<br>
+                        At the end, it will show how many pages there are printed and to be entered into the Zeiterfassung.<br>
+                        <br>
+                        By pressing <kbd>Copy</kbd>, a popup appears.<br>
+                        <br>
+                        The popup:
+                        <ul>
+                            <li>displays the page range to be entered into the print dialog of the pdf document</li>
+                            <li>shows for which customer the page range is for</li>
+                            <li>splits the page range if it detects a single page (1-4,<b>7</b>,9-10)</li>
+                            <li>adds a single page at the end of a sequence and adds subsequent single pages in a separate row</li>
+                            <li>splits the page range if it detects a range that results in an odd number of pages (1-4,<b>6-8</b>,10-11)</li>
+                            <li>adds the odd range at the end of a sequence and adds subsequent odd ranges in a separate row</li>
+                        </ul>
+                        <br>
+                        The tool:
+                        <ul>
+                            <li>adds the page count when tabbing out of an input field or when clicking the <kbd>Calculate Pages</kbd> button</li>
+                            <li>alerts you if it detects any other character besides a number, a dash (-) or a comma (,)</li>
+                            <li>alerts you if it detects a wrong sequence of page numbers (1-4-7 instead of 1-4,7)</li>
+                            <li>alerts you if it detects two special characters in a row (1-4,,7-10)</li>
+                            <li>alerts you if it detects the input being longer than 100 characters (and shows you where the overflow happens)</li>
+                            <li>ignores spaces, i.e. prevents them entirely</li>
+                            <li>stores entries in local memory so entered inputs are not lost if the page is refreshed or the browser window is closed</li>
+                        </ul>
+                        <br>
+                        The options menu:
+                        <ul>
+                            <li>Toggles the help dialog on or off</li>
+                            <li>Toggles the lookup database on or off</li>
+                            <li>Toggles screening dialog on or off</li>
+                            <li>Recovers entered data after a refresh or closure of the browser</li>
+                            <li>Lets you save your progress to a file, with the file name taken from the Document Name field</li>
+                            <li>Lets you load a saved progress file to continue the screening</li>
+                        <hr>
+                        <br>
+                        For any questions or bug reports, feel free to reach out to <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>.
+                    </div>
+                </div>
+                <div id ="helpMenuTriggerContainer">
+                    <div id="helpMenuTrigger"><i class="fas fa-life-ring"></i></div>
+                </div>
+            </div>
             <div class="optionsButton" id="optionsButton">
                 <i class="fas fa-cog"></i>
             </div>
             <div id="optionsMenuVeil">
                 <div id="optionsMenu">
-                    <div id="optionsDocToolHelp">
-                        <div id="optionsDocToolHelpTitle">
-                            Help Dialog
-                        </div>
-                        <div id="optionsDocToolHelpToggler">
-                            Hide <input type="range" id="optionsDocToolHelpRange" name="HelpRange" min="0" max="1" value="0"> Show
-                        </div>
-                    </div>
                     <div id="optionsLociDatabase">
                         <div id="optionsLociDatabaseTitle">
                             LOCI Lookup Database
@@ -440,59 +492,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="halpText" id="halpText">
-                <strong>LOCI Lookup Database</strong>
-                <br>
-                <br>
-                Enter the LOCI letters into the input field and see which airports Flightkeys need screened.<br>
-                L -> Shows everything starting with L<br>
-                LS -> Shows everything starting with LS<br>
-                And so on.
-                <br>
-                <hr>
-                <br>
-                <strong>Print Dialog for Screening</strong>
-                <br>
-                <br>
-                This tool is used in conjunction with a document to be screened.<br>
-                Enter the page range to be printed into the relevant input fields.<br>
-                At the end, it will show how many pages there are printed and to be entered into the Zeiterfassung.<br>
-                <br>
-                By pressing <kbd>Copy</kbd>, a popup appears.<br>
-                <br>
-                The popup:
-                <ul>
-                    <li>displays the page range to be entered into the print dialog of the pdf document</li>
-                    <li>shows for which customer the page range is for</li>
-                    <li>splits the page range if it detects a single page (1-4,<b>7</b>,9-10)</li>
-                    <li>adds a single page at the end of a sequence and adds subsequent single pages in a separate row</li>
-                    <li>splits the page range if it detects a range that results in an odd number of pages (1-4,<b>6-8</b>,10-11)</li>
-                    <li>adds the odd range at the end of a sequence and adds subsequent odd ranges in a separate row</li>
-                </ul>
-                <br>
-                The tool:
-                <ul>
-                    <li>adds the page count when tabbing out of an input field or when clicking the <kbd>Calculate Pages</kbd> button</li>
-                    <li>alerts you if it detects any other character besides a number, a dash (-) or a comma (,)</li>
-                    <li>alerts you if it detects a wrong sequence of page numbers (1-4-7 instead of 1-4,7)</li>
-                    <li>alerts you if it detects two special characters in a row (1-4,,7-10)</li>
-                    <li>alerts you if it detects the input being longer than 100 characters (and shows you where the overflow happens)</li>
-                    <li>ignores spaces, i.e. prevents them entirely</li>
-                    <li>stores entries in local memory so entered inputs are not lost if the page is refreshed or the browser window is closed</li>
-                </ul>
-                <br>
-                The options menu:
-                <ul>
-                    <li>Toggles the help dialog on or off</li>
-                    <li>Toggles the lookup database on or off</li>
-                    <li>Toggles screening dialog on or off</li>
-                    <li>Recovers entered data after a refresh or closure of the browser</li>
-                    <li>Lets you save your progress to a file, with the file name taken from the Document Name field</li>
-                    <li>Lets you load a saved progress file to continue the screening</li>
-                <hr>
-                <br>
-                For any questions or bug reports, feel free to reach out to <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>.
             </div>
             <div class="docContent">
                 <div class="queryContainer" id="queryContainer">
