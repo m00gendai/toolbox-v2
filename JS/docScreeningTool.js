@@ -396,23 +396,8 @@ function loadDocScreeningToolCode(){
     
     let optionsShow = false
     
-    const optionsButton = document.getElementById("optionsButton");
-    const optionsMenu = document.getElementById("optionsMenu");
-    const optionsTogglers = [
-        {
-            name: "optionsDataRange",
-            id: "optionsLociDatabaseRange",
-            target: "queryContainer"
-        },
-        {
-            name: "optionsPrintRange",
-            id: "optionsPrintRange",
-            target: "screeningContainer"
-        },
-    ]
-
     // simple - click on cog to show, click again to hide
-    optionsButton.addEventListener("click", function() {
+    document.getElementById("optionsButton").addEventListener("click", function() {
         if(!optionsShow){
             document.getElementById("optionsMenuVeil").style.display = "flex"
         }
@@ -445,17 +430,52 @@ function loadDocScreeningToolCode(){
         }
         helpShow = !helpShow
     })
-
-    // generates the togglers
-    for (let i = 0; i < Object.keys(optionsTogglers).length; i++) {
-        document.getElementById(optionsTogglers[i].id).addEventListener("click", function() {
-            if (document.getElementById(optionsTogglers[i].id).value == 1) {
-                document.getElementById(optionsTogglers[i].target).style.display = "block";
-            } else if (document.getElementById(optionsTogglers[i].id).value == 0) {
-                document.getElementById(optionsTogglers[i].target).style.display = "none";
-            }
-        })
+    
+    let showLociDB = true
+    let showScreening = true
+    
+    function toggliColorOn(toggler){
+        console.log("on")
+        document.getElementById(`${toggler}togglerBody`).style.background = "blue"
+        document.getElementById(`${toggler}togglerSwitch`).style.left = "auto"
+        document.getElementById(`${toggler}togglerSwitch`).style.right = "5%"
+        document.getElementById(`${toggler}togglerSwitch`).style.color = "lime"
     }
+    
+     function toggliColorOff(toggler){
+        document.getElementById(`${toggler}togglerBody`).style.background = "grey"
+        document.getElementById(`${toggler}togglerSwitch`).style.right = "auto"
+        document.getElementById(`${toggler}togglerSwitch`).style.left = "5%"
+        document.getElementById(`${toggler}togglerSwitch`).style.color = "red"
+    }
+    
+    const togglers = ["lociDB_", "screening_"]
+    togglers.forEach(toggler =>{
+        document.getElementById(`${toggler}check`).addEventListener("change", function(e){
+            if(e.target.id.startsWith("lociDB")){
+                if(!showLociDB){
+                    toggliColorOn(toggler)
+                } 
+                if(showLociDB){
+                    toggliColorOff(toggler)
+                }
+                showLociDB ? document.getElementById("queryContainer").style.display = "none" : document.getElementById("queryContainer").style.display = "block"
+                showLociDB = !showLociDB
+            }
+            if(e.target.id.startsWith("screening")){
+                if(!showScreening){
+                    toggliColorOn(toggler)
+                } 
+                if(showScreening){
+                    toggliColorOff(toggler)
+                }
+                showScreening ? document.getElementById("screeningContainer").style.display = "none" : document.getElementById("screeningContainer").style.display = "flex"
+                showScreening = !showScreening
+            }
+        })        
+    })
+
+    
 
     const saveDocLink = document.createElement("a");
     const saveDocLinkText = "Save Screening Session to file";
