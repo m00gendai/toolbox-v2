@@ -1,8 +1,12 @@
 function loadDocScreeningToolCode(){
-
+    
+    const customers = ["Document", "FKDF", "FKAT", "NTM", "DBU", "IATA"]
+    
+    customers.forEach(customer =>{
+        document.getElementById(`screen${customer}`).value = ""
+    })
 
 // L O C I   D A T A B A S E
-
 
     const FKResultsTable 	= document.getElementById("FKresultsTable");
     const queryFKfield		= document.getElementById("queryFK");
@@ -92,72 +96,26 @@ function loadDocScreeningToolCode(){
     }
 
     // This deals with putting the page ranges into local storage
+    
+    
     function localStorager(customer) {
-        const loStoDoc  = {valuex: "DocumentValues", 	screen: "screenDocument", 	name: "DOC"};
-        const LoStoFKDF = {valuex: "FKDFvalues", 	screen: "screenFKDF", 	name: "FKDF"};
-        const LoStoFKAT = {valuex: "FKATvalues", 	screen: "screenFKAT",	name: "FKAT"};
-        const LoStoNTM 	= {valuex: "NTMvalues", 	screen: "screenNTM",	name: "NTM"};
-        const LoStoDBU 	= {valuex: "DBUvalues", 	screen: "screenDBU",	name: "DBU"};
-        const LoStoIATA = {valuex: "IATAvalues", 	screen: "screenIATA", 	name: "IATA"};
-        const LoStoAll	= [LoStoFKDF, LoStoFKAT, LoStoNTM, LoStoDBU, LoStoIATA, loStoDoc]
-        for(let i=0;i<LoStoAll.length;i++){
-            if(customer == LoStoAll[i].name && document.getElementById(LoStoAll[i].screen).value != ""){
-                localStoragerSetter(LoStoAll, i);
-            } 
-        }
-        if (customer == "All"){
-            for(let i=0;i<LoStoAll.length;i++){
-                localStoragerSetter(LoStoAll, i);
-            }
-        }	
-    }
-
-    // this is only a function so i have to write this expression only once
-    function localStoragerSetter(LoStoAll,i) {
-        localStorage.setItem(LoStoAll[i].valuex, JSON.stringify(document.getElementById(LoStoAll[i].screen).value));
+        localStorage.setItem(`doctool_${customer}`, JSON.stringify([document.getElementById(`screen${customer}`).value]))
     }
 
     // pageCalculation function call events, either on buton or on blur
     // also deals with the local storage
     
-    let customer
-    
     document.getElementById("calculatePages").addEventListener("click", function() {
-        customer = "All";
-        
-        calculatePagesEvent(customer); // passing the customer variable shouldnt do anything but it works, so... i'll leave it
-        localStorager(customer);
-    })
-    document.getElementById("screenDocument").addEventListener("blur", function() {
-        customer = "DOC";
-        localStorager(customer);
-    })
-    document.getElementById("screenFKDF").addEventListener("blur", function() {
-        if(document.getElementById("screenFKDF").value != 0){
-            customer = "FKDF";
-            calculatePagesEvent(customer);
+        customers.forEach(customer =>{
             localStorager(customer);
-        }
+            calculatePagesEvent(customer)
+        })
     })
-    document.getElementById("screenFKAT").addEventListener("blur", function() {
-        customer = "FKAT";
-        calculatePagesEvent(customer);
-        localStorager(customer);
-    })
-    document.getElementById("screenNTM").addEventListener("blur", function() {
-        customer = "NTM";
-        calculatePagesEvent(customer);
-        localStorager(customer);
-    })
-    document.getElementById("screenDBU").addEventListener("blur", function() {
-        customer = "DBU";
-        calculatePagesEvent(customer);
-        localStorager(customer);
-    })
-    document.getElementById("screenIATA").addEventListener("blur", function() {
-        customer = "IATA";
-        calculatePagesEvent(customer);
-        localStorager(customer);
+    
+    customers.forEach(customer =>{
+        document.getElementById(`screen${customer}`).addEventListener("blur", function() {
+            localStorager(customer);
+        })
     })
 
     // the actual calculation magic
@@ -455,23 +413,6 @@ function loadDocScreeningToolCode(){
             target: "screeningContainer"
         },
     ]
-    const optionsButtons = [
-        {
-            name: "optionsRecover",
-            id: "optionsRecoverDataToggler",
-            target: "recover"
-        },
-        {
-            name: "optionsSave",
-            id: "optionsLoadSaveSave",
-            target: "save"
-        },
-        {
-            name: "optionsLoad",
-            id: "optionsLoadSaveLoad",
-            target: "load"
-        }
-    ]
 
     // simple - click on cog to show, click again to hide
     optionsButton.addEventListener("click", function() {
@@ -557,12 +498,13 @@ function loadDocScreeningToolCode(){
     })
 
     document.getElementById("optionsRecoverDataToggler").addEventListener("click", function(){
-        document.getElementById("screenDocument").innerHTML = JSON.parse(localStorage.getItem("DocumentValues"));   
-        document.getElementById("screenFKDF").innerHTML = JSON.parse(localStorage.getItem("FKDFvalues"));
-        document.getElementById("screenFKAT").innerHTML = JSON.parse(localStorage.getItem("FKATvalues"));
-        document.getElementById("screenNTM").innerHTML 	= JSON.parse(localStorage.getItem("NTMvalues"));
-        document.getElementById("screenDBU").innerHTML 	= JSON.parse(localStorage.getItem("DBUvalues"));
-        document.getElementById("screenIATA").innerHTML = JSON.parse(localStorage.getItem("IATAvalues"));
+        customers.forEach(customer =>{
+            document.getElementById(`screen${customer}`).value = ""
+            if(localStorage.getItem(`doctool_${customer}`)){
+                console.log(localStorage.getItem(`doctool_${customer}`))
+                document.getElementById(`screen${customer}`).value = JSON.parse(localStorage.getItem(`doctool_${customer}`)) == "" ? null : JSON.parse(localStorage.getItem(`doctool_${customer}`))
+            } 
+        })
     })
 
     const clearButtons = [
