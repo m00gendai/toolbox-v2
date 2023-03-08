@@ -13,27 +13,29 @@ function loadDocScreeningToolCode(){
     const locisFKsorted = locisFK.sort()
 
     // This creates the rows of the table dynamically
-    function createTableContentFK(i) {
-        const TRFK 				= document.createElement("tr");
-        const TDFK	 			= document.createElement("td");
-        const FKResultsContent 	= document.createTextNode(locisFKsorted[i]);
-        TRFK.appendChild(TDFK);
-        TDFK.appendChild(FKResultsContent);
-        FKResultsTable.appendChild(TRFK);	
+    function createTableContentFK(loci) {
+        const row = document.createElement("tr");
+        FKResultsTable.appendChild(row)
+        
+        const cell = document.createElement("td");
+        row.appendChild(cell);
+        
+        const content = document.createTextNode(loci);
+        cell.appendChild(content);
     }
 
     // This creates the table itself
     function queryFKLocis() {
-        const THFK			= document.createElement("th"); 
-        const THFKContent1 	= document.createTextNode("Flightkeys Airports");
-        THFK.appendChild(THFKContent1);
-        FKResultsTable.appendChild(THFK);
-        THFK.setAttribute("id", "thFK");
+        const head = document.createElement("th"); 
+        const content = document.createTextNode("Flightkeys Airports");
+        head.appendChild(content);
+        FKResultsTable.appendChild(head);
+        head.setAttribute("id", "thFK");
 
         if (queryFKfield.value == 0){
-            for (let i=0; i<locisFKsorted.length; i++){
-                createTableContentFK(i); // calls each JSON object and creates a row for it
-            }
+            locisFKsorted.forEach(loci =>{
+                createTableContentFK(loci); // calls each JSON object and creates a row for it
+            })
         } 
     }
 
@@ -43,11 +45,11 @@ function loadDocScreeningToolCode(){
         while (trsFK.length>0){
             trsFK[0].parentNode.removeChild(trsFK[0]);
         } 
-        for(let i=0;i<locisFK.length;i++){
-            if (locisFK[i].startsWith(queryFKfield.value.toUpperCase())){
-                createTableContentFK(i)
+        locisFK.forEach(loci=>{
+            if(loci.startsWith(queryFKfield.value.toUpperCase())){
+                createTableContentFK(loci)
             }
-        }
+        })
     })
 
     
