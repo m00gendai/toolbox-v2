@@ -400,11 +400,6 @@ function loadDocScreeningToolCode(){
     const optionsMenu = document.getElementById("optionsMenu");
     const optionsTogglers = [
         {
-            name: "optionsHelpRange",
-            id: "optionsDocToolHelpRange",
-            target: "halpText"
-        },
-        {
             name: "optionsDataRange",
             id: "optionsLociDatabaseRange",
             target: "queryContainer"
@@ -438,6 +433,17 @@ function loadDocScreeningToolCode(){
             document.getElementById("optionsMenuVeil").style.display = "none"
             optionsShow = ! optionsShow 
         }
+    })
+    
+    let helpShow = false
+    document.getElementById("helpMenuTrigger").addEventListener("click", function(){
+        if(helpShow){
+            document.getElementById("doctoolHelpWrapper").style.left = "calc(-30vw - 2.1rem)"
+        }
+        if(!helpShow){
+             document.getElementById("doctoolHelpWrapper").style.left = 0
+        }
+        helpShow = !helpShow
     })
 
     // generates the togglers
