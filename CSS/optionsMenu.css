@@ -43,7 +43,7 @@
 	background: white;
     z-index: 9999;
 }
-#optionsDocToolHelp,
+
 #optionsLociDatabase,
 #optionsPrintDialog,
 #optionsRecoverData,
@@ -57,7 +57,7 @@
 	margin: 0 0 1em 0;
 	border-bottom: 2px solid blue;
 }
-#optionsDocToolHelpTitle,
+
 #optionsLociDatabaseTitle,
 #optionsPrintDialogTitle,
 #optionsRecoverDataTitle,
@@ -70,7 +70,7 @@
 	justify-content: center;
 
 }
-#optionsDocToolHelpToggler,
+
 #optionsLociDatabaseToggler,
 #optionsPrintDialogToggler,
 #optionsRecoverDataToggler,
