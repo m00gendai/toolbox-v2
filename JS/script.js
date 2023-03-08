@@ -344,43 +344,25 @@ window.addEventListener('DOMContentLoaded', () => {
         alert(`Error ${err}: ${errorMessage}`)
     }
 
-    document.getElementById("sortBoxHomeTyp").style.background = "none";
-    document.getElementById("sortBoxHomeTyp").style.color = "black";
-    document.getElementById("sortBoxHomeAZ").style.background = "blue";
-    document.getElementById("sortBoxHomeAZ").style.color = "white";
+    try{
+        localStorage.getItem("toolbox_sortby") == '"name"' ? sortHomeByName(src) : localStorage.getItem("toolbox_sortby") == '"type"' ? sortHomeByType(src) : sortHomeByName(src)
+    }
+    catch(err){
+        alert(`Error ${err}: ${errorMessage}`)
+    }
 
+    
     document.getElementById("sortBoxHomeAZ").addEventListener("click", function(){
         sortHomeByName()
+        localStorage.setItem("toolbox_sortby", JSON.stringify("name"))
         
-        let sortedBy = sortHomeByName();
-        for(let i=0;i<Object.keys(sortedBy).length;i++){
-            localStorage.setItem(`sortedBy${i}`, JSON.stringify({
-                id: sortedBy[i].id,
-                img: sortedBy[i].img,
-                title: sortedBy[i].title,
-                link: sortedBy[i].link,
-                tags: sortedBy[i].tags,
-                style: sortedBy[i].style
-            }))
-        }
-    });
+    })
+       
         
     document.getElementById("sortBoxHomeTyp").addEventListener("click", function(){
         sortHomeByType()
-        
-        let sortedBy = sortHomeByType();
-        for(let i=0;i<Object.keys(sortedBy).length;i++){
-            localStorage.setItem(`sortedBy${i}`, JSON.stringify({
-                id: sortedBy[i].id,
-                img: sortedBy[i].img,
-                title: sortedBy[i].title,
-                link: sortedBy[i].link,
-                tags: sortedBy[i].tags,
-                style: sortedBy[i].style
-            }))
-        }
-    });
-    
+        localStorage.setItem("toolbox_sortby", JSON.stringify("type"))
+    })    
 
 // L E G A L   S T A T E M E N T
 
