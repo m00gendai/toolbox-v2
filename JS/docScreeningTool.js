@@ -1,7 +1,7 @@
 function loadDocScreeningToolCode(){
     
     const customers = ["Document", "FKDF", "FKAT", "NTM", "DBU", "IATA"]
-    
+
     customers.forEach(customer =>{
         document.getElementById(`screen${customer}`).value = ""
     })
@@ -54,7 +54,6 @@ function loadDocScreeningToolCode(){
 
     
 // D O C   S C R E E N I N G  
-
 
     //this is called on blur of screening input or on calculate pages button press
     function calculatePagesEvent() {
@@ -394,7 +393,8 @@ function loadDocScreeningToolCode(){
 
     
 // D O C   T O O L   O P T I O N S   M E N U
-
+    
+    let optionsShow = false
     
     const optionsButton = document.getElementById("optionsButton");
     const optionsMenu = document.getElementById("optionsMenu");
@@ -418,10 +418,25 @@ function loadDocScreeningToolCode(){
 
     // simple - click on cog to show, click again to hide
     optionsButton.addEventListener("click", function() {
-        if (optionsMenu.style.display == "") {
-            optionsMenu.style.display = "block";
-        } else if (optionsMenu.style.display == "block") {
-            optionsMenu.style.display = "";
+        if(!optionsShow){
+            document.getElementById("optionsMenuVeil").style.display = "flex"
+        }
+        optionsShow = ! optionsShow
+    })
+    
+    document.getElementById("optionsMenuVeil").addEventListener("click", function(e){
+        if(e.target.id == "optionsMenuVeil"){
+            if(optionsShow){
+                document.getElementById("optionsMenuVeil").style.display = "none"
+            }
+            optionsShow = ! optionsShow 
+        }
+    })
+    
+    document.addEventListener("keyup", function(e){
+        if(optionsShow && e.key == "Escape"){
+            document.getElementById("optionsMenuVeil").style.display = "none"
+            optionsShow = ! optionsShow 
         }
     })
 
@@ -435,22 +450,6 @@ function loadDocScreeningToolCode(){
             }
         })
     }
-
-    // this makes it so that if the menu is open, you can click anywhere BUT the menu and it closes
-    let autoCloseBarrier = 0; // this is a safety to not immediately close the menu again after opening
-    
-    document.addEventListener('click', function(event) {
-        if (optionsMenu.style.display == "block") { // if the current style of the menu is open...
-            let isClickInsideElement = optionsMenu.contains(event.target); // ... and a click on the DOM anywhere BUT the menu...
-            if (optionsMenu.style.display == "block" && !isClickInsideElement && autoCloseBarrier != 0) { //... and the menu is block and not clicked AND the safety is NOT 0...
-                optionsMenu.style.display = "" //... close it
-                autoCloseBarrier = 0; // resets the safety 
-            } else {
-                autoCloseBarrier++ // ... else increment the safety so the second if condition triggers
-            }
-        }
-    });
-    // this is due to the fact that when the menu is not open, a click on the cog to open it in the first place counts already as a click outside of the options menu. so, a system had to be put in place to not count the first click in this event.
 
     const saveDocLink = document.createElement("a");
     const saveDocLinkText = "Save Screening Session to file";
