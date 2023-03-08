@@ -46,42 +46,91 @@
 
 #optionsLociDatabase,
 #optionsPrintDialog,
-#optionsRecoverData,
+#optionsRecoverData
+{
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: 0 0 1em 0;
+	padding: 0.5rem 0 1.5rem 0;;
+	border-bottom: 2px solid blue;
+}
+
+
 #optionsLoadSave{
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	width: 100%;
 	margin: 0 0 1em 0;
 	border-bottom: 2px solid blue;
 }
 
-#optionsLociDatabaseTitle,
-#optionsPrintDialogTitle,
-#optionsRecoverDataTitle,
-#optionsLoadSaveTitle{
-
+.toggler{
+	width: 4rem;
+	height: 2rem;
 	position: relative;
+}
+
+#lociDB_check,
+#screening_check{
+	position: absolute;
+	z-index: 5;
 	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+}
+
+#lociDB_togglerBody,
+#screening_togglerBody{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: blue;
+	border-radius: 25px;
+	transition: 1s;
+}
+
+#lociDB_togglerSwitch,
+#screening_togglerSwitch{
+	height: 80%;
+	aspect-ratio: 1/1;
+	background: white;
+	position: absolute;
+	left: auto;
+	right: 5%;
+	top: 50%;
+	transform: translate(0, -50%);
+	border-radius: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-family: "Arial";
+	color: lime;
+	transition: 1s;
+}
+
+
+#optionsRecoverDataToggler{
+	position: relative;
+	width: 4rem;
+	height: 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
+	background: blue;
+	border-radius: 25px;
+	color: white;
 }
 
-#optionsLociDatabaseToggler,
-#optionsPrintDialogToggler,
-#optionsRecoverDataToggler,
-#optionsLoadSaveToggler{
-	position: relative;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 1em;
-}
 #optionsLoadSaveSave{
 	background: green;
 	padding: 1rem;
@@ -107,16 +156,6 @@
     color: white;
 }
 
-
-#optionsRecoverDataToggler{
-	background: yellow;
-	padding: 1rem;
-	margin: 1rem 0 1rem 0;
-	width: 40%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 #help,
 #data,
 #screen,
@@ -137,3 +176,5 @@
 #loadDocScreening{
 	display: none;
 }
+
+
