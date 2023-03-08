@@ -454,27 +454,27 @@
             <div id="optionsMenuVeil">
                 <div id="optionsMenu">
                     <div id="optionsLociDatabase">
-                        <div id="optionsLociDatabaseTitle">
-                            LOCI Lookup Database
-                        </div>
-                        <div id="optionsLociDatabaseToggler">
-                            Hide <input type="range" id="optionsLociDatabaseRange" name="LociRange" min="0" max="1" value="1"> Show
+                        LOCI Lookup Database
+                        <div class="toggler">
+                            <input type="checkbox" id="lociDB_check">
+                            <div id="lociDB_togglerBody">
+                                <div id="lociDB_togglerSwitch"><i class="fas fa-power-off"></i></div>
+                            </div>
                         </div>
                     </div>
                     <div id="optionsPrintDialog">
-                        <div id="optionsPrintDialogTitle">
-                            Print Dialog for Screening
-                        </div>
-                        <div id="optionsPrintDialogToggler">
-                            Hide <input type="range" id="optionsPrintRange" name="PrintRange" min="0" max="1" value="1"> Show
+                        Print Dialog for Screening
+                        <div class="toggler">
+                            <input type="checkbox" id="screening_check">
+                            <div id="screening_togglerBody">
+                                <div id="screening_togglerSwitch"><i class="fas fa-power-off"></i></div>
+                            </div>
                         </div>
                     </div>
                     <div id="optionsRecoverData">
-                        <div id="optionsRecoverDataTitle">
-                            Recover Screening Data <br> (Refresh page first to recover deleted fields)
-                        </div>
+                        Recover Screening Data
                         <div id="optionsRecoverDataToggler">
-                            Recover
+                            get
                         </div>
                     </div>
                     <div id="optionsLoadSave">
