@@ -1,6 +1,5 @@
 const errorMessage = "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html"
 
-
 // I N I T I A L   L O A D
 
 
@@ -8,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     console.time("Initial Load")
     
     const toolboxSections = ["contentBox", "aipBox", "atsBox", "frenchBox", "sitaBox", "doctoolBox"]
-    const toolboxTileLinkExclusions = ["frenchStuff", "sitaConversion", "atfmx", "reports"]
+    const toolboxTileLinkExclusions = ["frenchStuff", "sitaConversion", "atfmx", "reports", "docfiles"]
     const spacesNotAllowedIn = ["screenDocument", "frenchContactMail", "searchAll", "searchFrench", "searchGerman"]
     
     window.addEventListener("keypress", function(e){
@@ -111,7 +110,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })
     
     document.getElementById("mappingtool").addEventListener("click", function(){
-        window.open("https://aim-mapping-tool.onrender.com/")
+        window.open("https://aim-mapping-tool.mrweber.ch/")
     })
     
     
@@ -151,6 +150,62 @@ window.addEventListener('DOMContentLoaded', () => {
                     break;
             }
             
+            let navModal = false
+            function modal(text, path, image){
+                if(navModal){
+                    const veil = document.createElement("div")
+                    veil.className = "veil"
+                    document.getElementById("contentBox").appendChild(veil)
+                    
+                    const modal = document.createElement("div")
+                    modal.className = "modal"
+                    veil.appendChild(modal)
+                    
+                    const msg = document.createElement("p")
+                    msg.innerHTML = text
+                    modal.appendChild(msg)
+                    
+                    if(path != undefined){
+                        
+                        const inptWrapper = document.createElement("div")
+                        inptWrapper.className = "inptWrapper"
+                        modal.appendChild(inptWrapper)
+                        
+                        const inpt = document.createElement("input")
+                        inpt.type = "text"
+                        inpt.value = path
+                        inpt.className = "modalInput"
+                        setTimeout(function(){
+                            inpt.focus()
+                            inpt.setSelectionRange(0, inpt.value.length)
+                        },10)
+                        inpt.style.width = `${path.length+1}ch`
+                        inptWrapper.appendChild(inpt)
+                        
+                        const imgWrapper = document.createElement("div")
+                        imgWrapper.className = "imgWrapper"
+                        modal.appendChild(imgWrapper)
+                        
+                        const img = document.createElement("img")
+                        img.src = image
+                        img.className = "fortheblind"
+                        imgWrapper.appendChild(img)
+                    }
+                    const okWrapper = document.createElement("div")
+                    okWrapper.className="okWrapper"
+                    modal.appendChild(okWrapper)
+                    
+                    const ok = document.createElement("button")
+                    ok.className ="ok"
+                    okWrapper.appendChild(ok)
+                    ok.innerText ="Got it!"
+                    ok.addEventListener("click", function(){
+                        navModal = !navModal
+                        document.getElementById("contentBox").removeChild(veil)
+                    })
+                }
+            }
+            
             const homeTileDivEvents = ["click", "keypress"]
             homeTileDivEvents.forEach(homeTileDivEvent => {
                 homeTileDiv.addEventListener(homeTileDivEvent, function(e){
@@ -172,11 +227,19 @@ window.addEventListener('DOMContentLoaded', () => {
                         }
                         
                         if(homeTileDiv.id == "atfmx"){
-                            prompt(`Please navigate to`,  `U:\\ZOL\\PR-Team\\AIS-ALLG`)
+                            navModal = !navModal
+                            modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG", "./Assets/FileExplorer.png")
+                        }
+                        
+                        if(homeTileDiv.id == "docfiles"){
+                            navModal = !navModal
+                            console.log(homeTileDiv)
+                            modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG\\Data_Collection", "./Assets/FileExplorer.png")
                         }
                         
                         if(homeTileDiv.id == "reports"){
-                            alert(`Report Server is only accessible from OPS environment (AFPS/SCONE)\nUse address https://172.25.184.136:8443/BOE/BI if no bookmark is present.`)
+                            navModal = !navModal
+                            modal(`Report Server is only accessible from OPS environment (AFPS/SCONE)\nUse address https://172.25.184.136:8443/BOE/BI if no bookmark is present.`)
                         }
                         
                     }
