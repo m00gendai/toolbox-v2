@@ -253,6 +253,20 @@ window.addEventListener('DOMContentLoaded', () => {
     
 // H O M E   T I L E   D I S P L A Y   F U N C T I O N 
 
+    function sorterColorChange(choice){
+        if(choice =="name"){
+            document.getElementById("sortBoxHomeTyp").style.background = "none";
+            document.getElementById("sortBoxHomeTyp").style.color = "black";
+            document.getElementById("sortBoxHomeAZ").style.background = "blue";
+            document.getElementById("sortBoxHomeAZ").style.color = "white";
+        }
+        if(choice =="type"){
+            document.getElementById("sortBoxHomeTyp").style.background = "blue";
+            document.getElementById("sortBoxHomeTyp").style.color = "white";
+            document.getElementById("sortBoxHomeAZ").style.background = "none";
+            document.getElementById("sortBoxHomeAZ").style.color = "black";
+        }
+    }
 
     function sortHomeByName(src){
         document.getElementById("quickLinks").innerHTML = "";
@@ -266,10 +280,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
         generateAIPtiles(byName)
         
-        document.getElementById("sortBoxHomeTyp").style.background = "none";
-        document.getElementById("sortBoxHomeTyp").style.color = "black";
-        document.getElementById("sortBoxHomeAZ").style.background = "blue";
-        document.getElementById("sortBoxHomeAZ").style.color = "white";
+        sorterColorChange("name")
         return byName;
     }
 
@@ -285,10 +296,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
         generateAIPtiles(byType)
         
-        document.getElementById("sortBoxHomeTyp").style.background = "blue";
-        document.getElementById("sortBoxHomeTyp").style.color = "white";
-        document.getElementById("sortBoxHomeAZ").style.background = "none";
-        document.getElementById("sortBoxHomeAZ").style.color = "black";
+        sorterColorChange("type")
         return byType;
     }
 
