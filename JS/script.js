@@ -6,8 +6,8 @@ const errorMessage = "\nPlease advise weberml\nFor access to backup links, refer
 window.addEventListener('DOMContentLoaded', () => {
     console.time("Initial Load")
     
-    const toolboxSections = ["contentBox", "aipBox", "atsBox", "frenchBox", "sitaBox", "doctoolBox"]
-    const toolboxTileLinkExclusions = ["frenchStuff", "sitaConversion", "atfmx", "reports", "docfiles"]
+    const toolboxSections = ["contentBox", "aipBox", "atsBox", "frenchBox", "sitaBox", "doctoolBox", "areaBox"]
+    const toolboxTileLinkExclusions = ["frenchStuff", "sitaConversion", "atfmx", "reports", "docfiles", "RDareas", "arrmsg"]
     const spacesNotAllowedIn = ["screenDocument", "frenchContactMail", "searchAll", "searchFrench", "searchGerman"]
     
     window.addEventListener("keypress", function(e){
@@ -48,6 +48,10 @@ window.addEventListener('DOMContentLoaded', () => {
             break;
             case "sitaBox":{
                 document.getElementById("sitaBox").style.display = "flex"
+            }
+            case "areaBox":{
+                document.getElementById("areaBox").style.display = "flex"
+				document.getElementById("input").focus();
             }
             break;
         }
@@ -160,12 +164,12 @@ window.addEventListener('DOMContentLoaded', () => {
                     const modal = document.createElement("div")
                     modal.className = "modal"
                     veil.appendChild(modal)
-                    
-                    const msg = document.createElement("p")
-                    msg.innerHTML = text
-                    modal.appendChild(msg)
-                    
-                    if(path != undefined){
+                    if(text != undefined && text != ""){
+                        const msg = document.createElement("p")
+                        msg.innerHTML = text
+                        modal.appendChild(msg)
+                    }
+                    if(path != undefined && path != ""){
                         
                         const inptWrapper = document.createElement("div")
                         inptWrapper.className = "inptWrapper"
@@ -181,7 +185,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         },10)
                         inpt.style.width = `${path.length+1}ch`
                         inptWrapper.appendChild(inpt)
-                        
+                    }
+                    if(image != undefined & image != ""){
                         const imgWrapper = document.createElement("div")
                         imgWrapper.className = "imgWrapper"
                         modal.appendChild(imgWrapper)
@@ -226,6 +231,12 @@ window.addEventListener('DOMContentLoaded', () => {
                             toolboxSectionStateSetter("sitaBox", "SITA Address Converter")
                         }
                         
+                        if(homeTileDiv.id == "RDareas"){
+                            toolboxSectionToggler("areaBox")
+                            loadRDareas()
+                            toolboxSectionStateSetter("areaBox", "R/D Areas")
+                        }
+                        
                         if(homeTileDiv.id == "atfmx"){
                             navModal = !navModal
                             modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG", "./Assets/FileExplorer.png")
@@ -241,7 +252,10 @@ window.addEventListener('DOMContentLoaded', () => {
                             navModal = !navModal
                             modal(`Report Server is only accessible from OPS environment (AFPS/SCONE)\nUse address https://172.25.184.136:8443/BOE/BI if no bookmark is present.`)
                         }
-                        
+                        if(homeTileDiv.id == "arrmsg"){
+                            navModal = !navModal
+                            modal(" ", "", "./Assets/Phone_numbers_foreign_coutries.jpg")
+                        }
                     }
                 })
             })
