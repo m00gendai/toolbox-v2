@@ -27,7 +27,6 @@ const homeTileData = [{
 		id: "arrmsg",
 		img: "Assets/europe.png",
 		title: "ARR MSG/Phone Numbers",
-		link: "U:\\ZOL\\PR-Team\\AIS-ALLG\\aim-info-hub_DO NOT DELETE PLS -WM\\Documents\\Phone_numbers_foreign_coutries.jpg",
 		tags: "arrival phone arr number nr foreign italia france austria germany",
 		style: "aro"
 	},
@@ -123,7 +122,7 @@ const homeTileData = [{
 		id: "drohnenInfo",
 		img: "Assets/004-drone-2.png",
 		title: "drone Info BAZL",
-		link: "https://www.bazl.admin.ch/bazl/en/home/good-to-know/drones-and-aircraft-models/allgemeine-fragen-zu-drohnen.html",
+		link: "https://www.bazl.admin.ch/bazl/en/home/drohnen/verstaendnishilfe.html",
 		tags: "bazl drohnen drone info",
 		style: "sfo"
 	},
@@ -138,9 +137,9 @@ const homeTileData = [{
 	{
 		id: "eAip",
 		img: "Assets/044-passport.png",
-		title: "eAIP & DoD",
+		title: "eAIP",
 		link: "http://ais.skyguide.corp/map/eaipbytable.html",
-		tags: "eaip electronic aip internal aip dod",
+		tags: "eaip electronic aip internal aip",
 		style: "doc"
 	},
 	{
@@ -149,6 +148,14 @@ const homeTileData = [{
 		title: "eATM Daily Briefing",
 		link: "https://eatm/reading_list/",
 		tags: "eatm daily briefing list",
+		style: "general"
+	},
+	{
+		id: "yonder",
+		img: "Assets/checklist.png",
+		title: "Yonder",
+		link: "https://skyguide.yondermind.info/?#/",
+		tags: "eatm daily briefing list yonder",
 		style: "general"
 	},
 	{
@@ -377,7 +384,7 @@ const homeTileData = [{
 		id: "whoIsWho",
 		img: "Assets/032-employee.png",
 		title: "Who is Who Skyguide",
-		link: "http://phone.skyguide.corp/",
+		link: "https://performancemanager5.successfactors.eu/sf/directory?bplte_company=SkyguidePROD",
 		tags: "who is whio skyguide wer person suchen",
 		style: "general"
 	},
@@ -454,14 +461,6 @@ const homeTileData = [{
         style: "spvr"
     },
     {
-        id: "CountryList",
-        img: "Assets/country list.png",
-        title: "Country List",
-        link: "https://skydoc.skyguide.corp/otcs/llisapi.dll?func=Edit.Edit&nodeid=51019095&ReadOnly=True&uiType=1&nexturl=%2Fcs%2Eexe%3Ffunc%3Dll%26objaction%3Doverview%26objid%3D51019095",
-        tags: "country list doc länder liste",
-        style: "doc"
-    },
-    {
         id: "Bordercross",
         img: "Assets/barrier.png",
         title: "Crossborder Flights",
@@ -477,4 +476,35 @@ const homeTileData = [{
         tags: "map karte mäse aim mapping tool",
         style: "aro"
     },
+{
+        id: "mysky",
+        img: "Assets/salary.png",
+        title: "mySky",
+        link: "https://performancemanager5.successfactors.eu/sf/home?bplte_company=SkyguidePROD#Shell-home",
+        tags: "mysky salary lohn",
+        style: "general"
+    },
+{
+	id: "password",
+	img: "Assets/padlock.png",
+	title: "Password Management Self-Service Portal",
+	link: "http://password.skyguide.ch",
+	tags: "password reset self service portal management passwort vergessen forgot security sicherheit",
+	style: "general"
+},
+{	
+	id: "docfiles",
+	img: "Assets/documents.png",
+	title: "Data Collection Files",
+	link: "U:\\ZOL\\PR-Team\\AIS-ALLG\\Data_Collection",
+	tags: "doc-naw doc naw data collection files country list flightkeys oversized amdt zeiterfassung daily folder coverage datenbank iac pdf",
+	style: "doc"
+},
+{	
+	id: "RDareas",
+	img: "Assets/essay.png",
+	title: "R/D Area List",
+	tags: "r-area, d-area, rarea, darea, areas, kosif, aip, firing, frng, schiessanzeige, schiess, anzeige, schanz",
+	style: "pub"
+},
 ];
