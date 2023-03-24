@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="CSS/frenchBox.css">          <!-- CSS French Translation Section -->
 		<link rel="stylesheet" href="CSS/sitaBox.css">            <!-- CSS SITA Address Converter -->
 		<link rel="stylesheet" href="CSS/doctoolbox.css">         <!-- CSS DOC Screening Tool -->
+		<link rel="stylesheet" href="CSS/areaBox.css">            <!-- CSS R/D Areas -->
 		<link rel="stylesheet" href="CSS/legal.css">              <!-- CSS Legal Statement Popup -->
 		<link rel="stylesheet" href="CSS/optionsMenu.css">        <!-- CSS DOC Tool Options Menu -->
 		<link rel="stylesheet" href="CSS/achievements.css">       <!-- CSS Achievement Unlocked -->
@@ -32,6 +33,7 @@
         <script src="JS/aipLibrary.js" defer></script>          <!-- Specific AIP Library section JavaScript Code -->
         <script src="JS/docScreeningTool.js" defer></script>    <!-- Specific DOC Screening Tool section JavaScript Code -->
         <script src="JS/sita.js" defer></script>                <!-- Specific SITA section JavaScript Code -->
+        <script src="JS/rdareas.js" defer></script>              <!-- Specific R/D Areas JavaScript Code -->
         <script src="JS/apcodes.js" defer></script>             <!-- JSON for SITA section - Airport Codes -->
         <script src="JS/alcodes.js" defer></script>             <!-- JSON for SITA section - Airline Codes -->
         <script src="JS/convcodes.js" defer></script>           <!-- JSON for SITA section - Matching Address Pairs -->
@@ -684,6 +686,29 @@
             </div>
         </section>
 <!-- END Section DOC Screening Tool Section -->
+<!-- BEGIN Section Areas -->
+    <section id="areaBox">
+        <div class="areaContainer">
+            <input type="text" id="input" placeholder="Search Area Designator or Name"/>
+            <div class="areaContainerInner">
+                <table class="areatable" id="rTable">
+                <thead>
+                    <tr>
+                    <th>Designator</th><th>Name</th>
+                    </tr>
+                    </thead>
+                </table>
+                <table class="areatable" id="dTable">
+                <thead>
+                    <tr>
+                    <th>Designator</th><th>Name</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </section>
+<!-- END Section Areas -->
 <!-- BEGIN Legal Statement -->
         <div id="legalA">
             <div id="legalB">
@@ -766,7 +791,7 @@
             <div id="footerText">
             </div>
             <div id="legal">
-                <u>Legal Statement</u> | Version 2.148 (92cbfeb)
+                <u>Legal Statement</u> | Version 2.182 (9b1d781)
             </div>
         </footer>
 <!-- END Footer -->
