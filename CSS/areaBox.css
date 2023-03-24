@@ -1,0 +1,76 @@
+#areaBox{
+display: none;
+}
+
+.areaContainer{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#input {
+	font-size: 2vw;
+	width: 100%;
+	height: 3vw;
+	border: none;
+}
+
+#input:focus {
+	width: 100%;
+	outline: none;
+	box-shadow: 0px 5px 0px -1px blue;
+
+}
+
+.areaContainerInner{
+  margin: 2vw 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 5rem;
+  font-family: "Arial";
+  width: 80%;
+}
+
+.areatable {
+  border-collapse: collapse;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.areatable thead{
+  width: 100%;
+}
+
+.areatable tr{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.areatable tr:nth-child(2n+3){
+  background: linear-gradient(to right, rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%);
+}
+
+.areatable th {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 5px solid blue;
+}
+
+.areatable td{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  padding: 0.5rem;
+}
