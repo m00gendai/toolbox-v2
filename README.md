@@ -35,12 +35,12 @@ They are distinguishable in `JS\tileLinks.js` by the `link: "Documents/` value i
 
 Home Tiles creation, updating and maintaining is done in `JS\tileLinks.js`. 
 A Home Tiles object is structured as follows:
-- id: String Unique id for the tile
-- img: String Asset link to an icon
-- title: String The visible label of the Home Tile
-- link: String Associated link (external/internal/file)
-- tags: String space separated words that return this tile if the search bar is used
-- style: String color assignment of the tile (described in `JS\tileLinks.js`in detail)
+- **id**: String Unique id for the tile
+- **img**: String Asset link to an icon
+- **title**: String The visible label of the Home Tile
+- **link**: String Associated link (external/internal/file)
+- **tags**: String space separated words that return this tile if the search bar is used
+- **style**: String color assignment of the tile (described in `JS\tileLinks.js`in detail)
 
 Example:
 ```
@@ -53,7 +53,6 @@ Example:
 	style: "general"
 }
  ```
-
  Home Tiles that trigger a modal or a similar non-standard link forwarding are explicitly defined in their behavior in `JS\script.js` in the `generateAIPtiles`function. Example:
 ```
 {
@@ -65,7 +64,6 @@ Example:
 	style: "spvr"
 }
 ```
-
 ```
 if(homeTileDiv.id == "atfmx"){
       navModal = !navModal
@@ -81,12 +79,12 @@ This is simply a wrapper for FlightSearch.
 
 AIP Tiles creation, updating and maintaining is done in `JS\aipLinks.js`. 
 An AIP Tile is structured as follows:
-- id: String Unique id for the tile. Convention is ICAO two letter country code. With identical country codes for multiple countries, the convention is to hyphenate the country name. Exmaple: ub-uzbekistan.
-- img: String image link (usually a wikimedia commons image link)
-- icao: String ICAO two letter country code. This is not required to be unique.
-- country: String common name of the country 
-- link: String link to the AIP website/eAIP portal. can be empty if no electronic publications exist
-- aip: String color assignment of the triangle denoting AIP status (described in Toolbox AIP Library Information box in detail)
+- **id: String Unique id for the tile. Convention is ICAO two letter country code. With identical country codes for multiple countries, the convention is to hyphenate the country name. Exmaple: ub-uzbekistan.
+- **img: String image link (usually a wikimedia commons image link)
+- **icao: String ICAO two letter country code. This is not required to be unique.
+- **country: String common name of the country 
+- **link: String link to the AIP website/eAIP portal. can be empty if no electronic publications exist
+- **aip: String color assignment of the triangle denoting AIP status (described in Toolbox AIP Library Information box in detail)
 
 Example:
 ```
@@ -108,7 +106,12 @@ External link to AIM Mapping Tool. See [https://github.com/m00gendai/mapping-too
 
 ### Flightkeys LOCI Database  ###
 
-A queryable table of ICAO Location Indicators that are requred by Flightkeys. Data source is `JS\locisFK.js`.
+A queryable table of ICAO Location Indicators that are requred by Flightkeys. 
+
+Data source is a simple String Array in `JS\locisFK.js`.
+```
+const locisFK = ["AYPY","BGAA", ... ]
+```
 
 ### Print Dialog for Screening ###
 
@@ -130,6 +133,12 @@ It uses several databases that are merged:
 
 These databases are queried upon search and possible matches for letter combinations (or in rare cases a matching AFTN address) are displayed in a Sankey Chart for the operator to interpret.
 
+Data Types are JSON Objects:
+- **Airport Codes**: ```var apcodes = '{"apcode":[{"iata": "AAA", "icao": "NTGA", "airport": "Anaa Airport", "place": "Anaa, Tuamotus, French Polynesia"}, {...}]}'```
+- **Airline Codes**: ```var alcodes = '{"alcode":[{"designator": "0B", "airline": "Blue Air", "country": "Romania", "remark": ""}, {...}]}'```
+- **Organisation Codes**: ```var corpcodes = '{"corpcode":[{"abbr": "OO", "meaning": "Operations"}, {...}]}'```
+- **Translations**: ```var convcodes = '{"convcode":[{"id": "1", "aftn": "AYPYANGM", "sita": "POMOPPX"}, {...}]}'```
+
 ## Tools - AIS French ##
 
 A tailored collection of French - German translations, queryable for different topics.
@@ -139,11 +148,112 @@ Use a different source if you like.
 
 A feedback form is included that forwards the form via `getForm.io` API implemented in `index.html`
 
+Data Types are simple Object Arrays:
+```
+const sfoHelpdesk = [
+	{ 
+		Français: "Special Flight Office support, (Nom), bonjour", 
+		Allemand: "Special Flight Office support, Name, Guten Tag", 
+	},
+	{
+		...
+	}
+]
+```
+
 ## Tools - R- & D-Areas ##
 
 A queryable table of Swiss Restricted and Danger Areas. Data source is `JS\rdareas.js`.
+
+Data Type is a simple Object Array in `JS\rdareas.js`:
+```
+const rAreas = [
+	{
+		designator: "LSR2",
+		name: "Hohgant",
+		type: "MIL ACFT ACT",
+	},
+	{
+		...
+	}
+]
+```
 
 ## Tools - ICAO 8400 Abbreviations ##
 
 A queryable table of ICAO 8400 Abbreviations. Data source is `JS\8400.js`.
 
+Data Type is a relatively convoluted JSON object generated from an XML export via Crystal Reports:
+```
+export interface Root {
+  CrystalReport: CrystalReport
+}
+
+export interface CrystalReport {
+  ReportHeader: ReportHeader
+  Details: Detail[]
+  ReportFooter: ReportFooter
+  _xmlns: string
+  "_xmlns:xsi": string
+  "_xsi:schemaLocation": string
+}
+
+export interface ReportHeader {
+  Section: Section[]
+}
+
+export interface Section {
+  Text: Text[]
+  Field?: Field[]
+  Picture?: Picture
+  _SectionNumber: string
+}
+
+export interface Text {
+  TextValue: string
+  _Name: string
+}
+
+export interface Field {
+  FormattedValue: string
+  Value: string
+  _Name: string
+  _FieldName: string
+}
+
+export interface Picture {
+  _Name: string
+  _GraphicType: string
+}
+
+export interface Detail {
+  Section: Section2
+  _Level: string
+}
+
+export interface Section2 {
+  Field: Field2[]
+  _SectionNumber: string
+}
+
+export interface Field2 {
+  FormattedValue: string
+  Value: string
+  _Name: string
+  _FieldName: string
+}
+
+export interface ReportFooter {
+  Section: Section3
+}
+
+export interface Section3 {
+  Text: Text2
+  _SectionNumber: string
+}
+
+export interface Text2 {
+  TextValue: string
+  _Name: string
+}
+```
