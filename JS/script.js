@@ -1,14 +1,30 @@
 const errorMessage = "\nPlease advise weberml\nFor access to backup links, refer to:\nU:\\ZOL\\PR-Team\\AIS-ALLG\\TOOLBOX_AIM_Contingency_Site_files\\index.html"
 
+const arrPhone = {
+	at: "AT: +43 5 1703 3211",
+	fr: "FR: +33 156 301 301",
+	de: "DE: +49 6103 707 5500",
+ 	it1: "IT: +39 02 710 20019 (Milano)",
+	it2: "IT: +39 06 798 11011 (Rom)",
+}
+
 // I N I T I A L   L O A D
 
 
 window.addEventListener('DOMContentLoaded', () => {
     console.time("Initial Load")
     
-    const toolboxSections = ["contentBox", "aipBox", "atsBox", "frenchBox", "sitaBox", "doctoolBox", "areaBox"]
-    const toolboxTileLinkExclusions = ["frenchStuff", "sitaConversion", "atfmx", "reports", "docfiles", "RDareas", "arrmsg"]
+    const toolboxSections = ["contentBox", "aipBox", "atsBox", "frenchBox", "sitaBox", "doctoolBox", "areaBox", "abbrevBox"]
+    const toolboxTileLinkExclusions = ["frenchStuff", "sitaConversion", "atfmx", "reports", "docfiles", "RDareas", "arrmsg", "dangerdanger", "templateList"]
     const spacesNotAllowedIn = ["screenDocument", "frenchContactMail", "searchAll", "searchFrench", "searchGerman"]
+    
+    let mode = JSON.parse(localStorage.getItem("toolbox_option_Darkmode")) || "light"
+    document.querySelector('html').style.setProperty("color-scheme", mode);
+
+    let optionsVisible = false
+    let sortedBy = "name"
+
+
     
     window.addEventListener("keypress", function(e){
         if(e.key == " " && !spacesNotAllowedIn.includes(e.target)){
@@ -49,8 +65,14 @@ window.addEventListener('DOMContentLoaded', () => {
             case "sitaBox":{
                 document.getElementById("sitaBox").style.display = "flex"
             }
+			break;
             case "areaBox":{
                 document.getElementById("areaBox").style.display = "flex"
+				document.getElementById("input").focus();
+            }
+            break;
+            case "abbrevBox":{
+                document.getElementById("abbrevBox").style.display = "flex"
 				document.getElementById("input").focus();
             }
             break;
@@ -59,8 +81,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
     function toolboxSectionStateSetter(pageId, title){
         let state = { 'page_id': pageId}
-        let href = url.substring(0, url.indexOf("#"))
-        history.pushState(state, title, href)
+        history.pushState(state, "", title)
     }
     
     window.addEventListener('popstate', () => {
@@ -87,7 +108,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.getElementById("searchBar").value = ""
         document.getElementById("quickLinks").innerHTML = ""
         try {
-            sortHomeByName(src)
+            JSON.parse(localStorage.getItem("toolbox_option_HomeTileSort")) == "name" ? sortHomeByName(src) : JSON.parse(localStorage.getItem("toolbox_option_HomeTileSort")) == "type" ? sortHomeByType(src) : sortHomeByName(src)
         }
         catch(err) {
             alert(`Error\n" ${err}: ${errorMessage}`)
@@ -116,6 +137,26 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("mappingtool").addEventListener("click", function(){
         window.open("https://aim-mapping-tool.mrweber.ch/")
     })
+
+    document.getElementById("sitatool").addEventListener("click", function(){
+        toolboxSectionToggler("sitaBox")
+    toolboxSectionStateSetter("sitaBox", "SITA Address Converter")
+    })
+    document.getElementById("frenchtool").addEventListener("click", function(){
+            toolboxSectionToggler("frenchBox")
+            loadFrenchCode()
+            toolboxSectionStateSetter("frenchBox", "French Tool")
+    })
+    document.getElementById("rdtool").addEventListener("click", function(){
+    toolboxSectionToggler("areaBox")
+        loadRDareas()
+        toolboxSectionStateSetter("areaBox", "R/D Areas")
+    })
+    document.getElementById("abbrevtool").addEventListener("click", function(){
+        toolboxSectionToggler("abbrevBox")
+        loadAbbrevs()
+            toolboxSectionStateSetter("abbrevBox", "ICAO 8400 Abbreviations")
+        })
     
     
 // H O M E   T I L E   G E N E R A T O R
@@ -153,17 +194,82 @@ window.addEventListener('DOMContentLoaded', () => {
                 case "doc": homeTileDiv.style.background = "linear-gradient(45deg,  #ff3019 0%,#cf0404 100%)";
                     break;
             }
+                        
+            const homeTileDivEvents = ["click", "keypress"]
+            homeTileDivEvents.forEach(homeTileDivEvent => {
+                homeTileDiv.addEventListener(homeTileDivEvent, function(e){
+                    if(e.key == " " || e.key == "Enter" || e.type == "click") {
+                        if(!toolboxTileLinkExclusions.includes(homeTileDiv.id)){
+                            window.open(src[i].link)
+                        }
+                        
+                        if(homeTileDiv.id == "frenchStuff"){
+                            toolboxSectionToggler("frenchBox")
+                            loadFrenchCode()
+                            toolboxSectionStateSetter("frenchBox", "French Tool")
+                        }
+                        
+                        if(homeTileDiv.id == "sitaConversion"){
+                            toolboxSectionToggler("sitaBox")
+                            toolboxSectionStateSetter("sitaBox", "SITA Address Converter")
+                        }
+                        
+                        if(homeTileDiv.id == "RDareas"){
+                            toolboxSectionToggler("areaBox")
+                            loadRDareas()
+                            toolboxSectionStateSetter("areaBox", "R/D Areas")
+                        }
+                        
+                        if(homeTileDiv.id == "atfmx"){
+                            navModal = !navModal
+                            modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG", "./Assets/FileExplorer.png")
+                        }
+                        
+                        if(homeTileDiv.id == "docfiles"){
+                            navModal = !navModal
+                            console.log(homeTileDiv)
+                            modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG\\Data_Collection", "./Assets/FileExplorer.png")
+                        }
+                        
+                        if(homeTileDiv.id == "reports"){
+                            navModal = !navModal
+                            modal(`Report Server is only accessible from OPS environment (AFPS/SCONE)\nUse address https://172.25.184.136:8443/BOE/BI if no bookmark is present.`)
+                        }
+                        if(homeTileDiv.id == "arrmsg"){
+                            navModal = !navModal
+                            modal(`${arrPhone.at}\n\r${arrPhone.de}\n\r${arrPhone.fr}\n\r${arrPhone.it1}\n\r${arrPhone.it2}`, "", "")
+                        }
+						if(homeTileDiv.id == "dangerdanger"){
+                            navModal = !navModal
+                            console.log(homeTileDiv)
+                            modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG\\PUB\\Gefahr in Verzug", "./Assets/FileExplorer.png")
+                        }
+						if(homeTileDiv.id == "templateList"){
+							navModal = !navModal
+							modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG\\PUB\\SU-SA Stuff", "./Assets/FileExplorer.png")
+						}
+					}
+                })
+            })
             
-            let navModal = false
+           quicklinkGeneratorSpace.appendChild(homeTileDiv);
+        }
+    }
+    
+    let navModal = false
             function modal(text, path, image){
                 if(navModal){
                     const veil = document.createElement("div")
                     veil.className = "veil"
                     document.getElementById("contentBox").appendChild(veil)
                     
+                    const modalContainer = document.createElement("div")
+                    modalContainer.className= "modalContainer"
+                    veil.appendChild(modalContainer)
+
                     const modal = document.createElement("div")
                     modal.className = "modal"
-                    veil.appendChild(modal)
+                    modalContainer.appendChild(modal)
                     if(text != undefined && text != ""){
                         const msg = document.createElement("p")
                         msg.innerHTML = text
@@ -201,7 +307,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     modal.appendChild(okWrapper)
                     
                     const ok = document.createElement("button")
-                    ok.className ="ok"
+                    ok.className ="actionButton"
                     okWrapper.appendChild(ok)
                     ok.innerText ="Got it!"
                     ok.addEventListener("click", function(){
@@ -210,77 +316,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     })
                 }
             }
-            
-            const homeTileDivEvents = ["click", "keypress"]
-            homeTileDivEvents.forEach(homeTileDivEvent => {
-                homeTileDiv.addEventListener(homeTileDivEvent, function(e){
-                    if(e.key == " " || e.key == "Enter" || e.type == "click") {
-                        if(!toolboxTileLinkExclusions.includes(homeTileDiv.id)){
-                            window.open(src[i].link)
-                        }
-                        
-                        if(homeTileDiv.id == "frenchStuff"){
-                            toolboxSectionToggler("frenchBox")
-                            loadFrenchCode()
-                            toolboxSectionStateSetter("frenchBox", "French Tool")
-                        }
-                        
-                        if(homeTileDiv.id == "sitaConversion"){
-                            toolboxSectionToggler("sitaBox")
-                            loadFrenchCode()
-                            toolboxSectionStateSetter("sitaBox", "SITA Address Converter")
-                        }
-                        
-                        if(homeTileDiv.id == "RDareas"){
-                            toolboxSectionToggler("areaBox")
-                            loadRDareas()
-                            toolboxSectionStateSetter("areaBox", "R/D Areas")
-                        }
-                        
-                        if(homeTileDiv.id == "atfmx"){
-                            navModal = !navModal
-                            modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG", "./Assets/FileExplorer.png")
-                        }
-                        
-                        if(homeTileDiv.id == "docfiles"){
-                            navModal = !navModal
-                            console.log(homeTileDiv)
-                            modal("Please navigate to follwing file location. Do <strong>NOT</strong> use the browser, use the File Explorer!", "U:\\ZOL\\PR-Team\\AIS-ALLG\\Data_Collection", "./Assets/FileExplorer.png")
-                        }
-                        
-                        if(homeTileDiv.id == "reports"){
-                            navModal = !navModal
-                            modal(`Report Server is only accessible from OPS environment (AFPS/SCONE)\nUse address https://172.25.184.136:8443/BOE/BI if no bookmark is present.`)
-                        }
-                        if(homeTileDiv.id == "arrmsg"){
-                            navModal = !navModal
-                            modal(" ", "", "./Assets/Phone_numbers_foreign_coutries.jpg")
-                        }
-                    }
-                })
-            })
-            
-           quicklinkGeneratorSpace.appendChild(homeTileDiv);
-        }
-    }
-    
     
 // H O M E   T I L E   D I S P L A Y   F U N C T I O N 
-
-    function sorterColorChange(choice){
-        if(choice =="name"){
-            document.getElementById("sortBoxHomeTyp").style.background = "none";
-            document.getElementById("sortBoxHomeTyp").style.color = "black";
-            document.getElementById("sortBoxHomeAZ").style.background = "blue";
-            document.getElementById("sortBoxHomeAZ").style.color = "white";
-        }
-        if(choice =="type"){
-            document.getElementById("sortBoxHomeTyp").style.background = "blue";
-            document.getElementById("sortBoxHomeTyp").style.color = "white";
-            document.getElementById("sortBoxHomeAZ").style.background = "none";
-            document.getElementById("sortBoxHomeAZ").style.color = "black";
-        }
-    }
 
     function sortHomeByName(src){
         document.getElementById("quickLinks").innerHTML = "";
@@ -294,7 +331,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
         generateAIPtiles(byName)
         
-        sorterColorChange("name")
+
         return byName;
     }
 
@@ -310,11 +347,11 @@ window.addEventListener('DOMContentLoaded', () => {
         
         generateAIPtiles(byType)
         
-        sorterColorChange("type")
         return byType;
     }
 
     function displayGrid(src) {  
+        console.log(src)
         let input     = document.getElementById("searchBar");
         let inputV    = input.value;
         let inputVal  = String(inputV).toLowerCase();
@@ -337,10 +374,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     try {
         document.getElementById("searchBar").addEventListener("keyup", function(src){
-           if (document.getElementById("sortBoxHomeAZ").style.background == "blue"){
+           if (sortedBy === "name") {
                 src = sortHomeByName()
             }
-            if (document.getElementById("sortBoxHomeTyp").style.background == "blue"){
+            if (sortedBy === "type"){
                 src = sortHomeByType()
             }
             
@@ -359,14 +396,126 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     try{
-        localStorage.getItem("toolbox_sortby") == '"name"' ? sortHomeByName(src) : localStorage.getItem("toolbox_sortby") == '"type"' ? sortHomeByType(src) : sortHomeByName(src)
+        JSON.parse(localStorage.getItem("toolbox_option_HomeTileSort")) == "name" ? sortHomeByName(src) : JSON.parse(localStorage.getItem("toolbox_option_HomeTileSort")) == "type" ? sortHomeByType(src) : sortHomeByName(src)
     }
     catch(err){
         alert(`Error ${err}: ${errorMessage}`)
     }
-
     
-    document.getElementById("sortBoxHomeAZ").addEventListener("click", function(){
+    
+    const newItem = "templateList"
+    
+    const hasReadNewItem = JSON.parse(localStorage.getItem("toolbox_hasReadNewItem"))
+    if(hasReadNewItem == null){
+        const notification = document.createElement("div")
+        notification.id="notification"
+        document.getElementById(newItem).appendChild(notification)  
+    }
+if(hasReadNewItem != newItem){
+        const notification = document.createElement("div")
+        notification.id="notification"
+        document.getElementById(newItem).appendChild(notification)  
+    }
+    
+    document.getElementById(newItem).addEventListener("click", function(){
+        localStorage.setItem("toolbox_hasReadNewItem", JSON.stringify(newItem))
+        document.getElementById(newItem).removeChild(notification)
+    })
+
+    let hoverTools = false
+    let hoverToolsMenu = false
+
+    document.getElementById("tools").addEventListener("mouseenter", function(){
+        hoverTools = true
+        const toolMenuPositionX = document.getElementById("tools").getBoundingClientRect().x
+        const toolMenuPositionY = document.getElementById("tools").getBoundingClientRect().y
+        document.getElementById("toolsMenu").style.display = "flex"
+        document.getElementById("toolsMenu").style.left = `${toolMenuPositionX}px`
+        document.getElementById("toolsMenu").style.top = `${toolMenuPositionY}px`
+    })
+
+    document.getElementById("tools").addEventListener("mouseleave", function(){
+        hoverTools = false
+        setTimeout(function(){
+            if(!hoverTools && !hoverToolsMenu){
+                
+                document.getElementById("toolsMenu").style.display = "none"
+            }
+        }, 200)  
+    })
+    document.getElementById("toolsMenu").addEventListener("mouseenter", function(){
+        hoverTools = false
+        hoverToolsMenu = true
+    })
+    document.getElementById("toolsMenu").addEventListener("mouseleave", function(){
+        hoverToolsMenu = false
+        setTimeout(function(){
+            if(!hoverTools && !hoverToolsMenu){
+                
+                document.getElementById("toolsMenu").style.display = "none"
+            }
+        }, 200)  
+    })
+
+    function toggleDarkmode(toggleMode){
+        document.querySelector('html').style.setProperty("color-scheme", toggleMode);
+            mode = mode === "light" ? "dark" : "light"
+    }
+
+    function sortHomeTiles(toggleMode){
+        toggleMode == "type" ? sortHomeByType() : toggleMode == "name" ? sortHomeByName() : sortHomeByName()
+    }
+
+    function generateOptionsEntry(tag, title, on, off, func){
+        const entry = document.createElement("div")
+        entry.setAttribute("class", "optionEntry")
+        entry.setAttribute("id", `optionsEntry_${tag}`)
+        
+        const option = document.createElement("span")
+        entry.appendChild(option)
+        option.innerText = title
+
+        const toggle = document.createElement("input")
+        toggle.setAttribute("id", `range_${tag}`)
+        toggle.type = "range"
+        toggle.step = 1
+        toggle.min = 0
+        toggle.max = 1
+        toggle.value = JSON.parse(localStorage.getItem(`toolbox_option_${tag}`)) == on ? 1 : JSON.parse(localStorage.getItem(`toolbox_option_${tag}`)) == off ? 0 : 0
+        entry.appendChild(toggle)
+
+        const toggleOverlay = document.createElement("div")
+        toggleOverlay.setAttribute("class", "toggleOverlay")
+        toggleOverlay.addEventListener("click", function(){
+             toggle.value = toggle.value == 0 ? 1 : 0
+             const toggledValue = toggle.value == 1 ? on : off
+            func(toggledValue)
+            localStorage.setItem(`toolbox_option_${tag}`, JSON.stringify(toggledValue))
+        })
+        entry.appendChild(toggleOverlay)
+
+        return entry
+    }
+
+    const optionList = [
+        {
+            tag: "Darkmode",
+            title: "Toggle Darkmode",
+            on: "dark",
+            off: "light",
+            func: toggleDarkmode
+        },
+        {
+            tag: "HomeTileSort",
+            title: "Sort Home Tiles by Category",
+            on: "type",
+            off: "name",
+            func: sortHomeTiles
+        }
+    ]
+    
+    /*
+        document.getElementById("sortBoxHomeAZ").addEventListener("click", function(){
         sortHomeByName()
         localStorage.setItem("toolbox_sortby", JSON.stringify("name"))
         
@@ -376,17 +525,32 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("sortBoxHomeTyp").addEventListener("click", function(){
         sortHomeByType()
         localStorage.setItem("toolbox_sortby", JSON.stringify("type"))
-    })    
+    })   
+        */
 
+    document.getElementById("optionsToggle").addEventListener("click", function(){
+        const menu = document.getElementById("options")
+        const container = document.getElementById("optionsContainer")
+        menu.style.right = optionsVisible ? "-30rem" : 0
+        optionsVisible = !optionsVisible
+
+        for(const entry of optionList){
+            if(!document.getElementById(`optionsEntry_${entry.tag}`)){
+                container.appendChild(generateOptionsEntry(entry.tag, entry.title, entry.on, entry.off, entry.func))
+            } 
+        }
+    })
+        
+    
 // L E G A L   S T A T E M E N T
 
 
     document.getElementById("legal").addEventListener("click", function(){
-        document.getElementById("legalA").style.display ="flex";
+        document.getElementById("legalVeil").style.display ="flex";
     })
 
     document.getElementById("close").addEventListener("click", function(){
-        document.getElementById("legalA").style.display ="none";
+        document.getElementById("legalVeil").style.display ="none";
     })
     
     const thisDate = new Date()

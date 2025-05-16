@@ -1,0 +1,56 @@
+#options{
+    position: fixed;
+    top: 0;
+    right: -30rem;
+    height: 100dvh;
+    width: 30rem;
+    transition: 1s;
+    z-index: 9998;
+    padding: 3rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.optionsContainer{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--color_skydarkblue);
+    padding: 1rem;
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.optionsContainerTitle{
+    position: relative;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 0.5rem 0 0.5rem 0;
+	margin: 0 0 2rem 0;
+    text-align: center;
+    font-weight:bolder;
+    background: var(--color_aurora);
+    color: var(--color_skywhite);
+}
+
+.optionEntry{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 3rem;
+    position: relative;
+    color: var(--color_skywhite);
+}
+
+.toggleOverlay{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3rem;
+    height: 100%;
+    z-index: 2;
+}

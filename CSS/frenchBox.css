@@ -3,22 +3,19 @@ display: none;
 }
 
 
-table {
-	width: 80%;
-    border-collapse: collapse;
-	font-family: arial;
-	font-weight: 500;
-    box-shadow: 2px -2px 5px 1px darkgray;
-}
+
 
 .switchButton {
 	    padding: 1rem 0.5rem 1rem 0.5rem;
 	background-color: transparent;
-	color: black;
+	color: var(--color_skywhite);
 	border: none;
     margin: 0;
-     box-shadow: 2px -2px 5px 0px darkgray;
      letter-spacing: 1px;
+}
+
+.switchButton:hover{
+	cursor: pointer;
 }
 
 .switchButton:nth-child(1){
@@ -37,19 +34,13 @@ table {
 	outline: none;
 }
 
-
-
-
-
-tr:nth-child(2n+3) {
-	background: linear-gradient(to right, rgba(238,238,238,1) 0%,rgba(238,238,238,1) 100%);
-}
-
 #baguette {
 background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/320px-Flag_of_France.svg.png");
 background-repeat: no-repeat;
 background-size: cover;
 	font-size: 1.5rem;
+	padding: 1rem;
+	color: black;
 
 }
 #bratwurst {
@@ -59,30 +50,14 @@ background-size: 100% 100%;
 	font-size: 1.5rem;
 	color: white;
      padding: 0;
+	 padding: 1rem;
 
 }
-/*
-tr:last-child{
-	border-bottom: 1px solid black;
-}
 
-tr:nth-child(1) {
-	border: 1px solid black;
-	
-}
-*/
-td {
-	padding: 1vw;
-	/*border-left: 1px solid black;
-	border-right: 1px solid black;*/
+#frenchTable td{
 	width: 50%;
 }
 
-th {
-	padding: 0.5rem 0 0.5rem 0;
-	/*border: 1px solid black;*/
-
-}
 .inputField {
 	display: grid;
 	grid-template-columns: repeat( auto-fit, minmax(30%, 1fr) );
@@ -139,18 +114,10 @@ th {
 
 
 }
-input {
-	font-size: 2vw;
-	width: 100%;
-	height: 3vw;
-	border: none;
-}
 
-input:focus {
-	width: 100%;
-	outline: none;
-	box-shadow: 0px 5px 0px -1px blue;
-
+#searchAll, #searchFrench, #searchGerman{
+	height: 3rem;
+	font-size: 1rem;
 }
 
 
@@ -165,7 +132,7 @@ flex-wrap: wrap;
 #frenchContact{
 	width: 103%;
 	height: 30rem;
-	position: absolute;
+	position: fixed;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -176,7 +143,6 @@ flex-wrap: wrap;
 	background-image: url("../Assets/eiffel-tower-951509.jpg");
     background-size: cover;
     background-position: center;
-	box-shadow: 0px 0px 15px -5px #000000;
     transition: left 1s ease-out;
     z-index: 20000;
 }
@@ -251,8 +217,7 @@ outline: 0 !important;
 	position: absolute;
 	right: 0;
 	padding: 0 0.5rem 0 0.5rem;
-	background-color: #0499f2;
-background-image: linear-gradient(315deg, #0499f2 0%, #26f596 74%);
+	background-color: var(--color_sunset);
 
 
 	color: white;
@@ -260,7 +225,6 @@ background-image: linear-gradient(315deg, #0499f2 0%, #26f596 74%);
 text-orientation: upright;
 font-size: 1.5rem;
 font-family: "Arial";
-box-shadow: -10px 0px 15px -10px #000000;
 }
 
 #frenchContactArrow:hover{
@@ -279,30 +243,21 @@ cursor:pointer;
     border: 1px solid gold;
 }
 
-.svg-inline--fa.fa-w-8{
-    font-size: 2rem;
-    border: 2px solid white;
-    border-radius: 50px;
-    color: white;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: 2rem 0 0 0;
-}
-
 #toTop{
-margin: 2rem 0 0 0;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-font-size: 3rem;
-
-width: 100%;
-position: relative;
-}
-
-.fa-arrow-alt-circle-up.fa-w-16{
-    color: blue;
-}
-.fa-arrow-alt-circle-up.fa-w-16:hover{
-    cursor:pointer;
-}
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 3rem;
+	aspect-ratio: 1/1;
+	background: var(--color_skywhite);
+	border-radius: 100%;
+	position: fixed;
+	bottom: 3rem;
+	right: 1rem;
+	background-image: url("../iconography_pos_SVG/SKY_Interface_up.svg");
+	background-size: 100%;
+	}
+	
+	#toTop{
+	  cursor: pointer;
+	}

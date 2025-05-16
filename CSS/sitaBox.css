@@ -2,20 +2,18 @@
 	display: none;
 }
 
-.intro {
-	display: flex;
-	width: 100%
-}
-
 .queryBar {
 	display: grid;
-	grid-template-columns: 80% 20%;
+	grid-template-columns: 75% 20%;
+	grid-gap: 5%;
 	width: 100%;
-	grid-column-gap: 1vw;
 }
 
-.dissect {
+
+.dissectContainer {
 	display: flex;
+    justify-content: center;
+    align-items: center;
 	margin: 1rem 0 1rem 0;
 	text-transform: uppercase;
 	font-family: monospace;
@@ -23,4 +21,25 @@
 	font-size: 1rem;
 	width: 100%;
     height: 50vh;
+    background: lightblue;
+    background-image: url("../Assets/Aeronautical information 3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dissect{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.dissect p{
+text-transform: none;
+padding: 1rem;
+background: rgba(0,0,0,0.5);
+color: white;
+border-radius: 25px;
 }

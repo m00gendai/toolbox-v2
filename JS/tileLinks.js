@@ -19,7 +19,7 @@ const homeTileData = [{
 		id: "aisPhone",
 		img: "Assets/fax.png",
 		title: "AIS Phone & Equipment Map",
-		link: "Documents/aiseqptmap.pdf",
+		link: "Documents/AISEQPT.pdf",
 		tags: "ais phone equipment map telephone eqpt iawp",
 		style: "spvr"
 	},
@@ -41,7 +41,7 @@ const homeTileData = [{
 	{
 		id: "arOnline",
 		img: "Assets/maintenance.png",
-		title: "ARonline",
+		title: "AROnline",
 		link: "https://aronline.skyguide.corp/",
 		tags: "aronline master page addressing in flight change",
 		style: "aro"
@@ -66,7 +66,7 @@ const homeTileData = [{
 		id: "confluenceAIM",
 		img: "Assets/icons8-confluence-512.png",
 		title: "Confluence AIM Operations",
-		link: "https://confluence.skyguide.corp/display/AOP/AIM+Operations",
+		link: "https://confluence-skyguide.atlassian.net/wiki/display/AOP/AIM+Operations",
 		tags: "confluence aim operations",
 		style: "spvr"
 	},
@@ -121,8 +121,8 @@ const homeTileData = [{
 	{
 		id: "drohnenInfo",
 		img: "Assets/004-drone-2.png",
-		title: "drone Info BAZL",
-		link: "https://www.bazl.admin.ch/bazl/en/home/drohnen/verstaendnishilfe.html",
+		title: "Drone Info BAZL",
+		link: "https://www.bazl.admin.ch/bazl/en/home/drohnen.html",
 		tags: "bazl drohnen drone info",
 		style: "sfo"
 	},
@@ -154,7 +154,7 @@ const homeTileData = [{
 		id: "yonder",
 		img: "Assets/checklist.png",
 		title: "Yonder",
-		link: "https://skyguide.yondermind.info/?#/",
+		link: "https://skyguide.yonder.info/",
 		tags: "eatm daily briefing list yonder",
 		style: "general"
 	},
@@ -209,7 +209,7 @@ const homeTileData = [{
 		id: "ifpsError",
 		img: "Assets/error.png",
 		title: "IFPS Error Validation & Equipment Guide",
-		link: "https://contentzone.eurocontrol.int/FPL/errorSearch.aspx",
+		link: "https://learningzone.eurocontrol.int/ilp/customs/FPL/",
 		tags: "ifps red error fehler validation ifpsra ifpuv eqpt equipment guide item 10",
 		style: "aro"
 	},
@@ -233,7 +233,7 @@ const homeTileData = [{
 		id: "jiraDBU",
 		img: "Assets/icons8-jira-500.png",
 		title: "JIRA DBU",
-		link: "https://jira.skyguide.corp:8443/secure/RapidBoard.jspa?rapidView=774&projectKey=DBU",
+		link: "https://jira-skyguide.atlassian.net/jira/software/c/projects/DBU/boards/560",
 		tags: "dbu jira ticket issue problem",
 		style: "spvr"
 	},
@@ -266,7 +266,7 @@ const homeTileData = [{
 		img: "Assets/030-medical.png",
 		title: "Mobilisation & e-Alarming Tool",
 		link: "https://emergency.swisscom-alarm.ch/",
-		tags: "ealarming alarmierung notfall mobilisation tool mosi cos",
+		tags: "ealarming alarmierung notfall mobilisation tool mosi cos emergency",
 		style: "spvr"
 	},
 {
@@ -425,7 +425,7 @@ const homeTileData = [{
 		img: "Assets/risk.png",
 		title: "Aviation Reporting / Luftraumverletzung",
 		link: "https://e2.aviationreporting.eu/reporting",
-		tags: "luftraum verletzung melden report aviation airspace infringement",
+		tags: "luftraum verletzung melden report aviation airspace infringement anzeige selbst",
 		style: "spvr"
 	},
     {
@@ -472,7 +472,7 @@ const homeTileData = [{
         id: "aimmappingtool",
         img: "Assets/002-maps.png",
         title: "AIM Mapping Tool",
-        link: "https://aim-mapping-tool.onrender.com/",
+        link: "https://aim-mapping-tool.mrweber.ch/",
         tags: "map karte mäse aim mapping tool",
         style: "aro"
     },
@@ -507,4 +507,58 @@ const homeTileData = [{
 	tags: "r-area, d-area, rarea, darea, areas, kosif, aip, firing, frng, schiessanzeige, schiess, anzeige, schanz",
 	style: "pub"
 },
+{	
+	id: "regcause",
+	img: "Assets/encrypt.png",
+	title: "CFMU Regulation Codes",
+	link: "U:\\ZOL\\PR-Team\\AIS-ALLG\\aim-info-hub_DO NOT DELETE PLS -WM\\Documents\\REGCAUSE.pdf",
+	tags: "cfmu ifps regcasue regulation cause code atc capacity",
+	style: "aro"
+},
+{
+	id: "manual",
+	img: "Assets/manual.png",
+	title: "Toolbox Manual",
+	link: "file:///U:/ZOL/PR-Team/AIS-ALLG/aim-info-hub_DO%20NOT%20DELETE%20PLS%20-WM/Manual/Toolbox%20V2%20Guidelines.pdf",
+	tags: "toolbox manual guide guidelines anleitung instructions wi work user",
+	style: "general",
+},
+{
+	id: "dangerdanger",
+	img: "Assets/alert.png",
+	title: "Gefahr im Verzug",
+	link: "U:\\ZOL\\PR-Team\\AIS-ALLG\\PUB\\Gefahr in Verzug",
+	tags: "gefahr verzug danger alert",
+	style: "spvr",
+},
+{
+	id: "aimshop",
+	img: "Assets/shopping-cart.png",
+	title: "AIM Shop",
+	link: "https://www.aimshop-skyguide.ch/deutsch/",
+	tags: "aim, shop, aip, chart, karte, icao, ordner",
+	style: "general",
+},
+{
+	id: "microsoft365",
+	img: "Assets/office.png",
+	title: "Microsoft 365",
+	link: "https://skyguide.sharepoint.com/sites/InfoPortal/",
+	tags: "microsoft 365 office outlook word onedrive one drive excel powerpoint power point onenote one note sharepoint share point teams",
+	style: "general",
+},
+{
+	id: "templateList",
+	img: "Assets/layout.png",
+	title: "Template Liste",
+	tags: "template display event acp acr pc7 ps patrouille suisse gutzi lw oms",
+	style: "pub",
+},
+{
+	id: "icao8400",
+	img: "Assets/dictionary.png",
+	title: "ICAO 8400 Abbreviations",
+	tags: "icao 8400 abbreviation abkürzung kurz",
+	style: "doc",
+}
 ];

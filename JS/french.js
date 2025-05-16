@@ -8,93 +8,124 @@ function loadFrenchCode() {
     const filterAll 		= document.getElementById("searchAll");
     const filterFrench 		= document.getElementById("searchFrench");
     const filterGerman 		= document.getElementById("searchGerman");
-    const translateTable 	= document.getElementById("frenchTable");
+    const translateTable 	= document.getElementById("frenchTable").children[1];
     const btnContainer 		= document.getElementById("inputField2");
     const btns 				= btnContainer.getElementsByClassName("switchButton");
     const accentRegex       = /[\u00C0-\u00FF\u0027]/g
-    let allInOne
-    
+
 // E V E N T   L I S T E N E R S
 
-    
-    filterAll.addEventListener("keyup", function() {
-        obj = allInOne
-        while (translateTable.childNodes.length > 2) { // > 2 so it stops before removing the <th>
-            translateTable.removeChild(translateTable.lastChild);
-        }
-        for (i=0; i<obj.length; i++){
+function getCurrentTopic(){
+    switch(showTableOnLoad){
+        case 0:
+            return topic = sfoHelpdesk.slice(1)
+        case 1:
+            return topic = skybriefingHelpdesk.slice(1)    
+        case 2:
+            return topic = aipHelpdesk.slice(1)
+        case 3:
+            return topic = vociTechGen.slice(1)   
+        case 4:
+            return topic = vociDiv.slice(1)
+    }
+}
+
+function getCurrentSearchbox(){
+    if(filterAll.value !== ""){
+        return "all"
+    }
+    else if(filterFrench.value !== ""){
+        return "fr"
+    }
+    else if(filterGerman.value !== ""){
+        return "de"
+    }
+    else return "all"
+}
+
+function queryTopic(what, topic){
+    console.log(what, showTableOnLoad)
+    if(what === "all"){
+        for (i=0; i<topic.length; i++){
             let filterValueA = filterAll.value.toLowerCase();
             if (filterValueA.match(accentRegex)){ // checks if accent characters are present
-                if (obj[i].Français.toLowerCase().includes(filterValueA) || obj[i].Allemand.toLowerCase().includes(filterValueA)) {
-                    wordList(); // if accent characters present, search with them
+                if (topic[i].Français.toLowerCase().includes(filterValueA) || topic[i].Allemand.toLowerCase().includes(filterValueA)) {
+                    wordList(topic); // if accent characters present, search with them
                 } 
             } else { // if no accent characters present, normalize the object value and remove accent characters
-                let deaccentedAF = _.deburr(obj[i].Français.toLowerCase()); // ALL GLORY TO LODASH FOR THE DEBURR FUNCTION OH MY GOD
-                let deaccentedAG = _.deburr(obj[i].Allemand.toLowerCase()); // ...deburr removes accents and replaces accented letters with latin letters (è -> e)
+                let deaccentedAF = _.deburr(topic[i].Français.toLowerCase()); // ALL GLORY TO LODASH FOR THE DEBURR FUNCTION OH MY GOD
+                let deaccentedAG = _.deburr(topic[i].Allemand.toLowerCase()); // ...deburr removes accents and replaces accented letters with latin letters (è -> e)
                 if (deaccentedAF.includes(filterValueA) || deaccentedAG.includes(filterValueA)) {
-                    wordList();
+                    wordList(topic);
                 }
             }
         }
-    })
-
-    filterFrench.addEventListener("keyup", function() {
-        obj = allInOne
-        while (translateTable.childNodes.length > 2) { // > 2 so it stops before removing the <th>
-            translateTable.removeChild(translateTable.lastChild);
-        }
-        for (i=0; i<obj.length; i++){
-            let filterValueF = filterFrench.value.toLowerCase();
-            if (filterValueF.match(accentRegex)){ // checks if accent characters are present
-                if (obj[i].Français.toLowerCase().includes(filterValueF)) {
-                    wordList(); // if accent characters present, search with them
-                } 
-            } else { // if no accent characters present, normalize the object value and remove accent characters
-                let deaccentedF = _.deburr(obj[i].Français.toLowerCase());
-                if (deaccentedF.includes(filterValueF)) {
-                    wordList();
-                }
-            }
-        }
-    })
-
-    filterGerman.addEventListener("keyup", function() {
-        obj = allInOne
-        while (translateTable.childNodes.length > 2) { // > 2 so it stops before removing the <th>
-            translateTable.removeChild(translateTable.lastChild);
-        }
-        for (i=0; i<obj.length; i++){
+    }
+    if(what === "de"){
+        for (i=0; i<topic.length; i++){
             let filterValueG = filterGerman.value.toLowerCase();
             if (filterValueG.match(accentRegex)){ // checks if accent characters are present
-                if (obj[i].Allemand.toLowerCase().includes(filterValueG)) {
-                    wordList(); // if accent characters present, search with them
+                if (topic[i].Allemand.toLowerCase().includes(filterValueG)) {
+                    wordList(topic); // if accent characters present, search with them
                 } 
             } else { // if no accent characters present, normalize the object value and remove accent characters
-                let deaccentedG = _.deburr(obj[i].Allemand.toLowerCase());
+                let deaccentedG = _.deburr(topic[i].Allemand.toLowerCase());
                 if (deaccentedG.includes(filterValueG)) {
-                    wordList();
+                    wordList(topic);
                 }
             }
         }
-    })
+    }
+    if(what === "fr"){
+        for (i=0; i<topic.length; i++){
+            let filterValueF = filterFrench.value.toLowerCase();
+            if (filterValueF.match(accentRegex)){ // checks if accent characters are present
+                if (topic[i].Français.toLowerCase().includes(filterValueF)) {
+                    wordList(topic); // if accent characters present, search with them
+                } 
+            } else { // if no accent characters present, normalize the object value and remove accent characters
+                let deaccentedF = _.deburr(topic[i].Français.toLowerCase());
+                if (deaccentedF.includes(filterValueF)) {
+                    wordList(topic);
+                }
+            }
+        }
+    }
+}
+   
+filterAll.addEventListener("keyup", function() {
+    translateTable.innerHTML = ""
+    let topic = getCurrentTopic()
+    queryTopic("all", topic)
+})
+
+filterFrench.addEventListener("keyup", function() {
+    translateTable.innerHTML = ""
+    let topic = getCurrentTopic()
+    queryTopic("fr", topic)
+})
+
+filterGerman.addEventListener("keyup", function() {
+    translateTable.innerHTML = ""
+    let topic = getCurrentTopic()
+    queryTopic("de", topic)
+    
+})
 
 //These event listeners just call the init function with a assigned a value which determines the JSON source
 
     function tabbing(buttonID) {
+        translateTable.innerHTML = ""
         for (let i = 0; i < btns.length; i++) {
             if(btns[i].id == buttonID){
-                btns[i].style.backgroundImage = "linear-gradient(315deg, #0499f2 0%, #26f596 74%)";
+                btns[i].style.setProperty("background-color", "var(--color_skyblue)")
                 btns[i].style.opacity = "1"
-                btns[i].style.color ="white";
-                btns[i].style.textShadow ="0px 0px 3px black";
+                btns[i].style.setProperty("color", "var(--color_skywhite)")
             } else {
-                btns[i].style.backgroundImage = "linear-gradient(315deg, #0499f2 0%, #26f596 74%)";
-                btns[i].style.opacity = "0.5"
-                btns[i].style.textShadow ="none";
-                btns[i].style.color ="black";
+                btns[i].style.setProperty("background-color", "var(--color_skyblue)")
+                btns[i].style.opacity = "0.6"
             }
         }
-        filterAll.focus()
     }
 
 
@@ -102,35 +133,35 @@ function loadFrenchCode() {
         let buttonID = "buttonSFO";
         tabbing(buttonID);
         showTableOnLoad = 0;
-        init();
+        queryTopic(getCurrentSearchbox(), getCurrentTopic())
     })
     
     document.getElementById("buttonGeneral").addEventListener("click", function() {
         let buttonID = "buttonGeneral";
         tabbing(buttonID);
         showTableOnLoad = 1;
-        init();
+        queryTopic(getCurrentSearchbox(), getCurrentTopic())
     })
 
     document.getElementById("buttonWhatever").addEventListener("click", function() {
         let buttonID = "buttonWhatever";
         tabbing(buttonID);
         showTableOnLoad = 2;
-        init();
+        queryTopic(getCurrentSearchbox(), getCurrentTopic())
     })
 
     document.getElementById("buttonAnother").addEventListener("click", function() {
         let buttonID = "buttonAnother";
         tabbing(buttonID);
         showTableOnLoad = 3;
-        init();
+        queryTopic(getCurrentSearchbox(), getCurrentTopic())
     })
     
     document.getElementById("buttonLastOne").addEventListener("click", function() {
         let buttonID = "buttonLastOne";
         tabbing(buttonID);
         showTableOnLoad = 4;
-        init();
+        queryTopic(getCurrentSearchbox(), getCurrentTopic())
     })
     
 
@@ -138,7 +169,7 @@ function loadFrenchCode() {
 
 
 // This creates the rows of the table dynamically
-    function createTableContent() {
+    function createTableContent(obj) {
         const TR 					= document.createElement("tr");
         const TDFrench 			= document.createElement("td");
         const TDGerman 			= document.createElement("td");
@@ -152,47 +183,21 @@ function loadFrenchCode() {
     }
 
 // This creates the table itseld
-    function wordList() {
+    function wordList(obj) {
         if (filterAll.value == 0 && filterFrench.value == 0 && filterGerman.value == 0){
             translateTable.innerHTML=""; // clears the table completely 
-            const THFrench= document.createElement("th"); // The next lines rebuild the table with a header
-            const THGerman= document.createElement("th");
-            const THcontentFrench = document.createTextNode("Français");
-            const THcontentGerman = document.createTextNode("Deutsch");
-            THFrench.appendChild(THcontentFrench);
-            THGerman.appendChild(THcontentGerman);
-            translateTable.appendChild(THFrench);
-            translateTable.appendChild(THGerman);
-            THFrench.id = "baguette";
-            THGerman.id = "bratwurst";
-            
             for (i=0; i<obj.length; i++){
-                createTableContent(); // calls each JSON object and creates a row for it
+                createTableContent(obj); // calls each JSON object and creates a row for it
             }
         } else {
-            createTableContent(); // entry point for the filter event listeners; doesn't destroy the table
+            createTableContent(obj); // entry point for the filter event listeners; doesn't destroy the table
         }
     }
 
 // Initial display of the table and also used for switching JSON sources
     function init() {
-        if (showTableOnLoad == 0){
-            obj = sfoHelpdesk.slice(1)  ;
-            wordList();
-        } else if (showTableOnLoad == 1) {
-            obj = skybriefingHelpdesk.slice(1)    
-            wordList();
-        } else if (showTableOnLoad == 2) {
-            obj = aipHelpdesk.slice(1)  ;
-            wordList();
-        } else if (showTableOnLoad == 3) {
-            obj = vociTechGen.slice(1)   
-            wordList();
-        }
-         else if (showTableOnLoad == 4) {
-            obj = vociDiv.slice(1)   
-            wordList();
-        }
+        let topic = getCurrentTopic()
+        wordList(topic)
         
         console.log("sfoHelpdesk: " + sfoHelpdesk.length)
         console.log("skybriefingHelpdesk: " + skybriefingHelpdesk.length)
@@ -201,8 +206,6 @@ function loadFrenchCode() {
         console.log("vociDiv: " + vociDiv.length)
         console.log("Total: " + (sfoHelpdesk.length + aipHelpdesk.length + vociDiv.length + vociTechGen.length + skybriefingHelpdesk.length))
 
-        allInOne = sfoHelpdesk.concat(aipHelpdesk, vociDiv, vociTechGen, skybriefingHelpdesk)
-        console.log(allInOne)
     }
 
 // M A I N   E N T R Y   P O I N T

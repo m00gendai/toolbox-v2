@@ -351,21 +351,10 @@ function loadAipLibraryCode(){
     });
 
     
-    // M I S S I N G   C O U N T R I E S   S P O I L E R
-
-    if(document.getElementById("misCtry")){
-    
-    document.getElementById("misCtry").addEventListener("click", function() {
-        if (document.getElementById("misCtryCnt").style.display == "block"){
-            document.getElementById("misCtryCnt").style.display = "none";
-        } else if (document.getElementById("misCtryCnt").style.display = "none"){
-            document.getElementById("misCtryCnt").style.display = "block";
-        }
-    });
-    
+   
     document.getElementById("toTopAIPlibrary").addEventListener("click", function(){
         window.scrollTo(0,0)
     })
-    }
+    
     
 }

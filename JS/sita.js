@@ -23,8 +23,8 @@ window.onload = (event) => {
     
     function displayChart(sitaInput){
         am4core.ready(function() {
-            
-            document.getElementById("dissect").style.background = "none"
+            const mode = document.querySelector('html').style.getPropertyValue("color-scheme")
+            document.getElementById("dissectContainer").style.background = mode === "dark" ? "var(--color_aurora)" : "transparent"
             
             let airlineCodes = JSON.parse(alcodes)
             airlineCodes = airlineCodes.alcode
@@ -40,7 +40,7 @@ window.onload = (event) => {
             
             am4core.useTheme(am4themes_animated)
             
-            chart = am4core.create("dissect", am4charts.SankeyDiagram)
+            chart = am4core.create("dissectContainer", am4charts.SankeyDiagram)
             chart.hiddenState.properties.opacity = 0
 
             chart.data = []
@@ -130,6 +130,8 @@ window.onload = (event) => {
             let hoverState = chart.links.template.states.create("hover")
             hoverState.properties.fillOpacity = 0.6
 
+            chart.links.template.fillOpacity = mode === "dark" ? 1 : 0.5
+
             chart.dataFields.fromName = "from"
             chart.dataFields.toName = "to"
             chart.dataFields.value = "value"
@@ -151,6 +153,7 @@ window.onload = (event) => {
             chart.nodes.template.nameLabel.label.width = 500
             chart.nodes.template.nameLabel.label.truncate = false
             chart.nodes.template.nameLabel.label.wrap = true
+
 
         })
     }

@@ -1,7 +1,5 @@
 nav {
-    background-color: #045de9;
-background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
-    box-shadow: 0px 0px 14px -1px #000000;
+    background-color: var(--color_skydarkblue);
     text-align: center;
     overflow: hidden;
     height: 3em;
@@ -9,7 +7,9 @@ background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
     left: 0;
     right:0;
     top: 0;
-
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+border-bottom-color: light-dark(transparent, var(--color_skygrey));
   display: block;
   z-index: 9999;
   }
@@ -44,20 +44,82 @@ nav li:hover {
     border-bottom: 2px solid white;
   }
   
+  #optionsToggle{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--color_skywhite);
+  }
+
+  #optionsToggle:hover{
+    cursor:pointer;
+  }
 
   footer {
-    position: fixed;
+    position: absolute;
     left: 0;
-    right:0;
+    right: 0;
     bottom: 0;
-
-    background-color: #045de9;
-background-image: linear-gradient(135deg, #045de9 0%, #09c6f9 74%);
+height: 2rem;
+    background-color: var(--color_skydarkblue);
 z-index:9999;
-    color: white;
+    color: var(--color_skywhite);
     text-align: center;
     font-size: 0.8rem;
     padding: 0.2rem 0 0.2rem 0;
     font-family: "Arial";
-    box-shadow: 0px 0px 14px -1px #000000;
+  }
+
+  #tools{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #tools img{
+    height: 1em;
+    aspect-ratio: 1/1;
+    margin: 0 0 0 1em;
+    color: var(--color_skywhite);
+  }
+
+  #toolsMenu{
+    margin: 0 0 0 0;
+    padding: 4em 0 0 0;
+    display: none;
+    position: fixed;
+    min-width: 10rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
+    z-index: 9998;
+    background: var(--color_skydarkblue);
+    list-style-type:square;
+  }
+
+  #toolsMenu li {
+    margin: 0 1.5em 1.5em 1.5em;
+    padding: 0 0 0.5em 0;
+    font-size: 1em;
+    font-weight: bolder;
+    text-shadow: 2px 2px 2px black;
+    color: white;
+    overflow: hidden;
+    border-bottom: 2px solid transparent;
+  }
+
+  #toolsMenu li:hover {
+    cursor: pointer;
+    /*transform: scale(1.05, 1.05);*/
+    border-bottom: 2px solid white;
+  }
+
+  #favoritesTogglor{
+    display: none;
   }

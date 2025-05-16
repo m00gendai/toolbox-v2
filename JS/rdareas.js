@@ -1,199 +1,247 @@
 function loadRDareas(){
     const rAreas = [
 	{
-    designator: "R-2",
+    designator: "LSR2",
     name: "Hohgant",
+    type: "MIL ACFT ACT",
   },
   {
-    designator: "R-3",
+    designator: "LSR3",
     name: "Speer",
+    type: "MIL ACFT ACT",
   },
   {
-    designator: "R-4",
+    designator: "LSR4",
     name: "Lac de Neuchatel",
+    type: "ACFT FRNG",
   },
   {
-    designator: "R-4A",
+    designator: "LSR4A",
     name: "Lac de Neuchatel",
+    type: "ACFT FRNG",
   },
   {
-    designator: "R-5",
+    designator: "LSR5",
     name: "Biere",
+    type: "MIL UAS and/or FRNG ACT",
   },
   {
-    designator: "R-6",
+    designator: "LSR6",
     name: "Axalp",
+    type: "ACFT FRNG",
   },
   {
-    designator: "R-7",
+    designator: "LSR7",
     name: "Hongrin",
+    type: "MIL UAS and/or FRNG ACT",
   },
   {
-    designator: "R-8",
+    designator: "LSR8",
     name: "Dammastock",
+    type: "Air-Air FRNG",
   },
   {
-    designator: "R-9",
+    designator: "LSR8A",
+    name: "Dammastock",
+    type: "Air-Air FRNG / MIL ACFT ACT",
+  },
+  {
+    designator: "LSR9",
     name: "Hinterrhein",
+    type: "MIL UAS and/or FRNG ACT",
   },
   {
-    designator: "R-10",
+    designator: "LSR10",
     name: "Färmelberg",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-11",
+    designator: "LSR11",
     name: "Zuoz/S-chanf",
+    type: "Anti-ACFT FRNG / MIL ACFT ACT",
   },
   {
-    designator: "R-11A",
+    designator: "LSR11A",
     name: "Zuoz/S-chanf",
+    type: "Anti-ACFT FRNG / MIL ACFT ACT",
   },
   {
-    designator: "R-12",
+    designator: "LSR12",
     name: "Simplon",
+    type: "MIL UAS and/or FRNG ACT",
   },
   {
-    designator: "R-13",
+    designator: "LSR13",
     name: "Axalp",
+    type: "ACFT FRNG",
   },
   {
-    designator: "R-14",
+    designator: "LSR14",
     name: "Säntis",
+    type: "MIL UAS and/or FRNG ACT",
   },
   {
-    designator: "R-15",
+    designator: "LSR15",
     name: "Entlebuch",
+    type: "MIL UAS ACT expect ADS15 / ACFT activity",
   },
   {
-    designator: "R-16",
+    designator: "LSR16",
     name: "Isone 1",
+    type: "MIL UAS and/or FRNG ACT",
   },
   {
-    designator: "R-17",
+    designator: "LSR17",
     name: "Isone 2",
+    type: "MIL UAS and/or FRNG ACT",
   },
   {
-    designator: "R-18",
+    designator: "LSR18",
     name: "Bure",
+    type: "MIL UAS ACT",
   },
   {
-    designator: "R-31",
+    designator: "LSR31",
     name: "Gadmen",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-37",
+    designator: "LSR37",
     name: "Sustenpass",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-38",
-    name: "Glauberberg-Wasserfallen",
+    designator: "LSR38",
+    name: "Glaubenberg-Wasserfallen / Flüehli",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-39A",
+    designator: "LSR39A",
     name: "Heitli",
+    type: "Pilatus Flight Test",
   },
   {
-    designator: "R-39B",
+    designator: "LSR39B",
     name: "Brisen",
+    type: "Pilatus Flight Test",
   },
   {
-    designator: "R-39C",
+    designator: "LSR39C",
     name: "Stoos",
+    type: "Pilatus Flight Test",
   },
   {
-    designator: "R-40",
+    designator: "LSR40",
     name: "Wasserfallen",
+    type: "A/G FRNG / MIL ACFT ACT",
   },
   {
-    designator: "R-40A",
+    designator: "LSR40A",
     name: "Wasserfallen",
+    type: "A/G FRNG / MIL ACFT ACT",
   },
   {
-    designator: "R-40B",
+    designator: "LSR40B",
     name: "Wasserfallen",
+    type: "A/G FRNG / MIL ACFT ACT",
   },
   {
-    designator: "R-41",
+    designator: "LSR41",
     name: "Chalchtal",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-45",
+    designator: "LSR45",
     name: "Chlialp",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-46",
+    designator: "LSR46",
     name: "Mätteli",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-47",
+    designator: "LSR47",
     name: "Val Piana Cavagnolo",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-48",
+    designator: "LSR48",
     name: "Mundaun Nova",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-49",
+    designator: "LSR49",
     name: "Val Cristallina",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-50",
+    designator: "LSR50",
     name: "Val Nalps",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-51",
+    designator: "LSR51",
     name: "Val Rondadura",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-52",
+    designator: "LSR52",
     name: "Val Curtegns",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-53",
+    designator: "LSR53",
     name: "Albula Alpen E",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-57",
+    designator: "LSR57",
     name: "Rossboden-Rheinsand (Chur)",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-58",
+    designator: "LSR58",
     name: "Frauenfeld",
+    type: "FRNG ACT",
   },
   {
-    designator: "R-59",
+    designator: "LSR59",
     name: "Wichlen",
+    type: "FRNG ACT",
   },
 ]
 
 const dAreas = [
 	{
-    designator: "D-5",
+    designator: "LSD5",
     name: "Eriswil",
+    type: "Simulated Ground Attacks with MIL Jet and Prop ACFT",
   },
   {
-    designator: "D-7",
+    designator: "LSD7",
     name: "Grandvillard",
+    type: "MIL ACFT ACT",
   },
   {
-    designator: "D-10",
+    designator: "LSD10",
     name: "Breil/Brigels",
+    type: "MIL ACFT ACT",
   },
   {
-    designator: "D-12",
+    designator: "LSD12",
     name: "Sihltal",
+    type: "Test FRNG",
   },
   {
-    designator: "D-14",
+    designator: "LSD14",
     name: "Gasterntal",
-  },
-  {
-    designator: "D-22",
-    name: "Petit Mont",
+    type: "",
   },
 ]
 
 function rTabler(e){
+  const tbody = document.getElementById("rTable").children[1]
   for(let area of rAreas){
     if(area.name.toLowerCase().includes(e) 
     	|| area.designator.toLowerCase().includes(e) 
@@ -202,16 +250,20 @@ function rTabler(e){
       const row = document.createElement("tr")
       const cell1 = document.createElement("td")
       const cell2 = document.createElement("td")
+      const cell3 = document.createElement("td")
       cell1.innerText = area.designator
       cell2.innerText = area.name
+      cell3.innerText = area.type
       row.appendChild(cell1)
       row.appendChild(cell2)
-      document.getElementById("rTable").appendChild(row)
+      row.appendChild(cell3)
+      tbody.appendChild(row)
     }
   }
 }
 
 function dTabler(e){
+  const tbody = document.getElementById("dTable").children[1]
   for(let area of dAreas){
     if(area.name.toLowerCase().includes(e) 
     	|| area.designator.toLowerCase().includes(e) 
@@ -220,30 +272,27 @@ function dTabler(e){
       const row = document.createElement("tr")
       const cell1 = document.createElement("td")
       const cell2 = document.createElement("td")
+       const cell3 = document.createElement("td")
       cell1.innerText = area.designator
       cell2.innerText = area.name
+      cell3.innerText = area.type
       row.appendChild(cell1)
       row.appendChild(cell2)
-      document.getElementById("dTable").appendChild(row)
+      row.appendChild(cell3)
+      tbody.appendChild(row)
     }
   }
 }
 
 function rTableener(e){
-	let i = document.getElementById("rTable").children.length-1
-	while(i>0){
-  	document.getElementById("rTable").removeChild(document.getElementById("rTable").children[i])
-    i--
-  }
+  const tbody = document.getElementById("rTable").children[1]
+  tbody.innerHTML = ""
   rTabler(e)
 }
 
 function dTableener(e){
-	let i = document.getElementById("dTable").children.length-1
-	while(i>0){
-  	document.getElementById("dTable").removeChild(document.getElementById("dTable").children[i])
-    i--
-  }
+  const tbody = document.getElementById("dTable").children[1]
+	tbody.innerHTML = ""
   dTabler(e)
 }
 

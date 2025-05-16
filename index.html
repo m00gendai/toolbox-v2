@@ -12,12 +12,14 @@
 		<!-- BEGIN Stylesheets -->
 		<link rel="stylesheet" href="CSS/styles.css">             <!-- CSS General Styles -->
 		<link rel="stylesheet" href="CSS/menubar.css">            <!-- CSS Menu Bar & Footer -->
+        <link rel="stylesheet" href="CSS/options.css">            <!-- CSS Options -->
 		<link rel="stylesheet" href="CSS/aipbox.css">             <!-- CSS AIP Library -->
 		<link rel="stylesheet" href="CSS/atsbox.css">             <!-- CSS ATS MSG Search -->
 		<link rel="stylesheet" href="CSS/frenchBox.css">          <!-- CSS French Translation Section -->
 		<link rel="stylesheet" href="CSS/sitaBox.css">            <!-- CSS SITA Address Converter -->
 		<link rel="stylesheet" href="CSS/doctoolbox.css">         <!-- CSS DOC Screening Tool -->
 		<link rel="stylesheet" href="CSS/areaBox.css">            <!-- CSS R/D Areas -->
+        <link rel="stylesheet" href="CSS/abbrevBox.css">          <!-- CSS Abbreviations -->
 		<link rel="stylesheet" href="CSS/legal.css">              <!-- CSS Legal Statement Popup -->
 		<link rel="stylesheet" href="CSS/optionsMenu.css">        <!-- CSS DOC Tool Options Menu -->
 		<link rel="stylesheet" href="CSS/achievements.css">       <!-- CSS Achievement Unlocked -->
@@ -34,6 +36,7 @@
         <script src="JS/docScreeningTool.js" defer></script>    <!-- Specific DOC Screening Tool section JavaScript Code -->
         <script src="JS/sita.js" defer></script>                <!-- Specific SITA section JavaScript Code -->
         <script src="JS/rdareas.js" defer></script>              <!-- Specific R/D Areas JavaScript Code -->
+        <script src="JS/abbrevs.js" defer></script>              <!-- Specific Abbreviations JavaScript Code -->
         <script src="JS/apcodes.js" defer></script>             <!-- JSON for SITA section - Airport Codes -->
         <script src="JS/alcodes.js" defer></script>             <!-- JSON for SITA section - Airline Codes -->
         <script src="JS/convcodes.js" defer></script>           <!-- JSON for SITA section - Matching Address Pairs -->
@@ -44,6 +47,7 @@
         <script src="JS/aipLinks.js" defer></script>            <!-- JSON for AIP Library - eAIP Links -->
         <script src="JS/dragDrop.js" defer></script>            <!-- Drag & Drop logic -->
         <script src="JS/lodash.js" defer></script>              <!-- lodash library -->
+        <script src="JS/8400.js" defer></script>                <!-- ICAO 8400 JSON -->
         <script src="Documents/FRENCH BIBLIOTHEK/sfo_helpdesk.js" defer></script>           <!-- JSON for French Table 1 -->
         <script src="Documents/FRENCH BIBLIOTHEK/skybriefing_helpdesk.js" defer></script>   <!-- JSON for French Table 2 -->
         <script src="Documents/FRENCH BIBLIOTHEK/aip_helpdesk.js" defer></script>           <!-- JSON for French Table 3 -->
@@ -70,35 +74,46 @@
 			<li id="aip">
                 AIP Library
             </li>
-			<li id="doctool">
-                DOC Screening Tool
-            </li>
-            <li id="mappingtool">
-                Mapping Tool
-            </li>
-			<li id="favoritesTogglor" title="Toggle Favorites">
-                <i class="fas fa-star"></i>
+           <li id="tools">
+                Tools <img src="./iconography_negative_SVG/SKY-Interface_down.svg" />
             </li>
 		</ul>
+        <div id="optionsToggle">☰</div>
 	</nav>
+    <ul id="toolsMenu">
+        <li id="mappingtool">
+            Mapping Tool
+        </li>
+        <li id="doctool">
+            DOC Screening
+        </li>
+        <li id="sitatool">
+            SITA Converter
+        </li>
+        <li id="frenchtool">
+            AIS French
+        </li>
+        <li id="rdtool">
+            R- & D-Areas
+        </li>
+        <li id="abbrevtool">
+            ICAO 8400 Abbreviations
+        </li>
+    </ul>
 <!-- END Navigation Bar -->
 <!-- BEGIN Body -->
 	<body>
+        <article id="options">
+            <div class="optionsContainer" id="optionsContainer">
+                <div class="optionsContainerTitle">
+                    Options
+                </div>
+            </div>
+        </article>
 <!-- BEGIN Section Home  -->
         <section id="contentBox">
             <div class="title" id="searchBarContainer">
                 <input class="mainInput" type="text" id="searchBar" autofocus placeholder="Welcome to the AIM Toolbox">
-                <div class="sortBoxHome">
-                    <div class="sortBoxHomeTitle">
-                        Sort tiles by:
-                    </div>
-                    <div class="sortBoxHomeAZ" id="sortBoxHomeAZ">
-                        A-Z
-                    </div>
-                    <div class="sortBoxHomeTyp" id="sortBoxHomeTyp">
-                        CAT
-                    </div>
-                </div>
             </div>
             <div id="favoritesBar" name="favoritesBar">
                 <div id="favoritesMessage">
@@ -143,11 +158,11 @@
                         </button>
                     </div>
                 </div>
-               <div class="missingCountrySpoiler" id="misCtry">
-                    <div class="missingCountrySpoilerTitle">
+               <details class="introSpoiler">
+                    <summary >
                         Information and missing countries
-                    </div>
-                    <div class="missingCountrySpoilerContent" id="misCtryCnt">
+                    </summary>
+                    <div class="intro">
                         Listed are links to AIPs of countries, state unions, federations etc. <br>
                         This means that some countries have their own link, despite being in a state union (for example, England and the United Kingdom, or Serbia and Montenegro).<br>
                         Also, overseas territories (like French Polynesia) and some sovereign territories (like Akrotiri) are listed.<br>
@@ -189,9 +204,6 @@
                         Missing countries:
                         <ul>
                             <li>Antarctica</li>
-                            <li>Ashmore and Cartier Islands</li>
-                            <li>Baker Island</li>
-                            <li>Bouvet Island</li>
                             <li>CENOR FLIP</li>
                             <li>Clipperton Island</li>
                             <li>Cocos (Keeling) Islands</li>
@@ -199,36 +211,34 @@
                             <li>French Southern and Antarctic Lands</li>
                             <li>GEMIL</li>
                             <li>Heard Island and McDonald Islands</li>
-                            <li>Howland Island</li>
                             <li>Jan Mayen</li>
-                            <li>Jarvis Island</li>
-                            <li>Johnston Atoll</li>
                             <li>Navassa Island</li>
                             <li>Paracel Islands</li>
                             <li>Spratly Islands</li>
                             <li>United Kingdom Military</li>
-                            <li>United States Pacific Island Wildlife Refuges</li>
-                            <li>West Bank</li>
                         </ul>
                     </div>
-                </div>
+                </details>
                 <div id="alphabetSoup">
                 </div>
                 <div id="aipLinks">
                 </div>
             </div>
             <div id="toTopAIPlibrary">
-                <i class="far fa-arrow-alt-circle-up" title="Back to Top"></i>
+
             </div>
         </section>
 <!-- END Section AIP Library -->
 <!-- BEGIN Section Flight Search -->
         <section class = "sectionClass" id="atsBox">
-            <div class="title" id="atsTitle">
+            <details class="introSpoiler">
+                <summary>Information</summary>
+                <div class="intro">
                 Search for Flight Plans, Assosciated Messages and other ATS Messages on ACC and ARO Queues.<br>
                 Flight Rules are ignored for all message types except FPL.</br>
                 Queries can be triggered with the "enter" key in each input field. Use the "%" character as a wildcard (example: DEP LS%, %ZH, LS%H, L%Z%, %S%H, ...) for ACFT ID, DEP, DEST and FULL TEXT.
-            </div>
+                </div>
+            </details>
             <div class="FScontainer">
                 <div id="atsBoxForm">
                     <div class="annotation">
@@ -252,6 +262,7 @@
                         Flight Rules:
                     </div>
                     <select name="fltrule" id="fltrule">
+                        <option value="">All</option>
                         <option value="V">V - VFR</option>
                         <option value="I">I - IFR</option>
                         <option value="Z">Z - VFR - IFR</option>
@@ -296,7 +307,7 @@
                     <p>Flight Events will be displayed here</p>
                 </div>
             </div>
-            <button id="atsButton" onsubmit="return false">
+            <button class="actionButton" id="atsButton" onsubmit="return false">
                 Submit
             </button>
         </section>
@@ -332,6 +343,12 @@
                 </button>
             </div>
             <table id="frenchTable">
+                <thead>
+                    <tr>
+                        <th id="baguette">Français</th>
+                        <th id="bratwurst">Deutsch</th>
+                    </tr>
+                </thead>
                 <tbody>
                 </tbody>
             </table>
@@ -352,7 +369,6 @@
                 </div>
             </div>
             <div id="toTop">
-                <i class="far fa-arrow-alt-circle-up" title="Zurück nach oben"></i>
             </div>
         </section>
 <!-- END Section French Translation -->
@@ -362,12 +378,10 @@
                 <div id="loadingSpinner">
                 </div>
             </div>
-            <div class="queryBar">
-                <input type="text" id="inputSita" maxlength="7" placeholder="Enter SITA address" tabindex="0">
-                <button id="inputSitaSearch">
-                    Search
-                </button>
-            </div>
+            <details class="introSpoiler">
+                <summary>
+                    Information
+                </summary>
             <div class="intro">
                 <br>
                 This tool decodes a SITA address to approximately determine the origin of an ATS message.<br>
@@ -384,64 +398,25 @@
                 Therefore, this lookup simply returns all matching data to a SITA code segment; it has then to be interpreted manually.<br>
                 <br>
             </div>
+        </details>
+            <div class="queryBar">
+                <input type="text" id="inputSita" maxlength="7" placeholder="Enter SITA address" tabindex="0">
+                <button class="actionButton" id="inputSitaSearch">
+                    Search
+                </button>
+            </div>
+            <div class="dissectContainer" id="dissectContainer">
             <div class="dissect" id="dissect">
                 <p>Results will be displayed here</p>
             </div>
+        </div>
         </section>
 <!-- END Section SITA Conversion -->
 <!-- BEGIN Section DOC Screening Tool Section -->
         <section id="doctoolBox">
-            <div class="optionsButton" id="optionsButton">
-                <i class="fas fa-cog"></i>
-            </div>
-            <div id="optionsMenu">
-                <div id="optionsDocToolHelp">
-                    <div id="optionsDocToolHelpTitle">
-                        Help Dialog
-                    </div>
-                    <div id="optionsDocToolHelpToggler">
-                        Hide <input type="range" id="optionsDocToolHelpRange" name="HelpRange" min="0" max="1" value="0"> Show
-                    </div>
-                </div>
-                <div id="optionsLociDatabase">
-                    <div id="optionsLociDatabaseTitle">
-                        LOCI Lookup Database
-                    </div>
-                    <div id="optionsLociDatabaseToggler">
-                        Hide <input type="range" id="optionsLociDatabaseRange" name="LociRange" min="0" max="1" value="1"> Show
-                    </div>
-                </div>
-                <div id="optionsPrintDialog">
-                    <div id="optionsPrintDialogTitle">
-                        Print Dialog for Screening
-                    </div>
-                    <div id="optionsPrintDialogToggler">
-                        Hide <input type="range" id="optionsPrintRange" name="PrintRange" min="0" max="1" value="1"> Show
-                    </div>
-                </div>
-                <div id="optionsRecoverData">
-                    <div id="optionsRecoverDataTitle">
-                        Recover Screening Data <br> (Refresh page first to recover deleted fields)
-                    </div>
-                    <div id="optionsRecoverDataToggler">
-                        Recover
-                    </div>
-                </div>
-                <div id="optionsLoadSave">
-                    <div id="optionsLoadSaveTitle">
-                        Save & Load Screening Data
-                    </div>
-                    <div id="optionsLoadSaveToggler">
-                        <div id="optionsLoadSaveSave">
-                        </div>
-                        <input type="file" id="loadDocScreening" name="loadDocScreening">
-                        <label for="loadDocScreening" id="optionsLoadSaveLoad" title="Load Screening session from file">
-                            Load Screening session from file
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="halpText" id="halpText">
+            <details class="introSpoiler">
+                <summary>Information</summary>
+                <div class="intro">
                 <strong>LOCI Lookup Database</strong>
                 <br>
                 <br>
@@ -494,16 +469,18 @@
                 <br>
                 For any questions or bug reports, feel free to reach out to <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>.
             </div>
+        </details>
             <div class="docContent">
                 <div class="queryContainer" id="queryContainer">
                     <div class="containerTitle">
-                        LOCI Lookup Database <span style="font-size:0.5rem">WEF 27 JUN 21</span>
+                        LOCI Lookup Database <span style="font-size:0.5rem">WEF 18 OCT 24,</span><span style="font-size:0.5rem" id="FKadCount"></span>
                     </div>
                     <input id="queryFK" placeholder="Search for LOCI">
                     <div class="queryFKresults">
                         <table id="FKresultsTable">
-                            <tbody>
-                            </tbody>
+                            <thead>
+                                <tr><th>Flightkeys Airports</th></tr>
+                            </thead>
                         </table>
                     </div>
                 </div>
@@ -598,7 +575,7 @@
                         <div class="screenAlert" id="screenIATAalert">
                         </div>
                     </fieldset>
-                    <button id="calculatePages">
+                    <button class="actionButton" id="calculatePages">
                         Calculate Pages
                     </button>
                     <div class="pageDisplay">
@@ -610,6 +587,7 @@
                                 Pages
                                 </div>
                             <div id="thCopy">
+                                Open Copy Dialog
                             </div>
                         </div>
                         <div class="pageDisplayRow">
@@ -619,7 +597,7 @@
                             <div class="pageTD" id="FKDFtd">
                             </div>
                             <div id="copyFKDF" class="copyButtonContainer">
-                                <button id="buttonCopyFKDF" class="buttonCopy">
+                                <button id="buttonCopyFKDF" class="actionButton">
                                     Copy
                                 </button>
                             </div>
@@ -631,7 +609,7 @@
                             <div class="pageTD" id="FKATtd">
                             </div>
                             <div id="copyFKAT" class="copyButtonContainer">
-                                <button id="buttonCopyFKAT" class="buttonCopy">
+                                <button id="buttonCopyFKAT" class="actionButton">
                                     Copy
                                 </button>
                             </div>
@@ -643,7 +621,7 @@
                             <div class="pageTD" id="NTMtd">
                             </div>
                             <div id="copyNTM" class="copyButtonContainer">
-                                <button id="buttonCopyNTM" class="buttonCopy">
+                                <button id="buttonCopyNTM" class="actionButton">
                                     Copy
                                 </button>
                             </div>
@@ -655,7 +633,7 @@
                             <div class="pageTD" id="DBUtd">
                             </div>
                             <div id="copyDBU" class="copyButtonContainer">
-                                <button id="buttonCopyDBU" class="buttonCopy">
+                                <button id="buttonCopyDBU" class="actionButton">
                                     Copy
                                 </button>
                             </div>
@@ -667,107 +645,132 @@
                             <div class="pageTD" id="IATAtd">
                             </div>
                             <div id="copyIATA" class="copyButtonContainer">
-                                <button id="buttonCopyIATA" class="buttonCopy">
+                                <button id="buttonCopyIATA" class="actionButton">
                                     Copy
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="testHTMLContainer">
-                    <div id="testHTMLTitle">
+                <div id="docVeil">
+                    <div id="docModal">
+                    <div id="docModalTitle">
                     </div>
-                    <div id="testHTML">
+                    <div id="docModalContent">
                     </div>
-                    <button id="testHTMLClose">
+                    <button class="actionButton" id="docModalClose">
                         Close
                     </button>
                 </div>
+            </div>
             </div>
         </section>
 <!-- END Section DOC Screening Tool Section -->
 <!-- BEGIN Section Areas -->
     <section id="areaBox">
         <div class="areaContainer">
-            <input type="text" id="input" placeholder="Search Area Designator or Name"/>
+            <input type="text" class="mainInput" id="input" placeholder="Search Area Designator or Name"/>
             <div class="areaContainerInner">
                 <table class="areatable" id="rTable">
                 <thead>
                     <tr>
-                    <th>Designator</th><th>Name</th>
+                    <th>Designator</th><th>R-Area Name</th><th>Type of ACT</th>
                     </tr>
                     </thead>
+                    <tbody>
+
+                    </tbody>
                 </table>
                 <table class="areatable" id="dTable">
                 <thead>
                     <tr>
-                    <th>Designator</th><th>Name</th>
+                    <th>Designator</th><th>D-Area Name</th><th>Type of ACT</th>
                     </tr>
                     </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </div>
         </div>
     </section>
 <!-- END Section Areas -->
+ <!-- BEGIN Section Abbreviations -->
+ <section id="abbrevBox">
+    <div class="abbrevContainer">
+        <input type="text" class="mainInput" id="abbrevinput" placeholder="Search ICAO Abbreviation or Full Text"/>
+        <div class="abbrevContainerInner">
+            <table class="abbrevtable" id="aTable">
+            <thead>
+                <tr>
+                <th>Abbreviation</th><th>Explanation</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- END Section Abbreviations -->
 <!-- BEGIN Legal Statement -->
-        <div id="legalA">
-            <div id="legalB">
-                <div class="legalTitle">
-                    Legal Statement
-                </div>
-                Developed for skyguide AIM Services by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>.<br><br>
-                Links to internal (skyguide) and/or external resources are under the sole responsibility of the respective owner(s). AIM Services and <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> will assume no liability for the contents of external links.<br><br>
-                Original Tools: <br>
-                <ul>
-                    <li>SITA Address Decoder by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development)</li>
-                    <li>SFO French by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development) & <a href="http://phone.skyguide.corp/Default.asp?ID=4437" target="_blank">Christine Bissey</a> (Content & Requirements)</li>
-                    <li>DOC Tool by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development)</li>
-                </ul>
-                <br>
-                Image Usage Rights: <br>
-                <ul>
-                    <li>
-                        Icons by 
-                        <ul>
-                            <li><a href="https://www.flaticon.com/" target="_blank">flaticon.com</a></li>
-                            <li><a href="https://icons8.com/" target="_blank">icons8.com</a></li>
-                        </ul>
-                    </li>
-                    <li>Flags from <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a></li>
-                    <li>Photographs from <a href="https://pixabay.com" target="_blank">Pixabay</a></li>
-                    <li>ATS Message Search random images by <a hef="https://loremflickr.com/" target="_blank">LoremFlickr</a>
-                    <li>SITA Address converter image by skyguide Branding Portal</li>
-                </ul>
-                <br>
-                A source code backup is stored in a private git repo by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>. <br>This repo is also used to update the AIS local instance.<br><br>
-                Trello is used as a changelog and ticketing service. Please refer to the <a href="https://trello.com/b/lPvSDcli" target="_blanK">Toolbox V2 Kanban Board</a>. <br><br>For issue reports and feature requests, please advise <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> directly.<br>
-                An online ticketing service for AIM personnel is not planned.<br> <br>
-                Tech stack:<br>
-                <ul>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>JavaScript</li>
-                        <ul>
-                            <li>jQuery</li>
-                            <li>lodash</li>
-                            <li>dragula</li>
-                            <li>amCharts</li>
-                            <li>JSON</li>
-                        </ul>
-                    <li>Python 3.9</li>
-                    <li>git</li>
-                    <li>API</li>
-                        <ul>
-                            <li>getform.io</li>
-                        </ul>
-                </ul>
-                <div id="legalCopy">
-                </div>
+ <div id="legalVeil">
+    <div id="legalA">
+        <div id="legalB">
+            <div class="legalTitle">
+                Legal Statement
             </div>
-            <div id="close">
-                <i class="far fa-thumbs-up"></i>
+            Developed for skyguide AIM Services by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>.<br><br>
+            Links to internal (skyguide) and/or external resources are under the sole responsibility of the respective owner(s). AIM Services and <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> will assume no liability for the contents of external links.<br><br>
+            Original Tools: <br>
+            <ul>
+                <li>SITA Address Decoder by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development)</li>
+                <li>SFO French by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development) & <a href="http://phone.skyguide.corp/Default.asp?ID=4437" target="_blank">Christine Bissey</a> (Content & Requirements)</li>
+                <li>DOC Tool by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> (Development)</li>
+            </ul>
+            <br>
+            Image Usage Rights: <br>
+            <ul>
+                <li>
+                    Icons by 
+                    <ul>
+                        <li><a href="https://www.flaticon.com/" target="_blank">flaticon.com</a></li>
+                        <li><a href="https://icons8.com/" target="_blank">icons8.com</a></li>
+                    </ul>
+                </li>
+                <li>Flags from <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a></li>
+                <li>Photographs from <a href="https://company-220593.frontify.com/d/j3jZ1FEzTGBT" target="_blank">Skyguide Branding Portal</a></li>
+            </ul>
+            <br>
+            A source code backup is stored in a private git repo by <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a>. <br>This repo is also used to update the AIS local instance.<br><br>
+            Trello is used as a changelog and ticketing service. Please refer to the <a href="https://trello.com/b/lPvSDcli" target="_blanK">Toolbox V2 Kanban Board</a>. <br><br>For issue reports and feature requests, please advise <a href="http://phone.skyguide.corp/Default.asp?ID=4440&user=" target="_blank">Marcel Weber</a> directly.<br>
+            An online ticketing service for AIM personnel is not planned.<br> <br>
+            Tech stack:<br>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+                    <ul>
+                        <li>lodash</li>
+                        <li>dragula</li>
+                        <li>amCharts</li>
+                    </ul>
+                <li>Python 3.9</li>
+                <li>git</li>
+                <li>API</li>
+                    <ul>
+                        <li>getform.io</li>
+                    </ul>
+            </ul>
+            <div id="legalCopy">
             </div>
         </div>
+        <button id="close" class="actionButton">
+            OK
+        </button>
+    </div>
+    </div>
 <!-- END Legal Statement -->
 <!-- BEGIN Achievement -->
         <div id="achievementContainer">
@@ -791,7 +794,7 @@
             <div id="footerText">
             </div>
             <div id="legal">
-                <u>Legal Statement</u> | Version 2.182 (9b1d781)
+                <u>Legal Statement</u> | Version 3.0
             </div>
         </footer>
 <!-- END Footer -->
