@@ -16,7 +16,7 @@ const aipSerbiaMontenegro   = "https://smatsa.rs/en/aeronautical-information-pub
 
 const aipTileData = [{
 		id: "oa",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Flag_of_Afghanistan_%282013%E2%80%932021%29.svg/900px-Flag_of_Afghanistan_%282013%E2%80%932021%29.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/1024px-Flag_of_the_Taliban.svg.png",
 		icao: "OA",
 		country: "Afghanistan",
 		link: "http://acaa.gov.af/aip-aeronautical-information-publication/",
@@ -289,14 +289,14 @@ const aipTileData = [{
 		aip: "green"
 	}, {
 		id: "lc-akrotiri",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1000px-Flag_of_the_United_Kingdom.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/RAF_Akrotiri_flag.svg/1024px-RAF_Akrotiri_flag.svg.png",
 		icao: "LC",
 		country: "Akrotiri",
 		link: "https://www.aidu.mod.uk/aip/aipVolumes.html#ad-tab",
 		aip: "green"
 	}, {
 		id: "lc-dhekelia",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1000px-Flag_of_the_United_Kingdom.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Flag_of_the_Dhekelia_Garrison.svg/1024px-Flag_of_the_Dhekelia_Garrison.svg.png",
 		icao: "LC",
 		country: "Dhekelia",
 		link: "https://www.aidu.mod.uk/aip/aipVolumes.html#ad-tab",
@@ -439,8 +439,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Flag_of_Ghana.svg/1000px-Flag_of_Ghana.svg.png",
 		icao: "DG",
 		country: "Ghana",
-		link: "",
-		aip: "red"
+		link: toolboxeaipLink,
+		aip: "yellow"
 	}, {
 		id: "lg",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Flag_of_Greece.png/1024px-Flag_of_Greece.png",
@@ -548,7 +548,7 @@ const aipTileData = [{
 		aip: "green"
 	}, {
 		id: "li-vatican",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_the_Vatican_City.svg/1024px-Flag_of_the_Vatican_City.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_the_Vatican_City_%282001%E2%80%932023%29.svg/1024px-Flag_of_the_Vatican_City_%282001%E2%80%932023%29.svg.png",
 		icao: "LI",
 		country: "Vatican City",
 		link: aipItalyLink,
@@ -593,8 +593,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1000px-Flag_of_Kenya.svg.png",
 		icao: "HK",
 		country: "Kenia",
-		link: toolboxeaipLink,
-		aip: "yellow"
+		link: "https://eaip.kcaa.or.ke/eAIPHome.aspx",
+		aip: "green"
 	}, {
 		id: "rk",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1000px-Flag_of_South_Korea.svg.png",
@@ -726,15 +726,15 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/1000px-Flag_of_Mexico.svg.png",
 		icao: "MM",
 		country: "Mexico",
-		link: toolboxeaipLink,
-		aip: "yellow"
+		link: "https://aipmexico.seneam.gob.mx/inicio",
+		aip: "green"
 	}, {
 		id: "lu",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Flag_of_Moldova.svg/1000px-Flag_of_Moldova.svg.png",
 		icao: "LU",
 		country: "Moldova",
-		link: toolboxeaipLink,
-		aip: "yellow"
+		link: "https://aim.moldatsa.md/#welcome",
+		aip: "green"
 	}, {
 		id: "zm",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Mongolia.svg/1000px-Flag_of_Mongolia.svg.png",
@@ -880,8 +880,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Flag_of_Paraguay.svg/1000px-Flag_of_Paraguay.svg.png",
 		icao: "SG",
 		country: "Paraguay",
-		link: toolboxeaipLink,
-		aip: "yellow"
+		link: "http://www.dinac.gov.py/v3/",
+		aip: "green"
 	}, {
 		id: "ep",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Flag_of_Poland.svg/1000px-Flag_of_Poland.svg.png",
@@ -915,18 +915,18 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Flag_of_Rwanda.svg/1000px-Flag_of_Rwanda.svg.png",
 		icao: "HR",
 		country: "Rwanda",
-		link: "https://rac.co.rw/airports/aip/",
-		aip: "green"
+		link: toolboxeaipLink,
+		aip: "yellow"
 	}, {
 		id: "fh-saintHelena",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Saint_Helena.svg/1000px-Flag_of_Saint_Helena.svg.png",
 		icao: "FH",
 		country: "Saint Helena",
-		link: "",
-		aip: "black"
+		link: "https://atns.com/products-services/aim/aeronautical-information-managementst-helena-airport/7448",
+		aip: "green"
 	}, {
 		id: "fp",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Flag_of_Sao_Tome_and_Principe.svg/1000px-Flag_of_Sao_Tome_and_Principe.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Flag_of_S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe.svg/1024px-Flag_of_S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe.svg.png",
 		icao: "FP",
 		country: "Sao Tome & Principe",
 		link: asecnaLink,
@@ -985,8 +985,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Flag_of_the_Solomon_Islands.svg/1000px-Flag_of_the_Solomon_Islands.svg.png",
 		icao: "AG",
 		country: "Solomon Islands",
-		link: "",
-		aip: "black"
+		link: toolboxeaipLink,
+		aip: "yellow"
 	}, {
 		id: "hc",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Flag_of_Somalia.svg/1000px-Flag_of_Somalia.svg.png",
@@ -1055,8 +1055,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Flag_of_East_Timor.svg/1000px-Flag_of_East_Timor.svg.png",
 		icao: "WP",
 		country: "Timor Leste",
-		link: "",
-		aip: "black"
+		link: "https://aactl.gov.tl",
+		aip: "green"
 	}, {
 		id: "dx",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flag_of_Togo.svg/1000px-Flag_of_Togo.svg.png",
@@ -1115,7 +1115,7 @@ const aipTileData = [{
 		aip: "green"
 	}, {
 		id: "eg",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1000px-Flag_of_the_United_Kingdom.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/1024px-Flag_of_the_United_Kingdom_%281-2%29.svg.png",
 		icao: "EG",
 		country: "United Kingdom",
 		link: aipUKLink,
@@ -1216,8 +1216,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Flag_of_Zambia.svg/1000px-Flag_of_Zambia.svg.png",
 		icao: "FL",
 		country: "Zambia",
-		link: "",
-		aip: "red"
+		link: "https://www.aim.zacl.co.zm/aip-publications",
+		aip: "green"
 	}, {
 		id: "fv",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Flag_of_Zimbabwe.svg/1000px-Flag_of_Zimbabwe.svg.png",
@@ -1367,7 +1367,7 @@ const aipTileData = [{
         aip: "green"
 	}, {
 		id: "mh-cocesna",
-		img: "https://cocesna.org/home/wp-content/uploads/2018/10/cocesna-1.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Flag_of_the_Central_American_Integration_System.svg/1024px-Flag_of_the_Central_American_Integration_System.svg.png",
 		icao: "MH",
 		country: "COCESNA",
 		link: cocesnaLink,
@@ -1381,7 +1381,7 @@ const aipTileData = [{
         aip: "green"
     }, {
 		id: "tn-dcansp",
-		img: "http://dc-ansp.org/eAIS/wp-content/uploads/2018/06/LOGO-NEW.jpg",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_the_Netherlands_Antilles.png/1024px-Flag_of_the_Netherlands_Antilles.png",
 		icao: "TN",
 		country: "Dutch Caribbean",
 		link: dutchCaribbeanLink,
@@ -1496,8 +1496,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Cape_Verde.svg/1024px-Flag_of_Cape_Verde.svg.png",
 		icao: "GV",
 		country: "Cabo Verde",
-		link: "",
-        aip: "red"
+		link: "https://ais.asa.cv/",
+        aip: "green"
     }, {
 		id: "pt-caroline",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Flag_of_the_Federated_States_of_Micronesia.svg/1024px-Flag_of_the_Federated_States_of_Micronesia.svg.png",
@@ -1567,7 +1567,7 @@ const aipTileData = [{
 		icao: "NF",
 		country: "Fiji",
 		link: "http://airportsfiji.com/ais-fiji/wp-login.php?redirect_to=http%3A%2F%2Fairportsfiji.com%2Fais-fiji",
-        aip: "yellow"
+        aip: "green"
     }, {
 		id: "so",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Flag_of_French_Guiana.svg/1024px-Flag_of_French_Guiana.svg.png",
@@ -1612,7 +1612,7 @@ const aipTileData = [{
         aip: "green"
     }, {
 		id: "tf",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Flag_of_Guadeloupe_%28Local%29.svg/1024px-Flag_of_Guadeloupe_%28Local%29.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Unofficial_flag_of_Guadeloupe_%28local%29.svg/1024px-Unofficial_flag_of_Guadeloupe_%28local%29.svg.png",
 		icao: "TF",
 		country: "Guadeloupe",
 		link: aipFranceLink,
@@ -1657,8 +1657,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Flag_of_Jamaica.svg/1024px-Flag_of_Jamaica.svg.png",
 		icao: "MK",
 		country: "Jamaica",
-		link: "",
-        aip: "red"
+		link: "https://aim.jcaa.aero/client/login",
+        aip: "green"
     }, {
 		id: "vl",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Flag_of_Laos.svg/1024px-Flag_of_Laos.svg.png",
@@ -1685,13 +1685,6 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_the_U.S..svg/1000px-Flag_of_the_U.S..svg.png",
 		icao: "PL",
 		country: "US Line Islands",
-		link: aipUSALink,
-        aip: "green"
-    }, {
-        id: "pl-us-kingman",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_the_U.S..svg/1000px-Flag_of_the_U.S..svg.png",
-		icao: "PL",
-		country: "Kingman Reef",
 		link: aipUSALink,
         aip: "green"
     }, {
@@ -1738,7 +1731,7 @@ const aipTileData = [{
         aip: "green"
     }, {
         id: "tf-martinique",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Flag_of_Martinique_%28Local%29.svg/1024px-Flag_of_Martinique_%28Local%29.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Flag-of-Martinique.svg/1024px-Flag-of-Martinique.svg.png",
 		icao: "TF",
 		country: "Martinique",
 		link: aipFranceLink,
@@ -1780,7 +1773,7 @@ const aipTileData = [{
         aip: "green"
     }, {
 		id: "pm",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Flag_map_of_Midway_Atoll.svg/1024px-Flag_map_of_Midway_Atoll.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Flag_of_the_Midway_Islands_%28local%29.svg/1024px-Flag_of_the_Midway_Islands_%28local%29.svg.png",
 		icao: "PM",
 		country: "Midway Atoll",
 		link: aipUSALink,
@@ -1801,7 +1794,7 @@ const aipTileData = [{
         aip: "green"
     }, {
 		id: "nw",
-		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Flag_of_New_Caledonia_%282000_World_Factbook%29.svg/1024px-Flag_of_New_Caledonia_%282000_World_Factbook%29.svg.png",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_New_Caledonia_%28WFB_2000%29.svg/1024px-Flag_of_New_Caledonia_%28WFB_2000%29.svg.png",
 		icao: "NW",
 		country: "New Caledonia",
 		link: aipFranceLink,
@@ -1825,8 +1818,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Peru.svg/1024px-Flag_of_Peru.svg.png",
 		icao: "SP",
 		country: "Peru",
-		link: "",
-        aip: "red"
+		link: "http://portal2.corpac.gob.pe/SSO",
+        aip: "green"
     }, {
 		id: "rp",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/1024px-Flag_of_the_Philippines.svg.png",
@@ -1867,8 +1860,8 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Flag_of_South_Sudan.svg/1024px-Flag_of_South_Sudan.svg.png",
 		icao: "HS",
 		country: "South Sudan",
-		link: "",
-        aip: "red"
+		link: toolboxeaipLink,
+        aip: "yellow"
     }, {
 		id: "sm",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Flag_of_Suriname.svg/1024px-Flag_of_Suriname.svg.png",
@@ -1888,15 +1881,15 @@ const aipTileData = [{
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Tanzania.svg/1024px-Flag_of_Tanzania.svg.png",
 		icao: "HT",
 		country: "Tanzania",
-		link: "",
-        aip: "red"
+		link: toolboxeaipLink,
+        aip: "yellow"
     }, {
 		id: "mb",
 		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Flag_of_the_Turks_and_Caicos_Islands.svg/1024px-Flag_of_the_Turks_and_Caicos_Islands.svg.png",
 		icao: "MB",
 		country: "Turks and Caicos Islands",
-		link: "",
-        aip: "black"
+		link: "https://tciairports.com/aip-supplement/",
+        aip: "green"
     }, {
 		id: "ti",
 		img: "https://upload.wikimedia.org/wikipedia/commons/9/94/Flag_of_Virgin_Islands.jpg",
@@ -1925,8 +1918,69 @@ const aipTileData = [{
 		country: "Yemen",
 		link: "",
         aip: "red"
-    }
-	
-	
-
+    },
+	{
+		id: "oj-west_bank",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/1024px-Flag_of_Palestine.svg.png",
+		icao: "OJ",
+		country: "West Bank",
+		link: "http://www.carc.gov.jo/en/ais",
+		aip: "green",
+	},
+	{
+		id: "kd-kingman_reef",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Unofficial_flag_of_Kingman_Reef.svg/1024px-Unofficial_flag_of_Kingman_Reef.svg.png",
+		icao: "KD",
+		country: "Kingman Reef",
+		link: aipUSALink,
+		aip: "green",
+	},
+	{
+		id: "kd-johnston_atoll",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Flag_of_Johnston_Atoll_%28local%29.svg/1024px-Flag_of_Johnston_Atoll_%28local%29.svg.png",
+		icao: "KD",
+		country: "Johnston Atoll",
+		link: aipUSALink,
+		aip: "green",
+	},
+	{
+		id: "kd-howland_island",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Unofficial_Flag_of_Howland%2C_Baker%2C_and_Jarvis_Islands.svg/1024px-Unofficial_Flag_of_Howland%2C_Baker%2C_and_Jarvis_Islands.svg.png",
+		icao: "KD",
+		country: "Howland Island",
+		link: aipUSALink,
+		aip: "green",
+	},
+	{
+		id: "kd-baker_island",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Unofficial_Flag_of_Howland%2C_Baker%2C_and_Jarvis_Islands.svg/1024px-Unofficial_Flag_of_Howland%2C_Baker%2C_and_Jarvis_Islands.svg.png",
+		icao: "KD",
+		country: "Baker Island",
+		link: aipUSALink,
+		aip: "green",
+	},
+	{
+		id: "kd-jarvis_island",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Unofficial_Flag_of_Howland%2C_Baker%2C_and_Jarvis_Islands.svg/1024px-Unofficial_Flag_of_Howland%2C_Baker%2C_and_Jarvis_Islands.svg.png",
+		icao: "KD",
+		country: "Jarvis Island",
+		link: aipUSALink,
+		aip: "green",
+	},
+	{
+		id: "yb-ashmore_cartier",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Australia.svg/1000px-Flag_of_Australia.svg.png",
+		icao: "YB",
+		country: "Ashmore and Cartier Islands",
+		link: aipAustraliaLink,
+		aip: "green",
+	},
+	{
+		id: "fa-bouvet_island",
+		img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Flag_Bouvet_island.png/1024px-Flag_Bouvet_island.png",
+		icao: "FA",
+		country: "Bouvet Island",
+		link: "http://www.caa.co.za/pages/aeronautical%20information/aeronautical%20information%20publication.aspx",
+		aip: "green",
+	},
 ];

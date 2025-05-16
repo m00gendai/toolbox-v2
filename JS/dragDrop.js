@@ -9,12 +9,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if(!storedVisibility){
         document.getElementById("favoritesBar").style.display = "none"
-        document.getElementById("favoritesTogglor").innerHTML = '&#9734;'
+
         document.getElementById("quickLinks").style.margin = "3rem 0 2rem 0"
     } 
     if (storedVisibility){
         document.getElementById("favoritesBar").style.display = "grid"
-        document.getElementById("favoritesTogglor").innerHTML = '&#9733;'
+
         document.getElementById("quickLinks").style.margin = "1rem 0 2rem 0"
     }
 
@@ -117,19 +117,17 @@ window.addEventListener('DOMContentLoaded', () => {
          if(isVisible){
             localStorage.setItem("toolbox_displayFavorites", JSON.stringify(false))
             document.getElementById("favoritesBar").style.display = "none"
-            document.getElementById("favoritesTogglor").innerHTML = '&#9734;'
+
             document.getElementById("quickLinks").style.margin = "3rem 0 2rem 0"
          } 
          if (!isVisible){
              localStorage.setItem("toolbox_displayFavorites", JSON.stringify(true))
             document.getElementById("favoritesBar").style.display = "grid"
-            document.getElementById("favoritesTogglor").innerHTML = '&#9733;'
+
             document.getElementById("quickLinks").style.margin = "1rem 0 2rem 0"
         }
     }
     
     
-    document.getElementById("favoritesTogglor").addEventListener("click", function(){
-        favoriteBarToggler()
-    })
+
 })

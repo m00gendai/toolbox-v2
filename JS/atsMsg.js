@@ -1,14 +1,13 @@
 function loadAtsMsgCode(){
     const flightsearchFields = ["ident", "eobdfrom", "eobdto", "dep", "dest", "fltrule", "fulltext", "msgtype", "queue", "msgdir"];
     
-    for(let i=0; i<flightsearchFields.length; i++){
-        document.getElementById(flightsearchFields[i]).addEventListener("keyup", function(e){
+    flightsearchFields.forEach(flightsearchField => {
+        document.getElementById(flightsearchField).addEventListener("keyup", function(e){
             if(e.key == "Enter"){
                 atsForm();
             }
         })
-    }
-
+    })
     document.getElementById("atsButton").addEventListener("click", function(){
         atsForm();
     })
@@ -19,29 +18,17 @@ function loadAtsMsgCode(){
     let dateTodayDay = dateObj.getUTCDate();
 
     function dateToDOFFrom() {
-        const DOFyearFrom = eobdfrom.value.substring(2,4)
-        const DOFmonthFrom = eobdfrom.value.substring(5,7)
-        const DOFdayFrom = eobdfrom.value.substring(8,10)
-        const currentDOFFrom = DOFyearFrom + DOFmonthFrom + DOFdayFrom;
-        return currentDOFFrom;
+        return `${eobdfrom.value.substring(2,4)}${eobdfrom.value.substring(5,7)}${eobdfrom.value.substring(8,10)}`
     }
 
     function dateToDOFTo(){
-        const DOFyearTo = eobdto.value.substring(2,4)
-        const DOFmonthTo = eobdto.value.substring(5,7)
-        const DOFdayTo = eobdto.value.substring(8,10)
-        const currentDOFTo = DOFyearTo + DOFmonthTo + DOFdayTo;
-        return currentDOFTo;
+        return `${eobdto.value.substring(2,4)}${eobdto.value.substring(5,7)}${eobdto.value.substring(8,10)}`
     }
 
     function dateToString() {
-        if(dateTodayMonth<10){
-            dateTodayMonth = "0" + dateTodayMonth;
-        }
-        if(dateTodayDay<10){
-            dateTodayDay = "0" + dateTodayDay;
-        }
-        let currentUTCDate = dateTodayYear + "-" + dateTodayMonth + "-" + dateTodayDay;
+        dateTodayMonth<10 ? dateTodayMonth = `0${dateTodayMonth}` : dateTodayMonth = dateTodayMonth
+        dateTodayDay<10 ? dateTodayDay = `0${dateTodayDay}`: dateTodayDay = dateTodayDay
+        let currentUTCDate = `${dateTodayYear}-${dateTodayMonth}-${dateTodayDay}`
         eobdfrom.value = currentUTCDate;
         eobdto.value = currentUTCDate;
     }
@@ -57,57 +44,57 @@ function loadAtsMsgCode(){
     })
 
     function atsForm() {
-        const atsRegex = /([%])/;
-        const http1         = "http://zhisaop/FlightSearch/FlightSearch?QueryTimeOut=30&MaxFlightCount=50";
-        const httpident     = "&Ident="
+        const atsRegex      = /([%])/;
         let ident           = document.getElementById("ident").value
         
         if(ident.includes("%")){
             ident = document.getElementById("ident").value.replace(atsRegex, "%25")
         }
         
-        const httpeobdfrom  = "&EOBDFrom="
-        let eobdfrom      = dateToDOFFrom();
-        const httpeobtfrom  = "&EOBTFrom="
-        const httpeobdto    = "&EOBDUntil="
-        let eobdto        = dateToDOFTo();
-        const httpeobtto    = "&EOBTUntil="
-        const httpfltrule   = "&FlightRule="
-        let fltrule       = document.getElementById("fltrule").value
-        const httpdep       = "&DEPAD="
-        let dep           = document.getElementById("dep").value
+        let eobdfrom        = dateToDOFFrom();
+        let eobdto          = dateToDOFTo();
+        let fltrule         = document.getElementById("fltrule").value
+        let dep             = document.getElementById("dep").value
         
         if(dep.includes("%")){
             dep = document.getElementById("dep").value.replace(atsRegex, "%25")
         }
         
-        const httpdest      = "&DESTAD="
-        let dest          = document.getElementById("dest").value
+        let dest            = document.getElementById("dest").value
         
         if(dest.includes("%")){
             dest = document.getElementById("dest").value.replace(atsRegex, "%25")
         }
         
-        const httpfulltext  = "&FreeText="
-        let fulltext      = document.getElementById("fulltext").value
+        let fulltext        = document.getElementById("fulltext").value
         
         if(fulltext.includes("%")){
             document.getElementById("fulltext").value.replace(atsRegex, "%25")
         }
         
-        const httpmsgtype   = "&MessageType="
-        let msgtype       = document.getElementById("msgtype").value.toUpperCase();
-        const httpmsgdir    = "&MessageDirection="
-        let msgdir        = document.getElementById("msgdir").value
-        const httpqueue     = "&InQueues="
-        let queue         = document.getElementById("queue").value
+        let msgtype          = document.getElementById("msgtype").value.toUpperCase() || "FPL";
+        let msgdir          = document.getElementById("msgdir").value
+        let queue           = document.getElementById("queue").value
         let linkFS
-        if(msgtype != "FPL"){
-            linkFS = http1 + httpident + ident + httpeobdfrom + eobdfrom + httpeobtfrom + httpeobdto + eobdto + httpeobtto + httpqueue + queue + httpfltrule + httpdep + dep + httpdest + dest + httpmsgtype + msgtype + httpfulltext + fulltext + httpmsgdir + msgdir  
-        } else if(msgtype == "FPL"){
-            linkFS = http1 + httpident + ident + httpeobdfrom + eobdfrom + httpeobtfrom + httpeobdto + eobdto + httpeobtto + httpqueue + queue + httpfltrule + fltrule + httpdep + dep + httpdest + dest + httpmsgtype + msgtype + httpfulltext + fulltext + httpmsgdir + msgdir
-        }
-  
+
+        console.table(
+            [
+                ["IDENT", ident],
+                ["EOBD FROM", eobdfrom],
+                ["EOBD TO", eobdto],
+                ["FLT RULE", fltrule],
+                ["DEP", dep],
+                ["DEST", dest],
+                ["FULL TEXT", fulltext],
+                ["MSG TYPE", msgtype],
+                ["MSG DIR", msgdir],
+                ["QUEUE", queue],
+            ]
+        )
+        
+            linkFS = linkFS = `http://zhisaop/FlightSearch/FlightSearch?QueryTimeOut=30&MaxFlightCount=50&Ident=${ident}&EOBDFrom=${eobdfrom}&EOBDUntil=${eobdto}&EOBTFrom=&EOBTUntil=&InQueues=${queue}&FlightRule=${msgtype === "FPL" ? fltrule : ""}&DEPAD=${dep}&DESTAD=${dest}&MessageType=${msgtype}&FreeText=${fulltext}&MessageDirection=${msgdir}`
+
+        console.log(JSON.stringify(linkFS))
         const fsIframe = document.createElement("iframe");
         fsIframe.src = linkFS;
         fsIframe.id = "fsIframe";

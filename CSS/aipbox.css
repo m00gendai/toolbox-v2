@@ -1,0 +1,272 @@
+#aipBox {
+display: none;
+}
+
+.title {
+margin-bottom: 1em;
+}
+
+.aipLinkBox {
+      position: relative;
+  text-align: center;
+  box-shadow: var(--shadow_tile);
+font-family: arial;
+
+overflow: hidden;
+background-color: light-dark(var(--color_skywhite), var(--color_aurora40));
+aspect-ratio: 1 / 1.25;    
+}
+
+.aipLinkBox:hover{
+  transform: scale(1.1,1.1);
+  transition: 0.1s;
+}
+
+.aipLinkBoxImage {
+  padding: 0;
+  height: 50%;
+  width: 100%;
+  position: relative;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+}
+
+.aipLinkBox p {
+  margin: 0;
+  height: 50%;
+  width: 100%;
+  position: relative;
+    display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.aipLinkBox p strong{
+    width: 100%;
+}
+
+.aipLinkBox:hover {
+  cursor: pointer;
+}
+
+#aipLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+	width: 100%;
+	margin-top: 2em;
+  margin-bottom : 2em;
+
+
+}
+.colorCodesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+}
+  .colorCodes{
+display: grid;
+grid-template-columns: repeat(8, 1fr);
+width: 100%;
+grid-gap: 1vw;
+}
+
+#aipLogins{
+    background-color: var(--color_skyblue);
+    color: var(--color_skywhite);
+    padding: 0.5em 0 0.5em 0;
+}
+
+#spanGreen {
+    background-color: lime;
+    color: black;
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+#spanYellow{
+    background-color: yellow;
+    color: black;
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+#spanRed{
+    background-color: red;
+    grid-area: 1 / 4 / 2 / 5;
+    color: white;
+}
+
+#spanBlack{
+    background-color: black;
+    grid-area: 1 / 5 / 2 / 6;
+    color: white;
+}
+
+.aipSpan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Arial";
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    background: var(--color_skyblue);
+    color: var(--color_skywhite);
+}
+
+.aipSpan:hover{
+    cursor:pointer;
+}
+
+
+.fa-eye.fa-w-18, .fa-eye-slash.fa-w-20, .fa-sort-alpha-down.fa-w-14, .fa-grip-horizontal.fa-w-14, .fa-th.fa-w-16, .fa-unlock-alt.fa-w-14{
+    position: absolute;
+    right: 0.5rem;
+    font-size: 1rem;
+}
+
+
+
+.eaip {
+}
+.eaip:before{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+background-color: lime;
+clip-path: polygon(0 80%, 0% 100%, 20% 100%);
+}
+
+.toolbox{
+}
+.toolbox:before{
+      position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+background-color: yellow;
+clip-path: polygon(0 80%, 0% 100%, 20% 100%);
+}
+
+
+.bookaip {
+}
+.bookaip:before{
+    position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+background-color: red;
+clip-path: polygon(0 80%, 0% 100%, 20% 100%);
+}
+
+
+.noaip{
+}
+.noaip:before{
+position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+background-color: black;
+clip-path: polygon(0 80%, 0% 100%, 20% 100%);
+}
+
+
+
+.letterContainer{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.letterContainer:nth-child(n+2){
+    margin: 1rem 0 0 0;
+}
+
+.letterContainerStuff{
+    display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+  grid-gap: 1em;
+  width: 100%;
+  position: relative;
+  padding: 1rem;
+}
+
+.letterContainerLetter{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 4rem;
+    font-family: "Arial";
+    scroll-margin: 4rem;
+}
+
+#alphabetSoup{
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+    grid-gap: 1rem;
+    width: 100%;
+    position: relative;
+    font-family: "Arial";
+    margin: 1rem 0 0 0;
+}
+
+.alphabletter{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color_skyblue);
+    color: var(--color_skywhite);
+}
+
+.alphabletter:hover{
+    cursor:pointer;
+}
+
+#toTopAIPlibrary{
+display: flex;
+justify-content: flex-end;
+align-items: center;
+width: 3rem;
+aspect-ratio: 1/1;
+background: var(--color_skywhite);
+border-radius: 100%;
+position: fixed;
+bottom: 3rem;
+right: 1rem;
+background-image: url("../iconography_pos_SVG/SKY_Interface_up.svg");
+background-size: 100%;
+}
+
+#toTopAIPlibrary:hover{
+  cursor: pointer;
+}
+
+

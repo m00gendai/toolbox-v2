@@ -5,8 +5,12 @@ function loadDocScreeningToolCode(){
 
 
     const FKResultsTable 	= document.getElementById("FKresultsTable");
+    const FKResultsTableBody = document.createElement("tbody")
+    FKResultsTable.appendChild(FKResultsTableBody)
     const queryFKfield		= document.getElementById("queryFK");
     const locisFKsorted = locisFK.sort()
+
+    document.getElementById("FKadCount").innerText = ` ${locisFKsorted.length} LOCIs in Database`
 
     // This creates the rows of the table dynamically
     function createTableContentFK(i) {
@@ -15,17 +19,11 @@ function loadDocScreeningToolCode(){
         const FKResultsContent 	= document.createTextNode(locisFKsorted[i]);
         TRFK.appendChild(TDFK);
         TDFK.appendChild(FKResultsContent);
-        FKResultsTable.appendChild(TRFK);	
+        FKResultsTableBody.appendChild(TRFK);	
     }
 
     // This creates the table itself
     function queryFKLocis() {
-        const THFK			= document.createElement("th"); 
-        const THFKContent1 	= document.createTextNode("Flightkeys Airports");
-        THFK.appendChild(THFKContent1);
-        FKResultsTable.appendChild(THFK);
-        THFK.setAttribute("id", "thFK");
-
         if (queryFKfield.value == 0){
             for (let i=0; i<locisFKsorted.length; i++){
                 createTableContentFK(i); // calls each JSON object and creates a row for it
@@ -48,6 +46,17 @@ function loadDocScreeningToolCode(){
 
     
 // D O C   S C R E E N I N G  
+
+function init(){
+    document.getElementById("screenDocument").innerHTML = JSON.parse(localStorage.getItem("Documentvalues"));   
+        document.getElementById("screenFKDF").innerHTML = JSON.parse(localStorage.getItem("FKDFvalues"));
+        document.getElementById("screenFKAT").innerHTML = JSON.parse(localStorage.getItem("FKATvalues"));
+        document.getElementById("screenNTM").innerHTML 	= JSON.parse(localStorage.getItem("NTMvalues"));
+        document.getElementById("screenDBU").innerHTML 	= JSON.parse(localStorage.getItem("DBUvalues"));
+        document.getElementById("screenIATA").innerHTML = JSON.parse(localStorage.getItem("IATAvalues"));
+}
+
+init()
 
 
     //this is called on blur of screening input or on calculate pages button press
@@ -93,7 +102,8 @@ function loadDocScreeningToolCode(){
 
     // This deals with putting the page ranges into local storage
     function localStorager(customer) {
-        const loStoDoc  = {valuex: "DocumentValues", 	screen: "screenDocument", 	name: "DOC"};
+        console.log(customer)
+        const loStoDoc  = {valuex: "Documentvalues", 	screen: "screenDocument", 	name: "DOC"};
         const LoStoFKDF = {valuex: "FKDFvalues", 	screen: "screenFKDF", 	name: "FKDF"};
         const LoStoFKAT = {valuex: "FKATvalues", 	screen: "screenFKAT",	name: "FKAT"};
         const LoStoNTM 	= {valuex: "NTMvalues", 	screen: "screenNTM",	name: "NTM"};
@@ -183,7 +193,7 @@ function loadDocScreeningToolCode(){
 
    // This gets called by the copy event handlers and displays the page sequence popup.
     function displayPagePopup() {
-        document.getElementById("testHTMLContainer").style.display = "flex"
+        document.getElementById("docVeil").style.display = "flex"
     }
 
     // This  handles the splitting and the popup that shows the page sequences.
@@ -199,7 +209,7 @@ function loadDocScreeningToolCode(){
         const customerIATA 		= {name: "IATA", 	value: document.getElementById("screenIATA").value,  print: "IATA"}
         const customerValues 	= [customerFKDF, customerFKAT, customerNTM, customerDBU, customerIATA]; 
         
-        const html = document.getElementById("testHTML")
+        const docModalContent = document.getElementById("docModalContent")
         
         let alertArray
         
@@ -210,9 +220,9 @@ function loadDocScreeningToolCode(){
             if (customerValues[i].name == customer){ // compares the passed customer variable to each customer obj in the array
                 let customerValue = customerValues[i].value; // gets the value from the matching obj
                 alertArray = customerValue.split(","); // splits by comma
-                document.getElementById("testHTML").innerHTML = ""; // clears any content in the popup
-                document.getElementById("testHTMLTitle").innerHTML = ""; // clears the title of the popup
-                document.getElementById("testHTMLTitle").innerHTML += "Pages for " + customerValues[i].print + ":" // sets the title for the popup
+                document.getElementById("docModalContent").innerHTML = ""; // clears any content in the popup
+                document.getElementById("docModalTitle").innerHTML = ""; // clears the title of the popup
+                document.getElementById("docModalTitle").innerHTML += "Pages for " + customerValues[i].print + ":" // sets the title for the popup
             }
         }               
                 
@@ -232,29 +242,34 @@ function loadDocScreeningToolCode(){
 
         // The spanArray is a collection of page ranges that will get added to the different rows 
 
-        let spanArray = []
+        let inputArray = []
 
         for(let i=0;i<alertArray.length;i++){
             if(alertArray[i].includes("-")){ // This now checks if the elements contain a "-" and are thus ranges, or are single ints
                 let range = alertArray[i].split("-")
                 if(((range[1]-range[0]) + 1)%2 == 0){ // Checks if the page range is even (thus +1, because ex 4-1 = 3, but its 4 pages)
-                    let span = document.createElement("span") // Creates a span element
-                    span.className = "even" // Classifies this span element as even
-                    span.innerHTML = alertArray[i] // Assigns the text of the page range item to it
-                    spanArray.push(span) // Pushes it to the spanArray for further processing
+                    let inpt = document.createElement("input") // Creates a span element
+                    inpt.className = "even" // Classifies this span element as even
+                    inpt.setAttribute("readonly", true)
+                    inpt.value = alertArray[i] // Assigns the text of the page range item to it
+                    inputArray.push(inpt) // Pushes it to the spanArray for further processing
                 } else if(((range[1]-range[0])+1)%2 != 0){ // Same with odd page ranges
-                    let span = document.createElement("span")
-                    span.className = "odd"
-                    span.innerHTML = alertArray[i]
-                    spanArray.push(span)
+                    let inpt = document.createElement("input")
+                    inpt.className = "odd"
+                    inpt.setAttribute("readonly", true)
+                    inpt.value = alertArray[i]
+                    inputArray.push(inpt)
                 }
             } else { // And same with singe integers
-                let span = document.createElement("span")
-                span.className = "single"
-                span.innerHTML = alertArray[i]
-                spanArray.push(span)
+                let inpt = document.createElement("input")
+                inpt.className = "single"
+                inpt.setAttribute("readonly", true)
+                inpt.value = alertArray[i]
+                inputArray.push(inpt)
             }
         }
+
+        console.log(inputArray.map(span => span.value))
 
         // Now the spanArray is filled with the page range elements, and they are also assigned a class.
 
@@ -265,48 +280,48 @@ function loadDocScreeningToolCode(){
 
         let singleCheck = true 
 
-        for(let i=0;i<spanArray.length;i++){
+        for(let i=0;i<inputArray.length;i++){
             if(i==0){ // This is simply to create a new row from the get go
                 let pageRow = document.createElement("div")
                 pageRow.id = "pageRow0" // A div row with id pageRow0 is created...
-                pageRow.appendChild(spanArray[i]) // ...filled with the current page range element...
-                pageRow.innerHTML += ", " //...a comma added after that element...
-                html.appendChild(pageRow) //...and the row is the added to the page display container
+                pageRow.appendChild(inputArray[i]) // ...filled with the current page range element...
+                inputArray[i].value += ", " //...a comma added after that element...
+                docModalContent.appendChild(pageRow) //...and the row is the added to the page display container
             } else if(i > 0){ // Now for every other row except the first
-                if(spanArray[i].className == spanArray[i-1].className && spanArray[i-1].className != "odd" && singleCheck){
+                if(inputArray[i].className == inputArray[i-1].className && inputArray[i-1].className != "odd" && singleCheck){
                 /*
                 So, if the current span element classname equals that of the one before (so this can only be done from iteration i=1)
                 AND its not am odd page range (these will ALWAYS occupy their own row)
                 AND singleCheck is set to true (so a single element following another ssingle element will occupy the same row)
                 */
-                    let pageRow = html.lastChild.id // initiate a pageRow variable with the id of the LAST ADDED page row
-                    if((document.getElementById(pageRow).innerText.length + spanArray[i].innerText.length) < printWrap){ // This is the length check explained above
-                        document.getElementById(pageRow).appendChild(spanArray[i]) // Add that span element to the last row
-                        document.getElementById(pageRow).innerHTML += ", " // Add a comma after it
+                    let pageRow = docModalContent.lastChild.id // initiate a pageRow variable with the id of the LAST ADDED page row
+                    if((document.getElementById(pageRow).children[0].value.length + inputArray[i].value.length) < printWrap){ // This is the length check explained above
+                        document.getElementById(pageRow).children[0].value += inputArray[i].value // Add that span element to the last row
+                        document.getElementById(pageRow).children[0].value += ", " // Add a comma after it
                     } else { // Simply creates a new row and continue to fill that
                         let pageRow = document.createElement("div")
                         pageRow.id = "pageRow" + i
-                        pageRow.appendChild(spanArray[i])
-                        pageRow.innerHTML += ", "
-                        html.appendChild(pageRow)
+                        pageRow.appendChild(inputArray[i])
+                        pageRow.children[0].value += ", "
+                        docModalContent.appendChild(pageRow)
                     }
-                } else if((spanArray[i].className == "single" || spanArray[i].className == "odd") && spanArray[i-1].className == "even" && singleCheck){
+                } else if((inputArray[i].className == "single" || inputArray[i].className == "odd") && inputArray[i-1].className == "even" && singleCheck){
                 /*
                 Okay so if the current element is a single OR an odd, and the last one is an even, and singleCheck is true,
                 it adds the single/odd element to the current row.
                 It also sets singleCheck to false, so if the immediately following element is also a single/odd, it will occupy its own row
                 */
-                    let pageRow = html.lastChild.id
-                    if((document.getElementById(pageRow).innerText.length + spanArray[i].innerText.length) < printWrap){
-                        document.getElementById(pageRow).appendChild(spanArray[i])
-                        document.getElementById(pageRow).innerHTML += ", "
+                    let pageRow = docModalContent.lastChild.id
+                    if((document.getElementById(pageRow).children[0].value.length + inputArray[i].value.length) < printWrap){
+                        document.getElementById(pageRow).children[0].value += inputArray[i].value
+                        document.getElementById(pageRow).children[0].value += ", "
                         singleCheck = false
                     } else {
                         let pageRow = document.createElement("div")
                         pageRow.id = "pageRow" + i
                         pageRow.appendChild(spanArray[i])
-                        pageRow.innerHTML += ", "
-                        html.appendChild(pageRow)
+                        pageRow.value += ", "
+                        docModalContent.appendChild(pageRow)
                         singleCheck = false
                     }
                 } else { 
@@ -317,9 +332,9 @@ function loadDocScreeningToolCode(){
                 */
                     let pageRow = document.createElement("div")
                     pageRow.id = "pageRow" + i
-                    pageRow.appendChild(spanArray[i])
-                    pageRow.innerHTML += ", "
-                    html.appendChild(pageRow)
+                    pageRow.appendChild(inputArray[i])
+                    pageRow.children[0].value += ", "
+                    docModalContent.appendChild(pageRow)
                     singleCheck = true
                 }
             }
@@ -331,8 +346,11 @@ function loadDocScreeningToolCode(){
         INCONCEIVABLY important for the copy marking event handlers
         */
 
-        for(let i=0;i<html.childElementCount;i++){
-                html.children[i].innerHTML = html.children[i].innerHTML.slice(0,html.children[i].innerHTML.length-2)
+        for(let i=0;i<docModalContent.childElementCount;i++){
+            docModalContent.children[i].children[0].value = docModalContent.children[i].children[0].value.slice(0,docModalContent.children[i].children[0].value.length-2)
+            docModalContent.children[i].children[0].addEventListener("click", function(){
+                docModalContent.children[i].children[0].select()
+                })
         }
 
         // this fires the popup with the page sequences
@@ -357,11 +375,11 @@ function loadDocScreeningToolCode(){
             let selectedArray = selected.split(", ")
             console.log(selectedArray)
             for(let i=0;i<selectedArray.length;i++){
-                for(let j=0;j<html.childElementCount;j++){
-                    for(let k=0;k<html.children[j].childElementCount;k++){
-                        if(html.children[j].children[k].tagName == "SPAN"){
-                            if(selectedArray[i] == html.children[j].children[k].textContent){
-                                html.children[j].children[k].classList.toggle("selectah") // Why "selectah"? Watch Ali G in da house...
+                for(let j=0;j<docModalContent.childElementCount;j++){
+                    for(let k=0;k<docModalContent.children[j].childElementCount;k++){
+                        if(docModalContent.children[j].children[k].tagName == "SPAN"){
+                            if(selectedArray[i] == docModalContent.children[j].children[k].textContent){
+                                docModalContent.children[j].children[k].classList.toggle("selectah") // Why "selectah"? Watch Ali G in da house...
                             }
                         }
                     }
@@ -382,7 +400,7 @@ function loadDocScreeningToolCode(){
             } 
         });
 
-        html.addEventListener("contextmenu", function(e){
+        docModalContent.addEventListener("contextmenu", function(e){
             if(eventBubbler == 0){
                 markCopiedPages()
             }
@@ -419,8 +437,8 @@ function loadDocScreeningToolCode(){
 
     
     //This closes the page print popup
-    document.getElementById("testHTMLClose").addEventListener("click", function() {
-        document.getElementById("testHTMLContainer").style.display = "none";
+    document.getElementById("docModalClose").addEventListener("click", function() {
+        document.getElementById("docVeil").style.display = "none";
     })
 
 
@@ -434,33 +452,8 @@ function loadDocScreeningToolCode(){
 
     
 // D O C   T O O L   O P T I O N S   M E N U
-
-    
-    const optionsButton = document.getElementById("optionsButton");
-    const optionsMenu = document.getElementById("optionsMenu");
-    const optionsTogglers = [
-        {
-            name: "optionsHelpRange",
-            id: "optionsDocToolHelpRange",
-            target: "halpText"
-        },
-        {
-            name: "optionsDataRange",
-            id: "optionsLociDatabaseRange",
-            target: "queryContainer"
-        },
-        {
-            name: "optionsPrintRange",
-            id: "optionsPrintRange",
-            target: "screeningContainer"
-        },
-    ]
+    /*
     const optionsButtons = [
-        {
-            name: "optionsRecover",
-            id: "optionsRecoverDataToggler",
-            target: "recover"
-        },
         {
             name: "optionsSave",
             id: "optionsLoadSaveSave",
@@ -473,49 +466,6 @@ function loadDocScreeningToolCode(){
         }
     ]
 
-    // simple - click on cog to show, click again to hide
-    optionsButton.addEventListener("click", function() {
-        if (optionsMenu.style.display == "") {
-            optionsMenu.style.display = "block";
-        } else if (optionsMenu.style.display == "block") {
-            optionsMenu.style.display = "";
-        }
-    })
-
-    // generates the togglers
-    for (let i = 0; i < Object.keys(optionsTogglers).length; i++) {
-        document.getElementById(optionsTogglers[i].id).addEventListener("click", function() {
-            if (document.getElementById(optionsTogglers[i].id).value == 1) {
-                document.getElementById(optionsTogglers[i].target).style.display = "block";
-            } else if (document.getElementById(optionsTogglers[i].id).value == 0) {
-                document.getElementById(optionsTogglers[i].target).style.display = "none";
-            }
-        })
-    }
-
-    // this makes it so that if the menu is open, you can click anywhere BUT the menu and it closes
-    let autoCloseBarrier = 0; // this is a safety to not immediately close the menu again after opening
-    
-    document.addEventListener('click', function(event) {
-        if (optionsMenu.style.display == "block") { // if the current style of the menu is open...
-            let isClickInsideElement = optionsMenu.contains(event.target); // ... and a click on the DOM anywhere BUT the menu...
-            if (optionsMenu.style.display == "block" && !isClickInsideElement && autoCloseBarrier != 0) { //... and the menu is block and not clicked AND the safety is NOT 0...
-                optionsMenu.style.display = "" //... close it
-                autoCloseBarrier = 0; // resets the safety 
-            } else {
-                autoCloseBarrier++ // ... else increment the safety so the second if condition triggers
-            }
-        }
-    });
-    // this is due to the fact that when the menu is not open, a click on the cog to open it in the first place counts already as a click outside of the options menu. so, a system had to be put in place to not count the first click in this event.
-
-    const saveDocLink = document.createElement("a");
-    const saveDocLinkText = "Save Screening Session to file";
-    let txtsaveDocLinkText = document.createTextNode(saveDocLinkText);
-    saveDocLink.appendChild(txtsaveDocLinkText);
-    document.getElementById("optionsLoadSaveSave").appendChild(saveDocLink)
-    saveDocLink.href = ""
-    
     document.getElementById("optionsLoadSaveSave").addEventListener("click", function(){
         let docData = {
             docDataA: document.getElementById("screenDocument").value + "%0A",
@@ -556,14 +506,7 @@ function loadDocScreeningToolCode(){
         fr.readAsText(this.files[0]);
     })
 
-    document.getElementById("optionsRecoverDataToggler").addEventListener("click", function(){
-        document.getElementById("screenDocument").innerHTML = JSON.parse(localStorage.getItem("DocumentValues"));   
-        document.getElementById("screenFKDF").innerHTML = JSON.parse(localStorage.getItem("FKDFvalues"));
-        document.getElementById("screenFKAT").innerHTML = JSON.parse(localStorage.getItem("FKATvalues"));
-        document.getElementById("screenNTM").innerHTML 	= JSON.parse(localStorage.getItem("NTMvalues"));
-        document.getElementById("screenDBU").innerHTML 	= JSON.parse(localStorage.getItem("DBUvalues"));
-        document.getElementById("screenIATA").innerHTML = JSON.parse(localStorage.getItem("IATAvalues"));
-    })
+    */
 
     const clearButtons = [
         {target: "FKDF", clear: "clearFKDF", operation: "screenFKDF", collateral: "FKDFtd"},
@@ -575,9 +518,9 @@ function loadDocScreeningToolCode(){
     
     for (let i=0;i<Object.keys(clearButtons).length;i++){
         document.getElementById(clearButtons[i].clear).addEventListener("click", function(){
-        localStorager(clearButtons[i].target)
-        document.getElementById(clearButtons[i].operation).value = ""
-        document.getElementById(clearButtons[i].collateral).innerHTML = ""
+            localStorage.setItem(`${clearButtons[i].target}values`, JSON.stringify(""));
+            document.getElementById(clearButtons[i].operation).value = ""
+            document.getElementById(clearButtons[i].collateral).innerHTML = ""
             
         })
     }
