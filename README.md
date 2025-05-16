@@ -10,7 +10,7 @@ Copy the contents of the repo into a folder and access `index.html` as the entry
 
 Toolbox needs to load Assets, such as icons and images. 
 
-The icons are used for the Home Tiles in the home section. 
+The icons are mainly used for the Home Tiles in the home section. 
 Use any icons you like and link them correctly in `JS\tileLinks.js`.
 
 Icons for the dropdown menu and the get-to-top arrow are sourced from Skyguide Branding Portal.
@@ -18,6 +18,8 @@ Use any icons you like and link them correctly in the respective files:
 - Dropdown: `index.html`
 - AIP Library: `CSS\aipbox.css`
 - AIS French: `CSS\frenchBox.css`
+
+Icons for the Help section in the Options Menu are defined in `script.js` in the `helpList` constant.
 
 Images are sourced from Skyguide Branding Portal.
 Use any images you like and link them correctly in the respective CSS files of the sections:
